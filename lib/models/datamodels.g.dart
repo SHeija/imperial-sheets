@@ -10,7 +10,7 @@ Talent _$TalentFromJson(Map<String, dynamic> json) {
   return Talent(
     json['title'] as String,
     json['description'] as String,
-    json['rank'] as int,
+    json['tier'] as int,
     (json['aptitudes'] as List)?.map((e) => e as String)?.toList(),
   );
 }
@@ -18,7 +18,7 @@ Talent _$TalentFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$TalentToJson(Talent instance) => <String, dynamic>{
       'title': instance.title,
       'description': instance.description,
-      'rank': instance.rank,
+      'tier': instance.tier,
       'aptitudes': instance.aptitudes,
     };
 
@@ -84,4 +84,22 @@ Armor _$ArmorFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$ArmorToJson(Armor instance) => <String, dynamic>{
       'armor': instance.armor,
+    };
+
+Stat _$StatFromJson(Map<String, dynamic> json) {
+  return Stat(
+    json['name'] as String,
+    json['short'] as String,
+    json['value'] as int,
+    json['stage'] as int,
+    (json['aptitudes'] as List)?.map((e) => e as String)?.toList(),
+  );
+}
+
+Map<String, dynamic> _$StatToJson(Stat instance) => <String, dynamic>{
+      'name': instance.name,
+      'short': instance.short,
+      'value': instance.value,
+      'stage': instance.stage,
+      'aptitudes': instance.aptitudes,
     };

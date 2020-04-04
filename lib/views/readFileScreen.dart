@@ -50,8 +50,7 @@ class _ReadFileScreenState extends State<ReadFileScreen> {
       ),
       body: Column(
         children: <Widget>[
-          if (_weapon != null)
-            Text(_weapon.title),
+          Text(_weapon?.title),
           RaisedButton(
             onPressed: _writeFile, //write object to file
             child: Text('Write')

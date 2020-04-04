@@ -5,14 +5,14 @@ part 'datamodels.g.dart';
 @JsonSerializable()
 class Talent {
   String title, description;
-  int rank;
+  int tier;
   List<String> aptitudes;
 
-  Talent(this.title, this.description, this.rank, this.aptitudes);
+  Talent(this.title, this.description, this.tier, this.aptitudes);
   Talent.blank(){
     title = '';
     description = '';
-    rank = 1;
+    tier = 1;
     aptitudes = [];
   }
 
@@ -87,4 +87,18 @@ class Armor {
 
   factory Armor.fromJson(Map<String, dynamic> json) => _$ArmorFromJson(json);
   Map<String, dynamic> toJson() => _$ArmorToJson(this);
+}
+
+@JsonSerializable()
+class Stat {
+  String name; // "Agility"
+  String short; // "AG"
+  int value;
+  int stage;
+  List<String> aptitudes;
+
+  Stat(this.name, this.short, this.value, this.stage, this.aptitudes);
+
+  factory Stat.fromJson(Map<String, dynamic> json) => _$StatFromJson(json);
+  Map<String, dynamic> toJson() => _$StatToJson(this);
 }

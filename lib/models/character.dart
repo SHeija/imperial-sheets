@@ -6,6 +6,7 @@ part 'character.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Character {
   String name, description;
+  List<Stat> stats;
   List<Talent> talents;
   List<Skill> skills;
   List<String> aptitudes;
@@ -13,7 +14,7 @@ class Character {
   List<Weapon> weapons;
   Armor armor;
 
-  Character(this.name, this.description, this.talents, this.skills, this.aptitudes, this.items, this.armor);
+  Character(this.name, this.description, this.stats, this.talents, this.skills, this.aptitudes, this.items, this.weapons, this.armor);
 
   factory Character.fromJson(Map<String, dynamic> json) => _$CharacterFromJson(json);
   Map<String, dynamic> toJson() => _$CharacterToJson(this);

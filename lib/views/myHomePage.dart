@@ -26,13 +26,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  int _character;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +35,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        // widget = myhomepage ylhäällä
         title: Text(widget.title),
         centerTitle: true,
       ),
@@ -56,11 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             },
           )
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
