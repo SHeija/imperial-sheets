@@ -101,4 +101,8 @@ class Stat {
 
   factory Stat.fromJson(Map<String, dynamic> json) => _$StatFromJson(json);
   Map<String, dynamic> toJson() => _$StatToJson(this);
+
+  int getStatBonus() {
+    return (value/10).floor();
+  }
 }

@@ -1,4 +1,3 @@
-import '../models/datamodels.dart';
 // Koodisto
 // STATS
 const WS = 'Weapon Skill';

@@ -14,6 +14,16 @@ Character generateCharacter() {
   Armor armor = generateArmor();
 
   Character character = Character(name, description, stats, talents, skills, aptitudes, items, weapons, armor);
+  character.hp = 10;
+  character.damage = 11;
+  character.xp = 2000;
+  character.spentXp = 1500;
+  character.faith = 3;
+  character.currentFaith = 3-1;
+  character.insanity = 10;
+  character.corruption = 0;
+  character.fatigue = 0;
+
   return character;
 }
 

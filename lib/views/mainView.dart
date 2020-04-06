@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/models/character.dart';
+import '../components/basicInfo.dart';
+import '../components/statGrid.dart';
 
 class MainView extends StatelessWidget {
   final Character character;
@@ -8,14 +10,11 @@ class MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ListView (
-        children: <Widget>[
-          Text(character.name),
-          Text(character.description),
-          Text('Statit vois olla kivat')
-        ],
-      )
+    return ListView(
+      children: <Widget>[
+        BasicInfo(character),
+        StatGrid(character.stats)
+      ],
     );
   }
 }
