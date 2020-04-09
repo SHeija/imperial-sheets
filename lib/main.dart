@@ -11,10 +11,6 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Imperial Sheets',
-      theme: ThemeData(
-        // This is the theme of your application.
-        primarySwatch: Colors.red,
-      ),
       home: RootView(),
     );
   }

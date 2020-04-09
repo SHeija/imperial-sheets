@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/models/character.dart';
 
-class BasicInfo extends StatelessWidget {
+class InfoContainer extends StatelessWidget {
   final Character character;
-  BasicInfo(this.character);
+  InfoContainer(this.character);
 
   @override
   Widget build(BuildContext context) {

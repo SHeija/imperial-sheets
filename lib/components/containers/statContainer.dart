@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:imperial_sheets/components/statTile.dart';
+import 'package:imperial_sheets/components/common/statTile.dart';
 
-class StatGrid extends StatelessWidget {
+class StatContainer extends StatelessWidget {
   final stats;
-  StatGrid(this.stats);
+  StatContainer(this.stats);
 
   @override
   Widget build(BuildContext context) {
