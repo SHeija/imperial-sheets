@@ -32,6 +32,7 @@ List<Stat> generateStats() {
   Constants.STAT_LIST.forEach((key, value) {
     stats.add(Stat(value, key, 25, 0, []));
   });
+  stats[0].stage = 3;
   return stats;
 }
 
