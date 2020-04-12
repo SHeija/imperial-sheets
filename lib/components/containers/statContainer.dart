@@ -12,7 +12,6 @@ class StatContainer extends StatelessWidget {
     List<Widget> widgets = stats.map((e) => StatTile(e, stats.indexOf(e))).toList();
 
     return (Container(
-      padding: EdgeInsets.all(8.0),
       alignment: Alignment.center,
       child: Wrap(
         direction: Axis.horizontal,
