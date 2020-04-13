@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:imperial_sheets/components/common/stepIndicator.dart';
-import 'package:imperial_sheets/components/dialogs/statEditDialog.dart';
+import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
 import 'package:imperial_sheets/providers/characterModel.dart';
 import 'package:provider/provider.dart';
 
-class StatTile extends StatelessWidget {
-  StatTile(this.stat, this.index);
-  final Stat stat;
+class SkillTile extends StatelessWidget {
+  SkillTile(this.skill, this.index);
+  final Skill skill;
   final int index;
 
   // DIALOG
@@ -17,11 +16,11 @@ class StatTile extends StatelessWidget {
       context: context,
       barrierDismissible: true,
       builder: (context) {
-        return StatEditDialog(stat);
+        // return SkillEditDialog(skill);
       },
     );
     if (result != null) {
-      Provider.of<CharacterModel>(context, listen: false).updateStats(result, index);
+      // Provider.of<CharacterModel>(context, listen: false).updateStats(result, index);
     }
   }
 
@@ -29,6 +28,17 @@ class StatTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double cellPadding = 8.0; // TODO
+    Character _meta = Provider.of<CharacterModel>(context).getCharacter();
+    const smallTitle = TextStyle(
+        color: Color(0xdd000000),
+        fontFamily: 'Roboto',
+        fontSize: 17.0,
+        fontWeight: FontWeight.w500);
+    const smallerTitle = TextStyle(
+        color: Color(0xdd000000),
+        fontFamily: 'Roboto',
+        fontSize: 15.0,
+        fontWeight: FontWeight.w300);
 
     return (SizedBox(
       width: 190,
@@ -40,20 +50,27 @@ class StatTile extends StatelessWidget {
               Table(
                   //defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                   columnWidths: {
-                    0: FractionColumnWidth(0.75),
-                    1: FractionColumnWidth(0.25)
+                    0: FractionColumnWidth(0.70),
+                    1: FractionColumnWidth(0.30)
                   }, children: [
                 TableRow(children: <Widget>[
                   Container(
-                    child: Text(stat.name,
-                        style: Theme.of(context).textTheme.headline6),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(skill.title, style: smallTitle),
+                        skill.subSkill.isNotEmpty
+                            ? Text(skill.subSkill, overflow: TextOverflow.ellipsis, style: smallTitle)
+                            : Container(),
+                      ],
+                    ),
                     padding: EdgeInsets.only(
                         left: cellPadding,
                         top: cellPadding,
                         right: cellPadding),
                   ),
                   Container(
-                    child: Text(stat.value.toString(),
+                    child: Text(skill.getBonusString(),
                         style: Theme.of(context).textTheme.headline6),
                     padding: EdgeInsets.only(
                         left: cellPadding,
@@ -66,7 +83,7 @@ class StatTile extends StatelessWidget {
                   Column(
                     children: <Widget>[
                       Container(
-                        child: Text(stat.short,
+                        child: Text(skill.stat,
                             style: Theme.of(context).textTheme.bodyText2),
                         padding: EdgeInsets.only(
                             left: cellPadding,
@@ -75,7 +92,7 @@ class StatTile extends StatelessWidget {
                         alignment: Alignment.topLeft,
                       ),
                       Container(
-                        child: StepIndicator(5, stat.stage,
+                        child: StepIndicator(4, skill.stage,
                             Theme.of(context).accentColor, Colors.grey),
                         padding: EdgeInsets.only(
                             left: cellPadding,
@@ -87,7 +104,9 @@ class StatTile extends StatelessWidget {
                   ),
                   Container(
                       child: Chip(
-                          label: Text(stat.getStatBonus().toString()),
+                          label: Text((_meta.getStat(skill.stat).value +
+                                  skill.getBonus())
+                              .toString()),
                           padding: EdgeInsets.all(0)),
                       padding: EdgeInsets.only(
                           left: cellPadding,

@@ -11,6 +11,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Imperial Sheets',
+      theme: ThemeData(
+        accentColor: Colors.blueGrey,
+        primaryColor: Colors.blueGrey,
+      ),
       home: RootView(),
     );
   }

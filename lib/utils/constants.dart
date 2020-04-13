@@ -21,10 +21,10 @@ const awareness = 'Awareness';
 const charm = 'Charm';
 const command = 'Command';
 const commerce = 'Commerce';
-const commonLore = 'Common lore';
+const commonLore = 'Common lore:';
 const deceive = 'Deceive';
 const dodge = 'Dodge';
-const forbiddenLore = 'Forbidden lore';
+const forbiddenLore = 'Forbidden lore:';
 const inquiry = 'Inquiry';
 const interrogation = 'Interrogation';
 const intimidate = 'Intimidate';
@@ -39,7 +39,7 @@ const operateSurface = 'Operate: Surface';
 const operateVoidship = 'Operate: Voidship';
 const parry = 'Parry';
 const psyniscience = 'Psyniscience';
-const scholasticLore = 'Scholastic Lore';
+const scholasticLore = 'Scholastic Lore:';
 const scrutiny = 'Scrutiny';
 const security = 'Security';
 const sleighOfHand = 'Sleigh Of Hand';
@@ -81,5 +81,40 @@ const ALL_SKILLS = [
   techUse,
   trade
 ];
+
+const SKILL_LIST = {
+  acrobatics:AG,
+  athletics:S,
+  awareness:PER,
+  charm:FS,
+  command:FS,
+  commerce:INT,
+  commonLore:INT,
+  deceive:FS,
+  dodge:AG,
+  forbiddenLore:INT,
+  inquiry:FS,
+  interrogation:WP,
+  intimidate:S,
+  linguistics:INT,
+  logic:INT,
+  medicae:INT,
+  navigateSurface:INT,
+  navigateStellar:INT,
+  navigateWarp:INT,
+  operateAeronautica:AG,
+  operateSurface:AG,
+  operateVoidship:AG,
+  parry:WS,
+  psyniscience:PER,
+  scholasticLore:INT,
+  scrutiny:PER,
+  security:INT,
+  sleighOfHand:AG,
+  stealth:AG,
+  survival:PER,
+  techUse:INT,
+  trade:INT
+};
 
 // APTITUDES

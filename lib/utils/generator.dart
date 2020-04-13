@@ -43,9 +43,13 @@ List<Talent> generateTalents() {
 }
 
 List<Skill> generateSkills() {
-  Skill stealth = Skill('Stealth', ['agility', 'fieldcraft'], 3, 'agility');
-  Skill parry = Skill.notKnown('Parry', ['weapon skill', 'strength'], 'weapon skill');
-  return [stealth, parry];
+  List<Skill> skills = [];
+  Constants.SKILL_LIST.forEach((key, value) {
+    skills.add(Skill.notKnown(key, [], value));
+  });
+  skills[6].subSkill = 'Imperium';
+  skills[9].subSkill = 'Adeptus astra militarum';
+  return skills;
 }
 
 List<String> generateAptitudes() {

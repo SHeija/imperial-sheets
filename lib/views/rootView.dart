@@ -29,16 +29,16 @@ class _RootViewState extends State<RootView> {
 
     final List<Widget> _children = [
       MainView(),
+      SkillView(),
       InventoryView(widget._character),
       TalentView(widget._character),
-      SkillView(widget._character)
     ];
 
     final List<String> _destinations = [
       'Home',
+      'Skills',
       'Inventory',
       'Talents',
-      'Skills'
     ];
 
     List<BottomNavigationBarItem> navigation() {

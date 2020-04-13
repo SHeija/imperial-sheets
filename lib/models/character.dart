@@ -31,18 +31,8 @@ class Character {
   factory Character.fromJson(Map<String, dynamic> json) => _$CharacterFromJson(json);
   Map<String, dynamic> toJson() => _$CharacterToJson(this);
 
-  void useFaith() {
-    if (currentFaith>0)
-      currentFaith --;
-  }
-
-  void restoreFaith() {
-    currentFaith = faith;
-  }
-
-  void burnFaith() {
-    if (faith > 0)
-      faith --;
+  Stat getStat(String statName) {
+    return stats.firstWhere((element) => element.name == statName);
   }
 
   int getFatigueTreshold() {

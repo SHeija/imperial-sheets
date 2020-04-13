@@ -34,4 +34,14 @@ class CharacterModel extends ChangeNotifier {
     _character.stats[index] = stat;
     notifyListeners();
   }
+
+  // SKILLS
+  List<Skill> getSkills() {
+    return _character.skills;
+  }
+
+  void updateSkills(Skill skill, int index) {
+    _character.skills[index] = skill;
+    notifyListeners();
+  }
 }

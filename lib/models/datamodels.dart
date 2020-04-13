@@ -22,13 +22,37 @@ class Talent {
 
 @JsonSerializable()
 class Skill {
-  final String title, skill; // e.g Parry, Weapon Skill
+  final String title, stat; // e.g Parry, Weapon Skill
+  String subSkill;
   int stage;
   final List<String> aptitudes;
 
-  Skill(this.title, this.aptitudes, this.stage, this.skill);
-  Skill.notKnown(this.title, this.aptitudes, this.skill){
+  Skill(this.title, this.aptitudes, this.stage, this.stat);
+  Skill.notKnown(this.title, this.aptitudes, this.stat){
+    subSkill = '';
     stage = 0;
+  }
+
+  String getBonusString() {
+    switch (stage){
+      case 0:
+        return '-20';
+        break;
+      default:
+        return ('+${(stage-1)*10}');
+        break;
+    }
+  }
+
+  int getBonus() {
+    switch (stage){
+      case 0:
+        return -20;
+        break;
+      default:
+        return (stage-1)*10;
+        break;
+    }
   }
 
   factory Skill.fromJson(Map<String, dynamic> json) => _$SkillFromJson(json);
