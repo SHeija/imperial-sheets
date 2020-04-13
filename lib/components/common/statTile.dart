@@ -28,9 +28,9 @@ class StatTile extends StatelessWidget {
   // TILE
   @override
   Widget build(BuildContext context) {
-    const double cellPadding = 8.0; // TODO
+    const double cellPadding = 8.0;
 
-    return (SizedBox(
+    return SizedBox(
       width: 190,
       child: GestureDetector(
         onLongPress: () => _showEditDialog(context),
@@ -79,7 +79,6 @@ class StatTile extends StatelessWidget {
                             Theme.of(context).accentColor, Colors.grey),
                         padding: EdgeInsets.only(
                             left: cellPadding,
-                            bottom: cellPadding,
                             right: cellPadding),
                         alignment: Alignment.topLeft,
                       ),
@@ -91,7 +90,6 @@ class StatTile extends StatelessWidget {
                           padding: EdgeInsets.all(0)),
                       padding: EdgeInsets.only(
                           left: cellPadding,
-                          bottom: cellPadding,
                           right: cellPadding),
                       alignment: Alignment.topCenter),
                 ]),
@@ -100,6 +98,6 @@ class StatTile extends StatelessWidget {
           ),
         ),
       ),
-    ));
+    );
   }
 }

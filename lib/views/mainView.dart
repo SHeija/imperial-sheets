@@ -9,7 +9,29 @@ class MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return CustomScrollView(
+      primary: false,
+      slivers: <Widget>[
+        SliverPadding(
+          padding: const EdgeInsets.all(8.0),
+          sliver: SliverToBoxAdapter(
+            child: InfoContainer(Provider.of<CharacterModel>(context).getCharacter()),
+          ),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.all(8.0),
+          sliver: SliverToBoxAdapter(
+            child: SpeedTable(Provider.of<CharacterModel>(context).getCharacter()),
+          ),
+        ),
+        StatContainer(Provider.of<CharacterModel>(context).getStats()),
+      ],
+    );
+  }
+}
+
+/*
+Container(
       padding: EdgeInsets.all(8.0),
       color: Theme.of(context).bottomSheetTheme.backgroundColor,
       child: ListView(
@@ -19,6 +41,27 @@ class MainView extends StatelessWidget {
           StatContainer(Provider.of<CharacterModel>(context).getStats()),
         ],
       ),
+
+
+
+return CustomScrollView(
+      primary: false,
+      slivers: <Widget>[
+        SliverPadding(
+          padding: const EdgeInsets.all(8.0),
+          sliver: SliverGrid(
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200.0,
+              childAspectRatio: 190/108,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return SkillTile(skills[index], index);
+              },
+              childCount: skills.length,
+            ),
+          ),
+        ),
+      ],
     );
-  }
-}
+ */

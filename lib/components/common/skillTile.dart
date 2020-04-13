@@ -96,7 +96,6 @@ class SkillTile extends StatelessWidget {
                             Theme.of(context).accentColor, Colors.grey),
                         padding: EdgeInsets.only(
                             left: cellPadding,
-                            bottom: cellPadding,
                             right: cellPadding),
                         alignment: Alignment.topLeft,
                       ),
@@ -110,7 +109,6 @@ class SkillTile extends StatelessWidget {
                           padding: EdgeInsets.all(0)),
                       padding: EdgeInsets.only(
                           left: cellPadding,
-                          bottom: cellPadding,
                           right: cellPadding),
                       alignment: Alignment.topCenter),
                 ]),
