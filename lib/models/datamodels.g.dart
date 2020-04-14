@@ -27,13 +27,14 @@ Skill _$SkillFromJson(Map<String, dynamic> json) {
     json['title'] as String,
     (json['aptitudes'] as List)?.map((e) => e as String)?.toList(),
     json['stage'] as int,
-    json['skill'] as String,
-  );
+    json['stat'] as String,
+  )..subSkill = json['subSkill'] as String;
 }
 
 Map<String, dynamic> _$SkillToJson(Skill instance) => <String, dynamic>{
       'title': instance.title,
-      'skill': instance.stat,
+      'stat': instance.stat,
+      'subSkill': instance.subSkill,
       'stage': instance.stage,
       'aptitudes': instance.aptitudes,
     };
@@ -59,9 +60,12 @@ Weapon _$WeaponFromJson(Map<String, dynamic> json) {
     (json['weight'] as num)?.toDouble(),
     json['range'] as String,
     json['rateOfFire'] as String,
-    json['reloadSpeed'] as String,
-    json['type'] as String,
     json['damage'] as String,
+    json['type'] as String,
+    json['penetration'] as String,
+    json['clip'] as String,
+    json['reloadSpeed'] as String,
+    json['special'] as String,
   );
 }
 
@@ -71,9 +75,12 @@ Map<String, dynamic> _$WeaponToJson(Weapon instance) => <String, dynamic>{
       'weight': instance.weight,
       'range': instance.range,
       'rateOfFire': instance.rateOfFire,
-      'reloadSpeed': instance.reloadSpeed,
-      'type': instance.type,
       'damage': instance.damage,
+      'type': instance.type,
+      'penetration': instance.penetration,
+      'clip': instance.clip,
+      'reloadSpeed': instance.reloadSpeed,
+      'special': instance.special,
     };
 
 Armor _$ArmorFromJson(Map<String, dynamic> json) {

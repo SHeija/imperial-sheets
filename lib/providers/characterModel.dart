@@ -44,4 +44,44 @@ class CharacterModel extends ChangeNotifier {
     _character.skills[index] = skill;
     notifyListeners();
   }
+
+  // WEAPONS
+  List<Weapon> getWeapons() {
+    return _character.weapons;
+  }
+
+  void updateWeapons(Weapon weapon, int index) {
+    _character.weapons[index] = weapon;
+    notifyListeners();
+  }
+
+  void addWeapon(Weapon weapon) {
+    _character.weapons.add(weapon);
+    notifyListeners();
+  }
+
+  void removeWeapon(Weapon weapon) {
+    _character.weapons.remove(weapon);
+    notifyListeners();
+  }
+
+  // ITEMS
+  List<Item> getItems() {
+    return _character.items;
+  }
+
+  void updateItems(Item item, int index) {
+    _character.items[index] = item;
+    notifyListeners();
+  }
+
+  void addItem(Item item) {
+    _character.items.add(item);
+    notifyListeners();
+  }
+
+  void removeItem(Item item) {
+    _character.items.remove(item);
+    notifyListeners();
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imperial_sheets/components/common/cornerMenu.dart';
 import 'package:imperial_sheets/providers/characterModel.dart';
 import 'package:imperial_sheets/views/inventoryView.dart';
 import 'package:imperial_sheets/views/mainView.dart';
@@ -30,7 +31,7 @@ class _RootViewState extends State<RootView> {
     final List<Widget> _children = [
       MainView(),
       SkillView(),
-      InventoryView(widget._character),
+      InventoryView(),
       TalentView(widget._character),
     ];
 
@@ -55,6 +56,9 @@ class _RootViewState extends State<RootView> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Imperial Sheets'),
+          actions: <Widget>[
+            // CornerMenu()
+          ],
         ),
         body: _children[_currentIndex], // body selected from a list of widgets
         bottomNavigationBar: BottomNavigationBar(

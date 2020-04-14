@@ -78,15 +78,18 @@ class Item {
 
 @JsonSerializable()
 class Weapon extends Item{
-  String range, rateOfFire, reloadSpeed, type, damage;
+  String range, rateOfFire, damage, type, penetration, clip, reloadSpeed, special;
 
-  Weapon(String title, String description, double weight, this.range, this.rateOfFire, this.reloadSpeed, this.type, this.damage) : super(title, description, weight);
+  Weapon(String title, String description, double weight, this.range, this.rateOfFire, this.damage, this.type, this.penetration, this.clip, this.reloadSpeed, this.special) : super(title, description, weight);
   Weapon.blank() : super.blank() {
     range = '';
     rateOfFire = '-/-/-';
-    reloadSpeed = '';
-    type = '';
     damage = '1d10';
+    type = '';
+    penetration = '';
+    clip = '';
+    reloadSpeed = '';
+    special='';
   }
 
   factory Weapon.fromJson(Map<String, dynamic> json) => _$WeaponFromJson(json);

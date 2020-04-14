@@ -63,7 +63,7 @@ List<Item> generateItems() {
 }
 
 List<Weapon> generateWeapons() {
-  Weapon hotShot = Weapon('Hot-shot laspistol', 'Shoots harder than laspistol', 4.0, '20m', '1/2/-', '2Full', 'Energy', '1d10+4');
+  Weapon hotShot = Weapon('Hot-shot laspistol', 'Shoots harder than laspistol', 4.0, '20m', '1/2/-', '1d10+4', 'Energy', '7', '20', '2Full', 'Overheats');
   return [hotShot];
 }
 
