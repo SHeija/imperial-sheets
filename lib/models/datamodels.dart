@@ -23,16 +23,17 @@ class Talent {
 
 @JsonSerializable()
 class Skill {
-  final String title, stat; // e.g Parry, Weapon Skill
+  String title, stat; // e.g Parry, Weapon Skill
   String subSkill;
   int stage;
-  final List<String> aptitudes;
+  List<String> aptitudes;
 
   Skill(this.title, this.aptitudes, this.stage, this.stat);
   Skill.notKnown(this.title, this.aptitudes, this.stat){
     subSkill = '';
     stage = 0;
   }
+  Skill.blank();
 
   String getBonusString() {
     switch (stage){
@@ -133,6 +134,7 @@ class Stat {
   List<String> aptitudes;
 
   Stat(this.name, this.short, this.value, this.stage, this.aptitudes);
+  Stat.blank();
 
   factory Stat.fromJson(Map<String, dynamic> json) => _$StatFromJson(json);
   Map<String, dynamic> toJson() => _$StatToJson(this);

@@ -35,11 +35,6 @@ class SkillTile extends StatelessWidget {
         fontFamily: 'Roboto',
         fontSize: 17.0,
         fontWeight: FontWeight.w500);
-    const smallerTitle = TextStyle(
-        color: Color(0xdd000000),
-        fontFamily: 'Roboto',
-        fontSize: 15.0,
-        fontWeight: FontWeight.w300);
 
     return GestureDetector(
       onLongPress: () => _showEditDialog(context),
@@ -57,7 +52,7 @@ class SkillTile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(skill.title, style: smallTitle),
+                      Text(skill.canHaveMultiple() ? skill.title+':' : skill.title, style: smallTitle),
                       skill.subSkill.isNotEmpty
                           ? Text(skill.subSkill, overflow: TextOverflow.ellipsis, style: smallTitle)
                           : Container(),

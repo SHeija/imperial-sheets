@@ -28,7 +28,7 @@ class InfoContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (GestureDetector(
+    return GestureDetector(
         onLongPress: () => _showEditDialog(context),
         child: Container(
             child: Card(
@@ -46,6 +46,9 @@ class InfoContainer extends StatelessWidget {
                 ),
                 InfoChips(character),
               ],
-            )))));
+            ),
+            ),
+        ),
+    );
   }
 }

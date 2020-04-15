@@ -12,6 +12,11 @@ class MainView extends StatelessWidget {
     return CustomScrollView(
       primary: false,
       slivers: <Widget>[
+        SliverAppBar(
+          title: Text('Imperial sheets'),
+          snap: true,
+          floating: true,
+        ),
         SliverPadding(
           padding: const EdgeInsets.all(8.0),
           sliver: SliverToBoxAdapter(

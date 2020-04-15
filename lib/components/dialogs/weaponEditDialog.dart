@@ -92,7 +92,6 @@ class WeaponEditDialog extends StatelessWidget {
                         validators: [FormBuilderValidators.required()],
                         min: 0,
                         step: 1,
-                        valueTransformer: (v) => int.parse(v),
                       ),
                     ],
                   )),
@@ -111,6 +110,15 @@ class WeaponEditDialog extends StatelessWidget {
               weapon.title = _formKey.currentState.value['title'];
               weapon.description = _formKey.currentState.value['description'];
               weapon.weight = _formKey.currentState.value['weight'];
+              weapon.range = _formKey.currentState.value['range'];
+              weapon.rateOfFire = _formKey.currentState.value['rateOfFire'];
+              weapon.damage = _formKey.currentState.value['damage'];
+              weapon.type = _formKey.currentState.value['type'];
+              weapon.penetration = _formKey.currentState.value['penetration'];
+              weapon.clip = _formKey.currentState.value['clip'];
+              weapon.reloadSpeed = _formKey.currentState.value['reloadSpeed'];
+              weapon.special = _formKey.currentState.value['special'];
+              weapon.amount = _formKey.currentState.value['amount'];
               Navigator.of(context).pop(weapon);
             }
           },

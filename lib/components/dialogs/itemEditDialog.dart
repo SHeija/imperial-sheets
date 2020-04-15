@@ -52,7 +52,6 @@ class ItemEditDialog extends StatelessWidget {
                         validators: [FormBuilderValidators.required()],
                         min: 0,
                         step: 1,
-                        valueTransformer: (v) => int.parse(v),
                       ),
                     ],
                   )),
@@ -71,6 +70,7 @@ class ItemEditDialog extends StatelessWidget {
               item.title = _formKey.currentState.value['title'];
               item.description = _formKey.currentState.value['description'];
               item.weight = _formKey.currentState.value['weight'];
+              item.amount = _formKey.currentState.value['amount'];
               Navigator.of(context).pop(item);
             }
           },

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum Choices{addCharacter, addSkill, addItem, addTalent, deleteCharacter}
+enum Choices{addItem, addWeapon}
 
 class CornerMenu extends StatelessWidget {
   @override
@@ -9,19 +9,11 @@ class CornerMenu extends StatelessWidget {
       onSelected: (Choices result) { print('pressed lol'); },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<Choices>>[
         const PopupMenuItem<Choices>(
-          value: Choices.addCharacter,
-          child: Text('Add Character'),
-        ),
-        const PopupMenuItem<Choices>(
-          value: Choices.addSkill,
-          child: Text('Add a skill'),
-        ),
-        const PopupMenuItem<Choices>(
           value: Choices.addItem,
           child: Text('Add a item'),
         ),
         const PopupMenuItem<Choices>(
-          value: Choices.addTalent,
+          value: Choices.addWeapon,
           child: Text('Add a talent'),
         ),
       ],

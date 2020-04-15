@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:imperial_sheets/components/common/cornerMenu.dart';
 import 'package:imperial_sheets/providers/characterModel.dart';
 import 'package:imperial_sheets/views/inventoryView.dart';
 import 'package:imperial_sheets/views/mainView.dart';
@@ -54,13 +53,37 @@ class _RootViewState extends State<RootView> {
     return ChangeNotifierProvider(
       create: (context) => CharacterModel(),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Imperial Sheets'),
-          actions: <Widget>[
-            // CornerMenu()
+        drawer: Drawer(
+          child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Text('Item 2'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
           ],
         ),
-        body: _children[_currentIndex], // body selected from a list of widgets
+        ),
+        body: SafeArea(
+          child: _children[_currentIndex],
+        ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex, // this will be set when a new tab is tapped

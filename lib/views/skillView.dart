@@ -1,25 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/common/skillTile.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
+import 'package:imperial_sheets/components/dialogs/skillAddDialog.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
 import 'package:imperial_sheets/providers/characterModel.dart';
 import 'package:provider/provider.dart';
 
 class SkillView extends StatelessWidget {
+
+  // DIALOG
+  void _showAddDialog(BuildContext context) async {
+    final result = await showDialog<dynamic>(
+        context: context,
+        builder: (BuildContext context) {
+          return SkillAddDialog();
+        }
+    );
+    if (result != null) {
+      Provider.of<CharacterModel>(context, listen: false).addSkill(result);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Skill> skills = Provider.of<CharacterModel>(context).getSkills();
     return CustomScrollView(
       primary: false,
       slivers: <Widget>[
-        SliverPadding(
-          padding: const EdgeInsets.all(8.0),
-          sliver: SliverToBoxAdapter(
-            child: Container(
-              alignment: Alignment.center,
-              child: Text('Skills', style: Theme.of(context).textTheme.headline5)
-            ),
-          ),
+        SliverAppBar(
+          snap: true,
+          title: Text('Imperial sheets'),
+          floating: true,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                _showAddDialog(context);
+              },
+            )
+          ],
         ),
         SliverPadding(
           padding: const EdgeInsets.all(8.0),
