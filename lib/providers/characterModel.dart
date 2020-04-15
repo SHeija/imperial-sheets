@@ -45,6 +45,16 @@ class CharacterModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void addSkill(Skill skill) {
+    _character.skills.add(skill);
+    notifyListeners();
+  }
+
+  void removeSkill(Skill skill) {
+    _character.skills.remove(skill);
+    notifyListeners();
+  }
+
   // WEAPONS
   List<Weapon> getWeapons() {
     return _character.weapons;

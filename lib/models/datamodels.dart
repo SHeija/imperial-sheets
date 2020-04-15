@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import '../utils/constants.dart' as Constants;
 
 part 'datamodels.g.dart';
 
@@ -53,6 +54,11 @@ class Skill {
         return (stage-1)*10;
         break;
     }
+  }
+
+  bool canHaveMultiple() {
+    const multiples = [Constants.scholasticLore, Constants.forbiddenLore, Constants.commonLore, Constants.trade];
+    return multiples.contains(title);
   }
 
   factory Skill.fromJson(Map<String, dynamic> json) => _$SkillFromJson(json);
