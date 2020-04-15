@@ -22,6 +22,7 @@ class ItemEditDialog extends StatelessWidget {
                     'title': item.title,
                     'description': item.description,
                     'weight': item.weight.toString(),
+                    'amount': item.amount
                   },
                   child: Column(
                     children: <Widget>[
@@ -38,11 +39,20 @@ class ItemEditDialog extends StatelessWidget {
                       ),
                       FormBuilderTextField(
                         attribute: "weight",
-                        decoration: InputDecoration(labelText: 'Weight in kg'),
+                        decoration: InputDecoration(labelText: 'Weight per item (kg)'),
                         validators: [
                           FormBuilderValidators.numeric(),
                         ],
-                        valueTransformer: (v) => double.parse(v.replaceAll(',','.')),
+                        valueTransformer: (v) => double.parse(v),
+                      ),
+                      FormBuilderTouchSpin(
+                        attribute: "amount",
+                        initialValue: item.amount,
+                        decoration: InputDecoration(labelText: 'Amount'),
+                        validators: [FormBuilderValidators.required()],
+                        min: 0,
+                        step: 1,
+                        valueTransformer: (v) => int.parse(v),
                       ),
                     ],
                   )),

@@ -22,6 +22,15 @@ class WeaponEditDialog extends StatelessWidget {
                     'title': weapon.title,
                     'description': weapon.description,
                     'weight': weapon.weight.toString(),
+                    'range': weapon.range,
+                    'rateOfFire': weapon.rateOfFire,
+                    'damage': weapon.damage,
+                    'type': weapon.type,
+                    'penetration': weapon.penetration,
+                    'clip': weapon.clip,
+                    'reloadSpeed': weapon.reloadSpeed,
+                    'special': weapon.special,
+                    'amount': weapon.amount,
                   },
                   child: Column(
                     children: <Widget>[
@@ -43,6 +52,47 @@ class WeaponEditDialog extends StatelessWidget {
                           FormBuilderValidators.numeric(),
                         ],
                         valueTransformer: (v) => double.parse(v.replaceAll(',','.')),
+                      ),
+                      FormBuilderTextField(
+                        attribute: "range",
+                        decoration: InputDecoration(labelText: 'Range'),
+                      ),
+                      FormBuilderTextField(
+                        attribute: "rateOfFire",
+                        decoration: InputDecoration(labelText: 'Rate of fire'),
+                      ),
+                      FormBuilderTextField(
+                        attribute: "damage",
+                        decoration: InputDecoration(labelText: 'Damage'),
+                      ),
+                      FormBuilderTextField(
+                        attribute: "type",
+                        decoration: InputDecoration(labelText: 'Damage type'),
+                      ),
+                      FormBuilderTextField(
+                        attribute: "penetration",
+                        decoration: InputDecoration(labelText: 'Penetration'),
+                      ),
+                      FormBuilderTextField(
+                        attribute: "clip",
+                        decoration: InputDecoration(labelText: 'Clip'),
+                      ),
+                      FormBuilderTextField(
+                        attribute: "reloadSpeed",
+                        decoration: InputDecoration(labelText: 'Reload speed'),
+                      ),
+                      FormBuilderTextField(
+                        attribute: "special",
+                        decoration: InputDecoration(labelText: 'Special'),
+                      ),
+                      FormBuilderTouchSpin(
+                        attribute: "amount",
+                        initialValue: weapon.amount,
+                        decoration: InputDecoration(labelText: 'Amount'),
+                        validators: [FormBuilderValidators.required()],
+                        min: 0,
+                        step: 1,
+                        valueTransformer: (v) => int.parse(v),
                       ),
                     ],
                   )),

@@ -57,8 +57,8 @@ List<String> generateAptitudes() {
 }
 
 List<Item> generateItems() {
-  Item photoContacts = Item('Photo contacts', 'photo-contacts', 0.5);
-  Item microBead = Item('Micro-bead', 'vox lol', 0.5);
+  Item photoContacts = Item('Photo contacts', 'photo-contacts', 0.5, 1);
+  Item microBead = Item('Micro-bead', 'vox lol', 0.5, 1);
   return [photoContacts, microBead];
 }
 

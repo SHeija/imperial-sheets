@@ -64,12 +64,14 @@ class Skill {
 class Item {
   String title, description;
   double weight;
+  int amount;
 
-  Item(this.title, this.description, this.weight);
+  Item(this.title, this.description, this.weight, this.amount);
   Item.blank(){
     title = '';
     description = '';
     weight = 0.5;
+    amount=1;
   }
 
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
@@ -80,7 +82,7 @@ class Item {
 class Weapon extends Item{
   String range, rateOfFire, damage, type, penetration, clip, reloadSpeed, special;
 
-  Weapon(String title, String description, double weight, this.range, this.rateOfFire, this.damage, this.type, this.penetration, this.clip, this.reloadSpeed, this.special) : super(title, description, weight);
+  Weapon(String title, String description, double weight, this.range, this.rateOfFire, this.damage, this.type, this.penetration, this.clip, this.reloadSpeed, this.special) : super(title, description, weight, 1);
   Weapon.blank() : super.blank() {
     range = '';
     rateOfFire = '-/-/-';
