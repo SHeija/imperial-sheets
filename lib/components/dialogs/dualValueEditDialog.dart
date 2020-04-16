@@ -3,8 +3,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class DualValueEditDialog extends StatelessWidget {
   DualValueEditDialog(this.val1, this.val2, this.label1, this.label2, this.title, this.style);
-  dynamic val1, val2;
-  String label1, label2, title, style;
+  final dynamic val1, val2;
+  final String label1, label2, title, style;
   final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
 
   @override

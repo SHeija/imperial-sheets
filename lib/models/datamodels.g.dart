@@ -41,7 +41,7 @@ Map<String, dynamic> _$SkillToJson(Skill instance) => <String, dynamic>{
 
 Item _$ItemFromJson(Map<String, dynamic> json) {
   return Item(
-    json['title'] as String,
+    json['name'] as String,
     json['description'] as String,
     (json['weight'] as num)?.toDouble(),
     json['amount'] as int,
@@ -49,7 +49,7 @@ Item _$ItemFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{
-      'title': instance.title,
+      'name': instance.name,
       'description': instance.description,
       'weight': instance.weight,
       'amount': instance.amount,
@@ -57,7 +57,7 @@ Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{
 
 Weapon _$WeaponFromJson(Map<String, dynamic> json) {
   return Weapon(
-    json['title'] as String,
+    json['name'] as String,
     json['description'] as String,
     (json['weight'] as num)?.toDouble(),
     json['range'] as String,
@@ -72,7 +72,7 @@ Weapon _$WeaponFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$WeaponToJson(Weapon instance) => <String, dynamic>{
-      'title': instance.title,
+      'name': instance.name,
       'description': instance.description,
       'weight': instance.weight,
       'amount': instance.amount,
@@ -88,11 +88,20 @@ Map<String, dynamic> _$WeaponToJson(Weapon instance) => <String, dynamic>{
 
 Armor _$ArmorFromJson(Map<String, dynamic> json) {
   return Armor(
-    json['armor'] as Map<String, dynamic>,
-  );
+    json['name'] as String,
+    json['description'] as String,
+    (json['weight'] as num)?.toDouble(),
+    (json['armor'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(k, e as int),
+    ),
+  )..amount = json['amount'] as int;
 }
 
 Map<String, dynamic> _$ArmorToJson(Armor instance) => <String, dynamic>{
+      'name': instance.name,
+      'description': instance.description,
+      'weight': instance.weight,
+      'amount': instance.amount,
       'armor': instance.armor,
     };
 

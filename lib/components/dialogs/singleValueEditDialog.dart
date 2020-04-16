@@ -3,8 +3,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class SingleValueEditDialog extends StatelessWidget {
   SingleValueEditDialog(this.value, this.label);
-  String label;
-  dynamic value;
+  final String label;
+  final dynamic value;
   final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
 
   @override

@@ -39,7 +39,7 @@ class ItemTile extends StatelessWidget {
                 }, children: [
               TableRow(children: <Widget>[
                 Container(
-                  child: Text(item.title,
+                  child: Text(item.name,
                       style: Theme.of(context).textTheme.headline6),
                   padding: EdgeInsets.all(cellPadding),
                 ),

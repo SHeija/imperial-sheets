@@ -28,9 +28,10 @@ class SkillView extends StatelessWidget {
       primary: false,
       slivers: <Widget>[
         SliverAppBar(
-          snap: true,
           title: Text('Imperial sheets'),
           floating: true,
+          elevation: Theme.of(context).appBarTheme.elevation,
+          forceElevated: true,
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.add),
@@ -51,7 +52,7 @@ class SkillView extends StatelessWidget {
               (BuildContext context, int index) {
                 if(skills[index].canHaveMultiple()){
                   return Dismissible(
-                    key: Key('skill${index}'),
+                    key: Key('skill $index'),
                     background: Container(color: Theme.of(context).errorColor),
                     onDismissed: (direction) {
                       Provider.of<CharacterModel>(context, listen: false)

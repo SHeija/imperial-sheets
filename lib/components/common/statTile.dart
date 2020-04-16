@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:imperial_sheets/components/common/stepIndicator.dart';
 import 'package:imperial_sheets/components/dialogs/statEditDialog.dart';
 import 'package:imperial_sheets/models/datamodels.dart';

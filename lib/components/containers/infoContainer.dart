@@ -4,7 +4,6 @@ import 'package:flutter/rendering.dart';
 import 'package:imperial_sheets/components/common/infoChips.dart';
 import 'package:imperial_sheets/components/dialogs/infoEditDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:imperial_sheets/providers/characterModel.dart';
 import 'package:provider/provider.dart';
 

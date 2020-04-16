@@ -1,19 +1,15 @@
 import '../models/character.dart';
 import '../models/datamodels.dart';
-import 'constants.dart' as Constants;
 
 Character generateCharacter() {
-  String name = 'Roth Havelock';
-  String description = 'A dashing low-life rogue that dreams of being part of the elite that he was meant to be';
-  List<Stat> stats = generateStats();
-  List<Talent> talents = generateTalents();
-  List<Skill> skills = generateSkills();
-  List<String> aptitudes = generateAptitudes();
-  List<Item> items = generateItems();
-  List<Weapon> weapons = generateWeapons();
-  Armor armor = generateArmor();
-
-  Character character = Character(name, description, stats, talents, skills, aptitudes, items, weapons, armor);
+  Character character = Character.blank();
+  character.name = 'Roth Havelock';
+  character.description = 'A dashing low-life rogue that dreams of being part of the elite that he was meant to be';
+  character.talents = generateTalents();
+  character.aptitudes = generateAptitudes();
+  character.items = generateItems();
+  character.weapons = generateWeapons();
+  character.armor = generateArmor();
   character.hp = 10;
   character.damage = 11;
   character.xp = 2000;
@@ -27,29 +23,10 @@ Character generateCharacter() {
   return character;
 }
 
-List<Stat> generateStats() {
-  List<Stat> stats = [];
-  Constants.STAT_LIST.forEach((key, value) {
-    stats.add(Stat(value, key, 25, 0, []));
-  });
-  stats[0].stage = 3;
-  return stats;
-}
-
 List<Talent> generateTalents() {
   Talent quickDraw = Talent('Quick Draw', 'Halves time required to draw a weapon', 1, ['agility', 'finesse']);
   Talent sprint = Talent('Sprint', 'Sprints', 3, ['agility', 'fieldcraft']);
   return [quickDraw, sprint];
-}
-
-List<Skill> generateSkills() {
-  List<Skill> skills = [];
-  Constants.SKILL_LIST.forEach((key, value) {
-    skills.add(Skill.notKnown(key, [], value));
-  });
-  skills[6].subSkill = 'Imperium';
-  skills[9].subSkill = 'Adeptus astra militarum';
-  return skills;
 }
 
 List<String> generateAptitudes() {
@@ -69,6 +46,6 @@ List<Weapon> generateWeapons() {
 
 Armor generateArmor() {
   Armor armor = Armor.blank();
-  armor.armor['head'] = '5';
+  armor.armor['head'] = 5;
   return armor;
 }

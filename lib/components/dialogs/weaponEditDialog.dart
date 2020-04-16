@@ -12,14 +12,14 @@ class WeaponEditDialog extends StatelessWidget {
     return AlertDialog(
       shape:
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      title: Text('Edit ${weapon.title}'),
+      title: Text('Edit ${weapon.name}'),
       content: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               FormBuilder(
                   key: _formKey,
                   initialValue: {
-                    'title': weapon.title,
+                    'title': weapon.name,
                     'description': weapon.description,
                     'weight': weapon.weight.toString(),
                     'range': weapon.range,
@@ -107,7 +107,7 @@ class WeaponEditDialog extends StatelessWidget {
           child: Text('Submit'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {
-              weapon.title = _formKey.currentState.value['title'];
+              weapon.name = _formKey.currentState.value['title'];
               weapon.description = _formKey.currentState.value['description'];
               weapon.weight = _formKey.currentState.value['weight'];
               weapon.range = _formKey.currentState.value['range'];

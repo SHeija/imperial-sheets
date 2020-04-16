@@ -69,13 +69,13 @@ class Skill {
 
 @JsonSerializable()
 class Item {
-  String title, description;
+  String name, description;
   double weight;
   int amount;
 
-  Item(this.title, this.description, this.weight, this.amount);
+  Item(this.name, this.description, this.weight, this.amount);
   Item.blank(){
-    title = '';
+    name = '';
     description = '';
     weight = 0.5;
     amount=1;
@@ -89,11 +89,11 @@ class Item {
 class Weapon extends Item{
   String range, rateOfFire, damage, type, penetration, clip, reloadSpeed, special;
 
-  Weapon(String title, String description, double weight, this.range, this.rateOfFire, this.damage, this.type, this.penetration, this.clip, this.reloadSpeed, this.special) : super(title, description, weight, 1);
+  Weapon(String name, String description, double weight, this.range, this.rateOfFire, this.damage, this.type, this.penetration, this.clip, this.reloadSpeed, this.special) : super(name, description, weight, 1);
   Weapon.blank() : super.blank() {
     range = '';
-    rateOfFire = '-/-/-';
-    damage = '1d10';
+    rateOfFire = '';
+    damage = '';
     type = '';
     penetration = '';
     clip = '';
@@ -106,11 +106,11 @@ class Weapon extends Item{
 }
 
 @JsonSerializable()
-class Armor {
-  Map armor;
+class Armor extends Item {
+  Map<String, int> armor;
 
-  Armor(this.armor);
-  Armor.blank(){
+  Armor(String name, String description, double weight, Map<String, int>this.armor) : super(name, description, weight, 1);
+  Armor.blank() : super.blank() {
     armor = {
       'head': 0,
       'leftArm': 0,

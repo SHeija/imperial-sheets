@@ -12,14 +12,14 @@ class ItemEditDialog extends StatelessWidget {
     return AlertDialog(
       shape:
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      title: Text('Edit ${item.title}'),
+      title: Text('Edit ${item.name}'),
       content: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               FormBuilder(
                   key: _formKey,
                   initialValue: {
-                    'title': item.title,
+                    'title': item.name,
                     'description': item.description,
                     'weight': item.weight.toString(),
                     'amount': item.amount
@@ -67,7 +67,7 @@ class ItemEditDialog extends StatelessWidget {
           child: Text('Submit'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {
-              item.title = _formKey.currentState.value['title'];
+              item.name = _formKey.currentState.value['title'];
               item.description = _formKey.currentState.value['description'];
               item.weight = _formKey.currentState.value['weight'];
               item.amount = _formKey.currentState.value['amount'];

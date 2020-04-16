@@ -28,7 +28,7 @@ class SkillTile extends StatelessWidget {
   // TILE
   @override
   Widget build(BuildContext context) {
-    const double cellPadding = 8.0; // TODO
+    const double cellPadding = 8.0;
     Character _meta = Provider.of<CharacterModel>(context).getCharacter();
     const smallTitle = TextStyle(
         color: Color(0xdd000000),

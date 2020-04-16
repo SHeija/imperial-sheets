@@ -40,7 +40,7 @@ class WeaponTile extends StatelessWidget {
                 }, children: [
               TableRow(children: <Widget>[
                 Container(
-                  child: Text(weapon.title,
+                  child: Text(weapon.name,
                       style: Theme.of(context).textTheme.headline6),
                   padding: EdgeInsets.all(cellPadding),
                 ),

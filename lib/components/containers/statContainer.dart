@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/common/statTile.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
-import 'package:provider/provider.dart';
 
 class StatContainer extends StatelessWidget {
   final List<Stat> stats;

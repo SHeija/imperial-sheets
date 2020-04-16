@@ -1,3 +1,7 @@
 # imperial_sheets
 
-TODO: character stats, weapon clip, weapon pen
+TODO:
+Talents
+Database connection
+Character import from json
+Character export to json
