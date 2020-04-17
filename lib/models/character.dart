@@ -13,7 +13,7 @@ class Character {
   List<String> aptitudes;
   List<Item> items;
   List<Weapon> weapons;
-  Armor armor;
+  List<Armor> armors;
 
   int xp;
   int spentXp;
@@ -25,7 +25,7 @@ class Character {
   int insanity;
   int fatigue;
 
-  Character.blank(){
+  Character.blank() {
     name = 'Name';
     description = 'Description';
     stats = statSheet();
@@ -34,21 +34,23 @@ class Character {
     items = [];
     weapons = [];
     aptitudes = [];
-    armor = Armor.blank();
-    xp=0;
-    spentXp=0;
-    hp=0;
-    damage=0;
-    faith=0;
-    currentFaith=0;
-    corruption=0;
-    insanity=0;
-    fatigue=0;
+    armors = [];
+    xp = 0;
+    spentXp = 0;
+    hp = 0;
+    damage = 0;
+    faith = 0;
+    currentFaith = 0;
+    corruption = 0;
+    insanity = 0;
+    fatigue = 0;
   }
 
-  Character(this.name, this.description, this.stats, this.talents, this.skills, this.aptitudes, this.items, this.weapons, this.armor);
+  Character(this.name, this.description, this.stats, this.talents, this.skills,
+      this.aptitudes, this.items, this.weapons, this.armors);
 
-  factory Character.fromJson(Map<String, dynamic> json) => _$CharacterFromJson(json);
+  factory Character.fromJson(Map<String, dynamic> json) =>
+      _$CharacterFromJson(json);
   Map<String, dynamic> toJson() => _$CharacterToJson(this);
 
   // UTILS
@@ -92,13 +94,53 @@ class Character {
 
   void fillSkillList() {
     // remove mis-named
-    skills.retainWhere((element) => Constants.ALL_SKILLS.contains(element.title));
+    skills
+        .retainWhere((element) => Constants.ALL_SKILLS.contains(element.title));
     // Create "sheet"
     List<Skill> newSkills = skillSheet();
     // Replace
     skills.forEach((existing) {
-      newSkills[newSkills.indexWhere((e) => e.title == existing.title)] = existing;
+      newSkills[newSkills.indexWhere((e) => e.title == existing.title)] =
+          existing;
     });
     skills = newSkills;
+  }
+
+  Map<String, int> getArmorPoints() {
+    return armors.isEmpty
+        ? {
+            'Head': 0,
+            'Left Arm': 0,
+            'Right Arm': 0,
+            'Body': 0,
+            'Left Leg': 0,
+            'Right Leg': 0
+          }
+        : {
+            'Head': armors
+                .reduce((current, next) =>
+                    current.head > next.head ? current : next)
+                .head,
+            'Left Arm': armors
+                .reduce((current, next) =>
+                    current.leftArm > next.leftArm ? current : next)
+                .leftArm,
+            'Right Arm': armors
+                .reduce((current, next) =>
+                    current.rightArm > next.rightArm ? current : next)
+                .rightArm,
+            'Body': armors
+                .reduce((current, next) =>
+                    current.body > next.body ? current : next)
+                .body,
+            'Left Leg': armors
+                .reduce((current, next) =>
+                    current.leftLeg > next.leftLeg ? current : next)
+                .leftLeg,
+            'Right Leg': armors
+                .reduce((current, next) =>
+                    current.rightLeg > next.rightLeg ? current : next)
+                .rightLeg
+          };
   }
 }

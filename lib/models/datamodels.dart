@@ -72,6 +72,7 @@ class Item {
   String name, description;
   double weight;
   int amount;
+  bool stowed = false;
 
   Item(this.name, this.description, this.weight, this.amount);
   Item.blank(){
@@ -79,6 +80,10 @@ class Item {
     description = '';
     weight = 0.5;
     amount=1;
+  }
+
+  void toggleStow(){
+    stowed = !stowed;
   }
 
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
@@ -107,18 +112,18 @@ class Weapon extends Item{
 
 @JsonSerializable()
 class Armor extends Item {
-  Map<String, int> armor;
+  Map<String, int> armorPoints;
+  int head, leftArm, rightArm, body, leftLeg, rightLeg;
 
-  Armor(String name, String description, double weight, Map<String, int>this.armor) : super(name, description, weight, 1);
+  Armor(String name, String description, double weight, Map<String, int>this.armorPoints, bool stowed) : super(name, description, weight, 1);
   Armor.blank() : super.blank() {
-    armor = {
-      'head': 0,
-      'leftArm': 0,
-      'rightArm': 0,
-      'body': 0,
-      'leftLeg': 0,
-      'rightLeg': 0
-    };
+    stowed = false;
+    head = 0;
+    leftArm = 0;
+    rightArm = 0;
+    body = 0;
+    leftLeg = 0;
+    rightLeg = 0;
   }
 
   factory Armor.fromJson(Map<String, dynamic> json) => _$ArmorFromJson(json);

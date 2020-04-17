@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
+import 'package:imperial_sheets/components/common/armorPointsTable.dart';
+import 'package:imperial_sheets/components/containers/armorAndMovementContainer.dart';
+import 'package:imperial_sheets/components/containers/armorContainer.dart';
 import 'package:imperial_sheets/components/containers/itemContainer.dart';
 import 'package:imperial_sheets/components/containers/weaponContainer.dart';
+import 'package:imperial_sheets/components/dialogs/ArmorEditDialog.dart';
 import 'package:imperial_sheets/components/dialogs/itemEditDialog.dart';
 import 'package:imperial_sheets/components/dialogs/weaponEditDialog.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
 import 'package:imperial_sheets/providers/characterModel.dart';
 import 'package:provider/provider.dart';
 
-enum Choices{addItem, addWeapon}
+enum Choices{addItem, addWeapon, addArmor}
 
 class InventoryView extends StatelessWidget {
 
@@ -38,9 +44,23 @@ class InventoryView extends StatelessWidget {
     }
   }
 
+  void _showArmorAddDialog(BuildContext context) async {
+    final result = await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          Armor _newArmor = Armor.blank();
+          return ArmorEditDialog(_newArmor);
+        }
+    );
+    if (result!=null){
+      Provider.of<CharacterModel>(context, listen: false).addArmor(result);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      shrinkWrap: true,
       primary: false,
       slivers: <Widget>[
         SliverAppBar(
@@ -59,6 +79,9 @@ class InventoryView extends StatelessWidget {
                   case Choices.addWeapon:
                     _showWeaponAddDialog(context);
                     break;
+                  case Choices.addArmor:
+                    _showArmorAddDialog(context);
+                    break;
                   default:
                     print('Whoops!');
                 }
@@ -72,13 +95,27 @@ class InventoryView extends StatelessWidget {
                   value: Choices.addWeapon,
                   child: Text('Add a weapon'),
                 ),
+                const PopupMenuItem<Choices>(
+                  value: Choices.addArmor,
+                  child: Text('Add an armor'),
+                )
               ],
             )
           ],
         ),
         SliverPadding(
           padding: EdgeInsets.all(8.0),
+          sliver: SliverToBoxAdapter(
+            child: ArmorAndMovementContainer(),
+          ),
+        ),
+        SliverPadding(
+          padding: EdgeInsets.all(8.0),
           sliver: WeaponContainer(),
+        ),
+        SliverPadding(
+          padding: EdgeInsets.all(8.0),
+          sliver: ArmorContainer(),
         ),
         SliverPadding(
           padding: EdgeInsets.all(8.0),

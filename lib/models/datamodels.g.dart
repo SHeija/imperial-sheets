@@ -45,7 +45,7 @@ Item _$ItemFromJson(Map<String, dynamic> json) {
     json['description'] as String,
     (json['weight'] as num)?.toDouble(),
     json['amount'] as int,
-  );
+  )..stowed = json['stowed'] as bool;
 }
 
 Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{
@@ -53,6 +53,7 @@ Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{
       'description': instance.description,
       'weight': instance.weight,
       'amount': instance.amount,
+      'stowed': instance.stowed,
     };
 
 Weapon _$WeaponFromJson(Map<String, dynamic> json) {
@@ -68,7 +69,9 @@ Weapon _$WeaponFromJson(Map<String, dynamic> json) {
     json['clip'] as String,
     json['reloadSpeed'] as String,
     json['special'] as String,
-  )..amount = json['amount'] as int;
+  )
+    ..amount = json['amount'] as int
+    ..stowed = json['stowed'] as bool;
 }
 
 Map<String, dynamic> _$WeaponToJson(Weapon instance) => <String, dynamic>{
@@ -76,6 +79,7 @@ Map<String, dynamic> _$WeaponToJson(Weapon instance) => <String, dynamic>{
       'description': instance.description,
       'weight': instance.weight,
       'amount': instance.amount,
+      'stowed': instance.stowed,
       'range': instance.range,
       'rateOfFire': instance.rateOfFire,
       'damage': instance.damage,
@@ -91,10 +95,18 @@ Armor _$ArmorFromJson(Map<String, dynamic> json) {
     json['name'] as String,
     json['description'] as String,
     (json['weight'] as num)?.toDouble(),
-    (json['armor'] as Map<String, dynamic>)?.map(
+    (json['armorPoints'] as Map<String, dynamic>)?.map(
       (k, e) => MapEntry(k, e as int),
     ),
-  )..amount = json['amount'] as int;
+    json['stowed'] as bool,
+  )
+    ..amount = json['amount'] as int
+    ..head = json['head'] as int
+    ..leftArm = json['leftArm'] as int
+    ..rightArm = json['rightArm'] as int
+    ..body = json['body'] as int
+    ..leftLeg = json['leftLeg'] as int
+    ..rightLeg = json['rightLeg'] as int;
 }
 
 Map<String, dynamic> _$ArmorToJson(Armor instance) => <String, dynamic>{
@@ -102,7 +114,14 @@ Map<String, dynamic> _$ArmorToJson(Armor instance) => <String, dynamic>{
       'description': instance.description,
       'weight': instance.weight,
       'amount': instance.amount,
-      'armor': instance.armor,
+      'stowed': instance.stowed,
+      'armorPoints': instance.armorPoints,
+      'head': instance.head,
+      'leftArm': instance.leftArm,
+      'rightArm': instance.rightArm,
+      'body': instance.body,
+      'leftLeg': instance.leftLeg,
+      'rightLeg': instance.rightLeg,
     };
 
 Stat _$StatFromJson(Map<String, dynamic> json) {

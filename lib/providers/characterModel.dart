@@ -76,6 +76,35 @@ class CharacterModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // ARMOR
+  List<Armor> getArmors() {
+    return _character.armors;
+  }
+
+  Map<String, int> getArmorPoints() {
+    return _character.getArmorPoints();
+  }
+
+  void updateArmors(Armor armor, int index) {
+    _character.armors[index] = armor;
+    notifyListeners();
+  }
+
+  void addArmor(Armor armor){
+    _character.armors.add(armor);
+    notifyListeners();
+  }
+
+  void removeArmor(Armor armor) {
+    _character.armors.remove(armor);
+    notifyListeners();
+  }
+
+  void toggleStowArmor(int index) {
+    _character.armors[index].toggleStow();
+    notifyListeners();
+  }
+
   // WEAPONS
   List<Weapon> getWeapons() {
     return _character.weapons;
@@ -96,6 +125,11 @@ class CharacterModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void toggleStowWeapon(int index) {
+    _character.weapons[index].toggleStow();
+    notifyListeners();
+  }
+
   // ITEMS
   List<Item> getItems() {
     return _character.items;
@@ -113,6 +147,11 @@ class CharacterModel extends ChangeNotifier {
 
   void removeItem(Item item) {
     _character.items.remove(item);
+    notifyListeners();
+  }
+
+  void toggleStowItem(int index) {
+    _character.items[index].toggleStow();
     notifyListeners();
   }
 }

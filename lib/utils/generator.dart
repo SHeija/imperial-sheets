@@ -9,7 +9,6 @@ Character generateCharacter() {
   character.aptitudes = generateAptitudes();
   character.items = generateItems();
   character.weapons = generateWeapons();
-  character.armor = generateArmor();
   character.hp = 10;
   character.damage = 11;
   character.xp = 2000;
@@ -19,6 +18,7 @@ Character generateCharacter() {
   character.insanity = 10;
   character.corruption = 0;
   character.fatigue = 0;
+  character.armors.add(Armor.blank());
 
   return character;
 }
@@ -42,10 +42,4 @@ List<Item> generateItems() {
 List<Weapon> generateWeapons() {
   Weapon hotShot = Weapon('Hot-shot laspistol', 'Shoots harder than laspistol', 4.0, '20m', '1/2/-', '1d10+4', 'Energy', '7', '20', '2Full', 'Overheats');
   return [hotShot];
-}
-
-Armor generateArmor() {
-  Armor armor = Armor.blank();
-  armor.armor['head'] = 5;
-  return armor;
 }
