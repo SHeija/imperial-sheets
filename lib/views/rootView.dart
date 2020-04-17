@@ -10,7 +10,6 @@ import '../utils/generator.dart';
 
 class RootView extends StatefulWidget {
   RootView({Key key}) : super(key:key);
-  final Character _character = generateCharacter();
   @override
   _RootViewState createState() => _RootViewState();
 }
@@ -31,7 +30,7 @@ class _RootViewState extends State<RootView> {
       MainView(),
       SkillView(),
       InventoryView(),
-      TalentView(widget._character),
+      TalentView(),
     ];
 
     final List<String> _destinations = [

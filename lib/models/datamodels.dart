@@ -13,7 +13,7 @@ class Talent {
   Talent.blank(){
     title = '';
     description = '';
-    tier = 1;
+    tier = 0;
     aptitudes = [];
   }
 
