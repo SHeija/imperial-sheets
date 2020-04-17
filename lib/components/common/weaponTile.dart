@@ -27,9 +27,13 @@ class WeaponTile extends StatelessWidget {
   Widget build(BuildContext context) {
     double cellPadding = 8.0;
     return GestureDetector(
+      onTap: () {
+        Provider.of<CharacterModel>(context, listen: false).toggleStowWeapon(index);
+      },
       onLongPress: () =>
           _showEditDialog(context),
       child: Card(
+        color: weapon.stowed ? Colors.black12 : null,
         child: Column(
           children: <Widget>[
             Table(
@@ -59,7 +63,11 @@ class WeaponTile extends StatelessWidget {
                     padding: EdgeInsets.all(cellPadding),
                     alignment: Alignment.topLeft,
                   ),
-                  Container(),
+                  Container(
+                    child: Text(weapon.stowed ? 'Stowed' : ''),
+                    padding: EdgeInsets.all(cellPadding),
+                    alignment: Alignment.center,
+                  ),
                 ],
               ),
             ]),
