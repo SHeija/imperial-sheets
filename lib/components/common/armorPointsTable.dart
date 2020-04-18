@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/providers/characterModel.dart';
 import 'package:provider/provider.dart';
@@ -37,33 +38,44 @@ class ArmorPointsTable extends StatelessWidget {
     Map<String, int> armorPoints = _character.getArmorPoints();
     return Card(
       child: Container(
-        // color: Colors.red,
-        child: Table(
-          defaultColumnWidth: IntrinsicColumnWidth(),
-          children: armorPoints.entries
-              .map(
-                (e) => TableRow(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(e.key,
-                          style: Theme.of(context).textTheme.subtitle2),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                          '${(e.value+_character.getStat(Constants.T).getStatBonus())} (${e.value})',
-                          style: Theme.of(context).textTheme.subtitle2),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('(${_getHitValue(e)})',
-                          style: Theme.of(context).textTheme.subtitle2),
-                    )
-                  ],
-                ),
-              )
-              .toList(),
+        padding: EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            Container(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Hit locations', style: Theme.of(context).textTheme.headline6,)
+            ),
+            Container(
+              // color: Colors.red,
+              child: Table(
+                defaultColumnWidth: IntrinsicColumnWidth(),
+                children: armorPoints.entries
+                    .map(
+                      (e) => TableRow(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(e.key+':',
+                            style: Theme.of(context).textTheme.subtitle2),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                            '${(e.value+_character.getStat(Constants.T).getStatBonus())} (${e.value})',
+                            style: Theme.of(context).textTheme.bodyText2),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('(${_getHitValue(e)})',
+                            style: Theme.of(context).textTheme.bodyText2),
+                      )
+                    ],
+                  ),
+                )
+                    .toList(),
+              ),
+            ),
+          ],
         ),
       ),
     );

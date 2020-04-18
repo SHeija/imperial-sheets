@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:imperial_sheets/components/common/armorPointsTable.dart';
-import 'package:imperial_sheets/components/containers/armorAndMovementContainer.dart';
+import 'package:imperial_sheets/components/containers/armorAndWeightContainer.dart';
 import 'package:imperial_sheets/components/containers/armorContainer.dart';
 import 'package:imperial_sheets/components/containers/itemContainer.dart';
 import 'package:imperial_sheets/components/containers/weaponContainer.dart';
@@ -106,7 +105,7 @@ class InventoryView extends StatelessWidget {
         SliverPadding(
           padding: EdgeInsets.all(8.0),
           sliver: SliverToBoxAdapter(
-            child: ArmorAndMovementContainer(),
+            child: ArmorAndWeightContainer(),
           ),
         ),
         SliverPadding(

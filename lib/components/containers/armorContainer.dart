@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:imperial_sheets/components/common/armorTile.dart';
-import 'package:imperial_sheets/components/common/itemTile.dart';
+import 'package:imperial_sheets/components/tiles/armorTile.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
 import 'package:imperial_sheets/providers/characterModel.dart';

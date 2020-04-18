@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:imperial_sheets/components/common/skillTile.dart';
+import 'package:imperial_sheets/components/tiles/skillTile.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/components/dialogs/skillAddDialog.dart';
 import 'package:imperial_sheets/models/datamodels.dart';

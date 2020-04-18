@@ -5,8 +5,6 @@ import 'package:imperial_sheets/views/mainView.dart';
 import 'package:imperial_sheets/views/skillView.dart';
 import 'package:imperial_sheets/views/talentView.dart';
 import 'package:provider/provider.dart';
-import '../models/character.dart';
-import '../utils/generator.dart';
 
 class RootView extends StatefulWidget {
   RootView({Key key}) : super(key:key);

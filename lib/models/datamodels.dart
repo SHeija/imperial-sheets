@@ -58,7 +58,7 @@ class Skill {
   }
 
   bool canHaveMultiple() {
-    const multiples = [Constants.scholasticLore, Constants.forbiddenLore, Constants.commonLore, Constants.trade];
+    const multiples = [Constants.scholasticLore, Constants.forbiddenLore, Constants.commonLore, Constants.trade, Constants.linguistics];
     return multiples.contains(title);
   }
 
@@ -115,7 +115,7 @@ class Armor extends Item {
   Map<String, int> armorPoints;
   int head, leftArm, rightArm, body, leftLeg, rightLeg;
 
-  Armor(String name, String description, double weight, Map<String, int>this.armorPoints, bool stowed) : super(name, description, weight, 1);
+  Armor(String name, String description, double weight, this.armorPoints, bool stowed) : super(name, description, weight, 1);
   Armor.blank() : super.blank() {
     stowed = false;
     head = 0;
