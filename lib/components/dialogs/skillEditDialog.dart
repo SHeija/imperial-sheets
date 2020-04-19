@@ -11,7 +11,7 @@ class SkillEditDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      title: Text(skill.title),
+      title: Text(skill.name),
       content: SingleChildScrollView(
         child: Column(
           children: <Widget>[

@@ -11,14 +11,14 @@ class TalentEditDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      title: Text('Edit ${talent.title}'),
+      title: Text('Edit ${talent.name}'),
       content: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             FormBuilder(
               key: _formKey,
               initialValue: {
-                'title': talent.title,
+                'title': talent.name,
                 'description': talent.description,
                 'tier': talent.tier.toString()
               },
@@ -62,7 +62,7 @@ class TalentEditDialog extends StatelessWidget {
           child: Text('Submit'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {
-              talent.title = _formKey.currentState.value['title'];
+              talent.name = _formKey.currentState.value['title'];
               talent.description = _formKey.currentState.value['description'];
               talent.tier = _formKey.currentState.value['tier'];
               Navigator.of(context).pop(talent);

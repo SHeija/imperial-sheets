@@ -6,7 +6,7 @@ part 'character.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Character {
-  String name, description;
+  String name, description, notes;
   List<Stat> stats;
   List<Talent> talents;
   List<Skill> skills;
@@ -37,8 +37,7 @@ class Character {
     armors = [];
   }
 
-  Character(this.name, this.description, this.stats, this.talents, this.skills,
-      this.aptitudes, this.items, this.weapons, this.armors);
+  Character();
 
   factory Character.fromJson(Map<String, dynamic> json) =>
       _$CharacterFromJson(json);
@@ -159,7 +158,7 @@ class Character {
   List<Skill> skillSheet() {
     List<Skill> _skills = [];
     Constants.SKILL_LIST.forEach((key, value) {
-      _skills.add(Skill.notKnown(key, [], value));
+      _skills.add(Skill.notKnown(key, value));
     });
     return _skills;
   }
@@ -167,12 +166,12 @@ class Character {
   void fillSkillList() {
     // remove mis-named
     skills
-        .retainWhere((element) => Constants.ALL_SKILLS.contains(element.title));
+        .retainWhere((element) => Constants.ALL_SKILLS.contains(element.name));
     // Create "sheet"
     List<Skill> newSkills = skillSheet();
     // Replace
     skills.forEach((existing) {
-      newSkills[newSkills.indexWhere((e) => e.title == existing.title)] =
+      newSkills[newSkills.indexWhere((e) => e.name == existing.name)] =
           existing;
     });
     skills = newSkills;

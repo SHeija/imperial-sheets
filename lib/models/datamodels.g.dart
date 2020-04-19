@@ -8,15 +8,14 @@ part of 'datamodels.dart';
 
 Talent _$TalentFromJson(Map<String, dynamic> json) {
   return Talent(
-    json['title'] as String,
+    json['name'] as String,
     json['description'] as String,
     json['tier'] as int,
-    (json['aptitudes'] as List)?.map((e) => e as String)?.toList(),
-  );
+  )..aptitudes = (json['aptitudes'] as List)?.map((e) => e as String)?.toList();
 }
 
 Map<String, dynamic> _$TalentToJson(Talent instance) => <String, dynamic>{
-      'title': instance.title,
+      'name': instance.name,
       'description': instance.description,
       'tier': instance.tier,
       'aptitudes': instance.aptitudes,
@@ -24,15 +23,17 @@ Map<String, dynamic> _$TalentToJson(Talent instance) => <String, dynamic>{
 
 Skill _$SkillFromJson(Map<String, dynamic> json) {
   return Skill(
-    json['title'] as String,
-    (json['aptitudes'] as List)?.map((e) => e as String)?.toList(),
+    json['name'] as String,
     json['stage'] as int,
     json['stat'] as String,
-  )..subSkill = json['subSkill'] as String;
+  )
+    ..subSkill = json['subSkill'] as String
+    ..aptitudes =
+        (json['aptitudes'] as List)?.map((e) => e as String)?.toList();
 }
 
 Map<String, dynamic> _$SkillToJson(Skill instance) => <String, dynamic>{
-      'title': instance.title,
+      'name': instance.name,
       'stat': instance.stat,
       'subSkill': instance.subSkill,
       'stage': instance.stage,
@@ -61,17 +62,17 @@ Weapon _$WeaponFromJson(Map<String, dynamic> json) {
     json['name'] as String,
     json['description'] as String,
     (json['weight'] as num)?.toDouble(),
-    json['range'] as String,
-    json['rateOfFire'] as String,
-    json['damage'] as String,
-    json['type'] as String,
-    json['penetration'] as String,
-    json['clip'] as String,
-    json['reloadSpeed'] as String,
-    json['special'] as String,
   )
     ..amount = json['amount'] as int
-    ..stowed = json['stowed'] as bool;
+    ..stowed = json['stowed'] as bool
+    ..range = json['range'] as String
+    ..rateOfFire = json['rateOfFire'] as String
+    ..damage = json['damage'] as String
+    ..type = json['type'] as String
+    ..penetration = json['penetration'] as String
+    ..clip = json['clip'] as String
+    ..reloadSpeed = json['reloadSpeed'] as String
+    ..special = json['special'] as String;
 }
 
 Map<String, dynamic> _$WeaponToJson(Weapon instance) => <String, dynamic>{

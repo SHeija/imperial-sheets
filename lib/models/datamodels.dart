@@ -5,13 +5,13 @@ part 'datamodels.g.dart';
 
 @JsonSerializable()
 class Talent {
-  String title, description;
+  String name, description;
   int tier;
   List<String> aptitudes;
 
-  Talent(this.title, this.description, this.tier, this.aptitudes);
+  Talent(this.name, this.description, this.tier);
   Talent.blank(){
-    title = '';
+    name = '';
     description = '';
     tier = 0;
     aptitudes = [];
@@ -23,13 +23,13 @@ class Talent {
 
 @JsonSerializable()
 class Skill {
-  String title, stat; // e.g Parry, Weapon Skill
+  String name, stat; // e.g Parry, Weapon Skill
   String subSkill;
   int stage;
   List<String> aptitudes;
 
-  Skill(this.title, this.aptitudes, this.stage, this.stat);
-  Skill.notKnown(this.title, this.aptitudes, this.stat){
+  Skill(this.name, this.stage, this.stat);
+  Skill.notKnown(this.name, this.stat){
     subSkill = '';
     stage = 0;
   }
@@ -59,7 +59,7 @@ class Skill {
 
   bool canHaveMultiple() {
     const multiples = [Constants.scholasticLore, Constants.forbiddenLore, Constants.commonLore, Constants.trade, Constants.linguistics];
-    return multiples.contains(title);
+    return multiples.contains(name);
   }
 
   factory Skill.fromJson(Map<String, dynamic> json) => _$SkillFromJson(json);
@@ -94,7 +94,7 @@ class Item {
 class Weapon extends Item{
   String range, rateOfFire, damage, type, penetration, clip, reloadSpeed, special;
 
-  Weapon(String name, String description, double weight, this.range, this.rateOfFire, this.damage, this.type, this.penetration, this.clip, this.reloadSpeed, this.special) : super(name, description, weight, 1);
+  Weapon(String name, String description, double weight) : super(name, description, weight, 1);
   Weapon.blank() : super.blank() {
     range = '';
     rateOfFire = '';

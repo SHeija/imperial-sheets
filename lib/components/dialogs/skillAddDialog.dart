@@ -62,7 +62,7 @@ class SkillAddDialog extends StatelessWidget {
           child: Text('Submit'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {
-              _skill.title = _formKey.currentState.value['title'];
+              _skill.name = _formKey.currentState.value['title'];
               _skill.subSkill = _formKey.currentState.value['subSkill'];
               _skill.stat = Constants.SKILL_LIST[_formKey.currentState.value['title']];
               _skill.stage = _formKey.currentState.value['stage'];

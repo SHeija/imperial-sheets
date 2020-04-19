@@ -7,35 +7,35 @@ part of 'character.dart';
 // **************************************************************************
 
 Character _$CharacterFromJson(Map<String, dynamic> json) {
-  return Character(
-    json['name'] as String,
-    json['description'] as String,
-    (json['stats'] as List)
+  return Character()
+    ..name = json['name'] as String
+    ..description = json['description'] as String
+    ..notes = json['notes'] as String
+    ..stats = (json['stats'] as List)
         ?.map(
             (e) => e == null ? null : Stat.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    (json['talents'] as List)
+        ?.toList()
+    ..talents = (json['talents'] as List)
         ?.map((e) =>
             e == null ? null : Talent.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    (json['skills'] as List)
+        ?.toList()
+    ..skills = (json['skills'] as List)
         ?.map(
             (e) => e == null ? null : Skill.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    (json['aptitudes'] as List)?.map((e) => e as String)?.toList(),
-    (json['items'] as List)
+        ?.toList()
+    ..aptitudes = (json['aptitudes'] as List)?.map((e) => e as String)?.toList()
+    ..items = (json['items'] as List)
         ?.map(
             (e) => e == null ? null : Item.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    (json['weapons'] as List)
+        ?.toList()
+    ..weapons = (json['weapons'] as List)
         ?.map((e) =>
             e == null ? null : Weapon.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    (json['armors'] as List)
+        ?.toList()
+    ..armors = (json['armors'] as List)
         ?.map(
             (e) => e == null ? null : Armor.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-  )
+        ?.toList()
     ..xp = json['xp'] as int
     ..spentXp = json['spentXp'] as int
     ..hp = json['hp'] as int
@@ -50,6 +50,7 @@ Character _$CharacterFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$CharacterToJson(Character instance) => <String, dynamic>{
       'name': instance.name,
       'description': instance.description,
+      'notes': instance.notes,
       'stats': instance.stats?.map((e) => e?.toJson())?.toList(),
       'talents': instance.talents?.map((e) => e?.toJson())?.toList(),
       'skills': instance.skills?.map((e) => e?.toJson())?.toList(),

@@ -24,8 +24,10 @@ Character generateCharacter() {
 }
 
 List<Talent> generateTalents() {
-  Talent quickDraw = Talent('Quick Draw', 'Halves time required to draw a weapon', 1, ['agility', 'finesse']);
-  Talent sprint = Talent('Sprint', 'Sprints', 3, ['agility', 'fieldcraft']);
+  Talent quickDraw = Talent('Quick Draw', 'Halves time required to draw a weapon', 1)
+  ..aptitudes = ['agility', 'finesse'];
+  Talent sprint = Talent('Sprint', 'Sprints', 3)
+  ..aptitudes = ['agility', 'fieldcraft'];
   return [quickDraw, sprint];
 }
 
@@ -40,6 +42,13 @@ List<Item> generateItems() {
 }
 
 List<Weapon> generateWeapons() {
-  Weapon hotShot = Weapon('Hot-shot laspistol', 'Shoots harder than laspistol', 4.0, '20m', '1/2/-', '1d10+4', 'Energy', '7', '20', '2Full', 'Overheats');
+  Weapon hotShot = Weapon('Hot-shot laspistol', 'Shoots harder than laspistol', 4.0)
+  ..range = '20m'
+  ..rateOfFire = '1/2/-'
+  ..type = 'Energy'
+  ..penetration = '7'
+  ..clip = '20'
+  ..reloadSpeed = '2Full'
+  ..special = 'Overheats';
   return [hotShot];
 }

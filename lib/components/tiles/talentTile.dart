@@ -42,7 +42,7 @@ class TalentTile extends StatelessWidget {
                 TableRow(
                   children: <Widget>[
                     Container(
-                      child: Text(talent.title,
+                      child: Text(talent.name,
                           style: Theme.of(context).textTheme.headline6),
                       padding: EdgeInsets.all(cellPadding),
                     ),
