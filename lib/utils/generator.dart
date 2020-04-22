@@ -1,7 +1,9 @@
 import '../models/character.dart';
 import '../models/datamodels.dart';
+import '../database/CharacterDao.dart';
 
-Character generateCharacter() {
+Future<Character> generateCharacter() async {
+  CharacterDao dao = CharacterDao();
   Character character = Character.blank();
   character.name = 'Roth Havelock';
   character.description = 'A dashing low-life rogue that dreams of being part of the elite that he was meant to be';
@@ -19,7 +21,7 @@ Character generateCharacter() {
   character.corruption = 0;
   character.fatigue = 0;
   character.armors.add(Armor.blank());
-
+  character.id = await dao.insertCharacter(character);
   return character;
 }
 

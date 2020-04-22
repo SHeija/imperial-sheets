@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:provider/provider.dart';
 import 'package:statusbar/statusbar.dart';
 import './views/rootView.dart';
 
@@ -17,7 +19,10 @@ class App extends StatelessWidget {
         accentColor: Colors.blueGrey,
         primaryColor: Colors.blueGrey,
       ),
-      home: RootView(),
+      home: ChangeNotifierProvider(
+        create: (context) => CharacterModel(),
+        child: RootView(),
+      ),
     );
   }
 }

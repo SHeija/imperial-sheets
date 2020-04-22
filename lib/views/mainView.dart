@@ -35,39 +35,3 @@ class MainView extends StatelessWidget {
     );
   }
 }
-
-/*
-Container(
-      padding: EdgeInsets.all(8.0),
-      color: Theme.of(context).bottomSheetTheme.backgroundColor,
-      child: ListView(
-        children: <Widget>[
-          InfoContainer(Provider.of<CharacterModel>(context).getCharacter()),
-          SpeedTable(Provider.of<CharacterModel>(context).getCharacter()),
-          StatContainer(Provider.of<CharacterModel>(context).getStats()),
-        ],
-      ),
-
-
-
-return CustomScrollView(
-      primary: false,
-      slivers: <Widget>[
-        SliverPadding(
-          padding: const EdgeInsets.all(8.0),
-          sliver: SliverGrid(
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200.0,
-              childAspectRatio: 190/108,
-            ),
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return SkillTile(skills[index], index);
-              },
-              childCount: skills.length,
-            ),
-          ),
-        ),
-      ],
-    );
- */
