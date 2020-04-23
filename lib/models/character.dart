@@ -28,6 +28,7 @@ class Character {
   Character.blank() {
     name = 'Name';
     description = 'Description';
+    notes = '';
     stats = statSheet();
     skills = skillSheet();
     talents = [];

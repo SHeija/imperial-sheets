@@ -236,4 +236,15 @@ class CharacterModel extends ChangeNotifier {
     saveCharacter();
     notifyListeners();
   }
+
+  // NOTES
+  String getNotes() {
+    return _currentCharacter.notes;
+  }
+
+  void updateNotes(String notes) {
+    _currentCharacter.notes = notes;
+    saveCharacter();
+    notifyListeners();
+  }
 }

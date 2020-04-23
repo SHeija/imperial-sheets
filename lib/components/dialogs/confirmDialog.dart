@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ConfirmDialog extends StatelessWidget {
+  ConfirmDialog([this.child]);
+  Widget child;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -8,7 +10,7 @@ class ConfirmDialog extends StatelessWidget {
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       content: SingleChildScrollView(
         child: Center(
-          child: Text('Delete?')
+          child: child != null ? child : Text('Delete?'),
         ),
       ),
       actions: <Widget>[
