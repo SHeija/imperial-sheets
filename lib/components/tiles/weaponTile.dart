@@ -44,7 +44,7 @@ class WeaponTile extends StatelessWidget {
                 }, children: [
               TableRow(children: <Widget>[
                 Container(
-                  child: Text(weapon.name,
+                  child: Text(weapon.name+' '+weapon.getAmountString(),
                       style: Theme.of(context).textTheme.headline6),
                   padding: EdgeInsets.all(cellPadding),
                 ),
@@ -93,7 +93,7 @@ class WeaponTile extends StatelessWidget {
                       alignment: Alignment.topLeft,
                     ),
                     Container(
-                      child: Text('Dmg: ${weapon.damage}${weapon.type[0]}',
+                      child: Text('Dmg: ${weapon.damage} ${weapon.type}',
                           style: Theme.of(context).textTheme.subtitle1),
                       padding: EdgeInsets.all(cellPadding),
                       alignment: Alignment.topLeft,

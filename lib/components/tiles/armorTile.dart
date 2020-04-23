@@ -43,7 +43,7 @@ class ArmorTile extends StatelessWidget {
                 }, children: [
               TableRow(children: <Widget>[
                 Container(
-                  child: Text(armor.name,
+                  child: Text(armor.name+' '+armor.getAmountString(),
                       style: Theme.of(context).textTheme.headline6),
                   padding: EdgeInsets.all(cellPadding),
                 ),

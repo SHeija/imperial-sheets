@@ -86,6 +86,21 @@ class Item {
     stowed = !stowed;
   }
 
+  double getWeight() {
+    return stowed ? 0 : weight*amount;
+  }
+
+  String getAmountString() {
+    switch (amount) {
+      case 1:
+        return '';
+        break;
+      default:
+        return '($amount)';
+        break;
+    }
+  }
+
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
   Map<String, dynamic> toJson() => _$ItemToJson(this);
 }
@@ -127,27 +142,27 @@ class Armor extends Item {
   }
 
   int getHead() {
-    return stowed ? 0 : head;
+    return stowed || amount == 0 ? 0 : head;
   }
 
   int getLeftArm() {
-    return stowed ? 0 : leftArm;
+    return stowed || amount == 0 ? 0 : leftArm;
   }
 
   int getRightArm() {
-    return stowed ? 0 : rightArm;
+    return stowed || amount == 0 ? 0 : rightArm;
   }
 
   int getBody() {
-    return stowed ? 0 : body;
+    return stowed || amount == 0 ? 0 : body;
   }
 
   int getLeftLeg() {
-    return stowed ? 0 : leftLeg;
+    return stowed || amount == 0 ? 0 : leftLeg;
   }
 
   int getRightLeg() {
-    return stowed ? 0 : rightLeg;
+    return stowed || amount == 0 ? 0 : rightLeg;
   }
 
   factory Armor.fromJson(Map<String, dynamic> json) => _$ArmorFromJson(json);

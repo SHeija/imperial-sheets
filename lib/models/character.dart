@@ -176,9 +176,9 @@ class Character {
 
   //ITEMS
   double getItemWeight() {
-    double armorWT = armors.fold(0.0, (previousValue, element) => previousValue + (element.stowed ? 0 :element.weight));
-    double itemWt = items.fold(0.0, (previousValue, element) => previousValue + (element.stowed ? 0 :element.weight));
-    double weaponWT = weapons.fold(0.0, (previousValue, element) => previousValue + (element.stowed ? 0 :element.weight));
+    double armorWT = armors.fold(0.0, (previousValue, element) => previousValue + element.getWeight());
+    double itemWt = items.fold(0.0, (previousValue, element) => previousValue + element.getWeight());
+    double weaponWT = weapons.fold(0.0, (previousValue, element) => previousValue + element.getWeight());
     return armorWT+itemWt+weaponWT;
   }
 
