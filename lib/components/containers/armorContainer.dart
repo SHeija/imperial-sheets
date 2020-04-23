@@ -23,7 +23,9 @@ class ArmorContainer extends StatelessWidget {
                 return await showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return ConfirmDialog();
+                    return ConfirmDialog(
+                      child: Text('Delete ${armors[index].name}?'),
+                    );
                   },
                 );
               },

@@ -25,7 +25,14 @@ class MainView extends StatelessWidget {
                 final result = await showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return ConfirmDialog();
+                      return ConfirmDialog(
+                        child: Column(
+                          children: <Widget>[
+                            Text('Really delete this character?'),
+                            Text('This cannot be undone.')
+                          ],
+                        )
+                      );
                     }
                 );
                 if (result) {

@@ -22,7 +22,9 @@ class ItemContainer extends StatelessWidget {
           return await showDialog(
             context: context,
             builder: (BuildContext context) {
-              return ConfirmDialog();
+              return ConfirmDialog(
+                child: Text('Delete ${items[index].name}?'),
+              );
             },
           );
         },

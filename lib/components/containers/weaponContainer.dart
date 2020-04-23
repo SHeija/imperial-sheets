@@ -23,7 +23,9 @@ class WeaponContainer extends StatelessWidget {
               return await showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return ConfirmDialog();
+                  return ConfirmDialog(
+                    child: Text('Delete ${weapons[index].name}?')
+                  );
                 },
               );
             },

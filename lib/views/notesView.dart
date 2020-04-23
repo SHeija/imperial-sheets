@@ -83,7 +83,9 @@ class _NotesViewState extends State<NotesView> {
                 final result = await showDialog(
                     context: context,
                   builder: (BuildContext context) {
-                      return ConfirmDialog();
+                      return ConfirmDialog(
+                        child: Text('Clear notes?'),
+                      );
                   }
                 );
                 if (result) {
