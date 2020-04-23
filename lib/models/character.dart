@@ -6,8 +6,7 @@ part 'character.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Character {
-  int id;
-  String name, description, notes;
+  String name, description, notes, id;
   List<Stat> stats;
   List<Talent> talents;
   List<Skill> skills;

@@ -11,6 +11,7 @@ Character _$CharacterFromJson(Map<String, dynamic> json) {
     ..name = json['name'] as String
     ..description = json['description'] as String
     ..notes = json['notes'] as String
+    ..id = json['id'] as String
     ..stats = (json['stats'] as List)
         ?.map(
             (e) => e == null ? null : Stat.fromJson(e as Map<String, dynamic>))
@@ -51,6 +52,7 @@ Map<String, dynamic> _$CharacterToJson(Character instance) => <String, dynamic>{
       'name': instance.name,
       'description': instance.description,
       'notes': instance.notes,
+      'id': instance.id,
       'stats': instance.stats?.map((e) => e?.toJson())?.toList(),
       'talents': instance.talents?.map((e) => e?.toJson())?.toList(),
       'skills': instance.skills?.map((e) => e?.toJson())?.toList(),

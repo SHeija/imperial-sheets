@@ -3,6 +3,7 @@ import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/providers/characterModel.dart';
 import 'package:imperial_sheets/views/inventoryView.dart';
 import 'package:imperial_sheets/views/mainView.dart';
+import 'package:imperial_sheets/views/noCharacterView.dart';
 import 'package:imperial_sheets/views/skillView.dart';
 import 'package:imperial_sheets/views/talentView.dart';
 import 'package:provider/provider.dart';
@@ -58,11 +59,33 @@ class _RootViewState extends State<RootView> {
                 Provider.of<CharacterModel>(context, listen: false).setCurrentCharacter(_characterList[index]);
                 Navigator.of(context).pop();
               },
+              leading: Icon(Icons.bookmark),
               title: Text(_characterList[index].name),
-              subtitle: Text(_characterList[index].id.toString()),
             );
           },
           childCount: _characterList.length,
+        ),
+      );
+    }
+
+    Widget _getDrawerActions() {
+      return SliverList(
+        delegate: SliverChildListDelegate(
+          [
+            Divider(),
+            ListTile(
+              title: Text('Add new character'),
+              leading: Icon(Icons.add),
+              onTap: (){
+                Provider.of<CharacterModel>(context, listen: false).createNewCharacter();
+                Navigator.of(context).pop();
+              },
+            ),
+            ListTile(
+              title: Text('Import character'),
+              leading: Icon(Icons.file_download),
+            ),
+          ]
         ),
       );
     }
@@ -86,12 +109,16 @@ class _RootViewState extends State<RootView> {
             SliverPadding(
               padding: EdgeInsets.zero,
               sliver: _getCharacterList(),
+            ),
+            SliverPadding(
+              padding: EdgeInsets.zero,
+              sliver: _getDrawerActions(),
             )
           ],
         ),
       ),
       body: SafeArea(
-        child: _children[_currentIndex],
+        child: Provider.of<CharacterModel>(context).getCharacter() == null ? NoCharacterView() : _children[_currentIndex]
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

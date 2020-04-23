@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:imperial_sheets/database/CharacterDao.dart';
+import 'package:imperial_sheets/database/characterDao.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
 
 class CharacterModel extends ChangeNotifier {
   CharacterModel(){
-    this._currentCharacter = Character.blank();
     this._characterList = [];
     fetchCurrentCharacter();
     fetchCharacterList();
@@ -18,44 +17,60 @@ class CharacterModel extends ChangeNotifier {
   // SAVE CHANGES TO DB
   Future saveCharacter() async {
     if (_currentCharacter.id == null) {
-      _currentCharacter.id = await db.insertCharacter(_currentCharacter);
-      _characterList.add(_currentCharacter);
-      fetchCharacterList();
+      _currentCharacter.id = _currentCharacter.name+DateTime.now().toIso8601String();
+      await db.insertCharacter(_currentCharacter);
+      await fetchCharacterList();
     } else {
       await db.updateCharacter(_currentCharacter);
+      await fetchCharacterList();
     }
     notifyListeners();
   }
 
+  // FETCH FROM DB
   Future fetchCurrentCharacter() async {
-    //_currentCharacter = db.getActiveCharacter();
-  }
-
-  Future deleteSelected(Character character) async {
-    await db.delete(character);
-    fetchCharacterList();
-    print('deleted');
+    _currentCharacter = await db.getActiveCharacter();
   }
 
   Future fetchCharacterList() async {
     _characterList = await db.getAllCharacters();
     notifyListeners();
   }
-
-  // CHARACTER
-  Character getCharacter() {
-    return _currentCharacter;
-  }
-
-  void setCurrentCharacter(Character character) {
-    _currentCharacter = character;
-    notifyListeners();
-  }
-
+  
+  // CHARACTER LIST
   List<Character> getAllCharacters() {
     return _characterList;
   }
 
+  Future<void> setCurrentCharacter(Character character) async {
+    _currentCharacter = character;
+    await db.setActiveCharacter(character);
+    notifyListeners();
+  }
+
+  Future<void> deleteAll() async {
+    _currentCharacter = null;
+    await db.deleteAll();
+    await fetchCharacterList();
+  }
+  
+  // CHARACTER
+  Character getCharacter() {
+    return _currentCharacter;
+  }
+  
+  void createNewCharacter() {
+    _currentCharacter = Character.blank();
+    notifyListeners();
+  }
+
+  Future<void> deleteCurrentCharacter() async {
+    await db.delete(_currentCharacter);
+    await fetchCharacterList();
+    _currentCharacter = null;
+    notifyListeners();
+  }
+  
   void updateInfo(Character character) {
     _currentCharacter.name = character.name;
     _currentCharacter.description = character.description;

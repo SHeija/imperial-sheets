@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/common/speedTable.dart';
+import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/providers/characterModel.dart';
 import 'package:provider/provider.dart';
 import '../components/containers/infoContainer.dart';
@@ -17,6 +18,26 @@ class MainView extends StatelessWidget {
           floating: true,
           elevation: Theme.of(context).appBarTheme.elevation,
           forceElevated: true,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () async {
+                final result = await showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return ConfirmDialog();
+                    }
+                );
+                switch (result) {
+                  case true:
+                    Provider.of<CharacterModel>(context, listen: false).deleteCurrentCharacter();
+                    break;
+                  default:
+                    break;
+                };
+              },
+            )
+          ],
         ),
         SliverPadding(
           padding: const EdgeInsets.all(8.0),

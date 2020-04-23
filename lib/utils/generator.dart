@@ -1,6 +1,6 @@
 import '../models/character.dart';
 import '../models/datamodels.dart';
-import '../database/CharacterDao.dart';
+import '../database/characterDao.dart';
 
 Future<Character> generateCharacter() async {
   CharacterDao dao = CharacterDao();
@@ -21,7 +21,7 @@ Future<Character> generateCharacter() async {
   character.corruption = 0;
   character.fatigue = 0;
   character.armors.add(Armor.blank());
-  character.id = await dao.insertCharacter(character);
+  // character.id = await dao.insertCharacter(character);
   return character;
 }
 
