@@ -15,9 +15,9 @@ class CharacterDao {
     return await _characterFolder.record(character.id).add(await _db, character.toJson());
   }
 
-  Future<String> updateCharacter(Character character) async{
+  Future<int> updateCharacter(Character character) async{
     final finder = Finder(filter: Filter.byKey(character.id));
-    await _characterFolder.update(await _db, character.toJson(),finder: finder);
+    return await _characterFolder.update(await _db, character.toJson(),finder: finder);
   }
 
   Future<void> delete(Character character) async{

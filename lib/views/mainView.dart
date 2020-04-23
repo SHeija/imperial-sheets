@@ -28,13 +28,9 @@ class MainView extends StatelessWidget {
                       return ConfirmDialog();
                     }
                 );
-                switch (result) {
-                  case true:
-                    Provider.of<CharacterModel>(context, listen: false).deleteCurrentCharacter();
-                    break;
-                  default:
-                    break;
-                };
+                if (result) {
+                  Provider.of<CharacterModel>(context, listen: false).deleteCurrentCharacter();
+                }
               },
             )
           ],

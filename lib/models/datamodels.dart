@@ -126,6 +126,30 @@ class Armor extends Item {
     rightLeg = 0;
   }
 
+  int getHead() {
+    return stowed ? 0 : head;
+  }
+
+  int getLeftArm() {
+    return stowed ? 0 : leftArm;
+  }
+
+  int getRightArm() {
+    return stowed ? 0 : rightArm;
+  }
+
+  int getBody() {
+    return stowed ? 0 : body;
+  }
+
+  int getLeftLeg() {
+    return stowed ? 0 : leftLeg;
+  }
+
+  int getRightLeg() {
+    return stowed ? 0 : rightLeg;
+  }
+
   factory Armor.fromJson(Map<String, dynamic> json) => _$ArmorFromJson(json);
   Map<String, dynamic> toJson() => _$ArmorToJson(this);
 }

@@ -50,13 +50,6 @@ class Character {
     return wpB + tB;
   }
 
-  double getItemWeight() {
-    double armorWT = armors.fold(0.0, (previousValue, element) => previousValue + element.weight);
-    double itemWt = items.fold(0.0, (previousValue, element) => previousValue + element.weight);
-    double weaponWT = weapons.fold(0.0, (previousValue, element) => previousValue + element.weight);
-    return armorWT+itemWt+weaponWT;
-  }
-
   // oh lord why
   double getCarryLimit() {
     int B = getStat(Constants.S).getStatBonus()+getStat(Constants.T).getStatBonus();
@@ -181,7 +174,14 @@ class Character {
     skills.sort((a,b) => a.name.compareTo(b.name));
   }
 
-  //ARMOR
+  //ITEMS
+  double getItemWeight() {
+    double armorWT = armors.fold(0.0, (previousValue, element) => previousValue + (element.stowed ? 0 :element.weight));
+    double itemWt = items.fold(0.0, (previousValue, element) => previousValue + (element.stowed ? 0 :element.weight));
+    double weaponWT = weapons.fold(0.0, (previousValue, element) => previousValue + (element.stowed ? 0 :element.weight));
+    return armorWT+itemWt+weaponWT;
+  }
+
   Map<String, int> getArmorPoints() {
     return armors.isEmpty
         ? {
@@ -195,28 +195,28 @@ class Character {
         : {
             'Head': armors
                 .reduce((current, next) =>
-                    current.head > next.head ? current : next)
-                .head,
+                    current.getHead() > next.getHead() ? current : next)
+                .getHead(),
             'Left Arm': armors
                 .reduce((current, next) =>
-                    current.leftArm > next.leftArm ? current : next)
-                .leftArm,
+                    current.getLeftArm() > next.getLeftArm() ? current : next)
+                .getLeftArm(),
             'Right Arm': armors
                 .reduce((current, next) =>
-                    current.rightArm > next.rightArm ? current : next)
-                .rightArm,
+                    current.getRightArm() > next.getRightArm() ? current : next)
+                .getRightArm(),
             'Body': armors
                 .reduce((current, next) =>
-                    current.body > next.body ? current : next)
-                .body,
+                    current.getBody() > next.getBody() ? current : next)
+                .getBody(),
             'Left Leg': armors
                 .reduce((current, next) =>
-                    current.leftLeg > next.leftLeg ? current : next)
-                .leftLeg,
+                    current.getLeftLeg() > next.getLeftLeg() ? current : next)
+                .getLeftLeg(),
             'Right Leg': armors
                 .reduce((current, next) =>
-                    current.rightLeg > next.rightLeg ? current : next)
-                .rightLeg
+                    current.getRightLeg() > next.getRightLeg() ? current : next)
+                .getRightLeg()
           };
   }
 }
