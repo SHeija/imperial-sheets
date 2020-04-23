@@ -111,6 +111,7 @@ class CharacterModel extends ChangeNotifier {
 
   void addSkill(Skill skill) {
     _currentCharacter.skills.add(skill);
+    _currentCharacter.sortSkills();
     saveCharacter();
     notifyListeners();
   }

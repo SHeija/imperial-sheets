@@ -22,7 +22,7 @@ class SkillAddDialog extends StatelessWidget {
                 children: <Widget>[
                   FormBuilderDropdown(
                     attribute: 'title',
-                    items: [Constants.commonLore, Constants.forbiddenLore, Constants.scholasticLore, Constants.trade]
+                    items: [Constants.commonLore, Constants.forbiddenLore, Constants.scholasticLore, Constants.trade, Constants.linguistics]
                         .map((skill) => DropdownMenuItem(
                         value: skill,
                         child: Text("$skill")

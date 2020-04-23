@@ -177,6 +177,11 @@ class Character {
     skills = newSkills;
   }
 
+  void sortSkills() {
+    skills.sort((a,b) => a.name.compareTo(b.name));
+  }
+
+  //ARMOR
   Map<String, int> getArmorPoints() {
     return armors.isEmpty
         ? {
