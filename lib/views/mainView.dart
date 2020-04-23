@@ -47,7 +47,18 @@ class MainView extends StatelessWidget {
             child: SpeedTable(),
           ),
         ),
-        StatContainer(Provider.of<CharacterModel>(context).getStats()),
+        SliverPadding(
+          padding: EdgeInsets.all(8.0),
+          sliver: SliverAppBar(
+            automaticallyImplyLeading: false,
+            title: Text('Statistics'),
+            centerTitle: true,
+          ),
+        ),
+        SliverPadding(
+          padding: EdgeInsets.all(8.0),
+          sliver: StatContainer(Provider.of<CharacterModel>(context).getStats()),
+        ),
       ],
     );
   }

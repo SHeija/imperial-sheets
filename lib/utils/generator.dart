@@ -12,7 +12,7 @@ Future<Character> generateCharacter() async {
   character.items = generateItems();
   character.weapons = generateWeapons();
   character.hp = 10;
-  character.damage = 11;
+  character.currentHp = 11;
   character.xp = 2000;
   character.spentXp = 1500;
   character.faith = 3;

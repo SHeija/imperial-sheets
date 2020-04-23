@@ -55,7 +55,7 @@ class InfoChips extends StatelessWidget {
           break;
         case 'Wounds':
           character.hp = result['val2'];
-          character.damage = result['val1'];
+          character.currentHp = result['val1'];
           break;
         case 'Faith':
           character.currentFaith = result['val1'];
@@ -77,8 +77,8 @@ class InfoChips extends StatelessWidget {
               spacing: 8.0,
               children: [
                 ActionChip(
-                    label: Text('Wounds '+(character.hp-character.damage).toString()+'/'+character.hp.toString()),
-                    onPressed: () => _showDualValueDialog(context, character.damage, character.hp, 'Wounds', 'Damage taken', 'Total wounds'),
+                    label: Text('Wounds '+(character.currentHp.toString()).toString()+'/'+character.hp.toString()),
+                    onPressed: () => _showDualValueDialog(context, character.currentHp, character.hp, 'Wounds', 'Current Wounds', 'Total wounds'),
                 ),
                 ActionChip(
                   label: Text('Faith points '+character.currentFaith.toString()+'/'+character.faith.toString()),

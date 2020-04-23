@@ -75,7 +75,7 @@ class CharacterModel extends ChangeNotifier {
     _currentCharacter.name = character.name;
     _currentCharacter.description = character.description;
     _currentCharacter.hp = character.hp;
-    _currentCharacter.damage = character.damage;
+    _currentCharacter.currentHp = character.currentHp;
     _currentCharacter.xp = character.xp;
     _currentCharacter.spentXp = character.spentXp;
     _currentCharacter.faith = character.faith;

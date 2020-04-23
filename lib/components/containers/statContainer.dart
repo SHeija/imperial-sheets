@@ -8,19 +8,16 @@ class StatContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
-      padding: const EdgeInsets.all(8.0),
-      sliver: SliverGrid(
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 200.0,
-          childAspectRatio: 190/90,
-        ),
-        delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-            return StatTile(stats[index], index);
-          },
-          childCount: stats.length,
-        ),
+    return SliverGrid(
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 200.0,
+        childAspectRatio: 190/90,
+      ),
+      delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+          return StatTile(stats[index], index);
+        },
+        childCount: stats.length,
       ),
     );
   }

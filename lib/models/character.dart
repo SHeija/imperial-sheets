@@ -18,7 +18,7 @@ class Character {
   int xp = 0;
   int spentXp = 0;
   int hp = 0;
-  int damage = 0;
+  int currentHp = 0;
   int faith = 0;
   int currentFaith = 0;
   int corruption = 0;

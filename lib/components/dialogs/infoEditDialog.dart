@@ -22,7 +22,7 @@ class InfoEditDialog extends StatelessWidget {
                   'name': character.name,
                   'description': character.description,
                   'hp': character.hp.toString(),
-                  'damage': character.damage.toString(),
+                  'damage': character.currentHp.toString(),
                   'xp': character.xp.toString(),
                   'spentXp': character.spentXp.toString(),
                   'faith': character.faith.toString(),
@@ -135,7 +135,7 @@ class InfoEditDialog extends StatelessWidget {
               character.name = _formKey.currentState.value['name'];
               character.description = _formKey.currentState.value['description'];
               character.hp = _formKey.currentState.value['hp'];
-              character.damage = _formKey.currentState.value['damage'];
+              character.currentHp = _formKey.currentState.value['damage'];
               character.xp = _formKey.currentState.value['xp'];
               character.spentXp = _formKey.currentState.value['spentXp'];
               character.faith = _formKey.currentState.value['faith'];
