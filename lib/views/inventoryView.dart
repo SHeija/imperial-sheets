@@ -59,7 +59,6 @@ class InventoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      shrinkWrap: true,
       primary: false,
       slivers: <Widget>[
         SliverAppBar(
@@ -104,8 +103,14 @@ class InventoryView extends StatelessWidget {
         ),
         SliverPadding(
           padding: EdgeInsets.all(8.0),
-          sliver: SliverToBoxAdapter(
-            child: ArmorAndWeightContainer(),
+          sliver: ArmorAndWeightContainer(),
+        ),
+        SliverPadding(
+          padding: EdgeInsets.all(8.0),
+          sliver: SliverAppBar(
+            automaticallyImplyLeading: false,
+            title: Text('Weapons'),
+            centerTitle: true,
           ),
         ),
         SliverPadding(
@@ -114,7 +119,23 @@ class InventoryView extends StatelessWidget {
         ),
         SliverPadding(
           padding: EdgeInsets.all(8.0),
+          sliver: SliverAppBar(
+            automaticallyImplyLeading: false,
+            title: Text('Armor'),
+            centerTitle: true,
+          ),
+        ),
+        SliverPadding(
+          padding: EdgeInsets.all(8.0),
           sliver: ArmorContainer(),
+        ),
+        SliverPadding(
+          padding: EdgeInsets.all(8.0),
+          sliver: SliverAppBar(
+            automaticallyImplyLeading: false,
+            title: Text('Gear'),
+            centerTitle: true,
+          ),
         ),
         SliverPadding(
           padding: EdgeInsets.all(8.0),

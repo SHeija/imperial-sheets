@@ -42,7 +42,7 @@ class SkillView extends StatelessWidget {
           ],
         ),
         SliverPadding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.0),
           sliver: SliverGrid(
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200.0,
