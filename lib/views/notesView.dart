@@ -75,7 +75,6 @@ class _NotesViewState extends State<NotesView> {
       primary: false,
       slivers: <Widget>[
         SliverAppBar(
-          title: Text('Imperial sheets'),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.delete),

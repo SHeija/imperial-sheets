@@ -14,7 +14,6 @@ class MainView extends StatelessWidget {
       primary: false,
       slivers: <Widget>[
         SliverAppBar(
-          title: Text('Imperial sheets'),
           floating: true,
           elevation: Theme.of(context).appBarTheme.elevation,
           forceElevated: true,

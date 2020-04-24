@@ -105,9 +105,13 @@ class _RootViewState extends State<RootView> {
               padding: EdgeInsets.zero,
               sliver: SliverToBoxAdapter(
                 child: DrawerHeader(
-                  child: Text('Drawer Header'),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text('Imperial Sheets',
+                        style: Theme.of(context).textTheme.headline5.copyWith(color: Colors.white)),
+                  ),
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ),

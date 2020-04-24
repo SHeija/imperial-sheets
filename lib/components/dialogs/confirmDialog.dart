@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ConfirmDialog extends StatelessWidget {
   ConfirmDialog({this.child});
-  Widget child;
+  final Widget child;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(

@@ -29,7 +29,6 @@ class TalentView extends StatelessWidget {
       primary: false,
       slivers: <Widget>[
         SliverAppBar(
-          title: Text('Imperial sheets'),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.add),

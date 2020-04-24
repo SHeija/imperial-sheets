@@ -6,7 +6,6 @@ class NoCharacterView extends StatelessWidget {
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
-          title: Text('Imperial sheets'),
         ),
         SliverPadding(
           padding: EdgeInsets.all(30),
