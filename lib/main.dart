@@ -19,7 +19,7 @@ class App extends StatelessWidget {
         accentColor: Colors.blueGrey,
         primaryColor: Colors.blueGrey,
         textTheme: TextTheme(
-          headline6: TextStyle(fontSize: 17.0)
+          title: TextStyle(fontSize: 17.0)
         )
       ),
       home: ChangeNotifierProvider(

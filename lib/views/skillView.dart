@@ -45,7 +45,7 @@ class SkillView extends StatelessWidget {
           sliver: SliverGrid(
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 250.0,
-              childAspectRatio: 200/100,
+              childAspectRatio: 200/115,
             ),
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {

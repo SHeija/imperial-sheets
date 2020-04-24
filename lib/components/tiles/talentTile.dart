@@ -43,12 +43,12 @@ class TalentTile extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: Text(talent.name,
-                          style: Theme.of(context).textTheme.headline6),
+                          style: Theme.of(context).textTheme.title),
                       padding: EdgeInsets.all(cellPadding),
                     ),
                     Container(
                       child: Text('Tier ${talent.tier}',
-                          style: Theme.of(context).textTheme.subtitle2),
+                          style: Theme.of(context).textTheme.subtitle),
                       padding: EdgeInsets.all(cellPadding),
                       alignment: Alignment.center,
                     ),
@@ -58,7 +58,7 @@ class TalentTile extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: Text(talent.description,
-                          style: Theme.of(context).textTheme.bodyText2),
+                          style: Theme.of(context).textTheme.body1),
                       padding: EdgeInsets.all(cellPadding),
                       alignment: Alignment.topLeft,
                     ),

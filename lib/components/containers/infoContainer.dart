@@ -36,12 +36,12 @@ class InfoContainer extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(12.0),
                   child: Text(character.name,
-                      style: Theme.of(context).textTheme.headline5),
+                      style: Theme.of(context).textTheme.headline),
                 ),
                 Container(
                     padding: EdgeInsets.all(12.0),
                     child: Text(character.description,
-                        style: Theme.of(context).textTheme.bodyText2),
+                        style: Theme.of(context).textTheme.body1),
                 ),
                 InfoChips(character),
               ],

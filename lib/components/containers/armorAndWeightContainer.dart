@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/common/armorPointsTable.dart';
-import 'package:imperial_sheets/components/common/weightCounter.dart';
+import 'package:imperial_sheets/components/common/weightTable.dart';
 
 class ArmorAndWeightContainer extends StatelessWidget {
   @override
@@ -19,7 +19,7 @@ class ArmorAndWeightContainer extends StatelessWidget {
               children: <Widget>[
                 ArmorPointsTable(),
                 Expanded(
-                  child: WeightCounter(),
+                  child: WeightTable(),
                 )
               ],
             ),

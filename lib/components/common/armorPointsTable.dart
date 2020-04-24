@@ -43,7 +43,7 @@ class ArmorPointsTable extends StatelessWidget {
           children: <Widget>[
             Container(
                 padding: EdgeInsets.all(8.0),
-                child: Text('Hit locations', style: Theme.of(context).textTheme.headline6,)
+                child: Text('Hit locations', style: Theme.of(context).textTheme.title)
             ),
             Container(
               // color: Colors.red,
@@ -56,18 +56,18 @@ class ArmorPointsTable extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.all(4.0),
                         child: Text(e.key+':',
-                            style: Theme.of(context).textTheme.subtitle2),
+                            style: Theme.of(context).textTheme.subtitle),
                       ),
                       Container(
                         padding: EdgeInsets.all(4.0),
                         child: Text(
                             '${(e.value+_character.getStat(Constants.T).getStatBonus())} (${e.value})',
-                            style: Theme.of(context).textTheme.bodyText2),
+                            style: Theme.of(context).textTheme.body1),
                       ),
                       Container(
                         padding: EdgeInsets.all(4.0),
                         child: Text('(${_getHitValue(e)})',
-                            style: Theme.of(context).textTheme.bodyText2),
+                            style: Theme.of(context).textTheme.body1),
                       )
                     ],
                   ),

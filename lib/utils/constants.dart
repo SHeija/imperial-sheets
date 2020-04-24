@@ -12,7 +12,7 @@ const FS = 'Fellowship';
 const INF = 'Influence';
 
 const ALL_STATS = [WS, BS, S, T, AG, INT, PER, WP, FS, INF];
-const STAT_LIST = {'WS':WS, 'BS':BS, 'S':S, 'T':T, 'AG':AG, 'INT':INT, 'PER':PER, 'WP':WP, 'FS':FS, 'INF':INF};
+const STAT_LIST = {'WS':WS, 'BS':BS, 'S':S, 'T':T, 'AG':AG, 'INT':INT, 'PER':PER, 'WP':WP, 'FEL':FS, 'INF':INF};
 
 // SKILLS
 const acrobatics = 'Acrobatics';

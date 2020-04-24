@@ -30,11 +30,6 @@ class SkillTile extends StatelessWidget {
   Widget build(BuildContext context) {
     const double cellPadding = 8.0;
     Character _meta = Provider.of<CharacterModel>(context).getCharacter();
-    const smallTitle = TextStyle(
-        color: Color(0xdd000000),
-        fontFamily: 'Roboto',
-        fontSize: 17.0,
-        fontWeight: FontWeight.w500);
 
     return GestureDetector(
       onLongPress: () => _showEditDialog(context),
@@ -52,9 +47,9 @@ class SkillTile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(skill.canHaveMultiple() ? skill.name+':' : skill.name, style: Theme.of(context).textTheme.headline6, overflow: TextOverflow.ellipsis,),
+                      Text(skill.canHaveMultiple() ? skill.name+':' : skill.name, style: Theme.of(context).textTheme.title, overflow: TextOverflow.ellipsis,),
                       skill.subSkill.isNotEmpty
-                          ? Text(skill.subSkill, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.headline6)
+                          ? Text(skill.subSkill, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.subtitle)
                           : Container(),
                     ],
                   ),
@@ -65,7 +60,7 @@ class SkillTile extends StatelessWidget {
                 ),
                 Container(
                   child: Text(skill.getBonusString(),
-                      style: Theme.of(context).textTheme.headline6),
+                      style: Theme.of(context).textTheme.title),
                   padding: EdgeInsets.only(
                       left: cellPadding,
                       top: cellPadding,
@@ -78,7 +73,7 @@ class SkillTile extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: Text(skill.stat,
-                          style: Theme.of(context).textTheme.bodyText2),
+                          style: Theme.of(context).textTheme.body1),
                       padding: EdgeInsets.only(
                           left: cellPadding,
                           bottom: cellPadding,

@@ -106,7 +106,7 @@ class _RootViewState extends State<RootView> {
                   child: Container(
                     alignment: Alignment.center,
                     child: Text('Imperial Sheets',
-                        style: Theme.of(context).textTheme.headline5.copyWith(color: Colors.white)),
+                        style: Theme.of(context).textTheme.headline.copyWith(color: Colors.white)),
                   ),
                   decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,

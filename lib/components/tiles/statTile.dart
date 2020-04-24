@@ -45,7 +45,7 @@ class StatTile extends StatelessWidget {
                 TableRow(children: <Widget>[
                   Container(
                     child: Text(stat.name,
-                        style: Theme.of(context).textTheme.headline6),
+                        style: Theme.of(context).textTheme.title),
                     padding: EdgeInsets.only(
                         left: cellPadding,
                         top: cellPadding,
@@ -53,7 +53,7 @@ class StatTile extends StatelessWidget {
                   ),
                   Container(
                     child: Text(stat.value.toString(),
-                        style: Theme.of(context).textTheme.headline6),
+                        style: Theme.of(context).textTheme.title),
                     padding: EdgeInsets.only(
                         left: cellPadding,
                         top: cellPadding,
@@ -66,7 +66,7 @@ class StatTile extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         child: Text(stat.short,
-                            style: Theme.of(context).textTheme.bodyText2),
+                            style: Theme.of(context).textTheme.body1),
                         padding: EdgeInsets.only(
                             left: cellPadding,
                             bottom: cellPadding,
