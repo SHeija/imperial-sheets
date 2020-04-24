@@ -42,7 +42,7 @@ class TalentView extends StatelessWidget {
           elevation: Theme.of(context).appBarTheme.elevation,
         ),
         SliverPadding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(2.0),
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {

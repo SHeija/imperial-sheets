@@ -52,9 +52,9 @@ class SkillTile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(skill.canHaveMultiple() ? skill.name+':' : skill.name, style: smallTitle),
+                      Text(skill.canHaveMultiple() ? skill.name+':' : skill.name, style: Theme.of(context).textTheme.headline6, overflow: TextOverflow.ellipsis,),
                       skill.subSkill.isNotEmpty
-                          ? Text(skill.subSkill, overflow: TextOverflow.ellipsis, style: smallTitle)
+                          ? Text(skill.subSkill, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.headline6)
                           : Container(),
                     ],
                   ),

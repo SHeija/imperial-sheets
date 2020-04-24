@@ -101,11 +101,11 @@ class InventoryView extends StatelessWidget {
           ],
         ),
         SliverPadding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(2.0),
           sliver: ArmorAndWeightContainer(),
         ),
         SliverPadding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(2.0),
           sliver: SliverAppBar(
             automaticallyImplyLeading: false,
             title: Text('Weapons'),
@@ -113,11 +113,11 @@ class InventoryView extends StatelessWidget {
           ),
         ),
         SliverPadding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(2.0),
           sliver: WeaponContainer(),
         ),
         SliverPadding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(2.0),
           sliver: SliverAppBar(
             automaticallyImplyLeading: false,
             title: Text('Armor'),
@@ -125,11 +125,11 @@ class InventoryView extends StatelessWidget {
           ),
         ),
         SliverPadding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(2.0),
           sliver: ArmorContainer(),
         ),
         SliverPadding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(2.0),
           sliver: SliverAppBar(
             automaticallyImplyLeading: false,
             title: Text('Gear'),
@@ -137,7 +137,7 @@ class InventoryView extends StatelessWidget {
           ),
         ),
         SliverPadding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(2.0),
           sliver: ItemContainer(),
         )
       ],

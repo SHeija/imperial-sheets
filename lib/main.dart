@@ -18,6 +18,9 @@ class App extends StatelessWidget {
       theme: ThemeData(
         accentColor: Colors.blueGrey,
         primaryColor: Colors.blueGrey,
+        textTheme: TextTheme(
+          headline6: TextStyle(fontSize: 17.0)
+        )
       ),
       home: ChangeNotifierProvider(
         create: (context) => CharacterModel(),

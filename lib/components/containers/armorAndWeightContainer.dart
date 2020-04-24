@@ -9,8 +9,8 @@ class ArmorAndWeightContainer extends StatelessWidget {
     // Basically a 1x1 grid with a Row inside it
     return SliverGrid(
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 500.0,
-        childAspectRatio: 500/325,
+        maxCrossAxisExtent: 5000.0,
+        childAspectRatio: 500/300,
       ),
       delegate: SliverChildListDelegate(
         [

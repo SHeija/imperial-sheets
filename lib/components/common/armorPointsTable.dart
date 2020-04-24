@@ -38,7 +38,7 @@ class ArmorPointsTable extends StatelessWidget {
     Map<String, int> armorPoints = _character.getArmorPoints();
     return Card(
       child: Container(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
         child: Column(
           children: <Widget>[
             Container(
@@ -54,18 +54,18 @@ class ArmorPointsTable extends StatelessWidget {
                       (e) => TableRow(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(4.0),
                         child: Text(e.key+':',
                             style: Theme.of(context).textTheme.subtitle2),
                       ),
                       Container(
-                        padding: EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(4.0),
                         child: Text(
                             '${(e.value+_character.getStat(Constants.T).getStatBonus())} (${e.value})',
                             style: Theme.of(context).textTheme.bodyText2),
                       ),
                       Container(
-                        padding: EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(4.0),
                         child: Text('(${_getHitValue(e)})',
                             style: Theme.of(context).textTheme.bodyText2),
                       )

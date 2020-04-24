@@ -41,11 +41,11 @@ class SkillView extends StatelessWidget {
           ],
         ),
         SliverPadding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(2.0),
           sliver: SliverGrid(
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200.0,
-              childAspectRatio: 190/100,
+              maxCrossAxisExtent: 250.0,
+              childAspectRatio: 200/100,
             ),
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {

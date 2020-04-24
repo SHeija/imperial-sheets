@@ -44,19 +44,19 @@ class MainView extends StatelessWidget {
           ],
         ),
         SliverPadding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(2.0),
           sliver: SliverToBoxAdapter(
             child: InfoContainer(Provider.of<CharacterModel>(context).getCharacter()),
           ),
         ),
         SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 2.0),
           sliver: SliverToBoxAdapter(
             child: SpeedTable(),
           ),
         ),
         SliverPadding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(2.0),
           sliver: SliverAppBar(
             automaticallyImplyLeading: false,
             title: Text('Statistics'),
@@ -64,7 +64,7 @@ class MainView extends StatelessWidget {
           ),
         ),
         SliverPadding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(2.0),
           sliver: StatContainer(Provider.of<CharacterModel>(context).getStats()),
         ),
       ],
