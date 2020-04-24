@@ -47,7 +47,7 @@ class PowerView extends StatelessWidget {
                   background: Container(color: Theme.of(context).errorColor),
                   key: UniqueKey(),
                   onDismissed: (direction){
-                    Provider.of<CharacterModel>(context).removePower(_powers[index]);
+                    Provider.of<CharacterModel>(context, listen: false).removePower(_powers[index]);
                   },
                   confirmDismiss: (direction) async {
                     return await showDialog(
