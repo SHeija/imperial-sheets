@@ -40,6 +40,29 @@ Map<String, dynamic> _$SkillToJson(Skill instance) => <String, dynamic>{
       'aptitudes': instance.aptitudes,
     };
 
+Power _$PowerFromJson(Map<String, dynamic> json) {
+  return Power()
+    ..name = json['name'] as String
+    ..description = json['description'] as String
+    ..action = json['action'] as String
+    ..focusPower = json['focusPower'] as String
+    ..range = json['range'] as String
+    ..sustained = json['sustained'] as String
+    ..effect = json['effect'] as String
+    ..subType = json['subType'] as String;
+}
+
+Map<String, dynamic> _$PowerToJson(Power instance) => <String, dynamic>{
+      'name': instance.name,
+      'description': instance.description,
+      'action': instance.action,
+      'focusPower': instance.focusPower,
+      'range': instance.range,
+      'sustained': instance.sustained,
+      'effect': instance.effect,
+      'subType': instance.subType,
+    };
+
 Item _$ItemFromJson(Map<String, dynamic> json) {
   return Item(
     json['name'] as String,

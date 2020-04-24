@@ -68,6 +68,26 @@ class Skill {
 }
 
 @JsonSerializable()
+class Power {
+  String name, description, action, focusPower, range, sustained, effect, subType;
+
+  Power();
+  Power.blank(){
+    name = '';
+    description = '';
+    action = '';
+    focusPower = '';
+    range = '';
+    sustained = '';
+    effect = '';
+    subType = '';
+  }
+
+  factory Power.fromJson(Map<String, dynamic> json) => _$PowerFromJson(json);
+  Map<String, dynamic> toJson() => _$PowerToJson(this);
+}
+
+@JsonSerializable()
 class Item {
   String name, description;
   double weight;

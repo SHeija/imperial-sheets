@@ -5,6 +5,7 @@ import 'package:imperial_sheets/views/inventoryView.dart';
 import 'package:imperial_sheets/views/mainView.dart';
 import 'package:imperial_sheets/views/noCharacterView.dart';
 import 'package:imperial_sheets/views/notesView.dart';
+import 'package:imperial_sheets/views/powerView.dart';
 import 'package:imperial_sheets/views/skillView.dart';
 import 'package:imperial_sheets/views/talentView.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,7 @@ class _RootViewState extends State<RootView> {
       InventoryView(),
       TalentView(),
       NotesView(),
+      PowerView(),
     ];
 
     final List<String> _destinations = [
@@ -40,7 +42,8 @@ class _RootViewState extends State<RootView> {
       'Skills',
       'Inventory',
       'Talents',
-      'Notes'
+      'Notes',
+      'Powers'
     ];
 
     List<BottomNavigationBarItem> navigation() {

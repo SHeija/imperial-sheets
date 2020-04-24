@@ -14,6 +14,7 @@ class Character {
   List<Item> items;
   List<Weapon> weapons;
   List<Armor> armors;
+  List<Power> powers;
 
   int xp = 0;
   int spentXp = 0;
@@ -36,6 +37,7 @@ class Character {
     weapons = [];
     aptitudes = [];
     armors = [];
+    powers = [];
   }
 
   Character();

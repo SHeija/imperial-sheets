@@ -237,6 +237,30 @@ class CharacterModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // POWERS
+
+  List<Power> getPowers(){
+    return _currentCharacter.powers;
+  }
+
+  void addPower(Power power) {
+    _currentCharacter.powers.add(power);
+    saveCharacter();
+    notifyListeners();
+  }
+
+  void updatePowers(Power power, int index) {
+    _currentCharacter.powers[index] = power;
+    saveCharacter();
+    notifyListeners();
+  }
+
+  void removePower(Power power) {
+    _currentCharacter.powers.remove(power);
+    saveCharacter();
+    notifyListeners();
+  }
+
   // NOTES
   String getNotes() {
     return _currentCharacter.notes;

@@ -37,6 +37,10 @@ Character _$CharacterFromJson(Map<String, dynamic> json) {
         ?.map(
             (e) => e == null ? null : Armor.fromJson(e as Map<String, dynamic>))
         ?.toList()
+    ..powers = (json['powers'] as List)
+        ?.map(
+            (e) => e == null ? null : Power.fromJson(e as Map<String, dynamic>))
+        ?.toList()
     ..xp = json['xp'] as int
     ..spentXp = json['spentXp'] as int
     ..hp = json['hp'] as int
@@ -60,6 +64,7 @@ Map<String, dynamic> _$CharacterToJson(Character instance) => <String, dynamic>{
       'items': instance.items?.map((e) => e?.toJson())?.toList(),
       'weapons': instance.weapons?.map((e) => e?.toJson())?.toList(),
       'armors': instance.armors?.map((e) => e?.toJson())?.toList(),
+      'powers': instance.powers?.map((e) => e?.toJson())?.toList(),
       'xp': instance.xp,
       'spentXp': instance.spentXp,
       'hp': instance.hp,
