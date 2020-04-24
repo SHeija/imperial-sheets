@@ -39,7 +39,7 @@ class PowerEditDialog extends StatelessWidget {
                     ],
                   ),
                   FormBuilderTextField(
-                    attribute: 'descriptiom',
+                    attribute: 'description',
                     decoration: InputDecoration(
                         labelText: 'Description',
                       hintText: 'Flavor description'

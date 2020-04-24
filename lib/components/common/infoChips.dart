@@ -93,12 +93,12 @@ class InfoChips extends StatelessWidget {
                   onPressed: () => _showSingleValueDialog(context, character.insanity, 'Insanity'),
                 ),
                 ActionChip(
-                    label: Text('Experience '+character.spentXp.toString()+'/'+character.xp.toString()),
-                  onPressed: () => _showDualValueDialog(context, character.spentXp, character.xp, 'Experience', 'Spent', 'Total'),
-                ),
-                ActionChip(
                     label: Text('Corruption '+character.corruption.toString()),
                   onPressed: () => _showSingleValueDialog(context, character.corruption, 'Corruption'),
+                ),
+                ActionChip(
+                  label: Text('Experience '+character.spentXp.toString()+'/'+character.xp.toString()),
+                  onPressed: () => _showDualValueDialog(context, character.spentXp, character.xp, 'Experience', 'Spent', 'Total'),
                 ),
               ]
           ),

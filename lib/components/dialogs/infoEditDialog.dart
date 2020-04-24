@@ -43,7 +43,7 @@ class InfoEditDialog extends StatelessWidget {
                     ),
                     FormBuilderTextField(
                       attribute: "hp",
-                      decoration: InputDecoration(labelText: "HP"),
+                      decoration: InputDecoration(labelText: "Total wounds"),
                       validators: [
                         FormBuilderValidators.numeric(),
                         FormBuilderValidators.max(99),
@@ -52,7 +52,7 @@ class InfoEditDialog extends StatelessWidget {
                     ),
                     FormBuilderTextField(
                       attribute: "damage",
-                      decoration: InputDecoration(labelText: "Damage taken"),
+                      decoration: InputDecoration(labelText: "Current wounds"),
                       validators: [
                         FormBuilderValidators.numeric(),
                         FormBuilderValidators.max(99),
