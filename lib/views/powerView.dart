@@ -28,7 +28,6 @@ class PowerView extends StatelessWidget {
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
-          title: Text('Imperial sheets'),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.add),

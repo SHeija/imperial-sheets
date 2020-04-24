@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imperial_sheets/components/common/exportButton.dart';
 import 'package:imperial_sheets/components/common/speedTable.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/providers/characterModel.dart';
@@ -18,6 +19,7 @@ class MainView extends StatelessWidget {
           elevation: Theme.of(context).appBarTheme.elevation,
           forceElevated: true,
           actions: <Widget>[
+            ExportButton(),
             IconButton(
               icon: Icon(Icons.delete),
               onPressed: () async {

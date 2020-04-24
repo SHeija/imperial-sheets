@@ -27,6 +27,12 @@ class CharacterModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> importCharacter(Character character) async {
+    character.id = character.name+DateTime.now().toIso8601String();
+    await db.insertCharacter(character);
+    await fetchCharacterList();
+  }
+
   // FETCH FROM DB
   Future fetchCurrentCharacter() async {
     _currentCharacter = await db.getActiveCharacter();

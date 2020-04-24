@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imperial_sheets/components/common/importButton.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/providers/characterModel.dart';
 import 'package:imperial_sheets/views/inventoryView.dart';
@@ -87,10 +88,7 @@ class _RootViewState extends State<RootView> {
                 Navigator.of(context).pop();
               },
             ),
-            ListTile(
-              title: Text('Import character'),
-              leading: Icon(Icons.file_download),
-            ),
+            ImportButton(),
           ]
         ),
       );
