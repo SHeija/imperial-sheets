@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imperial_sheets/components/common/appInfoButton.dart';
 import 'package:imperial_sheets/components/common/importButton.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/providers/characterModel.dart';
@@ -89,6 +90,8 @@ class _RootViewState extends State<RootView> {
               },
             ),
             ImportButton(),
+            AppInfoButton(),
+
           ]
         ),
       );
@@ -121,7 +124,7 @@ class _RootViewState extends State<RootView> {
             SliverPadding(
               padding: EdgeInsets.zero,
               sliver: _getDrawerActions(),
-            )
+            ),
           ],
         ),
       ),
