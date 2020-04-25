@@ -1,5 +1,5 @@
 name: imperial_sheets
-description: A new Flutter application.
+description: A character sheet app for a certain d10-based grimdank RPG.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -11,7 +11,7 @@ description: A new Flutter application.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 0.0.1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -26,12 +26,12 @@ dependencies:
   json_annotation: 3.0.1
   path_provider: 1.5.1
   sembast: ^2.4.2
+  provider: ^4.0.4
   flutter_form_builder: ^3.8.2
   flutter_markdown: ^0.3.5
-  file_picker: ^1.6.3+2
-  esys_flutter_share: ^1.0.2
-  provider: ^4.0.4
   statusbar: ^1.1.0
+  file_picker: ^1.6.3+2
+  share: ^0.6.4
 
 dev_dependencies:
   flutter_test:

@@ -154,8 +154,7 @@ Stat _$StatFromJson(Map<String, dynamic> json) {
     json['short'] as String,
     json['value'] as int,
     json['stage'] as int,
-    (json['aptitudes'] as List)?.map((e) => e as String)?.toList(),
-  );
+  )..aptitudes = (json['aptitudes'] as List)?.map((e) => e as String)?.toList();
 }
 
 Map<String, dynamic> _$StatToJson(Stat instance) => <String, dynamic>{

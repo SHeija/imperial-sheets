@@ -92,7 +92,7 @@ class SkillTile extends StatelessWidget {
                 ),
                 Container(
                     child: Chip(
-                        label: Text((_meta.getStat(skill.stat).value +
+                        label: Text((_meta.getThisStat(skill.stat).value +
                             skill.getBonus())
                             .toString()),
                         padding: EdgeInsets.all(0)),

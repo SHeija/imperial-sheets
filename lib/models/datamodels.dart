@@ -197,7 +197,7 @@ class Stat {
   int stage;
   List<String> aptitudes;
 
-  Stat(this.name, this.short, this.value, this.stage, this.aptitudes);
+  Stat(this.name, this.short, this.value, this.stage);
   Stat.blank();
 
   factory Stat.fromJson(Map<String, dynamic> json) => _$StatFromJson(json);

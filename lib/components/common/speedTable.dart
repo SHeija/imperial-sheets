@@ -9,7 +9,7 @@ class SpeedTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Character _character = Provider.of<CharacterModel>(context).getCharacter();
-    final speed = _character.getStat(Contants.AG).getStatBonus();
+    final speed = _character.getThisStat(Contants.AG).getStatBonus();
     return Card(
       child: Padding(
         padding: EdgeInsets.all(8.0),

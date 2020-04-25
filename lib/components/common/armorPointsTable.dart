@@ -61,7 +61,7 @@ class ArmorPointsTable extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.all(4.0),
                         child: Text(
-                            '${(e.value+_character.getStat(Constants.T).getStatBonus())} (${e.value})',
+                            '${(e.value+_character.getThisStat(Constants.T).getStatBonus())} (${e.value})',
                             style: Theme.of(context).textTheme.body1),
                       ),
                       Container(

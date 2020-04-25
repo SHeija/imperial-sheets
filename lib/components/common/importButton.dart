@@ -18,10 +18,10 @@ class _ImportButtonState extends State<ImportButton> {
   bool loading = false;
 
   Future<Character> _import() async {
-    File file = await FilePicker.getFile(type: FileType.custom, allowedExtensions: ['json', 'txt']);
+    File file = await FilePicker.getFile(type: FileType.custom, allowedExtensions: ['txt']);
     String json = await file.readAsString();
-    Character character = Character.fromJson(jsonDecode(json))
-      ..id = null;
+    Character character = Character.fromJson(jsonDecode(json));
+    character.importCleanup();
     return character;
   }
 

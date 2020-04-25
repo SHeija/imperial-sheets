@@ -30,8 +30,8 @@ class Character {
     name = 'Name';
     description = 'Description';
     notes = '';
-    stats = statSheet();
-    skills = skillSheet();
+    stats = _statSheet();
+    skills = _skillSheet();
     talents = [];
     items = [];
     weapons = [];
@@ -46,16 +46,68 @@ class Character {
       _$CharacterFromJson(json);
   Map<String, dynamic> toJson() => _$CharacterToJson(this);
 
+  // IMPORT
+
+  void importCleanup() {
+    id = null;
+    _fillSkillList();
+    _fillStatList();
+  }
+
+  List<Stat> _statSheet() {
+    List<Stat> _stats = [];
+    Constants.STAT_LIST.forEach((key, value) {
+      _stats.add(Stat(value, key, 25, 0));
+    });
+    return _stats;
+  }
+
+  void _fillStatList() {
+    // Remove mis-named
+    stats.retainWhere((element) => Constants.ALL_STATS.contains(element.name));
+    // Create "sheet"
+    List<Stat> newStats = _statSheet();
+    // Replace
+    stats.forEach((existing) {
+      newStats[newStats.indexWhere((e) => e.name == existing.name)] = existing;
+    });
+    stats = newStats;
+  }
+
+  List<Skill> _skillSheet() {
+    List<Skill> _skills = [];
+    Constants.SKILL_LIST.forEach((key, value) {
+      _skills.add(Skill.notKnown(key, value));
+    });
+    return _skills;
+  }
+
+  void _fillSkillList() {
+    // remove mis-named
+    skills
+        .retainWhere((element) => Constants.ALL_SKILLS.contains(element.name));
+    // Create "sheet"
+    List<Skill> newSkills = _skillSheet();
+    // Replace
+    skills.forEach((existing) {
+      newSkills[newSkills.indexWhere((e) => e.name == existing.name)] =
+          existing;
+    });
+    skills = newSkills;
+    sortSkills();
+  }
+
   // MISC
   int getFatigueTreshold() {
-    int wpB = getStat(Constants.WP).getStatBonus();
-    int tB = getStat(Constants.T).getStatBonus();
+    int wpB = getThisStat(Constants.WP).getStatBonus();
+    int tB = getThisStat(Constants.T).getStatBonus();
     return wpB + tB;
   }
 
   // oh lord why
   double getCarryLimit() {
-    int B = getStat(Constants.S).getStatBonus()+getStat(Constants.T).getStatBonus();
+    int B = getThisStat(Constants.S).getStatBonus() +
+        getThisStat(Constants.T).getStatBonus();
     switch (B) {
       case 0:
         return 0.9;
@@ -125,64 +177,23 @@ class Character {
     }
   }
 
-  // STATS
-  Stat getStat(String statName) {
+  Stat getThisStat(String statName) {
     return stats.firstWhere((element) => element.name == statName);
   }
 
-  List<Stat> statSheet() {
-    List<Stat> _stats = [];
-    Constants.STAT_LIST.forEach((key, value) {
-      _stats.add(Stat(value, key, 25, 0, []));
-    });
-    return _stats;
-  }
-
-  void fillStatList() {
-    // Remove mis-named
-    stats.retainWhere((element) => Constants.ALL_STATS.contains(element.name));
-    // Create "sheet"
-    List<Stat> newStats = statSheet();
-    // Replace
-    stats.forEach((existing) {
-      newStats[newStats.indexWhere((e) => e.name == existing.name)] = existing;
-    });
-    stats = newStats;
-  }
-
-  // SKILLS
-  List<Skill> skillSheet() {
-    List<Skill> _skills = [];
-    Constants.SKILL_LIST.forEach((key, value) {
-      _skills.add(Skill.notKnown(key, value));
-    });
-    return _skills;
-  }
-
-  void fillSkillList() {
-    // remove mis-named
-    skills
-        .retainWhere((element) => Constants.ALL_SKILLS.contains(element.name));
-    // Create "sheet"
-    List<Skill> newSkills = skillSheet();
-    // Replace
-    skills.forEach((existing) {
-      newSkills[newSkills.indexWhere((e) => e.name == existing.name)] =
-          existing;
-    });
-    skills = newSkills;
-  }
-
   void sortSkills() {
-    skills.sort((a,b) => a.name.compareTo(b.name));
+    skills.sort((a, b) => a.name.compareTo(b.name));
   }
 
   //ITEMS
   double getItemWeight() {
-    double armorWT = armors.fold(0.0, (previousValue, element) => previousValue + element.getWeight());
-    double itemWt = items.fold(0.0, (previousValue, element) => previousValue + element.getWeight());
-    double weaponWT = weapons.fold(0.0, (previousValue, element) => previousValue + element.getWeight());
-    return armorWT+itemWt+weaponWT;
+    double armorWT = armors.fold(
+        0.0, (previousValue, element) => previousValue + element.getWeight());
+    double itemWt = items.fold(
+        0.0, (previousValue, element) => previousValue + element.getWeight());
+    double weaponWT = weapons.fold(
+        0.0, (previousValue, element) => previousValue + element.getWeight());
+    return armorWT + itemWt + weaponWT;
   }
 
   Map<String, int> getArmorPoints() {
