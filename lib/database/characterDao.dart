@@ -10,16 +10,10 @@ class CharacterDao {
 
   Future<Database> get  _db  async => await AppDatabase.instance.database;
 
-  Future<String> insertCharacter(Character character) async{
-    await setActiveCharacter(character);
-    return await _characterFolder.record(character.id).add(await _db, character.toJson());
+  Future<void> saveCharacter(Character character) async{
+    return await _characterFolder.record(character.id).put(await _db, character.toJson());
   }
-
-  Future<int> updateCharacter(Character character) async{
-    final finder = Finder(filter: Filter.byKey(character.id));
-    return await _characterFolder.update(await _db, character.toJson(),finder: finder);
-  }
-
+  
   Future<void> delete(Character character) async{
     final finder = Finder(filter: Filter.byKey(character.id));
     await _characterFolder.delete(await _db, finder: finder);
@@ -40,13 +34,13 @@ class CharacterDao {
   }
 
   Future<void> setActiveCharacter(Character character) async {
-    await _activeFolder.delete(await _db);
-    await _activeFolder.add(await _db, character.toJson());
+    await _activeFolder.record('active').put(await _db, character.id);
     print('Set active character: '+character.name);
   }
 
   Future<Character> getActiveCharacter() async {
-    final recordSnapshot = await _activeFolder.findFirst(await _db);
-    return Character.fromJson(recordSnapshot.value);
+    final idSnapshot = await _activeFolder.record('active').get(await _db);
+    final recordSnapshot = await _characterFolder.record(idSnapshot.value).get(await _db);
+    return Character.fromJson(recordSnapshot);
   }
 }

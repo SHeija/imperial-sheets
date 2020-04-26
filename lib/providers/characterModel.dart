@@ -18,18 +18,15 @@ class CharacterModel extends ChangeNotifier {
   Future saveCharacter() async {
     if (_currentCharacter.id == null) {
       _currentCharacter.id = _currentCharacter.name+DateTime.now().toIso8601String();
-      await db.insertCharacter(_currentCharacter);
-      await fetchCharacterList();
-    } else {
-      await db.updateCharacter(_currentCharacter);
-      await fetchCharacterList();
     }
+    await db.saveCharacter(_currentCharacter);
+    await fetchCharacterList();
     notifyListeners();
   }
 
   Future<void> importCharacter(Character character) async {
     character.id = character.name+DateTime.now().toIso8601String();
-    await db.insertCharacter(character);
+    await db.saveCharacter(character);
     await fetchCharacterList();
   }
 
@@ -111,8 +108,8 @@ class CharacterModel extends ChangeNotifier {
 
   void updateSkills(Skill skill, int index) {
     _currentCharacter.skills[index] = skill;
-    saveCharacter();
     notifyListeners();
+    saveCharacter();
   }
 
   void addSkill(Skill skill) {

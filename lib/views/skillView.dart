@@ -51,7 +51,7 @@ class SkillView extends StatelessWidget {
               (BuildContext context, int index) {
                 if(skills[index].canHaveMultiple()){
                   return Dismissible(
-                    key: Key('skill $index'),
+                    key: UniqueKey(),
                     background: Container(color: Theme.of(context).errorColor),
                     onDismissed: (direction) {
                       Provider.of<CharacterModel>(context, listen: false)
