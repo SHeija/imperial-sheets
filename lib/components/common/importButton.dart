@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:imperial_sheets/components/dialogs/errorDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/providers/characterModel.dart';
 import 'package:provider/provider.dart';
@@ -17,12 +18,25 @@ class _ImportButtonState extends State<ImportButton> {
 
   bool loading = false;
 
-  Future<Character> _import() async {
-    File file = await FilePicker.getFile(type: FileType.custom, allowedExtensions: ['txt']);
-    String json = await file.readAsString();
-    Character character = Character.fromJson(jsonDecode(json));
-    character.importCleanup();
-    return character;
+  Future<dynamic> _import() async {
+    try {
+      File file = await FilePicker.getFile(type: FileType.any);
+      String json = await file.readAsString();
+      Character character = Character.fromJson(jsonDecode(json));
+      character.importCleanup();
+      return character;
+    } catch (e) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context){
+            return ErrorDialog(
+              error: e,
+              content: Text('Import failed! If you created the file manually, double-check for formatting errors.'),
+            );
+          }
+      );
+      return e;
+    }
   }
 
   @override
@@ -34,8 +48,10 @@ class _ImportButtonState extends State<ImportButton> {
         setState(() {
           loading = true;
         });
-        Character imported = await _import();
-        await Provider.of<CharacterModel>(context, listen: false).importCharacter(imported);
+        dynamic result = await _import();
+        if (result.runtimeType == Character) {
+          await Provider.of<CharacterModel>(context, listen: false).importCharacter(result);
+        }
         setState(() {
           loading = false;
         });

@@ -6,14 +6,31 @@ part 'character.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Character {
+  @JsonKey(defaultValue: '')
   String name, description, notes, id;
+
+  @JsonKey(defaultValue: [])
   List<Stat> stats;
+
+  @JsonKey(defaultValue: [])
   List<Talent> talents;
+
+  @JsonKey(defaultValue: [])
   List<Skill> skills;
+
+  @JsonKey(defaultValue: [])
   List<String> aptitudes;
+
+  @JsonKey(defaultValue: [])
   List<Item> items;
+
+  @JsonKey(defaultValue: [])
   List<Weapon> weapons;
+
+  @JsonKey(defaultValue: [])
   List<Armor> armors;
+
+  @JsonKey(defaultValue: [])
   List<Power> powers;
 
   int xp = 0;
@@ -64,6 +81,9 @@ class Character {
 
   void _fillStatList() {
     // Remove mis-named
+    if (stats == null) {
+      stats = [];
+    }
     stats.retainWhere((element) => Constants.ALL_STATS.contains(element.name));
     // Create "sheet"
     List<Stat> newStats = _statSheet();
@@ -83,6 +103,9 @@ class Character {
   }
 
   void _fillSkillList() {
+    if (skills == null){
+      skills = [];
+    }
     // remove mis-named
     skills
         .retainWhere((element) => Constants.ALL_SKILLS.contains(element.name));
@@ -177,8 +200,8 @@ class Character {
     }
   }
 
-  Stat getThisStat(String statName) {
-    return stats.firstWhere((element) => element.name == statName);
+  dynamic getThisStat(String statName) {
+    return stats.firstWhere((element) => element.name == statName, orElse: () => null);
   }
 
   void sortSkills() {
@@ -197,7 +220,7 @@ class Character {
   }
 
   Map<String, int> getArmorPoints() {
-    return armors.isEmpty
+    return armors.isEmpty || armors == null
         ? {
             'Head': 0,
             'Left Arm': 0,

@@ -5,8 +5,13 @@ part 'datamodels.g.dart';
 
 @JsonSerializable()
 class Talent {
+  @JsonKey(required: true)
   String name, description;
+
+  @JsonKey(required: true)
   int tier;
+
+  @JsonKey(defaultValue: [])
   List<String> aptitudes;
 
   Talent(this.name, this.description, this.tier);
@@ -23,9 +28,15 @@ class Talent {
 
 @JsonSerializable()
 class Skill {
+  @JsonKey(required: true)
   String name, stat; // e.g Parry, Weapon Skill
+
   String subSkill;
+
+  @JsonKey(required: true)
   int stage;
+
+  @JsonKey(defaultValue: [])
   List<String> aptitudes;
 
   Skill(this.name, this.stage, this.stat);
@@ -89,9 +100,15 @@ class Power {
 
 @JsonSerializable()
 class Item {
+  @JsonKey(required: true)
   String name, description;
+
+  @JsonKey(required: true)
   double weight;
+
+  @JsonKey(required: true)
   int amount;
+
   bool stowed = false;
 
   Item(this.name, this.description, this.weight, this.amount);
@@ -127,6 +144,7 @@ class Item {
 
 @JsonSerializable()
 class Weapon extends Item{
+  @JsonKey(defaultValue: '')
   String range, rateOfFire, damage, type, penetration, clip, reloadSpeed, special;
 
   Weapon(String name, String description, double weight) : super(name, description, weight, 1);
@@ -147,12 +165,11 @@ class Weapon extends Item{
 
 @JsonSerializable()
 class Armor extends Item {
-  Map<String, int> armorPoints;
+  @JsonKey(required: true)
   int head, leftArm, rightArm, body, leftLeg, rightLeg;
 
-  Armor(String name, String description, double weight, this.armorPoints, bool stowed) : super(name, description, weight, 1);
+  Armor(String name, String description, double weight) : super(name, description, weight, 1);
   Armor.blank() : super.blank() {
-    stowed = false;
     head = 0;
     leftArm = 0;
     rightArm = 0;
@@ -161,6 +178,7 @@ class Armor extends Item {
     rightLeg = 0;
   }
 
+  // this can't be head*amount, because you can only wear one at a time
   int getHead() {
     return stowed || amount == 0 ? 0 : head;
   }
@@ -195,6 +213,7 @@ class Stat {
   String short; // "AG"
   int value;
   int stage;
+  @JsonKey(defaultValue: [])
   List<String> aptitudes;
 
   Stat(this.name, this.short, this.value, this.stage);

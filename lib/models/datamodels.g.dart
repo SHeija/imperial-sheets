@@ -7,11 +7,13 @@ part of 'datamodels.dart';
 // **************************************************************************
 
 Talent _$TalentFromJson(Map<String, dynamic> json) {
+  $checkKeys(json, requiredKeys: const ['name', 'description', 'tier']);
   return Talent(
     json['name'] as String,
     json['description'] as String,
     json['tier'] as int,
-  )..aptitudes = (json['aptitudes'] as List)?.map((e) => e as String)?.toList();
+  )..aptitudes =
+      (json['aptitudes'] as List)?.map((e) => e as String)?.toList() ?? [];
 }
 
 Map<String, dynamic> _$TalentToJson(Talent instance) => <String, dynamic>{
@@ -22,6 +24,7 @@ Map<String, dynamic> _$TalentToJson(Talent instance) => <String, dynamic>{
     };
 
 Skill _$SkillFromJson(Map<String, dynamic> json) {
+  $checkKeys(json, requiredKeys: const ['name', 'stat', 'stage']);
   return Skill(
     json['name'] as String,
     json['stage'] as int,
@@ -29,7 +32,7 @@ Skill _$SkillFromJson(Map<String, dynamic> json) {
   )
     ..subSkill = json['subSkill'] as String
     ..aptitudes =
-        (json['aptitudes'] as List)?.map((e) => e as String)?.toList();
+        (json['aptitudes'] as List)?.map((e) => e as String)?.toList() ?? [];
 }
 
 Map<String, dynamic> _$SkillToJson(Skill instance) => <String, dynamic>{
@@ -64,6 +67,8 @@ Map<String, dynamic> _$PowerToJson(Power instance) => <String, dynamic>{
     };
 
 Item _$ItemFromJson(Map<String, dynamic> json) {
+  $checkKeys(json,
+      requiredKeys: const ['name', 'description', 'weight', 'amount']);
   return Item(
     json['name'] as String,
     json['description'] as String,
@@ -81,6 +86,8 @@ Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{
     };
 
 Weapon _$WeaponFromJson(Map<String, dynamic> json) {
+  $checkKeys(json,
+      requiredKeys: const ['name', 'description', 'weight', 'amount']);
   return Weapon(
     json['name'] as String,
     json['description'] as String,
@@ -88,14 +95,14 @@ Weapon _$WeaponFromJson(Map<String, dynamic> json) {
   )
     ..amount = json['amount'] as int
     ..stowed = json['stowed'] as bool
-    ..range = json['range'] as String
-    ..rateOfFire = json['rateOfFire'] as String
-    ..damage = json['damage'] as String
-    ..type = json['type'] as String
-    ..penetration = json['penetration'] as String
-    ..clip = json['clip'] as String
-    ..reloadSpeed = json['reloadSpeed'] as String
-    ..special = json['special'] as String;
+    ..range = json['range'] as String ?? ''
+    ..rateOfFire = json['rateOfFire'] as String ?? ''
+    ..damage = json['damage'] as String ?? ''
+    ..type = json['type'] as String ?? ''
+    ..penetration = json['penetration'] as String ?? ''
+    ..clip = json['clip'] as String ?? ''
+    ..reloadSpeed = json['reloadSpeed'] as String ?? ''
+    ..special = json['special'] as String ?? '';
 }
 
 Map<String, dynamic> _$WeaponToJson(Weapon instance) => <String, dynamic>{
@@ -115,16 +122,25 @@ Map<String, dynamic> _$WeaponToJson(Weapon instance) => <String, dynamic>{
     };
 
 Armor _$ArmorFromJson(Map<String, dynamic> json) {
+  $checkKeys(json, requiredKeys: const [
+    'name',
+    'description',
+    'weight',
+    'amount',
+    'head',
+    'leftArm',
+    'rightArm',
+    'body',
+    'leftLeg',
+    'rightLeg'
+  ]);
   return Armor(
     json['name'] as String,
     json['description'] as String,
     (json['weight'] as num)?.toDouble(),
-    (json['armorPoints'] as Map<String, dynamic>)?.map(
-      (k, e) => MapEntry(k, e as int),
-    ),
-    json['stowed'] as bool,
   )
     ..amount = json['amount'] as int
+    ..stowed = json['stowed'] as bool
     ..head = json['head'] as int
     ..leftArm = json['leftArm'] as int
     ..rightArm = json['rightArm'] as int
@@ -139,7 +155,6 @@ Map<String, dynamic> _$ArmorToJson(Armor instance) => <String, dynamic>{
       'weight': instance.weight,
       'amount': instance.amount,
       'stowed': instance.stowed,
-      'armorPoints': instance.armorPoints,
       'head': instance.head,
       'leftArm': instance.leftArm,
       'rightArm': instance.rightArm,
@@ -154,7 +169,8 @@ Stat _$StatFromJson(Map<String, dynamic> json) {
     json['short'] as String,
     json['value'] as int,
     json['stage'] as int,
-  )..aptitudes = (json['aptitudes'] as List)?.map((e) => e as String)?.toList();
+  )..aptitudes =
+      (json['aptitudes'] as List)?.map((e) => e as String)?.toList() ?? [];
 }
 
 Map<String, dynamic> _$StatToJson(Stat instance) => <String, dynamic>{
