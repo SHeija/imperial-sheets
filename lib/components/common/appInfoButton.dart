@@ -6,7 +6,7 @@ class AppInfoButton extends StatelessWidget {
     return ListTile(
       leading: Icon(Icons.info_outline),
       title: Text('Version'),
-      subtitle: Text('0.0.1'),
+      subtitle: Text('0.0.2'),
     );
   }
 }
