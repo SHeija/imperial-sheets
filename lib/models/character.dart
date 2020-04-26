@@ -6,14 +6,31 @@ part 'character.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Character {
+  @JsonKey(defaultValue: '')
   String name, description, notes, id;
+
+  @JsonKey(defaultValue: [])
   List<Stat> stats;
+
+  @JsonKey(defaultValue: [])
   List<Talent> talents;
+
+  @JsonKey(defaultValue: [])
   List<Skill> skills;
+
+  @JsonKey(defaultValue: [])
   List<String> aptitudes;
+
+  @JsonKey(defaultValue: [])
   List<Item> items;
+
+  @JsonKey(defaultValue: [])
   List<Weapon> weapons;
+
+  @JsonKey(defaultValue: [])
   List<Armor> armors;
+
+  @JsonKey(defaultValue: [])
   List<Power> powers;
 
   int xp = 0;

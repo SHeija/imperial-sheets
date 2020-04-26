@@ -8,39 +8,32 @@ part of 'character.dart';
 
 Character _$CharacterFromJson(Map<String, dynamic> json) {
   return Character()
-    ..name = json['name'] as String
-    ..description = json['description'] as String
-    ..notes = json['notes'] as String
-    ..id = json['id'] as String
+    ..name = json['name'] as String ?? ''
+    ..description = json['description'] as String ?? ''
+    ..notes = json['notes'] as String ?? ''
+    ..id = json['id'] as String ?? ''
     ..stats = (json['stats'] as List)
-        ?.map(
-            (e) => e == null ? null : Stat.fromJson(e as Map<String, dynamic>))
-        ?.toList()
+            ?.map((e) =>
+                e == null ? null : Stat.fromJson(e as Map<String, dynamic>))
+            ?.toList() ??
+        []
     ..talents = (json['talents'] as List)
-        ?.map((e) =>
-            e == null ? null : Talent.fromJson(e as Map<String, dynamic>))
-        ?.toList()
+            ?.map((e) =>
+                e == null ? null : Talent.fromJson(e as Map<String, dynamic>))
+            ?.toList() ??
+        []
     ..skills = (json['skills'] as List)
-        ?.map(
-            (e) => e == null ? null : Skill.fromJson(e as Map<String, dynamic>))
-        ?.toList()
-    ..aptitudes = (json['aptitudes'] as List)?.map((e) => e as String)?.toList()
-    ..items = (json['items'] as List)
-        ?.map(
-            (e) => e == null ? null : Item.fromJson(e as Map<String, dynamic>))
-        ?.toList()
-    ..weapons = (json['weapons'] as List)
-        ?.map((e) =>
-            e == null ? null : Weapon.fromJson(e as Map<String, dynamic>))
-        ?.toList()
-    ..armors = (json['armors'] as List)
-        ?.map(
-            (e) => e == null ? null : Armor.fromJson(e as Map<String, dynamic>))
-        ?.toList()
-    ..powers = (json['powers'] as List)
-        ?.map(
-            (e) => e == null ? null : Power.fromJson(e as Map<String, dynamic>))
-        ?.toList()
+            ?.map((e) =>
+                e == null ? null : Skill.fromJson(e as Map<String, dynamic>))
+            ?.toList() ??
+        []
+    ..aptitudes =
+        (json['aptitudes'] as List)?.map((e) => e as String)?.toList() ?? []
+    ..items =
+        (json['items'] as List)?.map((e) => e == null ? null : Item.fromJson(e as Map<String, dynamic>))?.toList() ?? []
+    ..weapons = (json['weapons'] as List)?.map((e) => e == null ? null : Weapon.fromJson(e as Map<String, dynamic>))?.toList() ?? []
+    ..armors = (json['armors'] as List)?.map((e) => e == null ? null : Armor.fromJson(e as Map<String, dynamic>))?.toList() ?? []
+    ..powers = (json['powers'] as List)?.map((e) => e == null ? null : Power.fromJson(e as Map<String, dynamic>))?.toList() ?? []
     ..xp = json['xp'] as int
     ..spentXp = json['spentXp'] as int
     ..hp = json['hp'] as int
