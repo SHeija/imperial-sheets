@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class ErrorDialog extends StatelessWidget {
   ErrorDialog({
     @required this.error,
-    this.content
+    this.content = const Text('Something went wrong.')
   });
   final Exception error;
-  Widget content = Text('Something went wrong.');
+  final Widget content;
 
   @override
   Widget build(BuildContext context) {
