@@ -39,8 +39,9 @@ class CharacterDao {
   }
 
   Future<Character> getActiveCharacter() async {
-    final idSnapshot = await _activeFolder.record('active').get(await _db);
-    final recordSnapshot = await _characterFolder.record(idSnapshot.value).get(await _db);
+    final String idSnapshot = await _activeFolder.record('active').get(await _db);
+    final recordSnapshot = await _characterFolder.record(idSnapshot).get(await _db);
+    print('Fetched active character: '+idSnapshot);
     return Character.fromJson(recordSnapshot);
   }
 }

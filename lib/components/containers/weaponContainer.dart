@@ -29,7 +29,10 @@ class WeaponContainer extends StatelessWidget {
                 },
               );
             },
-            child: WeaponTile(weapons[index], index),
+            child: WeaponTile(
+                weapon: weapons[index],
+                index: index
+            ),
           );
         },
         childCount: weapons.length

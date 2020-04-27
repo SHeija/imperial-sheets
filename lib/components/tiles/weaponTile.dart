@@ -5,7 +5,10 @@ import 'package:imperial_sheets/providers/characterModel.dart';
 import 'package:provider/provider.dart';
 
 class WeaponTile extends StatelessWidget {
-  WeaponTile(this.weapon, this.index);
+  WeaponTile({
+    @required this.weapon,
+    @required this.index
+  });
   final Weapon weapon;
   final int index;
 
