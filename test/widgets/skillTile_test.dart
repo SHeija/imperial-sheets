@@ -51,14 +51,11 @@ void main() {
       final Widget widget = MaterialApp(
         home: Scaffold(
             body: Container(
-              child: ChangeNotifierProvider(
-                create: (context) => CharacterModel(),
                 child: SkillTile(
                   skill: skill,
                   index: 1,
                   stat: mockCharacter.getThisStat(skill.stat),
                 ),
-              ),
             )
         ),
       );
@@ -76,14 +73,11 @@ void main() {
       final Widget widget = MaterialApp(
         home: Scaffold(
             body: Container(
-              child: ChangeNotifierProvider(
-                create: (context) => CharacterModel(),
-                child: SkillTile(
+              child: SkillTile(
                     skill: skillWSubskill,
                     index: 1,
                     stat: mockCharacter.getThisStat(skill.stat),
                 ),
-              ),
             )
         ),
       );

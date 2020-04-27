@@ -5,7 +5,10 @@ import 'package:imperial_sheets/providers/characterModel.dart';
 import 'package:provider/provider.dart';
 
 class ItemTile extends StatelessWidget {
-  ItemTile(this.item, this.index);
+  ItemTile({
+    @required this.item,
+    @required this.index
+  });
   final Item item;
   final int index;
 

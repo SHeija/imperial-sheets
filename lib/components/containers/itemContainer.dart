@@ -28,7 +28,10 @@ class ItemContainer extends StatelessWidget {
             },
           );
         },
-        child: ItemTile(items[index], index),
+        child: ItemTile(
+            item: items[index],
+            index: index
+        ),
       );
     }, childCount: items.length));
   }
