@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/common/stepIndicator.dart';
 import 'package:imperial_sheets/components/dialogs/skillEditDialog.dart';
-import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
 import 'package:imperial_sheets/providers/characterModel.dart';
 import 'package:provider/provider.dart';
 
 class SkillTile extends StatelessWidget {
-  SkillTile(this.skill, this.index);
+  SkillTile({
+    @required this.skill,
+    @required this.index,
+    this.stat
+  });
+
   final Skill skill;
   final int index;
+  final Stat stat;
 
   // DIALOG
   Future<void> _showEditDialog(BuildContext context) async {
@@ -29,7 +34,7 @@ class SkillTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double cellPadding = 8.0;
-    Character _meta = Provider.of<CharacterModel>(context).getCharacter();
+    bool _hasSubSkill = skill.subSkill != null && skill.subSkill != '';
 
     return GestureDetector(
       onLongPress: () => _showEditDialog(context),
@@ -48,7 +53,7 @@ class SkillTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(skill.canHaveMultiple() ? skill.name+':' : skill.name, style: Theme.of(context).textTheme.title, overflow: TextOverflow.ellipsis,),
-                      skill.subSkill.isNotEmpty
+                      _hasSubSkill
                           ? Text(skill.subSkill, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.subtitle)
                           : Container(),
                     ],
@@ -92,7 +97,7 @@ class SkillTile extends StatelessWidget {
                 ),
                 Container(
                     child: Chip(
-                        label: Text((_meta.getThisStat(skill.stat).value +
+                        label: Text((stat.value +
                             skill.getBonus())
                             .toString()),
                         padding: EdgeInsets.all(0)),
