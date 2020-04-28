@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imperial_sheets/components/containers/talentContainer.dart';
 import 'package:imperial_sheets/components/tiles/talentTile.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/components/dialogs/talentEditDialog.dart';
@@ -24,7 +25,6 @@ class TalentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Talent> talents = Provider.of<CharacterModel>(context).getTalents();
     return CustomScrollView(
       primary: false,
       slivers: <Widget>[
@@ -43,31 +43,8 @@ class TalentView extends StatelessWidget {
         ),
         SliverPadding(
           padding: EdgeInsets.all(2.0),
-          sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return Dismissible(
-                    background: Container(color: Theme.of(context).errorColor),
-                    key: Key('talent'+index.toString()),
-                    onDismissed: (direction) {
-                      Provider.of<CharacterModel>(context, listen: false)
-                          .removeTalent(talents[index]);
-                    },
-                    confirmDismiss: (direction) async {
-                      return await showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return ConfirmDialog();
-                        },
-                      );
-                    },
-                    child: TalentTile(talents[index], index)
-                  );
-                },
-                childCount: talents.length
-            ),
-          ),
-        )
+          sliver: TalentContainer(),
+        ),
       ],
     );
   }

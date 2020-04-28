@@ -5,7 +5,11 @@ import 'package:imperial_sheets/providers/characterModel.dart';
 import 'package:provider/provider.dart';
 
 class TalentTile extends StatelessWidget {
-  TalentTile(this.talent, this.index);
+  TalentTile({
+    @required this.talent,
+    @required this.index
+  });
+
   final Talent talent;
   final int index;
 
