@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/models/character.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
-import 'package:provider/provider.dart';
 
 class WeightTable extends StatelessWidget {
+  WeightTable({
+    @required this.character
+  });
+  final Character character;
+
   @override
   Widget build(BuildContext context) {
-    Character _character = Provider.of<CharacterModel>(context).getCharacter();
     return Card(
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 8.0),
@@ -27,7 +29,7 @@ class WeightTable extends StatelessWidget {
                       ),
                       Container(
                         padding: EdgeInsets.all(8.0),
-                        child: Text('${_character.getItemWeight()} kg', style: Theme.of(context).textTheme.body1),
+                        child: Text('${character.getItemWeight()} kg', style: Theme.of(context).textTheme.body1),
                       ),
                     ]
                 ),
@@ -39,7 +41,7 @@ class WeightTable extends StatelessWidget {
                       ),
                       Container(
                         padding: EdgeInsets.all(8.0),
-                        child: Text('${_character.getCarryLimit()} kg', style: Theme.of(context).textTheme.body1),
+                        child: Text('${character.getCarryLimit()} kg', style: Theme.of(context).textTheme.body1),
                       ),
                     ]
                 ),
@@ -51,7 +53,7 @@ class WeightTable extends StatelessWidget {
                       ),
                       Container(
                         padding: EdgeInsets.all(8.0),
-                        child: Text('${_character.getCarryLimit()*2} kg', style: Theme.of(context).textTheme.body1),
+                        child: Text('${character.getCarryLimit()*2} kg', style: Theme.of(context).textTheme.body1),
                       ),
                     ]
                 ),
@@ -63,7 +65,7 @@ class WeightTable extends StatelessWidget {
                       ),
                       Container(
                         padding: EdgeInsets.all(8.0),
-                        child: Text('${_character.getCarryLimit()*4} kg', style: Theme.of(context).textTheme.body1),
+                        child: Text('${character.getCarryLimit()*4} kg', style: Theme.of(context).textTheme.body1),
                       ),
                     ]
                 ),

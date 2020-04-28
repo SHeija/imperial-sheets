@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:imperial_sheets/models/character.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
-import 'package:provider/provider.dart';
 import '../../utils/constants.dart' as Constants;
 
 class ArmorPointsTable extends StatelessWidget {
+  ArmorPointsTable({
+    @required this.character
+  });
+
+  final Character character;
+
 
   String _getHitValue(dynamic place) {
     switch (place.key) {
@@ -34,8 +38,7 @@ class ArmorPointsTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Character _character = Provider.of<CharacterModel>(context).getCharacter();
-    Map<String, int> armorPoints = _character.getArmorPoints();
+    Map<String, int> armorPoints = character.getArmorPoints();
     return Card(
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
@@ -61,7 +64,7 @@ class ArmorPointsTable extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.all(4.0),
                         child: Text(
-                            '${(e.value+_character.getThisStat(Constants.T).getStatBonus())} (${e.value})',
+                            '${(e.value+character.getThisStat(Constants.T).getStatBonus())} (${e.value})',
                             style: Theme.of(context).textTheme.body1),
                       ),
                       Container(

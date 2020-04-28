@@ -5,11 +5,16 @@ import 'package:provider/provider.dart';
 import '../../utils/constants.dart' as Contants;
 
 class SpeedTable extends StatelessWidget {
+  SpeedTable({
+    @required this.character
+  });
+
+  final Character character;
 
   @override
   Widget build(BuildContext context) {
-    final Character _character = Provider.of<CharacterModel>(context).getCharacter();
-    final speed = _character.getThisStat(Contants.AG).getStatBonus();
+    final speed = character.getThisStat(Contants.AG).getStatBonus();
+
     return Card(
       child: Padding(
         padding: EdgeInsets.all(8.0),

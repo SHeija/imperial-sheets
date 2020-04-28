@@ -52,7 +52,9 @@ class MainView extends StatelessWidget {
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 2.0),
           sliver: SliverToBoxAdapter(
-            child: SpeedTable(),
+            child: SpeedTable(
+              character: Provider.of<CharacterModel>(context).getCharacter(),
+            ),
           ),
         ),
         SliverPadding(
