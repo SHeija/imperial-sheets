@@ -3,8 +3,8 @@ import 'package:imperial_sheets/database/characterDao.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
 
-class CharacterModel extends ChangeNotifier {
-  CharacterModel(){
+class CharacterProvider extends ChangeNotifier {
+  CharacterProvider(){
     this._characterList = [];
     fetchCurrentCharacter();
     fetchCharacterList();

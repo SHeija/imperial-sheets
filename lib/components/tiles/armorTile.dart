@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/dialogs/ArmorEditDialog.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 
 class ArmorTile extends StatelessWidget {
@@ -19,7 +19,7 @@ class ArmorTile extends StatelessWidget {
       },
     );
     if (result != null) {
-      Provider.of<CharacterModel>(context, listen: false).updateArmors(result, index);
+      Provider.of<CharacterProvider>(context, listen: false).updateArmors(result, index);
     }
   }
 
@@ -28,7 +28,7 @@ class ArmorTile extends StatelessWidget {
     double cellPadding = 8.0;
     return GestureDetector(
       onTap: () {
-        Provider.of<CharacterModel>(context, listen: false).toggleStowArmor(index);
+        Provider.of<CharacterProvider>(context, listen: false).toggleStowArmor(index);
       },
       onLongPress: () => _showEditDialog(context),
       child: Card(

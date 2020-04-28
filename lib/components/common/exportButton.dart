@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/models/character.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 
@@ -13,7 +13,7 @@ class ExportButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Character _character = Provider.of<CharacterModel>(context).getCharacter();
+    Character _character = Provider.of<CharacterProvider>(context).getCharacter();
     return IconButton(
       icon: Icon(Icons.file_upload),
       onPressed: () {

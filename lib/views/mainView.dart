@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/common/exportButton.dart';
 import 'package:imperial_sheets/components/common/speedTable.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 import '../components/containers/infoContainer.dart';
 import '../components/containers/statContainer.dart';
@@ -37,7 +37,7 @@ class MainView extends StatelessWidget {
                     }
                 );
                 if (result) {
-                  Provider.of<CharacterModel>(context, listen: false).deleteCurrentCharacter();
+                  Provider.of<CharacterProvider>(context, listen: false).deleteCurrentCharacter();
                 }
               },
             )
@@ -46,14 +46,14 @@ class MainView extends StatelessWidget {
         SliverPadding(
           padding: const EdgeInsets.all(2.0),
           sliver: SliverToBoxAdapter(
-            child: InfoContainer(Provider.of<CharacterModel>(context).getCharacter()),
+            child: InfoContainer(Provider.of<CharacterProvider>(context).getCharacter()),
           ),
         ),
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 2.0),
           sliver: SliverToBoxAdapter(
             child: SpeedTable(
-              character: Provider.of<CharacterModel>(context).getCharacter(),
+              character: Provider.of<CharacterProvider>(context).getCharacter(),
             ),
           ),
         ),
@@ -67,7 +67,7 @@ class MainView extends StatelessWidget {
         ),
         SliverPadding(
           padding: EdgeInsets.all(2.0),
-          sliver: StatContainer(Provider.of<CharacterModel>(context).getStats()),
+          sliver: StatContainer(Provider.of<CharacterProvider>(context).getStats()),
         ),
       ],
     );

@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:imperial_sheets/components/common/infoChips.dart';
 import 'package:imperial_sheets/components/dialogs/infoEditDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 
 class InfoContainer extends StatelessWidget {
@@ -21,7 +21,7 @@ class InfoContainer extends StatelessWidget {
         });
 
     if (result != null) {
-      Provider.of<CharacterModel>(context, listen: false).updateInfo(result);
+      Provider.of<CharacterProvider>(context, listen: false).updateInfo(result);
     }
   }
 

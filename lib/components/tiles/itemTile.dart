@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/dialogs/itemEditDialog.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 
 class ItemTile extends StatelessWidget {
@@ -22,7 +22,7 @@ class ItemTile extends StatelessWidget {
       },
     );
     if (result != null) {
-      Provider.of<CharacterModel>(context, listen: false).updateItems(result, index);
+      Provider.of<CharacterProvider>(context, listen: false).updateItems(result, index);
     }
   }
 
@@ -31,7 +31,7 @@ class ItemTile extends StatelessWidget {
     double cellPadding = 8.0;
     return GestureDetector(
       onTap: () {
-        Provider.of<CharacterModel>(context, listen: false).toggleStowItem(index);
+        Provider.of<CharacterProvider>(context, listen: false).toggleStowItem(index);
       },
       onLongPress: () => _showEditDialog(context),
       child: Card(

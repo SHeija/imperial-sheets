@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/containers/skillContainer.dart';
 import 'package:imperial_sheets/components/dialogs/skillAddDialog.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 
 class SkillView extends StatelessWidget {
@@ -15,7 +15,7 @@ class SkillView extends StatelessWidget {
         }
     );
     if (result != null) {
-      Provider.of<CharacterModel>(context, listen: false).addSkill(result);
+      Provider.of<CharacterProvider>(context, listen: false).addSkill(result);
     }
   }
 

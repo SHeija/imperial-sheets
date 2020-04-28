@@ -4,7 +4,7 @@ import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/components/dialogs/powerEditDialog.dart';
 import 'package:imperial_sheets/components/tiles/powerTile.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 
 class PowerView extends StatelessWidget {
@@ -18,13 +18,13 @@ class PowerView extends StatelessWidget {
         }
     );
     if (result != null) {
-      Provider.of<CharacterModel>(context, listen: false).addPower(result);
+      Provider.of<CharacterProvider>(context, listen: false).addPower(result);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Power> _powers = Provider.of<CharacterModel>(context).getPowers();
+    List<Power> _powers = Provider.of<CharacterProvider>(context).getPowers();
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
@@ -46,7 +46,7 @@ class PowerView extends StatelessWidget {
                   background: Container(color: Theme.of(context).errorColor),
                   key: UniqueKey(),
                   onDismissed: (direction){
-                    Provider.of<CharacterModel>(context, listen: false).removePower(_powers[index]);
+                    Provider.of<CharacterProvider>(context, listen: false).removePower(_powers[index]);
                   },
                   confirmDismiss: (direction) async {
                     return await showDialog(

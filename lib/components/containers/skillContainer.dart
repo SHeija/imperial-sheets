@@ -3,14 +3,14 @@ import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/components/tiles/skillTile.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 
 class SkillContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Skill> skills = Provider.of<CharacterModel>(context).getSkills();
-    Character character = Provider.of<CharacterModel>(context).getCharacter();
+    List<Skill> skills = Provider.of<CharacterProvider>(context).getSkills();
+    Character character = Provider.of<CharacterProvider>(context).getCharacter();
 
     return SliverGrid(
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -24,7 +24,7 @@ class SkillContainer extends StatelessWidget {
               key: UniqueKey(),
               background: Container(color: Theme.of(context).errorColor),
               onDismissed: (direction) {
-                Provider.of<CharacterModel>(context, listen: false)
+                Provider.of<CharacterProvider>(context, listen: false)
                     .removeSkill(skills[index]);
               },
               confirmDismiss: (direction) async {

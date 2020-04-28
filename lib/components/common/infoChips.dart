@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/dialogs/singleValueEditDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 
 import '../dialogs/dualValueEditDialog.dart';
@@ -33,7 +33,7 @@ class InfoChips extends StatelessWidget {
           break;
         default: //nothing
       }
-      Provider.of<CharacterModel>(context, listen: false).updateInfo(character);
+      Provider.of<CharacterProvider>(context, listen: false).updateInfo(character);
     }
   }
 
@@ -62,7 +62,7 @@ class InfoChips extends StatelessWidget {
           character.faith = result['val2'];
           break;
       }
-      Provider.of<CharacterModel>(context, listen: false).updateInfo(character);
+      Provider.of<CharacterProvider>(context, listen: false).updateInfo(character);
     }
   }
 

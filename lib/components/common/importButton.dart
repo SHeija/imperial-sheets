@@ -5,7 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/dialogs/errorDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 
 class ImportButton extends StatefulWidget{
@@ -50,7 +50,7 @@ class _ImportButtonState extends State<ImportButton> {
         });
         dynamic result = await _import();
         if (result.runtimeType == Character) {
-          await Provider.of<CharacterModel>(context, listen: false).importCharacter(result);
+          await Provider.of<CharacterProvider>(context, listen: false).importCharacter(result);
         }
         setState(() {
           loading = false;

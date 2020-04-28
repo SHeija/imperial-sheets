@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/containers/talentContainer.dart';
 import 'package:imperial_sheets/components/dialogs/talentEditDialog.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 
 class TalentView extends StatelessWidget {
@@ -17,7 +17,7 @@ class TalentView extends StatelessWidget {
         }
     );
     if (result != null) {
-      Provider.of<CharacterModel>(context, listen: false).addTalent(result);
+      Provider.of<CharacterProvider>(context, listen: false).addTalent(result);
     }
   }
 

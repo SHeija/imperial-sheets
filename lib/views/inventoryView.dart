@@ -9,7 +9,7 @@ import 'package:imperial_sheets/components/dialogs/ArmorEditDialog.dart';
 import 'package:imperial_sheets/components/dialogs/itemEditDialog.dart';
 import 'package:imperial_sheets/components/dialogs/weaponEditDialog.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 
 enum Choices{addItem, addWeapon, addArmor}
@@ -26,7 +26,7 @@ class InventoryView extends StatelessWidget {
         }
     );
     if (result!=null){
-      Provider.of<CharacterModel>(context, listen: false).addItem(result);
+      Provider.of<CharacterProvider>(context, listen: false).addItem(result);
     }
   }
 
@@ -39,7 +39,7 @@ class InventoryView extends StatelessWidget {
         }
     );
     if (result!=null){
-      Provider.of<CharacterModel>(context, listen: false).addWeapon(result);
+      Provider.of<CharacterProvider>(context, listen: false).addWeapon(result);
     }
   }
 
@@ -52,7 +52,7 @@ class InventoryView extends StatelessWidget {
         }
     );
     if (result!=null){
-      Provider.of<CharacterModel>(context, listen: false).addArmor(result);
+      Provider.of<CharacterProvider>(context, listen: false).addArmor(result);
     }
   }
 

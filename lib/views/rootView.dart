@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/common/appInfoButton.dart';
 import 'package:imperial_sheets/components/common/importButton.dart';
 import 'package:imperial_sheets/models/character.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:imperial_sheets/views/inventoryView.dart';
 import 'package:imperial_sheets/views/mainView.dart';
 import 'package:imperial_sheets/views/noCharacterView.dart';
@@ -58,13 +58,13 @@ class _RootViewState extends State<RootView> {
     }
 
     Widget _getCharacterList() {
-      List<Character> _characterList = Provider.of<CharacterModel>(context).getAllCharacters();
+      List<Character> _characterList = Provider.of<CharacterProvider>(context).getAllCharacters();
       return SliverList(
         delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index){
             return ListTile(
               onTap: (){
-                Provider.of<CharacterModel>(context, listen: false).setCurrentCharacter(_characterList[index]);
+                Provider.of<CharacterProvider>(context, listen: false).setCurrentCharacter(_characterList[index]);
                 Navigator.of(context).pop();
               },
               leading: Icon(Icons.bookmark),
@@ -85,7 +85,7 @@ class _RootViewState extends State<RootView> {
               title: Text('Add new character'),
               leading: Icon(Icons.add),
               onTap: (){
-                Provider.of<CharacterModel>(context, listen: false).createNewCharacter();
+                Provider.of<CharacterProvider>(context, listen: false).createNewCharacter();
                 Navigator.of(context).pop();
               },
             ),
@@ -129,7 +129,7 @@ class _RootViewState extends State<RootView> {
         ),
       ),
       body: SafeArea(
-        child: Provider.of<CharacterModel>(context).getCharacter() == null ? NoCharacterView() : _children[_currentIndex]
+        child: Provider.of<CharacterProvider>(context).getCharacter() == null ? NoCharacterView() : _children[_currentIndex]
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

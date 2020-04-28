@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/common/stepIndicator.dart';
 import 'package:imperial_sheets/components/dialogs/skillEditDialog.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 
 class SkillTile extends StatelessWidget {
@@ -26,7 +26,7 @@ class SkillTile extends StatelessWidget {
       },
     );
     if (result != null) {
-      Provider.of<CharacterModel>(context, listen: false).updateSkills(result, index);
+      Provider.of<CharacterProvider>(context, listen: false).updateSkills(result, index);
     }
   }
 

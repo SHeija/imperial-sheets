@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/dialogs/powerEditDialog.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 
 class PowerTile extends StatelessWidget {
@@ -19,7 +19,7 @@ class PowerTile extends StatelessWidget {
       },
     );
     if (result != null) {
-      Provider.of<CharacterModel>(context, listen: false).updatePowers(result, index);
+      Provider.of<CharacterProvider>(context, listen: false).updatePowers(result, index);
     }
   }
 

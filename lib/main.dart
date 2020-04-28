@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:statusbar/statusbar.dart';
 import './views/rootView.dart';
@@ -23,7 +23,7 @@ class App extends StatelessWidget {
         )
       ),
       home: ChangeNotifierProvider(
-        create: (context) => CharacterModel(),
+        create: (context) => CharacterProvider(),
         child: RootView(),
       ),
     );

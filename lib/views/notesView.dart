@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
-import 'package:imperial_sheets/providers/characterModel.dart';
+import 'package:imperial_sheets/providers/characterProvider.dart';
 import 'package:provider/provider.dart';
 
 class NotesView extends StatefulWidget {
@@ -24,7 +24,7 @@ class _NotesViewState extends State<NotesView> {
 
   @override
   Widget build(BuildContext context) {
-    String notes = Provider.of<CharacterModel>(context).getNotes();
+    String notes = Provider.of<CharacterProvider>(context).getNotes();
 
     Widget _editToggleButton() {
       return _editing
@@ -32,7 +32,7 @@ class _NotesViewState extends State<NotesView> {
               icon: Icon(Icons.save),
               onPressed: () {
                 if (_formKey.currentState.saveAndValidate()) {
-                  Provider.of<CharacterModel>(context, listen: false)
+                  Provider.of<CharacterProvider>(context, listen: false)
                       .updateNotes(_formKey.currentState.value["notes"]);
                   _toggleEditing();
                 }
@@ -89,7 +89,7 @@ class _NotesViewState extends State<NotesView> {
                 );
                 if (result) {
                   _toggleEditing();
-                  Provider.of<CharacterModel>(context, listen: false).updateNotes('');
+                  Provider.of<CharacterProvider>(context, listen: false).updateNotes('');
                 }
               },
             ),
