@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/dialogs/talentEditDialog.dart';
+import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:imperial_sheets/database/hiveProvider.dart';
 
 class TalentTile extends StatelessWidget {
   TalentTile({
     @required this.talent,
-    @required this.index
+    @required this.index,
   });
 
   final Talent talent;
@@ -23,8 +23,9 @@ class TalentTile extends StatelessWidget {
       },
     );
     if (result != null) {
-      Provider.of<CharacterProvider>(context, listen: false)
-          .updateTalents(result, index);
+      Character character = HiveProvider.of(context).getActiveCharacter();
+      character.talents[index] = result;
+      character.save();
     }
   }
 

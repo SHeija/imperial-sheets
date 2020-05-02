@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/components/tiles/talentTile.dart';
+import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:imperial_sheets/database/hiveProvider.dart';
 
 class TalentContainer extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    List<Talent> talents = Provider.of<CharacterProvider>(context).getTalents();
+    Character character = HiveProvider.of(context).getActiveCharacter();
+    List<Talent> talents = character.talents;
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(
@@ -17,8 +18,8 @@ class TalentContainer extends StatelessWidget{
               background: Container(color: Theme.of(context).errorColor),
               key: Key('talent'+index.toString()),
               onDismissed: (direction) {
-                Provider.of<CharacterProvider>(context, listen: false)
-                    .removeTalent(talents[index]);
+                character.talents.removeAt(index);
+                character.save();
               },
               confirmDismiss: (direction) async {
                 return await showDialog(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/containers/skillContainer.dart';
 import 'package:imperial_sheets/components/dialogs/skillAddDialog.dart';
-import 'package:imperial_sheets/providers/characterProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:imperial_sheets/models/character.dart';
+import 'package:imperial_sheets/database/hiveProvider.dart';
 
 class SkillView extends StatelessWidget {
 
@@ -15,7 +15,10 @@ class SkillView extends StatelessWidget {
         }
     );
     if (result != null) {
-      Provider.of<CharacterProvider>(context, listen: false).addSkill(result);
+      Character _character = HiveProvider.of(context).getActiveCharacter();
+      _character.skills.add(result);
+      _character.sortSkills();
+      _character.save();
     }
   }
 

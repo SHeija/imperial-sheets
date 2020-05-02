@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
-import 'package:imperial_sheets/providers/characterProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:imperial_sheets/models/character.dart';
+import 'package:imperial_sheets/database/hiveProvider.dart';
 
 class NotesView extends StatefulWidget {
   NotesView({Key key}) : super(key: key);
@@ -24,7 +24,8 @@ class _NotesViewState extends State<NotesView> {
 
   @override
   Widget build(BuildContext context) {
-    String notes = Provider.of<CharacterProvider>(context).getNotes();
+    Character character = HiveProvider.of(context).getActiveCharacter();
+    String notes = character.notes;
 
     Widget _editToggleButton() {
       return _editing
@@ -32,8 +33,8 @@ class _NotesViewState extends State<NotesView> {
               icon: Icon(Icons.save),
               onPressed: () {
                 if (_formKey.currentState.saveAndValidate()) {
-                  Provider.of<CharacterProvider>(context, listen: false)
-                      .updateNotes(_formKey.currentState.value["notes"]);
+                  character.notes = _formKey.currentState.value['notes'];
+                  character.save();
                   _toggleEditing();
                 }
               },
@@ -68,7 +69,8 @@ class _NotesViewState extends State<NotesView> {
             child: FormBuilderTextField(
               attribute: "notes",
             ),
-          ));
+          ),
+      );
     }
 
     return CustomScrollView(
@@ -89,7 +91,8 @@ class _NotesViewState extends State<NotesView> {
                 );
                 if (result) {
                   _toggleEditing();
-                  Provider.of<CharacterProvider>(context, listen: false).updateNotes('');
+                  character.notes = '';
+                  character.save();
                 }
               },
             ),

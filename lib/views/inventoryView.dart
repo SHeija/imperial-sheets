@@ -8,25 +8,25 @@ import 'package:imperial_sheets/components/containers/weaponContainer.dart';
 import 'package:imperial_sheets/components/dialogs/ArmorEditDialog.dart';
 import 'package:imperial_sheets/components/dialogs/itemEditDialog.dart';
 import 'package:imperial_sheets/components/dialogs/weaponEditDialog.dart';
+import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:imperial_sheets/database/hiveProvider.dart';
 
-enum Choices{addItem, addWeapon, addArmor}
+enum Choices { addItem, addWeapon, addArmor }
 
 class InventoryView extends StatelessWidget {
-
   // DIALOG
   void _showItemAddDialog(BuildContext context) async {
     final result = await showDialog<dynamic>(
         context: context,
-        builder: (BuildContext context){
+        builder: (BuildContext context) {
           Item _newItem = Item.blank();
           return ItemEditDialog(_newItem);
-        }
-    );
-    if (result!=null){
-      Provider.of<CharacterProvider>(context, listen: false).addItem(result);
+        });
+    if (result != null) {
+      Character character = HiveProvider.of(context).getActiveCharacter();
+      character.items.add(result);
+      character.save();
     }
   }
 
@@ -36,10 +36,11 @@ class InventoryView extends StatelessWidget {
         builder: (BuildContext context) {
           Weapon _newWeapon = Weapon.blank();
           return WeaponEditDialog(_newWeapon);
-        }
-    );
-    if (result!=null){
-      Provider.of<CharacterProvider>(context, listen: false).addWeapon(result);
+        });
+    if (result != null) {
+      Character character = HiveProvider.of(context).getActiveCharacter();
+      character.items.add(result);
+      character.save();
     }
   }
 
@@ -49,10 +50,11 @@ class InventoryView extends StatelessWidget {
         builder: (BuildContext context) {
           Armor _newArmor = Armor.blank();
           return ArmorEditDialog(_newArmor);
-        }
-    );
-    if (result!=null){
-      Provider.of<CharacterProvider>(context, listen: false).addArmor(result);
+        });
+    if (result != null) {
+      Character character = HiveProvider.of(context).getActiveCharacter();
+      character.items.add(result);
+      character.save();
     }
   }
 

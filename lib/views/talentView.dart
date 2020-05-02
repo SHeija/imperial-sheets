@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/containers/talentContainer.dart';
 import 'package:imperial_sheets/components/dialogs/talentEditDialog.dart';
+import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:imperial_sheets/database/hiveProvider.dart';
 
 class TalentView extends StatelessWidget {
 
@@ -17,7 +17,9 @@ class TalentView extends StatelessWidget {
         }
     );
     if (result != null) {
-      Provider.of<CharacterProvider>(context, listen: false).addTalent(result);
+      Character character = HiveProvider.of(context).getActiveCharacter();
+      character.talents.add(result);
+      character.save();
     }
   }
 

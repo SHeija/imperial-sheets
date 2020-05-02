@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/components/dialogs/powerEditDialog.dart';
 import 'package:imperial_sheets/components/tiles/powerTile.dart';
+import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:imperial_sheets/database/hiveProvider.dart';
 
 class PowerView extends StatelessWidget {
 
@@ -18,13 +18,16 @@ class PowerView extends StatelessWidget {
         }
     );
     if (result != null) {
-      Provider.of<CharacterProvider>(context, listen: false).addPower(result);
+      Character character = HiveProvider.of(context).getActiveCharacter();
+      character.powers.add(result);
+      character.save();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Power> _powers = Provider.of<CharacterProvider>(context).getPowers();
+    Character character = HiveProvider.of(context).getActiveCharacter();
+    List<Power> _powers = character.powers;
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
@@ -46,7 +49,8 @@ class PowerView extends StatelessWidget {
                   background: Container(color: Theme.of(context).errorColor),
                   key: UniqueKey(),
                   onDismissed: (direction){
-                    Provider.of<CharacterProvider>(context, listen: false).removePower(_powers[index]);
+                    character.powers.removeAt(index);
+                    character.save();
                   },
                   confirmDismiss: (direction) async {
                     return await showDialog(

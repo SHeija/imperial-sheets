@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:imperial_sheets/components/common/appInfoButton.dart';
 import 'package:imperial_sheets/components/common/importButton.dart';
 import 'package:imperial_sheets/models/character.dart';
-import 'package:imperial_sheets/providers/characterProvider.dart';
+import 'package:imperial_sheets/database/hiveProvider.dart';
 import 'package:imperial_sheets/views/inventoryView.dart';
 import 'package:imperial_sheets/views/mainView.dart';
 import 'package:imperial_sheets/views/noCharacterView.dart';
@@ -10,7 +11,6 @@ import 'package:imperial_sheets/views/notesView.dart';
 import 'package:imperial_sheets/views/powerView.dart';
 import 'package:imperial_sheets/views/skillView.dart';
 import 'package:imperial_sheets/views/talentView.dart';
-import 'package:provider/provider.dart';
 
 class RootView extends StatefulWidget {
   RootView({Key key}) : super(key:key);
@@ -26,19 +26,23 @@ class _RootViewState extends State<RootView> {
       _currentIndex = index;
     });
   }
-
+  
   @override
   Widget build(BuildContext context) {
 
-    final List<Widget> _children = [
-      MainView(),
-      SkillView(),
-      TalentView(),
-      InventoryView(),
-      NotesView(),
-      PowerView(),
-    ];
+    Widget _getView() {
+      final List<Widget> _children = [
+        MainView(),
+        SkillView(),
+        TalentView(),
+        InventoryView(),
+        NotesView(),
+        PowerView(),
+      ];
 
+      return _children[_currentIndex];
+    }
+    
     final List<String> _destinations = [
       'Home',
       'Skills',
@@ -57,26 +61,32 @@ class _RootViewState extends State<RootView> {
       }).toList();
     }
 
-    Widget _getCharacterList() {
-      List<Character> _characterList = Provider.of<CharacterProvider>(context).getAllCharacters();
-      return SliverList(
-        delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index){
-            return ListTile(
-              onTap: (){
-                Provider.of<CharacterProvider>(context, listen: false).setCurrentCharacter(_characterList[index]);
-                Navigator.of(context).pop();
+    Widget _drawerCharacterListBuilder() {
+      return ValueListenableBuilder(
+        valueListenable: HiveProvider.of(context).characters.listenable(),
+        builder: (context, box, widget){
+          List<Character> _characterList = box.values.toList();
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index){
+                return ListTile(
+                  onTap: (){
+                    HiveProvider.of(context).settings.put('activeCharacter', _characterList[index].id);
+                    print('Set active character '+_characterList[index].id);
+                    Navigator.of(context).pop();
+                  },
+                  leading: Icon(Icons.bookmark),
+                  title: Text(_characterList[index].name),
+                );
               },
-              leading: Icon(Icons.bookmark),
-              title: Text(_characterList[index].name),
-            );
-          },
-          childCount: _characterList.length,
-        ),
+              childCount: _characterList.length,
+            ),
+          );
+        },
       );
     }
 
-    Widget _getDrawerActions() {
+    Widget _drawerActionsBuilder() {
       return SliverList(
         delegate: SliverChildListDelegate(
           [
@@ -85,7 +95,10 @@ class _RootViewState extends State<RootView> {
               title: Text('Add new character'),
               leading: Icon(Icons.add),
               onTap: (){
-                Provider.of<CharacterProvider>(context, listen: false).createNewCharacter();
+                Character _newChar = Character.blank() ..id = DateTime.now().toIso8601String();
+                HiveProvider.of(context).characters.put(_newChar.id, _newChar);
+                HiveProvider.of(context).settings.put('activeCharacter', _newChar.id);
+                print('created character '+_newChar.id);
                 Navigator.of(context).pop();
               },
             ),
@@ -119,17 +132,32 @@ class _RootViewState extends State<RootView> {
             ),
             SliverPadding(
               padding: EdgeInsets.zero,
-              sliver: _getCharacterList(),
+              sliver: _drawerCharacterListBuilder(),
             ),
             SliverPadding(
               padding: EdgeInsets.zero,
-              sliver: _getDrawerActions(),
+              sliver: _drawerActionsBuilder(),
             ),
           ],
         ),
       ),
       body: SafeArea(
-        child: Provider.of<CharacterProvider>(context).getCharacter() == null ? NoCharacterView() : _children[_currentIndex]
+        child: ValueListenableBuilder(
+          valueListenable: HiveProvider.of(context).settings.listenable(keys: ['activeCharacter']),
+          builder: (context, box, widget){
+            String id = box.get('activeCharacter');
+            if (id == null || id == '') {
+              return NoCharacterView();
+            } else {
+              return ValueListenableBuilder(
+                valueListenable: HiveProvider.of(context).characters.listenable(),
+                builder: (context, box, widget){
+                 return _getView();
+                }
+              );
+            }
+          },
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

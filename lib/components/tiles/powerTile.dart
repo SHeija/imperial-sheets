@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/dialogs/powerEditDialog.dart';
+import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:imperial_sheets/database/hiveProvider.dart';
 
 class PowerTile extends StatelessWidget {
   PowerTile(this.power, this.index);
@@ -19,7 +19,9 @@ class PowerTile extends StatelessWidget {
       },
     );
     if (result != null) {
-      Provider.of<CharacterProvider>(context, listen: false).updatePowers(result, index);
+      Character character = HiveProvider.of(context).getActiveCharacter();
+      character.powers[index] = result;
+      character.save();
     }
   }
 
@@ -33,7 +35,6 @@ class PowerTile extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Table(
-                //defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                 columnWidths: {
                   0: FractionColumnWidth(0.75),
                   1: FractionColumnWidth(0.25)

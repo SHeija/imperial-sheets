@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/models/character.dart';
-import 'package:imperial_sheets/providers/characterProvider.dart';
-import 'package:provider/provider.dart';
 import '../../utils/constants.dart' as Contants;
 
 class SpeedTable extends StatelessWidget {

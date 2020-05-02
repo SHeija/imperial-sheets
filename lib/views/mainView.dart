@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/common/exportButton.dart';
 import 'package:imperial_sheets/components/common/speedTable.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
-import 'package:imperial_sheets/providers/characterProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:imperial_sheets/models/character.dart';
+import 'package:imperial_sheets/database/hiveProvider.dart';
 import '../components/containers/infoContainer.dart';
 import '../components/containers/statContainer.dart';
 
 class MainView extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
+    Character currentCharacter = HiveProvider.of(context).getActiveCharacter();
+
     return CustomScrollView(
       primary: false,
       slivers: <Widget>[
@@ -24,36 +25,37 @@ class MainView extends StatelessWidget {
               icon: Icon(Icons.delete),
               onPressed: () async {
                 final result = await showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return ConfirmDialog(
-                        child: Column(
-                          children: <Widget>[
-                            Text('Really delete this character?'),
-                            Text('This cannot be undone.')
-                          ],
-                        )
-                      );
-                    }
+                  context: context,
+                  builder: (BuildContext context) {
+                    return ConfirmDialog(
+                      child: Column(
+                        children: <Widget>[
+                          Text('Really delete this character?'),
+                          Text('This cannot be undone.')
+                        ],
+                      ),
+                    );
+                  },
                 );
                 if (result) {
-                  Provider.of<CharacterProvider>(context, listen: false).deleteCurrentCharacter();
+                  HiveProvider.of(context).settings.put('activeCharacter', '');
+                  currentCharacter.delete();
                 }
               },
-            )
+            ),
           ],
         ),
         SliverPadding(
           padding: const EdgeInsets.all(2.0),
           sliver: SliverToBoxAdapter(
-            child: InfoContainer(Provider.of<CharacterProvider>(context).getCharacter()),
+            child: InfoContainer(currentCharacter),
           ),
         ),
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 2.0),
           sliver: SliverToBoxAdapter(
             child: SpeedTable(
-              character: Provider.of<CharacterProvider>(context).getCharacter(),
+              character: currentCharacter,
             ),
           ),
         ),
@@ -67,7 +69,7 @@ class MainView extends StatelessWidget {
         ),
         SliverPadding(
           padding: EdgeInsets.all(2.0),
-          sliver: StatContainer(Provider.of<CharacterProvider>(context).getStats()),
+          sliver: StatContainer(currentCharacter.stats),
         ),
       ],
     );

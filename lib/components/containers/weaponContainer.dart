@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/tiles/weaponTile.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
+import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:imperial_sheets/database/hiveProvider.dart';
 
 class WeaponContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Weapon> weapons = Provider.of<CharacterProvider>(context).getWeapons();
+    Character character = HiveProvider.of(context).getActiveCharacter();
+    List<Weapon> weapons = character.weapons;
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
@@ -16,8 +17,8 @@ class WeaponContainer extends StatelessWidget {
             background: Container(color: Theme.of(context).errorColor),
             key: Key('weapon'+index.toString()),
             onDismissed: (direction) {
-              Provider.of<CharacterProvider>(context, listen: false)
-                  .removeWeapon(weapons[index]);
+              character.weapons.removeAt(index);
+              character.save();
             },
             confirmDismiss: (direction) async {
               return await showDialog(

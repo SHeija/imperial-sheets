@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/dialogs/itemEditDialog.dart';
+import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:imperial_sheets/database/hiveProvider.dart';
 
 class ItemTile extends StatelessWidget {
-  ItemTile({
-    @required this.item,
-    @required this.index
-  });
+  ItemTile({@required this.item, @required this.index});
   final Item item;
   final int index;
 
@@ -22,7 +19,9 @@ class ItemTile extends StatelessWidget {
       },
     );
     if (result != null) {
-      Provider.of<CharacterProvider>(context, listen: false).updateItems(result, index);
+      Character character = HiveProvider.of(context).getActiveCharacter();
+      character.items[index] = result;
+      character.save();
     }
   }
 
@@ -31,7 +30,9 @@ class ItemTile extends StatelessWidget {
     double cellPadding = 8.0;
     return GestureDetector(
       onTap: () {
-        Provider.of<CharacterProvider>(context, listen: false).toggleStowItem(index);
+        Character character = HiveProvider.of(context).getActiveCharacter();
+        character.items[index].toggleStow();
+        character.save();
       },
       onLongPress: () => _showEditDialog(context),
       child: Card(
@@ -40,38 +41,41 @@ class ItemTile extends StatelessWidget {
           children: <Widget>[
             Table(
               //defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                columnWidths: {
-                  0: FractionColumnWidth(0.75),
-                  1: FractionColumnWidth(0.25)
-                }, children: [
-              TableRow(children: <Widget>[
-                Container(
-                  child: Text(item.name+' '+item.getAmountString(),
-                      style: Theme.of(context).textTheme.title),
-                  padding: EdgeInsets.all(cellPadding),
-                ),
-                Container(
-                  child: Text(item.weight.toString()+' kg',
-                      style: Theme.of(context).textTheme.title),
-                  padding: EdgeInsets.all(cellPadding),
-                  alignment: Alignment.center,
-                ),
-              ]),
-              TableRow(children: <Widget>[
-                Container(
-                  child: Text(item.description,
-                      style: Theme.of(context).textTheme.body1),
-                  padding: EdgeInsets.all(cellPadding),
-                  alignment: Alignment.topLeft,
-                ),
-                Container(
-                  child: Text(item.stowed ? 'Stowed' : ''),
-                  padding: EdgeInsets.all(cellPadding),
-                  alignment: Alignment.center,
+              columnWidths: {
+                0: FractionColumnWidth(0.75),
+                1: FractionColumnWidth(0.25)
+              },
+              children: [
+                TableRow(children: <Widget>[
+                  Container(
+                    child: Text(item.name + ' ' + item.getAmountString(),
+                        style: Theme.of(context).textTheme.title),
+                    padding: EdgeInsets.all(cellPadding),
+                  ),
+                  Container(
+                    child: Text(item.weight.toString() + ' kg',
+                        style: Theme.of(context).textTheme.title),
+                    padding: EdgeInsets.all(cellPadding),
+                    alignment: Alignment.center,
+                  ),
+                ]),
+                TableRow(
+                  children: <Widget>[
+                    Container(
+                      child: Text(item.description,
+                          style: Theme.of(context).textTheme.body1),
+                      padding: EdgeInsets.all(cellPadding),
+                      alignment: Alignment.topLeft,
+                    ),
+                    Container(
+                      child: Text(item.stowed ? 'Stowed' : ''),
+                      padding: EdgeInsets.all(cellPadding),
+                      alignment: Alignment.center,
+                    ),
+                  ],
                 ),
               ],
-              ),
-            ]),
+            ),
           ],
         ),
       ),

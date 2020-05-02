@@ -5,8 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/dialogs/errorDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
-import 'package:imperial_sheets/providers/characterProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:imperial_sheets/database/hiveProvider.dart';
 
 class ImportButton extends StatefulWidget{
   ImportButton({Key key}) : super(key:key);
@@ -33,7 +32,7 @@ class _ImportButtonState extends State<ImportButton> {
               error: e,
               content: Text('Import failed! If you created the file manually, double-check for formatting errors.'),
             );
-          }
+          },
       );
       return e;
     }
@@ -50,7 +49,7 @@ class _ImportButtonState extends State<ImportButton> {
         });
         dynamic result = await _import();
         if (result.runtimeType == Character) {
-          await Provider.of<CharacterProvider>(context, listen: false).importCharacter(result);
+          await HiveProvider.of(context).characters.put(result.id, result);
         }
         setState(() {
           loading = false;

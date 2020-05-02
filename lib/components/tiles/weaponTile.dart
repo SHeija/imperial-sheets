@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/dialogs/weaponEditDialog.dart';
+import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import 'package:imperial_sheets/providers/characterProvider.dart';
-import 'package:provider/provider.dart';
+import 'package:imperial_sheets/database/hiveProvider.dart';
 
 class WeaponTile extends StatelessWidget {
-  WeaponTile({
-    @required this.weapon,
-    @required this.index
-  });
+  WeaponTile({@required this.weapon, @required this.index});
   final Weapon weapon;
   final int index;
 
@@ -22,7 +19,9 @@ class WeaponTile extends StatelessWidget {
       },
     );
     if (result != null) {
-      Provider.of<CharacterProvider>(context, listen: false).updateWeapons(result, index);
+      Character character = HiveProvider.of(context).getActiveCharacter();
+      character.weapons[index] = result;
+      character.save();
     }
   }
 
@@ -31,49 +30,54 @@ class WeaponTile extends StatelessWidget {
     double cellPadding = 8.0;
     return GestureDetector(
       onTap: () {
-        Provider.of<CharacterProvider>(context, listen: false).toggleStowWeapon(index);
+        Character character = HiveProvider.of(context).getActiveCharacter();
+        character.weapons[index].toggleStow();
+        character.save();
       },
-      onLongPress: () =>
-          _showEditDialog(context),
+      onLongPress: () => _showEditDialog(context),
       child: Card(
         color: weapon.stowed ? Colors.black12 : null,
         child: Column(
           children: <Widget>[
             Table(
-                //defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                columnWidths: {
-                  0: FractionColumnWidth(0.75),
-                  1: FractionColumnWidth(0.25)
-                }, children: [
-              TableRow(children: <Widget>[
-                Container(
-                  child: Text(weapon.name+' '+weapon.getAmountString(),
-                      style: Theme.of(context).textTheme.title),
-                  padding: EdgeInsets.all(cellPadding),
+              //defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+              columnWidths: {
+                0: FractionColumnWidth(0.75),
+                1: FractionColumnWidth(0.25)
+              },
+              children: [
+                TableRow(
+                  children: <Widget>[
+                    Container(
+                      child: Text(weapon.name + ' ' + weapon.getAmountString(),
+                          style: Theme.of(context).textTheme.title),
+                      padding: EdgeInsets.all(cellPadding),
+                    ),
+                    Container(
+                      child: Text(weapon.weight.toString() + ' kg',
+                          style: Theme.of(context).textTheme.title),
+                      padding: EdgeInsets.all(cellPadding),
+                      alignment: Alignment.center,
+                    ),
+                  ],
                 ),
-                Container(
-                  child: Text(weapon.weight.toString() + ' kg',
-                      style: Theme.of(context).textTheme.title),
-                  padding: EdgeInsets.all(cellPadding),
-                  alignment: Alignment.center,
+                TableRow(
+                  children: <Widget>[
+                    Container(
+                      child: Text(weapon.description,
+                          style: Theme.of(context).textTheme.body1),
+                      padding: EdgeInsets.all(cellPadding),
+                      alignment: Alignment.topLeft,
+                    ),
+                    Container(
+                      child: Text(weapon.stowed ? 'Stowed' : ''),
+                      padding: EdgeInsets.all(cellPadding),
+                      alignment: Alignment.center,
+                    ),
+                  ],
                 ),
-              ]),
-              TableRow(
-                children: <Widget>[
-                  Container(
-                    child: Text(weapon.description,
-                        style: Theme.of(context).textTheme.body1),
-                    padding: EdgeInsets.all(cellPadding),
-                    alignment: Alignment.topLeft,
-                  ),
-                  Container(
-                    child: Text(weapon.stowed ? 'Stowed' : ''),
-                    padding: EdgeInsets.all(cellPadding),
-                    alignment: Alignment.center,
-                  ),
-                ],
-              ),
-            ]),
+              ],
+            ),
             Container(
               padding: EdgeInsets.only(top: 3.0),
               decoration: BoxDecoration(
@@ -82,47 +86,49 @@ class WeaponTile extends StatelessWidget {
               ),
               child: Table(
                 children: <TableRow>[
-                  TableRow(children: <Widget>[
-                    Container(
-                      child: Text('Range: ${weapon.range}',
-                          style: Theme.of(context).textTheme.subhead),
-                      padding: EdgeInsets.all(cellPadding),
-                      alignment: Alignment.topLeft,
-                    ),
-                    Container(
-                      child: Text('RoF: ${weapon.rateOfFire}',
-                          style: Theme.of(context).textTheme.subhead),
-                      padding: EdgeInsets.all(cellPadding),
-                      alignment: Alignment.topLeft,
-                    ),
-                    Container(
-                      child: Text('Dmg: ${weapon.damage} ${weapon.type}',
-                          style: Theme.of(context).textTheme.subhead),
-                      padding: EdgeInsets.all(cellPadding),
-                      alignment: Alignment.topLeft,
-                    ),
-                  ],
+                  TableRow(
+                    children: <Widget>[
+                      Container(
+                        child: Text('Range: ${weapon.range}',
+                            style: Theme.of(context).textTheme.subhead),
+                        padding: EdgeInsets.all(cellPadding),
+                        alignment: Alignment.topLeft,
+                      ),
+                      Container(
+                        child: Text('RoF: ${weapon.rateOfFire}',
+                            style: Theme.of(context).textTheme.subhead),
+                        padding: EdgeInsets.all(cellPadding),
+                        alignment: Alignment.topLeft,
+                      ),
+                      Container(
+                        child: Text('Dmg: ${weapon.damage} ${weapon.type}',
+                            style: Theme.of(context).textTheme.subhead),
+                        padding: EdgeInsets.all(cellPadding),
+                        alignment: Alignment.topLeft,
+                      ),
+                    ],
                   ),
-                  TableRow(children: <Widget>[
-                    Container(
-                      child: Text('Pen: ${weapon.penetration}',
-                          style: Theme.of(context).textTheme.subhead),
-                      padding: EdgeInsets.all(cellPadding),
-                      alignment: Alignment.topLeft,
-                    ),
-                    Container(
-                      child: Text('Clip: ${weapon.clip}',
-                          style: Theme.of(context).textTheme.subhead),
-                      padding: EdgeInsets.all(cellPadding),
-                      alignment: Alignment.topLeft,
-                    ),
-                    Container(
-                      child: Text('Rld: ${weapon.reloadSpeed}',
-                          style: Theme.of(context).textTheme.subhead),
-                      padding: EdgeInsets.all(cellPadding),
-                      alignment: Alignment.topLeft,
-                    ),
-                  ],
+                  TableRow(
+                    children: <Widget>[
+                      Container(
+                        child: Text('Pen: ${weapon.penetration}',
+                            style: Theme.of(context).textTheme.subhead),
+                        padding: EdgeInsets.all(cellPadding),
+                        alignment: Alignment.topLeft,
+                      ),
+                      Container(
+                        child: Text('Clip: ${weapon.clip}',
+                            style: Theme.of(context).textTheme.subhead),
+                        padding: EdgeInsets.all(cellPadding),
+                        alignment: Alignment.topLeft,
+                      ),
+                      Container(
+                        child: Text('Rld: ${weapon.reloadSpeed}',
+                            style: Theme.of(context).textTheme.subhead),
+                        padding: EdgeInsets.all(cellPadding),
+                        alignment: Alignment.topLeft,
+                      ),
+                    ],
                   ),
                 ],
               ),

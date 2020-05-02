@@ -1,3 +1,5 @@
+import 'package:hive/hive.dart';
+
 import './datamodels.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../utils/constants.dart' as Constants;
@@ -5,7 +7,7 @@ import '../utils/constants.dart' as Constants;
 part 'character.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Character {
+class Character extends HiveObject{
   @JsonKey(defaultValue: '')
   String name, description, notes, id;
 
@@ -66,7 +68,7 @@ class Character {
   // IMPORT
 
   void importCleanup() {
-    id = null;
+    id = DateTime.now().toIso8601String();
     _fillSkillList();
     _fillStatList();
   }
