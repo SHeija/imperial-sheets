@@ -6,14 +6,17 @@ import 'package:imperial_sheets/views/mainView.dart';
 import 'package:imperial_sheets/views/noCharacterView.dart';
 
 void main() {
-  group('SanityCheck', (){
-    testWidgets('Views update when information is changed', (WidgetTester tester) async{
+  final TestWidgetsFlutterBinding binding = TestWidgetsFlutterBinding.ensureInitialized();
+  group('SanityCheck', () {
+    testWidgets('Views update when information is changed',
+        (WidgetTester tester) async {
+      await binding.setSurfaceSize(Size(1000, 800));
       final widget = App();
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
       // nothing
       expect(find.byType(NoCharacterView), findsOneWidget);
-      
+
       // open drawer
       await tester.tap(find.byIcon(Icons.menu));
       await tester.pumpAndSettle();
@@ -42,7 +45,5 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Name'), findsOneWidget);
     });
-
-
   });
 }

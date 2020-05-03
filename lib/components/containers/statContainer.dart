@@ -11,7 +11,7 @@ class StatContainer extends StatelessWidget {
     return SliverGrid(
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 250.0,
-        childAspectRatio: 200/100,
+        childAspectRatio: 2,
       ),
       delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
