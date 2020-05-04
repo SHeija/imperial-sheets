@@ -13,7 +13,7 @@ void main() {
       //await binding.setSurfaceSize(Size(1000, 800));
       final widget = App();
       await tester.pumpWidget(widget);
-      await tester.pump();
+      await tester.pumpAndSettle();
       // nothing
       expect(find.byType(NoCharacterView), findsOneWidget);
 
