@@ -83,6 +83,7 @@ class StatTile extends StatelessWidget {
               ),
               Container(
                   child: Chip(
+                      backgroundColor: stat.isUnnatural() ? Color(0xff16757683) : null,
                       label: Text(stat.getStatBonus().toString()),
                       padding: EdgeInsets.all(0)),
                   padding: EdgeInsets.only(

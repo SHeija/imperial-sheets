@@ -7,28 +7,57 @@ import 'package:imperial_sheets/models/datamodels.dart';
 import '../utils/constants.dart' as Constants;
 
 void main() {
-  testWidgets('StatTile structure and function', (WidgetTester tester) async {
-    final Stat stat = Stat(Constants.WP, 'WP', 25, 0);
-    final Widget testableWidget = MaterialApp(
-      home: Scaffold(
-        body: Container(
-          child: StatTile(stat,1),
+  group('StatTile', () {
+
+    testWidgets('renders correctly', (WidgetTester tester) async {
+      final Stat stat = Stat(Constants.WP, 'WP', 25, 0);
+      final Widget testableWidget = MaterialApp(
+        home: Scaffold(
+          body: Container(
+            child: StatTile(stat,1),
+          ),
         ),
-      ),
-    );
-    await tester.pumpWidget(testableWidget);
-    await tester.pumpAndSettle();
+      );
+      await tester.pumpWidget(testableWidget);
+      await tester.pumpAndSettle();
 
-    expect(find.text(Constants.WP), findsOneWidget);
-    expect(find.text('WP'), findsOneWidget);
-    expect(find.text('25'), findsOneWidget);
-    expect(find.widgetWithText(Chip, '2'), findsOneWidget );
-    expect(find.byType(StepIndicator), findsOneWidget);
+      expect(find.text(stat.name), findsOneWidget);
+      expect(find.text(stat.short), findsOneWidget);
+      expect(find.text(stat.value.toString()), findsOneWidget);
+      expect(find.widgetWithText(Chip, stat.getStatBonus().toString()), findsOneWidget );
+      expect(find.byType(StepIndicator), findsOneWidget);
 
-    // Check that dialog opens
-    await tester.longPress(find.byType(StatTile));
-    await tester.pumpAndSettle();
-    expect(find.byType(StatEditDialog), findsOneWidget);
+      // Check that dialog opens
+      await tester.longPress(find.byType(StatTile));
+      await tester.pumpAndSettle();
+      expect(find.byType(StatEditDialog), findsOneWidget);
+
+    });
+
+    testWidgets('renders correctly w/ unnaturalBonus', (WidgetTester tester) async {
+      final Stat stat = Stat(Constants.WP, 'WP', 25, 0)
+      ..unnaturalBonus = 3;
+      final Widget testableWidget = MaterialApp(
+        home: Scaffold(
+          body: Container(
+            child: StatTile(stat,1),
+          ),
+        ),
+      );
+      await tester.pumpWidget(testableWidget);
+      await tester.pumpAndSettle();
+
+      expect(find.text(stat.name), findsOneWidget);
+      expect(find.text(stat.short), findsOneWidget);
+      expect(find.text(stat.value.toString()), findsOneWidget);
+      expect(find.widgetWithText(Chip, stat.getStatBonus().toString()), findsOneWidget );
+      expect(find.byType(StepIndicator), findsOneWidget);
+
+      // Check that dialog opens
+      await tester.longPress(find.byType(StatTile));
+      await tester.pumpAndSettle();
+      expect(find.byType(StatEditDialog), findsOneWidget);
+    });
 
   });
 }

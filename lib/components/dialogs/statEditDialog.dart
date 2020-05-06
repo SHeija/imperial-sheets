@@ -21,6 +21,7 @@ class StatEditDialog extends StatelessWidget {
                   initialValue: {
                     'value': stat.value.toString(),
                     'stage': stat.stage.toString(),
+                    'unnaturalBonus': stat.unnaturalBonus.toString(),
                   },
                   child: Column(
                     children: <Widget>[
@@ -40,6 +41,14 @@ class StatEditDialog extends StatelessWidget {
                         min: 0,
                         step: 1,
                       ),
+                      FormBuilderTouchSpin(
+                        decoration: InputDecoration(labelText: "Unnatural bonus"),
+                        validators: [FormBuilderValidators.min(0)],
+                        attribute: "unnaturalBonus",
+                        initialValue: stat.unnaturalBonus,
+                        min: 0,
+                        step: 1,
+                      ),
                     ],
                   )),
             ],
@@ -55,6 +64,7 @@ class StatEditDialog extends StatelessWidget {
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {
               stat.stage = _formKey.currentState.value['stage'];
+              stat.unnaturalBonus = _formKey.currentState.value['unnaturalBonus'];
               stat.value =
                   int.parse(_formKey.currentState.value['value']);
               Navigator.of(context).pop(stat);
