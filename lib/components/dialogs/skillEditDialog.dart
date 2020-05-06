@@ -37,6 +37,7 @@ class SkillEditDialog extends StatelessWidget {
                     initialValue: skill.stage,
                     min: 0,
                     step: 1,
+                    max: 4,
                   ),
                 ],
               ),

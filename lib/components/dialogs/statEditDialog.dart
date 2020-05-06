@@ -40,6 +40,7 @@ class StatEditDialog extends StatelessWidget {
                         initialValue: stat.stage,
                         min: 0,
                         step: 1,
+                        max: 5,
                       ),
                       FormBuilderTouchSpin(
                         decoration: InputDecoration(labelText: "Unnatural bonus"),

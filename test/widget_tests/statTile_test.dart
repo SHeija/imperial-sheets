@@ -52,7 +52,7 @@ void main() {
       expect(find.text(stat.value.toString()), findsOneWidget);
       expect(find.widgetWithText(Chip, stat.getStatBonus().toString()), findsOneWidget);
       Chip chip = tester.firstWidget(find.byType(Chip));
-      expect(chip.backgroundColor, Color(0xff16757683));
+      expect(chip.backgroundColor, Color(0xff2196f3));
       expect(find.byType(StepIndicator), findsOneWidget);
 
       // Check that dialog opens
