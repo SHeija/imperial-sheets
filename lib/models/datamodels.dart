@@ -213,6 +213,7 @@ class Stat {
   String short; // "AG"
   int value;
   int stage;
+  int unnaturalBonus = 0;
   @JsonKey(defaultValue: [])
   List<String> aptitudes;
 
@@ -222,7 +223,11 @@ class Stat {
   factory Stat.fromJson(Map<String, dynamic> json) => _$StatFromJson(json);
   Map<String, dynamic> toJson() => _$StatToJson(this);
 
+  bool isUnnatural() {
+    return unnaturalBonus > 0;
+  }
+
   int getStatBonus() {
-    return (value/10).floor();
+    return (value/10).floor()+unnaturalBonus;
   }
 }

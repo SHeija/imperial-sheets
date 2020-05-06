@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class StepIndicator extends StatelessWidget{
-  StepIndicator(this.steps, this.currentSteps, this.selectedColor, this.unselectedColor);
+  StepIndicator({
+    @required this.steps,
+    @required this.currentSteps,
+    this.selectedColor,
+    this.unselectedColor
+  });
   final int steps, currentSteps;
   final Color selectedColor, unselectedColor;
 
@@ -10,9 +15,9 @@ class StepIndicator extends StatelessWidget{
     final List<Widget> indicators = [];
     for (var i = 0; i<steps; i++) {
       if (i < currentSteps)
-        indicators.add(_Indicator(selectedColor));
+        indicators.add(_Indicator(selectedColor ?? Theme.of(context).indicatorColor));
       else
-        indicators.add(_Indicator(unselectedColor));
+        indicators.add(_Indicator(unselectedColor ?? Colors.grey));
     }
 
     return (

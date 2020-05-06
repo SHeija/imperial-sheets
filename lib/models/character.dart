@@ -39,8 +39,8 @@ class Character extends HiveObject{
   int spentXp = 0;
   int hp = 0;
   int currentHp = 0;
-  int faith = 0;
-  int currentFaith = 0;
+  int fate = 0;
+  int currentFate = 0;
   int corruption = 0;
   int insanity = 0;
   int fatigue = 0;

@@ -38,8 +38,8 @@ Character _$CharacterFromJson(Map<String, dynamic> json) {
     ..spentXp = json['spentXp'] as int
     ..hp = json['hp'] as int
     ..currentHp = json['currentHp'] as int
-    ..faith = json['faith'] as int
-    ..currentFaith = json['currentFaith'] as int
+    ..fate = json['fate'] as int
+    ..currentFate = json['currentFate'] as int
     ..corruption = json['corruption'] as int
     ..insanity = json['insanity'] as int
     ..fatigue = json['fatigue'] as int;
@@ -62,8 +62,8 @@ Map<String, dynamic> _$CharacterToJson(Character instance) => <String, dynamic>{
       'spentXp': instance.spentXp,
       'hp': instance.hp,
       'currentHp': instance.currentHp,
-      'faith': instance.faith,
-      'currentFaith': instance.currentFaith,
+      'fate': instance.fate,
+      'currentFate': instance.currentFate,
       'corruption': instance.corruption,
       'insanity': instance.insanity,
       'fatigue': instance.fatigue,

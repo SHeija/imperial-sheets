@@ -96,8 +96,10 @@ class SkillTile extends StatelessWidget {
                           alignment: Alignment.topLeft,
                         ),
                         Container(
-                          child: StepIndicator(4, skill.stage,
-                              Theme.of(context).accentColor, Colors.grey),
+                          child: StepIndicator(
+                            steps: 4,
+                            currentSteps: skill.stage,
+                          ),
                           padding: EdgeInsets.only(
                               left: cellPadding, right: cellPadding),
                           alignment: Alignment.topLeft,
