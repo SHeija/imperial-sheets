@@ -25,8 +25,9 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Imperial Sheets',
       theme: ThemeData(
-          accentColor: Colors.blueGrey,
+          accentColor: Colors.blueGrey[200],
           primaryColor: Colors.blueGrey,
+          indicatorColor: Colors.blueGrey,
           textTheme: TextTheme(title: TextStyle(fontSize: 17.0))),
       home: FutureBuilder(
         future: _init(),
