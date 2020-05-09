@@ -68,12 +68,21 @@ class InventoryView extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           Armor _newArmor = Armor.blank();
-          return ArmorEditDialog(_newArmor);
+          return ArmorEditDialog(
+            _newArmor,
+            isNew: true,
+          );
         });
     if (result != null) {
-      Character character = HiveProvider.of(context).getActiveCharacter();
-      character.items.add(result);
-      character.save();
+      switch (result['choice']){
+        case DialogChoices.confirm:
+          Character character = HiveProvider.of(context).getActiveCharacter();
+          character.armors.add(result['payload']);
+          character.save();
+          break;
+        default:
+          break;
+      }
     }
   }
 

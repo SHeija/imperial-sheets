@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:imperial_sheets/components/common/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
+import 'package:imperial_sheets/utils/enums.dart';
 
 class ArmorEditDialog extends StatelessWidget {
-  ArmorEditDialog(this.armor);
+  ArmorEditDialog(this.armor, {this.isNew = false});
+  final bool isNew;
   final Armor armor;
   final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
 
@@ -11,7 +14,18 @@ class ArmorEditDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      title: Text('Edit ${armor.name}'),
+      title: isNew
+          ? Text('Add armor')
+          : DialogTitleWithButton(
+              title: Text('Edit ${armor.name}'),
+              icon: Icon(
+                Icons.delete,
+                color: Theme.of(context).errorColor,
+              ),
+              onTap: () {
+                Navigator.of(context).pop({'choice': DialogChoices.delete});
+              },
+            ),
       content: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -119,7 +133,7 @@ class ArmorEditDialog extends StatelessWidget {
         FlatButton(
             child: Text('Regret'),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pop({'choice': DialogChoices.cancel});
             }),
         FlatButton(
           child: Text('Submit'),
@@ -135,7 +149,10 @@ class ArmorEditDialog extends StatelessWidget {
               armor.leftLeg = _formKey.currentState.value['leftLeg'];
               armor.rightLeg = _formKey.currentState.value['rightLeg'];
               armor.amount = _formKey.currentState.value['amount'];
-              Navigator.of(context).pop(armor);
+              Navigator.of(context).pop({
+                'choice': DialogChoices.confirm,
+                'payload': armor,
+              });
             }
           },
         ),

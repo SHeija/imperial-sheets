@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/dialogs/ArmorEditDialog.dart';
+import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
+import 'package:imperial_sheets/utils/enums.dart';
 
 class ArmorTile extends StatelessWidget {
   ArmorTile(this.armor, this.index);
@@ -18,10 +20,33 @@ class ArmorTile extends StatelessWidget {
         return ArmorEditDialog(armor);
       },
     );
+
+    Future<bool> _confirmDismiss() async {
+      return await showDialog<bool>(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmDialog(
+            child: Text('Delete ${armor.name}?'),
+          );
+        },
+      );
+    }
+
     if (result != null) {
       Character character = HiveProvider.of(context).getActiveCharacter();
-      character.armors[index] = result;
-      character.save();
+      switch (result['choice']) {
+        case DialogChoices.cancel:
+          break;
+        case DialogChoices.confirm:
+          character.armors[index] = result['payload'];
+          character.save();
+          break;
+        case DialogChoices.delete:
+          if (await _confirmDismiss()) {
+            character.armors.removeAt(index);
+            character.save();
+          }
+      }
     }
   }
 
