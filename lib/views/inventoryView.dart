@@ -11,6 +11,7 @@ import 'package:imperial_sheets/components/dialogs/weaponEditDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
+import 'package:imperial_sheets/utils/enums.dart';
 
 enum Choices { addItem, addWeapon, addArmor }
 
@@ -21,12 +22,18 @@ class InventoryView extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           Item _newItem = Item.blank();
-          return ItemEditDialog(_newItem);
+          return ItemEditDialog(_newItem, isNew: true,);
         });
     if (result != null) {
-      Character character = HiveProvider.of(context).getActiveCharacter();
-      character.items.add(result);
-      character.save();
+      switch (result['choice']) {
+        case DialogChoices.confirm:
+          Character character = HiveProvider.of(context).getActiveCharacter();
+          character.items.add(result['payload']);
+          character.save();
+          break;
+        default:
+          break;
+      }
     }
   }
 

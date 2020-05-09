@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:imperial_sheets/components/common/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
@@ -12,14 +13,10 @@ class SkillEditDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(skill.name),
-          skill.canHaveMultiple()
-              ?
-            GestureDetector(
-              child: Icon(
+      title: skill.canHaveMultiple()
+          ? DialogTitleWithButton(
+              title: Text(skill.name),
+              icon: Icon(
                 Icons.delete,
                 color: Theme.of(context).errorColor,
               ),
@@ -27,9 +24,7 @@ class SkillEditDialog extends StatelessWidget {
                 Navigator.of(context).pop({"choice": DialogChoices.delete});
               },
             )
-              : Container(),
-        ],
-      ),
+          : Text(skill.name),
       content: SingleChildScrollView(
         child: Column(
           children: <Widget>[
