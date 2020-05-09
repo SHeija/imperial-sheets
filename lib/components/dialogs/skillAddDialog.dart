@@ -22,7 +22,7 @@ class SkillAddDialog extends StatelessWidget {
                 children: <Widget>[
                   FormBuilderDropdown(
                     attribute: 'title',
-                    items: [Constants.commonLore, Constants.forbiddenLore, Constants.scholasticLore, Constants.trade, Constants.linguistics]
+                    items: Constants.SKILLS_MULTIPLE
                         .map((skill) => DropdownMenuItem(
                         value: skill,
                         child: Text("$skill")
@@ -33,7 +33,7 @@ class SkillAddDialog extends StatelessWidget {
                   ),
                   FormBuilderTextField(
                     attribute: 'subSkill',
-                    decoration: InputDecoration(labelText: 'Sub-skill', hintText: 'e.g. Mechanicus, shipwright...'),
+                    decoration: InputDecoration(labelText: 'Subskill', hintText: 'e.g. Mechanicus, shipwright...'),
                     validators: [
                       FormBuilderValidators.required(),
                     ],

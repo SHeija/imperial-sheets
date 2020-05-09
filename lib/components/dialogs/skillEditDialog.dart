@@ -39,7 +39,7 @@ class SkillEditDialog extends StatelessWidget {
                   skill.canHaveMultiple()
                       ? FormBuilderTextField(
                           attribute: 'subSkill',
-                          decoration: InputDecoration(labelText: "Sub-skill"),
+                          decoration: InputDecoration(labelText: "Subskill"),
                           validators: [FormBuilderValidators.required()],
                         )
                       : Container(),

@@ -6,7 +6,7 @@ import 'package:imperial_sheets/components/dialogs/skillEditDialog.dart';
 import 'package:imperial_sheets/components/tiles/skillTile.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import '../utils/constants.dart' as Constants;
+import '../../utils/constants.dart' as Constants;
 
 void main() {
   group('SkillTile', () {
