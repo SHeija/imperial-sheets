@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/components/dialogs/weaponEditDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
+import 'package:imperial_sheets/utils/enums.dart';
 
 class WeaponTile extends StatelessWidget {
   WeaponTile({@required this.weapon, @required this.index});
@@ -18,10 +20,34 @@ class WeaponTile extends StatelessWidget {
         return WeaponEditDialog(weapon);
       },
     );
+
+    Future<bool> _confirmDismiss() async {
+      return await showDialog<bool>(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmDialog(
+            child: Text('Delete ${weapon.name}?'),
+          );
+        },
+      );
+    }
+
     if (result != null) {
       Character character = HiveProvider.of(context).getActiveCharacter();
-      character.weapons[index] = result;
-      character.save();
+      switch (result['choice']) {
+        case DialogChoices.cancel:
+          break;
+        case DialogChoices.confirm:
+          character.weapons[index] = result['payload'];
+          character.save();
+          break;
+        case DialogChoices.delete:
+          if (await _confirmDismiss()) {
+            character.weapons.removeAt(index);
+            character.save();
+          }
+          break;
+      }
     }
   }
 

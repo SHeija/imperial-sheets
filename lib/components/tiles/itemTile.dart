@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/components/dialogs/itemEditDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
+import 'package:imperial_sheets/utils/enums.dart';
 
 class ItemTile extends StatelessWidget {
   ItemTile({@required this.item, @required this.index});
@@ -18,10 +20,34 @@ class ItemTile extends StatelessWidget {
         return ItemEditDialog(item);
       },
     );
+
+    Future<bool> _confirmDismiss() async {
+      return await showDialog<bool>(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmDialog(
+            child: Text('Delete ${item.name}?'),
+          );
+        },
+      );
+    }
+
     if (result != null) {
       Character character = HiveProvider.of(context).getActiveCharacter();
-      character.items[index] = result;
-      character.save();
+      switch (result['choice']) {
+        case DialogChoices.cancel:
+          break;
+        case DialogChoices.confirm:
+          character.items[index] = result['payload'];
+          character.save();
+          break;
+        case DialogChoices.delete:
+          if (await _confirmDismiss()) {
+            character.items.removeAt(index);
+            character.save();
+          }
+          break;
+      }
     }
   }
 

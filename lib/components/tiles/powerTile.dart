@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/components/dialogs/powerEditDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
+import 'package:imperial_sheets/utils/enums.dart';
 
 class PowerTile extends StatelessWidget {
   PowerTile(this.power, this.index);
@@ -18,10 +20,34 @@ class PowerTile extends StatelessWidget {
         return PowerEditDialog(power);
       },
     );
+
+    Future<bool> _confirmDismiss() async {
+      return await showDialog<bool>(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmDialog(
+            child: Text('Delete ${power.name}?'),
+          );
+        },
+      );
+    }
+
     if (result != null) {
       Character character = HiveProvider.of(context).getActiveCharacter();
-      character.powers[index] = result;
-      character.save();
+      switch (result['choice']){
+        case DialogChoices.cancel:
+          break;
+        case DialogChoices.confirm:
+          character.powers[index] = result['payload'];
+          character.save();
+          break;
+        case DialogChoices.delete:
+          if (await _confirmDismiss()) {
+            character.powers.removeAt(index);
+            character.save();
+          }
+          break;
+      }
     }
   }
 

@@ -117,4 +117,12 @@ const SKILL_LIST = {
   trade:INT
 };
 
+const SKILLS_MULTIPLE = [
+  trade,
+  linguistics,
+  scholasticLore,
+  forbiddenLore,
+  commonLore,
+];
+
 // APTITUDES

@@ -7,14 +7,14 @@ import './views/rootView.dart';
 import 'models/character.dart';
 import 'database/characterAdapter.dart';
 
-void main() => runApp(App());
-
-Future<void> _init() async {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   var dir = await getApplicationDocumentsDirectory();
   Hive.init(dir.path);
   Hive.registerAdapter(CharacterAdapter());
   await Hive.openBox<Character>('characters');
   await Hive.openBox('settings');
+  runApp(App());
 }
 
 class App extends StatelessWidget {
@@ -29,26 +29,8 @@ class App extends StatelessWidget {
           primaryColor: Colors.blueGrey,
           indicatorColor: Colors.blueGrey,
           textTheme: TextTheme(title: TextStyle(fontSize: 17.0))),
-      home: FutureBuilder(
-        future: _init(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return HiveProvider(
-              child: RootView(),
-            );
-          } else {
-            return Container(
-              color: Colors.white,
-              child: Center(
-                child: SizedBox(
-                  width: 200,
-                  height: 200,
-                  child: CircularProgressIndicator(),
-                ),
-              ),
-            );
-          }
-        },
+      home: HiveProvider(
+        child: RootView(),
       ),
     );
   }

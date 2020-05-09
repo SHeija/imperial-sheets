@@ -4,7 +4,7 @@ import 'package:imperial_sheets/components/common/stepIndicator.dart';
 import 'package:imperial_sheets/components/dialogs/statEditDialog.dart';
 import 'package:imperial_sheets/components/tiles/statTile.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import '../utils/constants.dart' as Constants;
+import '../../utils/constants.dart' as Constants;
 
 void main() {
   group('StatTile', () {

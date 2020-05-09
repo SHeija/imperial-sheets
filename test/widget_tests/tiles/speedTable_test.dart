@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:imperial_sheets/components/common/speedTable.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
-import '../utils/constants.dart' as Constants;
+import '../../utils/constants.dart' as Constants;
 
 void main() {
   testWidgets('Speedtable renders correctly', (WidgetTester tester) async {

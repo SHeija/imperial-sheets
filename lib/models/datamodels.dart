@@ -69,7 +69,7 @@ class Skill {
   }
 
   bool canHaveMultiple() {
-    const multiples = [Constants.scholasticLore, Constants.forbiddenLore, Constants.commonLore, Constants.trade, Constants.linguistics];
+    const multiples = Constants.SKILLS_MULTIPLE;
     return multiples.contains(name);
   }
 

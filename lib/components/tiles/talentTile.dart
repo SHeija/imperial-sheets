@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/components/dialogs/talentEditDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
+import 'package:imperial_sheets/utils/enums.dart';
 
 class TalentTile extends StatelessWidget {
   TalentTile({
@@ -22,10 +24,34 @@ class TalentTile extends StatelessWidget {
         return TalentEditDialog(talent);
       },
     );
+
+    Future<bool> _confirmDismiss() async {
+      return await showDialog<bool>(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmDialog(
+            child: Text('Delete ${talent.name}?'),
+          );
+        },
+      );
+    }
+
     if (result != null) {
       Character character = HiveProvider.of(context).getActiveCharacter();
-      character.talents[index] = result;
-      character.save();
+      switch (result['choice']) {
+        case DialogChoices.cancel:
+          break;
+        case DialogChoices.confirm:
+          character.talents[index] = result['payload'];
+          character.save();
+          break;
+        case DialogChoices.delete:
+          if (await _confirmDismiss()) {
+            character.talents.removeAt(index);
+            character.save();
+          }
+          break;
+      }
     }
   }
 

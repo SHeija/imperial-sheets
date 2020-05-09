@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/common/stepIndicator.dart';
+import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/components/dialogs/skillEditDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
+import 'package:imperial_sheets/utils/enums.dart';
 
 class SkillTile extends StatelessWidget {
   SkillTile({@required this.skill, @required this.index, this.stat});
@@ -21,12 +23,38 @@ class SkillTile extends StatelessWidget {
         return SkillEditDialog(skill);
       },
     );
+
+    Future<bool> _confirmDismiss() async {
+      return await showDialog<bool>(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmDialog(
+            child: Text('Delete ${skill.name}: ${skill.subSkill.toString()}?'),
+          );
+        },
+      );
+    }
+
+    final Character character = HiveProvider.of(context).getActiveCharacter();
+
     if (result != null) {
-      final Character character = HiveProvider.of(context).getActiveCharacter();
-      character.skills[index] = skill;
-      character.save();
+      switch (result['choice']) {
+        case DialogChoices.confirm:
+          character.skills[index] = result['payload'];
+          character.save();
+          break;
+        case DialogChoices.cancel:
+          break;
+        case DialogChoices.delete:
+          if (await _confirmDismiss()) {
+            character.skills.removeAt(index);
+            character.save();
+          }
+          break;
+      }
     }
   }
+
 
   // TILE
   @override
@@ -37,90 +65,86 @@ class SkillTile extends StatelessWidget {
     return GestureDetector(
       onLongPress: () => _showEditDialog(context),
       child: Card(
-        child: Column(
-          children: <Widget>[
-            Table(
-              //defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-              columnWidths: {
-                0: FractionColumnWidth(0.70),
-                1: FractionColumnWidth(0.30)
-              },
-              children: [
-                TableRow(
+          child: SingleChildScrollView(
+        child: Table(
+          //defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+          columnWidths: {
+            0: FractionColumnWidth(0.70),
+            1: FractionColumnWidth(0.30)
+          },
+          children: [
+            TableRow(
+              children: <Widget>[
+                Container(
+                  child: Text(
+                    skill.canHaveMultiple() ? skill.name + ':' : skill.name,
+                    style: Theme.of(context).textTheme.title,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  padding: EdgeInsets.only(
+                      left: cellPadding, top: cellPadding, right: cellPadding),
+                ),
+                Container(
+                  child: Text(
+                    skill.getBonusString(),
+                    style: Theme.of(context).textTheme.title,
+                  ),
+                  padding: EdgeInsets.only(
+                      left: cellPadding, top: cellPadding, right: cellPadding),
+                  alignment: Alignment.center,
+                ),
+              ],
+            ),
+            TableRow(
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    _hasSubSkill
+                        ? Container(
+                            child: Text(skill.subSkill,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context).textTheme.subtitle),
+                            padding: EdgeInsets.only(
+                              left: cellPadding,
+                            ),
+                          )
+                        : Container(),
                     Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            skill.canHaveMultiple()
-                                ? skill.name + ':'
-                                : skill.name,
-                            style: Theme.of(context).textTheme.title,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          _hasSubSkill
-                              ? Text(skill.subSkill,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context).textTheme.subtitle)
-                              : Container(),
-                        ],
+                      child: Text(
+                        skill.stat,
+                        style: Theme.of(context).textTheme.body1,
                       ),
                       padding: EdgeInsets.only(
-                          left: cellPadding,
-                          top: cellPadding,
-                          right: cellPadding),
+                        left: cellPadding,
+                        bottom: cellPadding,
+                        right: cellPadding,
+                      ),
+                      alignment: Alignment.topLeft,
                     ),
                     Container(
-                      child: Text(skill.getBonusString(),
-                          style: Theme.of(context).textTheme.title),
+                      child: StepIndicator(
+                        steps: 4,
+                        currentSteps: skill.stage,
+                      ),
                       padding: EdgeInsets.only(
-                          left: cellPadding,
-                          top: cellPadding,
-                          right: cellPadding),
-                      alignment: Alignment.center,
+                          left: cellPadding, right: cellPadding),
+                      alignment: Alignment.topLeft,
                     ),
                   ],
                 ),
-                TableRow(
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Container(
-                          child: Text(skill.stat,
-                              style: Theme.of(context).textTheme.body1),
-                          padding: EdgeInsets.only(
-                              left: cellPadding,
-                              bottom: cellPadding,
-                              right: cellPadding),
-                          alignment: Alignment.topLeft,
-                        ),
-                        Container(
-                          child: StepIndicator(
-                            steps: 4,
-                            currentSteps: skill.stage,
-                          ),
-                          padding: EdgeInsets.only(
-                              left: cellPadding, right: cellPadding),
-                          alignment: Alignment.topLeft,
-                        ),
-                      ],
-                    ),
-                    Container(
-                        child: Chip(
-                            label: Text(
-                                (stat.value + skill.getBonus()).toString()),
-                            padding: EdgeInsets.all(0)),
-                        padding: EdgeInsets.only(
-                            left: cellPadding, right: cellPadding),
-                        alignment: Alignment.topCenter),
-                  ],
-                ),
+                Container(
+                    child: Chip(
+                        label: Text((stat.value + skill.getBonus()).toString()),
+                        padding: EdgeInsets.all(0)),
+                    padding:
+                        EdgeInsets.only(left: cellPadding, right: cellPadding),
+                    alignment: Alignment.topCenter),
               ],
             ),
           ],
         ),
-      ),
+      )),
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:imperial_sheets/components/common/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/models/datamodels.dart';
+import 'package:imperial_sheets/utils/enums.dart';
 
 class SkillEditDialog extends StatelessWidget {
   SkillEditDialog(this.skill);
@@ -11,7 +13,18 @@ class SkillEditDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      title: Text(skill.name),
+      title: skill.canHaveMultiple()
+          ? DialogTitleWithButton(
+              title: Text(skill.name),
+              icon: Icon(
+                Icons.delete,
+                color: Theme.of(context).errorColor,
+              ),
+              onTap: () {
+                Navigator.of(context).pop({"choice": DialogChoices.delete});
+              },
+            )
+          : Text(skill.name),
       content: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -26,7 +39,7 @@ class SkillEditDialog extends StatelessWidget {
                   skill.canHaveMultiple()
                       ? FormBuilderTextField(
                           attribute: 'subSkill',
-                          decoration: InputDecoration(labelText: "Sub-skill"),
+                          decoration: InputDecoration(labelText: "Subskill"),
                           validators: [FormBuilderValidators.required()],
                         )
                       : Container(),
@@ -49,7 +62,7 @@ class SkillEditDialog extends StatelessWidget {
         FlatButton(
             child: Text('Regret'),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pop({"choice": DialogChoices.cancel});
             }),
         FlatButton(
           child: Text('Submit'),
@@ -59,7 +72,8 @@ class SkillEditDialog extends StatelessWidget {
               if (skill.canHaveMultiple()) {
                 skill.subSkill = _formKey.currentState.value['subSkill'];
               }
-              Navigator.of(context).pop(skill);
+              Navigator.of(context)
+                  .pop({"choice": DialogChoices.confirm, "payload": skill});
             }
           },
         ),
