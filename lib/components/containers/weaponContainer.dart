@@ -13,27 +13,9 @@ class WeaponContainer extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          return Dismissible(
-            background: Container(color: Theme.of(context).errorColor),
-            key: Key('weapon'+index.toString()),
-            onDismissed: (direction) {
-              character.weapons.removeAt(index);
-              character.save();
-            },
-            confirmDismiss: (direction) async {
-              return await showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return ConfirmDialog(
-                    child: Text('Delete ${weapons[index].name}?')
-                  );
-                },
-              );
-            },
-            child: WeaponTile(
-                weapon: weapons[index],
-                index: index
-            ),
+          return WeaponTile(
+              weapon: weapons[index],
+              index: index
           );
         },
         childCount: weapons.length

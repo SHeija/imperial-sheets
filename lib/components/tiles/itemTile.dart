@@ -32,15 +32,14 @@ class ItemTile extends StatelessWidget {
       );
     }
 
-    Character character = HiveProvider.of(context).getActiveCharacter();
-
     if (result != null) {
+      Character character = HiveProvider.of(context).getActiveCharacter();
       switch (result['choice']) {
+        case DialogChoices.cancel:
+          break;
         case DialogChoices.confirm:
           character.items[index] = result['payload'];
           character.save();
-          break;
-        case DialogChoices.cancel:
           break;
         case DialogChoices.delete:
           if (await _confirmDismiss()) {

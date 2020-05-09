@@ -22,7 +22,10 @@ class InventoryView extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           Item _newItem = Item.blank();
-          return ItemEditDialog(_newItem, isNew: true,);
+          return ItemEditDialog(
+            _newItem,
+            isNew: true,
+          );
         });
     if (result != null) {
       switch (result['choice']) {
@@ -42,12 +45,21 @@ class InventoryView extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           Weapon _newWeapon = Weapon.blank();
-          return WeaponEditDialog(_newWeapon);
+          return WeaponEditDialog(
+            _newWeapon,
+            isNew: true,
+          );
         });
     if (result != null) {
-      Character character = HiveProvider.of(context).getActiveCharacter();
-      character.items.add(result);
-      character.save();
+      switch (result['choice']) {
+        case DialogChoices.confirm:
+          Character character = HiveProvider.of(context).getActiveCharacter();
+          character.weapons.add(result['payload']);
+          character.save();
+          break;
+        default:
+          break;
+      }
     }
   }
 
