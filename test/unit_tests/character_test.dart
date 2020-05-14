@@ -18,7 +18,8 @@ void main() {
     expect(c.weapons.isEmpty, true);
     expect(c.items.isEmpty, true);
     expect(c.armors.isEmpty, true);
-    expect(c.aptitudes.isEmpty, true);
+    expect(c.aptitudes.length, 1);
+    expect(c.aptitudes[0], 'general');
   });
 
   group('Import', () {
