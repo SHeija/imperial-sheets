@@ -8,7 +8,7 @@ class AptitudeChips extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool hasAptitudes = aptitudes.length > 0;
     if (!hasAptitudes) {
-      aptitudes.add("general");
+      aptitudes.add('general');
     }
     return Wrap(
       runSpacing: 1.0,

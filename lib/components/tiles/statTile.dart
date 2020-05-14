@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/common/stepIndicator.dart';
 import 'package:imperial_sheets/components/dialogs/statEditDialog.dart';
+import 'package:imperial_sheets/models/attributes.dart';
 import 'package:imperial_sheets/models/character.dart';
-import 'package:imperial_sheets/models/datamodels.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
 
 class StatTile extends StatelessWidget {

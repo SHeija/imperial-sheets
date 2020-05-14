@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:imperial_sheets/components/dialogs/weaponEditDialog.dart';
 import 'package:imperial_sheets/components/tiles/weaponTile.dart';
-import 'package:imperial_sheets/models/datamodels.dart';
+import 'package:imperial_sheets/models/equipment.dart';
 
 void main() {
  group('WeaponTile', () {

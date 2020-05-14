@@ -1,8 +1,9 @@
 import 'package:hive/hive.dart';
 
-import './datamodels.dart';
+import './equipment.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../utils/constants.dart' as Constants;
+import 'attributes.dart';
 
 part 'character.g.dart';
 
@@ -54,7 +55,7 @@ class Character extends HiveObject{
     talents = [];
     items = [];
     weapons = [];
-    aptitudes = [];
+    aptitudes = ['general'];
     armors = [];
     powers = [];
   }

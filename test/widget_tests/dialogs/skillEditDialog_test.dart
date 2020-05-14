@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:imperial_sheets/components/common/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/components/dialogs/skillAddDialog.dart';
 import 'package:imperial_sheets/components/dialogs/skillEditDialog.dart';
-import 'package:imperial_sheets/models/datamodels.dart';
+import 'package:imperial_sheets/models/attributes.dart';
 import '../../utils/constants.dart' as Constants;
 
 void main() {

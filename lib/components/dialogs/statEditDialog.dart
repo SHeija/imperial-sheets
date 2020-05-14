@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:imperial_sheets/models/datamodels.dart';
+import 'package:imperial_sheets/models/attributes.dart';
 
 class StatEditDialog extends StatelessWidget {
   StatEditDialog(this.stat);
