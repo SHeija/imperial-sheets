@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:imperial_sheets/components/common/infoChips.dart';
 import 'package:imperial_sheets/components/dialogs/infoEditDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
+import 'package:imperial_sheets/utils/enums.dart';
 
 class InfoContainer extends StatelessWidget {
   InfoContainer(this.character);
@@ -19,7 +20,15 @@ class InfoContainer extends StatelessWidget {
       },
     );
     if (result != null) {
-      result.save();
+      switch (result['choice']) {
+        case DialogChoices.confirm:
+          character.name = result['payload'].name;
+          character.description = result['payload'].description;
+          character.save();
+          break;
+        default:
+          break;
+      }
     }
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:imperial_sheets/components/dialogs/ArmorEditDialog.dart';
+import 'package:imperial_sheets/components/dialogs/armorEditDialog.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/models/datamodels.dart';

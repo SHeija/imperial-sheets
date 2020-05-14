@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/common/exportButton.dart';
 import 'package:imperial_sheets/components/common/speedTable.dart';
+import 'package:imperial_sheets/components/containers/aptitudeContainer.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
@@ -52,7 +53,7 @@ class MainView extends StatelessWidget {
           ),
         ),
         SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 2.0),
+          padding: const EdgeInsets.all(2.0),
           sliver: SliverToBoxAdapter(
             child: SpeedTable(
               character: currentCharacter,
@@ -71,6 +72,20 @@ class MainView extends StatelessWidget {
           padding: EdgeInsets.all(2.0),
           sliver: StatContainer(currentCharacter.stats),
         ),
+        SliverPadding(
+          padding: EdgeInsets.all(2.0),
+          sliver: SliverAppBar(
+            automaticallyImplyLeading: false,
+            title: Text('Aptitudes'),
+            centerTitle: true,
+          ),
+        ),
+        SliverPadding(
+          padding: EdgeInsets.all(2.0),
+          sliver: SliverToBoxAdapter(
+            child: AptitudeContainer(),
+          ),
+        )
       ],
     );
   }
