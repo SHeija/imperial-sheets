@@ -40,6 +40,7 @@ class PowerEditDialog extends StatelessWidget {
                 'sustained': power.sustained,
                 'subType': power.subType,
                 'effect': power.effect,
+                'cost': power.cost.toString(),
               },
               child: Column(
                 children: <Widget>[
@@ -116,6 +117,14 @@ class PowerEditDialog extends StatelessWidget {
                       FormBuilderValidators.required(),
                     ],
                   ),
+                  FormBuilderTextField(
+                    attribute: "cost",
+                    decoration: InputDecoration(labelText: "Exp cost"),
+                    validators: [
+                      FormBuilderValidators.numeric(),
+                    ],
+                    valueTransformer: (v) => int.parse(v),
+                  ),
                 ],
               ),
             ),
@@ -140,6 +149,7 @@ class PowerEditDialog extends StatelessWidget {
               power.sustained = _formKey.currentState.value['sustained'];
               power.subType = _formKey.currentState.value['subType'];
               power.effect = _formKey.currentState.value['effect'];
+              power.cost = _formKey.currentState.value['cost'];
               Navigator.of(context).pop({
                 'choice': DialogChoices.confirm,
                 'payload': power,

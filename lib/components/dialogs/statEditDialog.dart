@@ -10,50 +10,59 @@ class StatEditDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape:
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: Text(stat.name),
       content: SingleChildScrollView(
           child: Column(
-            children: <Widget>[
-              FormBuilder(
-                  key: _formKey,
-                  initialValue: {
-                    'value': stat.value.toString(),
-                    'stage': stat.stage.toString(),
-                    'unnaturalBonus': stat.unnaturalBonus.toString(),
-                  },
-                  child: Column(
-                    children: <Widget>[
-                      FormBuilderTextField(
-                        attribute: "value",
-                        decoration: InputDecoration(labelText: "Value"),
-                        validators: [
-                          FormBuilderValidators.numeric(),
-                          FormBuilderValidators.max(100),
-                        ],
-                      ),
-                      FormBuilderTouchSpin(
-                        decoration: InputDecoration(labelText: "Stage"),
-                        validators: [FormBuilderValidators.max(5)],
-                        attribute: "stage",
-                        initialValue: stat.stage,
-                        min: 0,
-                        step: 1,
-                        max: 5,
-                      ),
-                      FormBuilderTouchSpin(
-                        decoration: InputDecoration(labelText: "Unnatural bonus"),
-                        validators: [FormBuilderValidators.min(0)],
-                        attribute: "unnaturalBonus",
-                        initialValue: stat.unnaturalBonus,
-                        min: 0,
-                        step: 1,
-                      ),
+        children: <Widget>[
+          FormBuilder(
+              key: _formKey,
+              initialValue: {
+                'value': stat.value.toString(),
+                'stage': stat.stage.toString(),
+                'unnaturalBonus': stat.unnaturalBonus.toString(),
+                'cost': stat.cost.toString(),
+              },
+              child: Column(
+                children: <Widget>[
+                  FormBuilderTextField(
+                    attribute: "value",
+                    decoration: InputDecoration(labelText: "Value"),
+                    validators: [
+                      FormBuilderValidators.numeric(),
+                      FormBuilderValidators.max(100),
                     ],
-                  )),
-            ],
-          )),
+                    valueTransformer: (v) => int.parse(v),
+                  ),
+                  FormBuilderTouchSpin(
+                    decoration: InputDecoration(labelText: "Stage"),
+                    validators: [FormBuilderValidators.max(5)],
+                    attribute: "stage",
+                    initialValue: stat.stage,
+                    min: 0,
+                    step: 1,
+                    max: 5,
+                  ),
+                  FormBuilderTouchSpin(
+                    decoration: InputDecoration(labelText: "Unnatural bonus"),
+                    validators: [FormBuilderValidators.min(0)],
+                    attribute: "unnaturalBonus",
+                    initialValue: stat.unnaturalBonus,
+                    min: 0,
+                    step: 1,
+                  ),
+                  FormBuilderTextField(
+                    attribute: "cost",
+                    decoration: InputDecoration(labelText: "Exp cost in total"),
+                    validators: [
+                      FormBuilderValidators.numeric(),
+                    ],
+                    valueTransformer: (v) => int.parse(v),
+                  ),
+                ],
+              )),
+        ],
+      )),
       actions: <Widget>[
         FlatButton(
             child: Text('Regret'),
@@ -65,9 +74,10 @@ class StatEditDialog extends StatelessWidget {
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {
               stat.stage = _formKey.currentState.value['stage'];
-              stat.unnaturalBonus = _formKey.currentState.value['unnaturalBonus'];
-              stat.value =
-                  int.parse(_formKey.currentState.value['value']);
+              stat.unnaturalBonus =
+                  _formKey.currentState.value['unnaturalBonus'];
+              stat.value = _formKey.currentState.value['value'];
+              stat.cost = _formKey.currentState.value['cost'];
               Navigator.of(context).pop(stat);
             }
           },

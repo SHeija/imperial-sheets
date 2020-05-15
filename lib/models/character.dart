@@ -130,6 +130,14 @@ class Character extends HiveObject{
     return wpB + tB;
   }
 
+  int calculateSpentExp() {
+    int statExp = stats.fold(0, (previousValue, element) => previousValue+element.cost);
+    int skillExp = skills.fold(0, (previousValue, element) => previousValue+element.cost);
+    int talentExp  = talents.fold(0, (previousValue, element) => previousValue+element.cost);
+    int powerExp = powers.fold(0, (previousValue, element) => previousValue+element.cost);
+    return statExp+skillExp+talentExp+powerExp;
+  }
+
   // oh lord why
   double getCarryLimit() {
     int B = getThisStat(Constants.S).getStatBonus() +

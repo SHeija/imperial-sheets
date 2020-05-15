@@ -32,7 +32,8 @@ class SkillEditDialog extends StatelessWidget {
               key: _formKey,
               initialValue: {
                 'stage': skill.stage.toString(),
-                'subSkill': skill.canHaveMultiple() ? skill.subSkill : ''
+                'subSkill': skill.canHaveMultiple() ? skill.subSkill : '',
+                'cost': skill.cost.toString(),
               },
               child: Column(
                 children: <Widget>[
@@ -52,6 +53,14 @@ class SkillEditDialog extends StatelessWidget {
                     step: 1,
                     max: 4,
                   ),
+                  FormBuilderTextField(
+                    attribute: "cost",
+                    decoration: InputDecoration(labelText: "Exp cost in total"),
+                    validators: [
+                      FormBuilderValidators.numeric(),
+                    ],
+                    valueTransformer: (v) => int.parse(v),
+                  ),
                 ],
               ),
             ),
@@ -69,6 +78,7 @@ class SkillEditDialog extends StatelessWidget {
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {
               skill.stage = _formKey.currentState.value['stage'];
+              skill.cost = _formKey.currentState.value['cost'];
               if (skill.canHaveMultiple()) {
                 skill.subSkill = _formKey.currentState.value['subSkill'];
               }

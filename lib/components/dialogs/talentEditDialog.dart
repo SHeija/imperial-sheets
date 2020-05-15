@@ -34,7 +34,8 @@ class TalentEditDialog extends StatelessWidget {
               initialValue: {
                 'title': talent.name,
                 'description': talent.description,
-                'tier': talent.tier.toString()
+                'tier': talent.tier.toString(),
+                'cost': talent.cost.toString(),
               },
               child: Column(
                 children: <Widget>[
@@ -57,6 +58,14 @@ class TalentEditDialog extends StatelessWidget {
                       FormBuilderValidators.numeric(),
                       FormBuilderValidators.min(1),
                       FormBuilderValidators.max(3)
+                    ],
+                    valueTransformer: (v) => int.parse(v),
+                  ),
+                  FormBuilderTextField(
+                    attribute: "cost",
+                    decoration: InputDecoration(labelText: "Exp cost"),
+                    validators: [
+                      FormBuilderValidators.numeric(),
                     ],
                     valueTransformer: (v) => int.parse(v),
                   ),
