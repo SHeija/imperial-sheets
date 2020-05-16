@@ -29,6 +29,7 @@ class StatEditDialog extends StatelessWidget {
                     attribute: "value",
                     decoration: InputDecoration(labelText: "Value"),
                     validators: [
+                      FormBuilderValidators.required(),
                       FormBuilderValidators.numeric(),
                       FormBuilderValidators.max(100),
                     ],
@@ -55,6 +56,7 @@ class StatEditDialog extends StatelessWidget {
                     attribute: "cost",
                     decoration: InputDecoration(labelText: "Exp cost in total"),
                     validators: [
+                      FormBuilderValidators.required(),
                       FormBuilderValidators.numeric(),
                     ],
                     valueTransformer: (v) => int.parse(v),

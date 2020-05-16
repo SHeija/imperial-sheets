@@ -58,6 +58,7 @@ class SkillEditDialog extends StatelessWidget {
                     decoration: InputDecoration(labelText: "Exp cost in total"),
                     validators: [
                       FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
                     ],
                     valueTransformer: (v) => int.parse(v),
                   ),

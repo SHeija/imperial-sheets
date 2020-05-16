@@ -2,11 +2,9 @@ import 'package:json_annotation/json_annotation.dart';
 import '../utils/constants.dart' as Constants;
 part 'attributes.g.dart';
 
-@JsonSerializable()
-class Buyable {
-  @JsonKey(defaultValue: [])
+
+abstract class Buyable {
   List<String> aptitudes = [];
-  @JsonKey(defaultValue: 0)
   int cost = 0;
 }
 
@@ -18,8 +16,8 @@ class Talent extends Buyable{
   @JsonKey(required: true)
   int tier;
 
-  Talent(this.name, this.description, this.tier) : super();
-  Talent.blank() : super(){
+  Talent(this.name, this.description, this.tier);
+  Talent.blank(){
     name = '';
     description = '';
     tier = 0;
@@ -39,8 +37,8 @@ class Skill extends Buyable {
   @JsonKey(required: true)
   int stage;
 
-  Skill(this.name, this.stage, this.stat): super();
-  Skill.notKnown(this.name, this.stat) : super(){
+  Skill(this.name, this.stage, this.stat);
+  Skill.notKnown(this.name, this.stat){
     subSkill = '';
     stage = 0;
   }
@@ -82,8 +80,8 @@ class Skill extends Buyable {
 class Power extends Buyable {
   String name, description, action, focusPower, range, sustained, effect, subType;
 
-  Power() : super();
-  Power.blank() : super(){
+  Power();
+  Power.blank(){
     name = '';
     description = '';
     action = '';
@@ -106,8 +104,8 @@ class Stat extends Buyable {
   int stage;
   int unnaturalBonus = 0;
 
-  Stat(this.name, this.short, this.value, this.stage) : super();
-  Stat.blank() : super();
+  Stat(this.name, this.short, this.value, this.stage);
+  Stat.blank();
 
   factory Stat.fromJson(Map<String, dynamic> json) => _$StatFromJson(json);
   Map<String, dynamic> toJson() => _$StatToJson(this);

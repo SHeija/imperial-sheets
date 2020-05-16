@@ -122,6 +122,7 @@ class PowerEditDialog extends StatelessWidget {
                     decoration: InputDecoration(labelText: "Exp cost"),
                     validators: [
                       FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
                     ],
                     valueTransformer: (v) => int.parse(v),
                   ),

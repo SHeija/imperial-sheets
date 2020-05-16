@@ -66,6 +66,7 @@ class TalentEditDialog extends StatelessWidget {
                     decoration: InputDecoration(labelText: "Exp cost"),
                     validators: [
                       FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
                     ],
                     valueTransformer: (v) => int.parse(v),
                   ),
@@ -88,6 +89,7 @@ class TalentEditDialog extends StatelessWidget {
               talent.name = _formKey.currentState.value['title'];
               talent.description = _formKey.currentState.value['description'];
               talent.tier = _formKey.currentState.value['tier'];
+              talent.cost = _formKey.currentState.value['cost'];
               Navigator.of(context).pop({
                 'choice': DialogChoices.confirm,
                 'payload': talent,

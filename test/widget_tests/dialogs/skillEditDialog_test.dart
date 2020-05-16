@@ -58,7 +58,7 @@ void main() {
     
     expect(find.text('Add a skill'), findsOneWidget);
     expect(find.byType(FormBuilderDropdown), findsOneWidget);
-    expect(find.byType(FormBuilderTextField), findsOneWidget);
+    expect(find.byType(FormBuilderTextField), findsNWidgets(2));
     FormBuilderTextField textField = tester.firstWidget(find.byType(FormBuilderTextField));
     expect(textField.decoration.labelText, 'Subskill');
     expect(find.byType(FormBuilderTouchSpin), findsOneWidget);
