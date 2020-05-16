@@ -1,8 +1,9 @@
 import 'package:hive/hive.dart';
 
-import './datamodels.dart';
+import './equipment.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../utils/constants.dart' as Constants;
+import 'attributes.dart';
 
 part 'character.g.dart';
 
@@ -35,14 +36,31 @@ class Character extends HiveObject{
   @JsonKey(defaultValue: [])
   List<Power> powers;
 
+  @JsonKey(defaultValue: 0)
   int xp = 0;
+
+  @JsonKey(defaultValue: 0)
   int spentXp = 0;
+
+  @JsonKey(defaultValue: 0)
   int hp = 0;
+
+  @JsonKey(defaultValue: 0)
   int currentHp = 0;
+
+  @JsonKey(defaultValue: 0)
   int fate = 0;
+
+  @JsonKey(defaultValue: 0)
   int currentFate = 0;
+
+  @JsonKey(defaultValue: 0)
   int corruption = 0;
+
+  @JsonKey(defaultValue: 0)
   int insanity = 0;
+
+  @JsonKey(defaultValue: 0)
   int fatigue = 0;
 
   Character.blank() {
@@ -54,7 +72,7 @@ class Character extends HiveObject{
     talents = [];
     items = [];
     weapons = [];
-    aptitudes = [];
+    aptitudes = ['general'];
     armors = [];
     powers = [];
   }
@@ -127,6 +145,14 @@ class Character extends HiveObject{
     int wpB = getThisStat(Constants.WP).getStatBonus();
     int tB = getThisStat(Constants.T).getStatBonus();
     return wpB + tB;
+  }
+
+  int calculateSpentExp() {
+    int statExp = stats.fold(0, (previousValue, element) => previousValue+element.cost);
+    int skillExp = skills.fold(0, (previousValue, element) => previousValue+element.cost);
+    int talentExp  = talents.fold(0, (previousValue, element) => previousValue+element.cost);
+    int powerExp = powers.fold(0, (previousValue, element) => previousValue+element.cost);
+    return statExp+skillExp+talentExp+powerExp;
   }
 
   // oh lord why

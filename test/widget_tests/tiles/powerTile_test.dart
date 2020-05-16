@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:imperial_sheets/components/dialogs/powerEditDialog.dart';
 import 'package:imperial_sheets/components/tiles/powerTile.dart';
-import 'package:imperial_sheets/models/datamodels.dart';
+import 'package:imperial_sheets/models/attributes.dart';
 
 void main() {
   group('PowerTile', (){

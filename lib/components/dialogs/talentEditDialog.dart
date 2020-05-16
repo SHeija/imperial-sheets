@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:imperial_sheets/components/common/dialogTitleWithButton.dart';
-import 'package:imperial_sheets/models/datamodels.dart';
+import 'package:imperial_sheets/models/attributes.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
 class TalentEditDialog extends StatelessWidget {
@@ -34,7 +34,8 @@ class TalentEditDialog extends StatelessWidget {
               initialValue: {
                 'title': talent.name,
                 'description': talent.description,
-                'tier': talent.tier.toString()
+                'tier': talent.tier.toString(),
+                'cost': talent.cost.toString(),
               },
               child: Column(
                 children: <Widget>[
@@ -60,6 +61,15 @@ class TalentEditDialog extends StatelessWidget {
                     ],
                     valueTransformer: (v) => int.parse(v),
                   ),
+                  FormBuilderTextField(
+                    attribute: "cost",
+                    decoration: InputDecoration(labelText: "Exp cost"),
+                    validators: [
+                      FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
+                    ],
+                    valueTransformer: (v) => int.parse(v),
+                  ),
                 ],
               ),
             ),
@@ -79,6 +89,7 @@ class TalentEditDialog extends StatelessWidget {
               talent.name = _formKey.currentState.value['title'];
               talent.description = _formKey.currentState.value['description'];
               talent.tier = _formKey.currentState.value['tier'];
+              talent.cost = _formKey.currentState.value['cost'];
               Navigator.of(context).pop({
                 'choice': DialogChoices.confirm,
                 'payload': talent,

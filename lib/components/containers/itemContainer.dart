@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/tiles/itemTile.dart';
 import 'package:imperial_sheets/models/character.dart';
-import 'package:imperial_sheets/models/datamodels.dart';
+import 'package:imperial_sheets/models/equipment.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
 
 class ItemContainer extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:imperial_sheets/models/datamodels.dart';
+import 'package:imperial_sheets/models/attributes.dart';
 import '../utils/constants.dart' as Constants;
 
 void main() {
@@ -10,7 +10,7 @@ void main() {
       final Skill skill = Skill(element, 2, 'stat');
       if (skill.canHaveMultiple()) {
         multiples.add(skill.name);
-      };
+      }
     });
     multiples.forEach((element) {
       expect(truth.contains(element), isTrue);

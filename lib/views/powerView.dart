@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imperial_sheets/components/dialogs/powerEditDialog.dart';
 import 'package:imperial_sheets/components/tiles/powerTile.dart';
+import 'package:imperial_sheets/models/attributes.dart';
 import 'package:imperial_sheets/models/character.dart';
-import 'package:imperial_sheets/models/datamodels.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 

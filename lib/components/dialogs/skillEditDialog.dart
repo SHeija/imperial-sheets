@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:imperial_sheets/components/common/dialogTitleWithButton.dart';
-import 'package:imperial_sheets/models/datamodels.dart';
+import 'package:imperial_sheets/models/attributes.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
 class SkillEditDialog extends StatelessWidget {
@@ -32,7 +32,8 @@ class SkillEditDialog extends StatelessWidget {
               key: _formKey,
               initialValue: {
                 'stage': skill.stage.toString(),
-                'subSkill': skill.canHaveMultiple() ? skill.subSkill : ''
+                'subSkill': skill.canHaveMultiple() ? skill.subSkill : '',
+                'cost': skill.cost.toString(),
               },
               child: Column(
                 children: <Widget>[
@@ -52,6 +53,15 @@ class SkillEditDialog extends StatelessWidget {
                     step: 1,
                     max: 4,
                   ),
+                  FormBuilderTextField(
+                    attribute: "cost",
+                    decoration: InputDecoration(labelText: "Exp cost in total"),
+                    validators: [
+                      FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
+                    ],
+                    valueTransformer: (v) => int.parse(v),
+                  ),
                 ],
               ),
             ),
@@ -69,6 +79,7 @@ class SkillEditDialog extends StatelessWidget {
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {
               skill.stage = _formKey.currentState.value['stage'];
+              skill.cost = _formKey.currentState.value['cost'];
               if (skill.canHaveMultiple()) {
                 skill.subSkill = _formKey.currentState.value['subSkill'];
               }

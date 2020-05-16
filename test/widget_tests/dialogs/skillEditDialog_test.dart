@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:imperial_sheets/components/common/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/components/dialogs/skillAddDialog.dart';
 import 'package:imperial_sheets/components/dialogs/skillEditDialog.dart';
-import 'package:imperial_sheets/models/datamodels.dart';
+import 'package:imperial_sheets/models/attributes.dart';
 import '../../utils/constants.dart' as Constants;
 
 void main() {
@@ -22,6 +22,7 @@ void main() {
       FormBuilderTouchSpin touchSpin = tester.firstWidget(find.byType(FormBuilderTouchSpin));
       expect(touchSpin.decoration.labelText, 'Stage');
       expect(touchSpin.initialValue, skill.stage);
+      expect(find.byType(FormBuilderTextField), findsNWidgets(1));
       expect(find.widgetWithText(FlatButton, 'Submit'), findsOneWidget);
       expect(find.widgetWithText(FlatButton, 'Regret'), findsOneWidget);
     });
@@ -36,7 +37,7 @@ void main() {
 
       expect(find.byType(DialogTitleWithButton), findsOneWidget);
       expect(find.byIcon(Icons.delete), findsOneWidget);
-      expect(find.byType(FormBuilderTextField), findsOneWidget);
+      expect(find.byType(FormBuilderTextField), findsNWidgets(2));
       expect(find.text(skill.subSkill), findsOneWidget);
       FormBuilderTextField textField = tester.firstWidget(find.byType(FormBuilderTextField));
       expect(textField.decoration.labelText, 'Subskill');
@@ -57,7 +58,7 @@ void main() {
     
     expect(find.text('Add a skill'), findsOneWidget);
     expect(find.byType(FormBuilderDropdown), findsOneWidget);
-    expect(find.byType(FormBuilderTextField), findsOneWidget);
+    expect(find.byType(FormBuilderTextField), findsNWidgets(2));
     FormBuilderTextField textField = tester.firstWidget(find.byType(FormBuilderTextField));
     expect(textField.decoration.labelText, 'Subskill');
     expect(find.byType(FormBuilderTouchSpin), findsOneWidget);

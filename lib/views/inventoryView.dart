@@ -5,11 +5,11 @@ import 'package:imperial_sheets/components/containers/armorAndWeightContainer.da
 import 'package:imperial_sheets/components/containers/armorContainer.dart';
 import 'package:imperial_sheets/components/containers/itemContainer.dart';
 import 'package:imperial_sheets/components/containers/weaponContainer.dart';
-import 'package:imperial_sheets/components/dialogs/ArmorEditDialog.dart';
+import 'package:imperial_sheets/components/dialogs/armorEditDialog.dart';
 import 'package:imperial_sheets/components/dialogs/itemEditDialog.dart';
 import 'package:imperial_sheets/components/dialogs/weaponEditDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
-import 'package:imperial_sheets/models/datamodels.dart';
+import 'package:imperial_sheets/models/equipment.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
