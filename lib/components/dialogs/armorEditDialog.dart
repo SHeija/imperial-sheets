@@ -155,7 +155,7 @@ class ArmorEditDialog extends StatelessWidget {
               armor.leftLeg = _formKey.currentState.value['leftLeg'];
               armor.rightLeg = _formKey.currentState.value['rightLeg'];
               armor.amount = _formKey.currentState.value['amount'];
-              armor.amount = _formKey.currentState.value['stackable'];
+              armor.stackable = _formKey.currentState.value['stackable'];
               Navigator.of(context).pop({
                 'choice': DialogChoices.confirm,
                 'payload': armor,

@@ -39,46 +39,48 @@ class ArmorPointsTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map<String, int> armorPoints = character.getArmorPoints();
-    return Card(
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
-        child: Column(
-          children: <Widget>[
-            Container(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Hit locations', style: Theme.of(context).textTheme.title)
-            ),
-            Container(
-              // color: Colors.red,
-              child: Table(
-                defaultColumnWidth: IntrinsicColumnWidth(),
-                children: armorPoints.entries
-                    .map(
-                      (e) => TableRow(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(4.0),
-                        child: Text(e.key+':',
-                            style: Theme.of(context).textTheme.subtitle),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(4.0),
-                        child: Text(
-                            '${(e.value+character.getThisStat(Constants.T).getStatBonus())} (${e.value})',
-                            style: Theme.of(context).textTheme.body1),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(4.0),
-                        child: Text('(${_getHitValue(e)})',
-                            style: Theme.of(context).textTheme.body1),
-                      )
-                    ],
-                  ),
-                )
-                    .toList(),
+    return SingleChildScrollView(
+      child: Card(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
+          child: Column(
+            children: <Widget>[
+              Container(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Hit locations', style: Theme.of(context).textTheme.title)
               ),
-            ),
-          ],
+              Container(
+                // color: Colors.red,
+                child: Table(
+                  defaultColumnWidth: IntrinsicColumnWidth(),
+                  children: armorPoints.entries
+                      .map(
+                        (e) => TableRow(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(4.0),
+                          child: Text(e.key.replaceAll('Left', 'L.').replaceAll('Right', 'R.')+':',
+                              style: Theme.of(context).textTheme.subtitle),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(4.0),
+                          child: Text(
+                              '${(e.value+character.getThisStat(Constants.T).getStatBonus())} (${e.value})',
+                              style: Theme.of(context).textTheme.body1),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(4.0),
+                          child: Text('(${_getHitValue(e)})',
+                              style: Theme.of(context).textTheme.body1),
+                        )
+                      ],
+                    ),
+                  )
+                      .toList(),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
