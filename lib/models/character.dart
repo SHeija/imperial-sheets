@@ -36,14 +36,31 @@ class Character extends HiveObject{
   @JsonKey(defaultValue: [])
   List<Power> powers;
 
+  @JsonKey(defaultValue: 0)
   int xp = 0;
+
+  @JsonKey(defaultValue: 0)
   int spentXp = 0;
+
+  @JsonKey(defaultValue: 0)
   int hp = 0;
+
+  @JsonKey(defaultValue: 0)
   int currentHp = 0;
+
+  @JsonKey(defaultValue: 0)
   int fate = 0;
+
+  @JsonKey(defaultValue: 0)
   int currentFate = 0;
+
+  @JsonKey(defaultValue: 0)
   int corruption = 0;
+
+  @JsonKey(defaultValue: 0)
   int insanity = 0;
+
+  @JsonKey(defaultValue: 0)
   int fatigue = 0;
 
   Character.blank() {

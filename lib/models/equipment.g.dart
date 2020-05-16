@@ -7,13 +7,11 @@ part of 'equipment.dart';
 // **************************************************************************
 
 Item _$ItemFromJson(Map<String, dynamic> json) {
-  $checkKeys(json,
-      requiredKeys: const ['name', 'description', 'weight', 'amount']);
   return Item(
-    json['name'] as String,
-    json['description'] as String,
-    (json['weight'] as num)?.toDouble(),
-    json['amount'] as int,
+    json['name'] as String ?? '',
+    json['description'] as String ?? '',
+    (json['weight'] as num)?.toDouble() ?? 0.5,
+    json['amount'] as int ?? 1,
   )..stowed = json['stowed'] as bool;
 }
 
@@ -26,14 +24,12 @@ Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{
     };
 
 Weapon _$WeaponFromJson(Map<String, dynamic> json) {
-  $checkKeys(json,
-      requiredKeys: const ['name', 'description', 'weight', 'amount']);
   return Weapon(
-    json['name'] as String,
-    json['description'] as String,
-    (json['weight'] as num)?.toDouble(),
+    json['name'] as String ?? '',
+    json['description'] as String ?? '',
+    (json['weight'] as num)?.toDouble() ?? 0.5,
   )
-    ..amount = json['amount'] as int
+    ..amount = json['amount'] as int ?? 1
     ..stowed = json['stowed'] as bool
     ..range = json['range'] as String ?? ''
     ..rateOfFire = json['rateOfFire'] as String ?? ''
@@ -62,31 +58,19 @@ Map<String, dynamic> _$WeaponToJson(Weapon instance) => <String, dynamic>{
     };
 
 Armor _$ArmorFromJson(Map<String, dynamic> json) {
-  $checkKeys(json, requiredKeys: const [
-    'name',
-    'description',
-    'weight',
-    'amount',
-    'head',
-    'leftArm',
-    'rightArm',
-    'body',
-    'leftLeg',
-    'rightLeg'
-  ]);
   return Armor(
-    json['name'] as String,
-    json['description'] as String,
-    (json['weight'] as num)?.toDouble(),
+    json['name'] as String ?? '',
+    json['description'] as String ?? '',
+    (json['weight'] as num)?.toDouble() ?? 0.5,
   )
-    ..amount = json['amount'] as int
+    ..amount = json['amount'] as int ?? 1
     ..stowed = json['stowed'] as bool
-    ..head = json['head'] as int
-    ..leftArm = json['leftArm'] as int
-    ..rightArm = json['rightArm'] as int
-    ..body = json['body'] as int
-    ..leftLeg = json['leftLeg'] as int
-    ..rightLeg = json['rightLeg'] as int;
+    ..head = json['head'] as int ?? 0
+    ..leftArm = json['leftArm'] as int ?? 0
+    ..rightArm = json['rightArm'] as int ?? 0
+    ..body = json['body'] as int ?? 0
+    ..leftLeg = json['leftLeg'] as int ?? 0
+    ..rightLeg = json['rightLeg'] as int ?? 0;
 }
 
 Map<String, dynamic> _$ArmorToJson(Armor instance) => <String, dynamic>{

@@ -4,13 +4,13 @@ part 'equipment.g.dart';
 
 @JsonSerializable()
 class Item {
-  @JsonKey(required: true)
+  @JsonKey(defaultValue: '')
   String name, description;
 
-  @JsonKey(required: true)
+  @JsonKey(defaultValue: 0.5)
   double weight;
 
-  @JsonKey(required: true)
+  @JsonKey(defaultValue: 1)
   int amount;
 
   bool stowed = false;
@@ -69,7 +69,7 @@ class Weapon extends Item{
 
 @JsonSerializable()
 class Armor extends Item {
-  @JsonKey(required: true)
+  @JsonKey(defaultValue: 0)
   int head, leftArm, rightArm, body, leftLeg, rightLeg;
 
   Armor(String name, String description, double weight) : super(name, description, weight, 1);

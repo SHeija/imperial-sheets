@@ -34,15 +34,15 @@ Character _$CharacterFromJson(Map<String, dynamic> json) {
     ..weapons = (json['weapons'] as List)?.map((e) => e == null ? null : Weapon.fromJson(e as Map<String, dynamic>))?.toList() ?? []
     ..armors = (json['armors'] as List)?.map((e) => e == null ? null : Armor.fromJson(e as Map<String, dynamic>))?.toList() ?? []
     ..powers = (json['powers'] as List)?.map((e) => e == null ? null : Power.fromJson(e as Map<String, dynamic>))?.toList() ?? []
-    ..xp = json['xp'] as int
-    ..spentXp = json['spentXp'] as int
-    ..hp = json['hp'] as int
-    ..currentHp = json['currentHp'] as int
-    ..fate = json['fate'] as int
-    ..currentFate = json['currentFate'] as int
-    ..corruption = json['corruption'] as int
-    ..insanity = json['insanity'] as int
-    ..fatigue = json['fatigue'] as int;
+    ..xp = json['xp'] as int ?? 0
+    ..spentXp = json['spentXp'] as int ?? 0
+    ..hp = json['hp'] as int ?? 0
+    ..currentHp = json['currentHp'] as int ?? 0
+    ..fate = json['fate'] as int ?? 0
+    ..currentFate = json['currentFate'] as int ?? 0
+    ..corruption = json['corruption'] as int ?? 0
+    ..insanity = json['insanity'] as int ?? 0
+    ..fatigue = json['fatigue'] as int ?? 0;
 }
 
 Map<String, dynamic> _$CharacterToJson(Character instance) => <String, dynamic>{

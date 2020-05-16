@@ -10,10 +10,13 @@ abstract class Buyable {
 
 @JsonSerializable()
 class Talent extends Buyable{
-  @JsonKey(required: true)
-  String name, description;
+  @JsonKey(defaultValue: '')
+  String name;
 
-  @JsonKey(required: true)
+  @JsonKey(defaultValue: '')
+  String description;
+
+  @JsonKey(defaultValue: 0)
   int tier;
 
   Talent(this.name, this.description, this.tier);
@@ -29,12 +32,16 @@ class Talent extends Buyable{
 
 @JsonSerializable()
 class Skill extends Buyable {
-  @JsonKey(required: true)
-  String name, stat; // e.g Parry, Weapon Skill
+  @JsonKey(defaultValue: '')
+  String name;
 
+  @JsonKey(defaultValue: '')
+  String stat; // e.g Weapon Skill
+
+  @JsonKey(defaultValue: '')
   String subSkill;
 
-  @JsonKey(required: true)
+  @JsonKey(defaultValue: 0)
   int stage;
 
   Skill(this.name, this.stage, this.stat);
@@ -98,10 +105,15 @@ class Power extends Buyable {
 
 @JsonSerializable()
 class Stat extends Buyable {
+  @JsonKey(defaultValue: '')
   String name; // "Agility"
+  @JsonKey(defaultValue: '')
   String short; // "AG"
+  @JsonKey(defaultValue: 0)
   int value;
+  @JsonKey(defaultValue: 0)
   int stage;
+  @JsonKey(defaultValue: 0)
   int unnaturalBonus = 0;
 
   Stat(this.name, this.short, this.value, this.stage);

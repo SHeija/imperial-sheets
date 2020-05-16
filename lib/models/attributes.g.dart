@@ -7,11 +7,10 @@ part of 'attributes.dart';
 // **************************************************************************
 
 Talent _$TalentFromJson(Map<String, dynamic> json) {
-  $checkKeys(json, requiredKeys: const ['name', 'description', 'tier']);
   return Talent(
-    json['name'] as String,
-    json['description'] as String,
-    json['tier'] as int,
+    json['name'] as String ?? '',
+    json['description'] as String ?? '',
+    json['tier'] as int ?? 0,
   )
     ..aptitudes = (json['aptitudes'] as List)?.map((e) => e as String)?.toList()
     ..cost = json['cost'] as int;
@@ -26,15 +25,14 @@ Map<String, dynamic> _$TalentToJson(Talent instance) => <String, dynamic>{
     };
 
 Skill _$SkillFromJson(Map<String, dynamic> json) {
-  $checkKeys(json, requiredKeys: const ['name', 'stat', 'stage']);
   return Skill(
-    json['name'] as String,
-    json['stage'] as int,
-    json['stat'] as String,
+    json['name'] as String ?? '',
+    json['stage'] as int ?? 0,
+    json['stat'] as String ?? '',
   )
     ..aptitudes = (json['aptitudes'] as List)?.map((e) => e as String)?.toList()
     ..cost = json['cost'] as int
-    ..subSkill = json['subSkill'] as String;
+    ..subSkill = json['subSkill'] as String ?? '';
 }
 
 Map<String, dynamic> _$SkillToJson(Skill instance) => <String, dynamic>{
@@ -75,14 +73,14 @@ Map<String, dynamic> _$PowerToJson(Power instance) => <String, dynamic>{
 
 Stat _$StatFromJson(Map<String, dynamic> json) {
   return Stat(
-    json['name'] as String,
-    json['short'] as String,
-    json['value'] as int,
-    json['stage'] as int,
+    json['name'] as String ?? '',
+    json['short'] as String ?? '',
+    json['value'] as int ?? 0,
+    json['stage'] as int ?? 0,
   )
     ..aptitudes = (json['aptitudes'] as List)?.map((e) => e as String)?.toList()
     ..cost = json['cost'] as int
-    ..unnaturalBonus = json['unnaturalBonus'] as int;
+    ..unnaturalBonus = json['unnaturalBonus'] as int ?? 0;
 }
 
 Map<String, dynamic> _$StatToJson(Stat instance) => <String, dynamic>{
