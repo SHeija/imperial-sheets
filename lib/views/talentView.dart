@@ -19,15 +19,15 @@ class TalentView extends StatelessWidget {
           );
         });
     if (result != null) {
-     switch (result['choice']){
-       case DialogChoices.confirm:
-         Character character = HiveProvider.of(context).getActiveCharacter();
-         character.talents.add(result['payload']);
-         character.save();
-         break;
-       default:
-         break;
-     }
+      switch (result['choice']) {
+        case DialogChoices.confirm:
+          Character character = HiveProvider.of(context).getActiveCharacter();
+          character.talents.add(result['payload']);
+          character.save();
+          break;
+        default:
+          break;
+      }
     }
   }
 

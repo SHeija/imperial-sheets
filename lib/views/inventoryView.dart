@@ -74,7 +74,7 @@ class InventoryView extends StatelessWidget {
           );
         });
     if (result != null) {
-      switch (result['choice']){
+      switch (result['choice']) {
         case DialogChoices.confirm:
           Character character = HiveProvider.of(context).getActiveCharacter();
           character.armors.add(result['payload']);

@@ -75,12 +75,12 @@ class ItemTile extends StatelessWidget {
                 TableRow(children: <Widget>[
                   Container(
                     child: Text(item.name + ' ' + item.getAmountString(),
-                        style: Theme.of(context).textTheme.title),
+                        style: Theme.of(context).textTheme.headline6),
                     padding: EdgeInsets.all(cellPadding),
                   ),
                   Container(
                     child: Text(item.weight.toString() + ' kg',
-                        style: Theme.of(context).textTheme.title),
+                        style: Theme.of(context).textTheme.headline6),
                     padding: EdgeInsets.all(cellPadding),
                     alignment: Alignment.center,
                   ),
@@ -89,7 +89,7 @@ class ItemTile extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: Text(item.description,
-                          style: Theme.of(context).textTheme.body1),
+                          style: Theme.of(context).textTheme.bodyText2),
                       padding: EdgeInsets.all(cellPadding),
                       alignment: Alignment.topLeft,
                     ),

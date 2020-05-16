@@ -4,12 +4,9 @@ import 'package:imperial_sheets/models/character.dart';
 import '../../utils/constants.dart' as Constants;
 
 class ArmorPointsTable extends StatelessWidget {
-  ArmorPointsTable({
-    @required this.character
-  });
+  ArmorPointsTable({@required this.character});
 
   final Character character;
-
 
   String _getHitValue(dynamic place) {
     switch (place.key) {
@@ -39,46 +36,52 @@ class ArmorPointsTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map<String, int> armorPoints = character.getArmorPoints();
-    return Card(
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
-        child: Column(
-          children: <Widget>[
-            Container(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Hit locations', style: Theme.of(context).textTheme.title)
-            ),
-            Container(
-              // color: Colors.red,
-              child: Table(
-                defaultColumnWidth: IntrinsicColumnWidth(),
-                children: armorPoints.entries
-                    .map(
-                      (e) => TableRow(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(4.0),
-                        child: Text(e.key+':',
-                            style: Theme.of(context).textTheme.subtitle),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(4.0),
-                        child: Text(
-                            '${(e.value+character.getThisStat(Constants.T).getStatBonus())} (${e.value})',
-                            style: Theme.of(context).textTheme.body1),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(4.0),
-                        child: Text('(${_getHitValue(e)})',
-                            style: Theme.of(context).textTheme.body1),
+    return SingleChildScrollView(
+      child: Card(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
+          child: Column(
+            children: <Widget>[
+              Container(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Hit locations',
+                      style: Theme.of(context).textTheme.headline6)),
+              Container(
+                // color: Colors.red,
+                child: Table(
+                  defaultColumnWidth: IntrinsicColumnWidth(),
+                  children: armorPoints.entries
+                      .map(
+                        (e) => TableRow(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(4.0),
+                              child: Text(
+                                  e.key
+                                          .replaceAll('Left', 'L.')
+                                          .replaceAll('Right', 'R.') +
+                                      ':',
+                                  style: Theme.of(context).textTheme.subtitle2),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(4.0),
+                              child: Text(
+                                  '${(e.value + character.getThisStat(Constants.T).getStatBonus())} (${e.value})',
+                                  style: Theme.of(context).textTheme.bodyText2),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(4.0),
+                              child: Text('(${_getHitValue(e)})',
+                                  style: Theme.of(context).textTheme.bodyText2),
+                            )
+                          ],
+                        ),
                       )
-                    ],
-                  ),
-                )
-                    .toList(),
+                      .toList(),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

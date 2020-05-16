@@ -60,16 +60,16 @@ class _NotesViewState extends State<NotesView> {
 
     Widget getEditingForm() {
       return FormBuilder(
-          key: _formKey,
-          initialValue: {
-            "notes": notes,
-          },
-          child: SizedBox(
-            height: 400,
-            child: FormBuilderTextField(
-              attribute: "notes",
-            ),
+        key: _formKey,
+        initialValue: {
+          "notes": notes,
+        },
+        child: SizedBox(
+          height: 400,
+          child: FormBuilderTextField(
+            attribute: "notes",
           ),
+        ),
       );
     }
 
@@ -83,12 +83,11 @@ class _NotesViewState extends State<NotesView> {
               onPressed: () async {
                 final result = await showDialog(
                     context: context,
-                  builder: (BuildContext context) {
+                    builder: (BuildContext context) {
                       return ConfirmDialog(
                         child: Text('Clear notes?'),
                       );
-                  }
-                );
+                    });
                 if (result) {
                   _toggleEditing();
                   character.notes = '';

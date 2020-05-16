@@ -20,7 +20,7 @@ class SpeedTable extends StatelessWidget {
           children: <Widget>[
             Container(
               padding: EdgeInsets.only(bottom: 8.0, right: 8.0, left: 8.0),
-              child: Text('Movement', style: Theme.of(context).textTheme.title),
+              child: Text('Movement', style: Theme.of(context).textTheme.headline6),
             ),
             Table(
               // border: TableBorder.all(color: Theme.of(context).accentColor, width: 2.0),
@@ -30,7 +30,7 @@ class SpeedTable extends StatelessWidget {
                     Column(
                       children: <Widget>[
                         Container(
-                          child: Text('Half move', style: Theme.of(context).textTheme.subhead),
+                          child: Text('Half move', style: Theme.of(context).textTheme.subtitle1),
                           alignment: Alignment.center,
                         ),
                         Container(
@@ -42,7 +42,7 @@ class SpeedTable extends StatelessWidget {
                     Column(
                       children: <Widget>[
                         Container(
-                          child: Text('Full move', style: Theme.of(context).textTheme.subhead),
+                          child: Text('Full move', style: Theme.of(context).textTheme.subtitle1),
                           alignment: Alignment.center,
                         ),
                         Container(
@@ -54,7 +54,7 @@ class SpeedTable extends StatelessWidget {
                     Column(
                       children: <Widget>[
                         Container(
-                          child: Text('Charge', style: Theme.of(context).textTheme.subhead),
+                          child: Text('Charge', style: Theme.of(context).textTheme.subtitle1),
                           alignment: Alignment.center,
                         ),
                         Container(
@@ -66,7 +66,7 @@ class SpeedTable extends StatelessWidget {
                     Column(
                       children: <Widget>[
                         Container(
-                          child: Text('Run', style: Theme.of(context).textTheme.subhead),
+                          child: Text('Run', style: Theme.of(context).textTheme.subtitle1),
                           alignment: Alignment.center,
                         ),
                         Container(

@@ -5,8 +5,7 @@ class NoCharacterView extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
-        SliverAppBar(
-        ),
+        SliverAppBar(),
         SliverPadding(
           padding: EdgeInsets.all(30),
           sliver: SliverToBoxAdapter(

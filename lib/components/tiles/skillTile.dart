@@ -78,7 +78,7 @@ class SkillTile extends StatelessWidget {
                 Container(
                   child: Text(
                     skill.canHaveMultiple() ? skill.name + ':' : skill.name,
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline6,
                     overflow: TextOverflow.ellipsis,
                   ),
                   padding: EdgeInsets.only(
@@ -87,7 +87,7 @@ class SkillTile extends StatelessWidget {
                 Container(
                   child: Text(
                     skill.getBonusString(),
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline6,
                   ),
                   padding: EdgeInsets.only(
                       left: cellPadding, top: cellPadding, right: cellPadding),
@@ -104,7 +104,7 @@ class SkillTile extends StatelessWidget {
                         ? Container(
                             child: Text(skill.subSkill,
                                 overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context).textTheme.subtitle),
+                                style: Theme.of(context).textTheme.subtitle2),
                             padding: EdgeInsets.only(
                               left: cellPadding,
                             ),
@@ -113,7 +113,7 @@ class SkillTile extends StatelessWidget {
                     Container(
                       child: Text(
                         skill.stat,
-                        style: Theme.of(context).textTheme.body1,
+                        style: Theme.of(context).textTheme.bodyText2,
                       ),
                       padding: EdgeInsets.only(
                         left: cellPadding,

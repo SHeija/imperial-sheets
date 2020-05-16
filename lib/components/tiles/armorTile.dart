@@ -74,12 +74,12 @@ class ArmorTile extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: Text(armor.name + ' ' + armor.getAmountString(),
-                          style: Theme.of(context).textTheme.title),
+                          style: Theme.of(context).textTheme.headline6),
                       padding: EdgeInsets.all(cellPadding),
                     ),
                     Container(
                       child: Text(armor.weight.toString() + ' kg',
-                          style: Theme.of(context).textTheme.title),
+                          style: Theme.of(context).textTheme.headline6),
                       padding: EdgeInsets.all(cellPadding),
                       alignment: Alignment.center,
                     ),
@@ -89,7 +89,7 @@ class ArmorTile extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: Text(armor.description,
-                          style: Theme.of(context).textTheme.body1),
+                          style: Theme.of(context).textTheme.bodyText2),
                       padding: EdgeInsets.all(cellPadding),
                       alignment: Alignment.topLeft,
                     ),

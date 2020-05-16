@@ -13,7 +13,7 @@ import 'package:imperial_sheets/views/skillView.dart';
 import 'package:imperial_sheets/views/talentView.dart';
 
 class RootView extends StatefulWidget {
-  RootView({Key key}) : super(key:key);
+  RootView({Key key}) : super(key: key);
   @override
   _RootViewState createState() => _RootViewState();
 }
@@ -26,10 +26,9 @@ class _RootViewState extends State<RootView> {
       _currentIndex = index;
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
-
     Widget _getView() {
       final List<Widget> _children = [
         MainView(),
@@ -42,7 +41,7 @@ class _RootViewState extends State<RootView> {
 
       return _children[_currentIndex];
     }
-    
+
     final List<String> _destinations = [
       'Home',
       'Skills',
@@ -55,24 +54,24 @@ class _RootViewState extends State<RootView> {
     List<BottomNavigationBarItem> navigation() {
       return _destinations.map((destination) {
         return BottomNavigationBarItem(
-            title: new Text(destination),
-            icon: new Icon(Icons.adjust)
-        );
+            title: new Text(destination), icon: new Icon(Icons.adjust));
       }).toList();
     }
 
     Widget _drawerCharacterListBuilder() {
       return ValueListenableBuilder(
         valueListenable: HiveProvider.of(context).characters.listenable(),
-        builder: (context, box, widget){
+        builder: (context, box, widget) {
           List<Character> _characterList = box.values.toList();
           return SliverList(
             delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index){
+              (BuildContext context, int index) {
                 return ListTile(
-                  onTap: (){
-                    HiveProvider.of(context).settings.put('activeCharacter', _characterList[index].id);
-                    print('Set active character '+_characterList[index].id);
+                  onTap: () {
+                    HiveProvider.of(context)
+                        .settings
+                        .put('activeCharacter', _characterList[index].id);
+                    print('Set active character ' + _characterList[index].id);
                     Navigator.of(context).pop();
                   },
                   leading: Icon(Icons.bookmark),
@@ -88,28 +87,27 @@ class _RootViewState extends State<RootView> {
 
     Widget _drawerActionsBuilder() {
       return SliverList(
-        delegate: SliverChildListDelegate(
-          [
-            Divider(),
-            ListTile(
-              title: Text('Add new character'),
-              leading: Icon(Icons.add),
-              onTap: (){
-                Character _newChar = Character.blank() ..id = DateTime.now().toIso8601String();
-                HiveProvider.of(context).characters.put(_newChar.id, _newChar);
-                HiveProvider.of(context).settings.put('activeCharacter', _newChar.id);
-                print('created character '+_newChar.id);
-                Navigator.of(context).pop();
-              },
-            ),
-            ImportButton(),
-            AppInfoButton(),
-
-          ]
-        ),
+        delegate: SliverChildListDelegate([
+          Divider(),
+          ListTile(
+            title: Text('Add new character'),
+            leading: Icon(Icons.add),
+            onTap: () {
+              Character _newChar = Character.blank()
+                ..id = DateTime.now().toIso8601String();
+              HiveProvider.of(context).characters.put(_newChar.id, _newChar);
+              HiveProvider.of(context)
+                  .settings
+                  .put('activeCharacter', _newChar.id);
+              print('created character ' + _newChar.id);
+              Navigator.of(context).pop();
+            },
+          ),
+          ImportButton(),
+          AppInfoButton(),
+        ]),
       );
     }
-
 
     return Scaffold(
       drawer: Drawer(
@@ -122,7 +120,10 @@ class _RootViewState extends State<RootView> {
                   child: Container(
                     alignment: Alignment.center,
                     child: Text('Imperial Sheets',
-                        style: Theme.of(context).textTheme.headline.copyWith(color: Colors.white)),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline5
+                            .copyWith(color: Colors.white)),
                   ),
                   decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
@@ -143,25 +144,28 @@ class _RootViewState extends State<RootView> {
       ),
       body: SafeArea(
         child: ValueListenableBuilder(
-          valueListenable: HiveProvider.of(context).settings.listenable(keys: ['activeCharacter']),
-          builder: (context, box, widget){
+          valueListenable: HiveProvider.of(context)
+              .settings
+              .listenable(keys: ['activeCharacter']),
+          builder: (context, box, widget) {
             String id = box.get('activeCharacter');
             if (id == null || id == '') {
               return NoCharacterView();
             } else {
               return ValueListenableBuilder(
-                valueListenable: HiveProvider.of(context).characters.listenable(),
-                builder: (context, box, widget){
-                 return _getView();
-                }
-              );
+                  valueListenable:
+                      HiveProvider.of(context).characters.listenable(),
+                  builder: (context, box, widget) {
+                    return _getView();
+                  });
             }
           },
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: _currentIndex, // this will be set when a new tab is tapped
+        currentIndex:
+            _currentIndex, // this will be set when a new tab is tapped
         onTap: onTabTapped,
         items: navigation(),
       ),
