@@ -72,6 +72,9 @@ class Armor extends Item {
   @JsonKey(defaultValue: 0)
   int head, leftArm, rightArm, body, leftLeg, rightLeg;
 
+  @JsonKey(defaultValue: false)
+  bool stackable = false;
+
   Armor(String name, String description, double weight) : super(name, description, weight, 1);
   Armor.blank() : super.blank() {
     head = 0;

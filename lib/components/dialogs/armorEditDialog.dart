@@ -41,7 +41,8 @@ class ArmorEditDialog extends StatelessWidget {
                 'body': armor.body.toString(),
                 'leftLeg': armor.leftLeg.toString(),
                 'rightLeg': armor.rightLeg.toString(),
-                'amount': armor.amount
+                'amount': armor.amount,
+                'stackable': armor.stackable,
               },
               child: Column(
                 children: <Widget>[
@@ -123,6 +124,11 @@ class ArmorEditDialog extends StatelessWidget {
                     min: 0,
                     step: 1,
                   ),
+                  FormBuilderSwitch(
+                    attribute: 'stackable',
+                    initialValue: armor.stackable,
+                    label: Text('This armor stacks'),
+                  )
                 ],
               ),
             ),
@@ -149,6 +155,7 @@ class ArmorEditDialog extends StatelessWidget {
               armor.leftLeg = _formKey.currentState.value['leftLeg'];
               armor.rightLeg = _formKey.currentState.value['rightLeg'];
               armor.amount = _formKey.currentState.value['amount'];
+              armor.amount = _formKey.currentState.value['stackable'];
               Navigator.of(context).pop({
                 'choice': DialogChoices.confirm,
                 'payload': armor,

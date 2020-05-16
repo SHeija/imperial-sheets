@@ -8,7 +8,7 @@ import 'attributes.dart';
 part 'character.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Character extends HiveObject{
+class Character extends HiveObject {
   @JsonKey(defaultValue: '')
   String name, description, notes, id;
 
@@ -123,7 +123,7 @@ class Character extends HiveObject{
   }
 
   void _fillSkillList() {
-    if (skills == null){
+    if (skills == null) {
       skills = [];
     }
     // remove mis-named
@@ -132,9 +132,16 @@ class Character extends HiveObject{
     // Create "sheet"
     List<Skill> newSkills = _skillSheet();
     // Replace
-    skills.forEach((existing) {
-      newSkills[newSkills.indexWhere((e) => e.name == existing.name)] =
-          existing;
+    skills.forEach((imported) {
+      // handle multiples
+      if (imported.canHaveMultiple() &&
+          imported.subSkill != '' &&
+          imported.subSkill != null) {
+        newSkills.add(imported);
+      } else {
+        newSkills[newSkills.indexWhere((e) => e.name == imported.name)] =
+            imported;
+      }
     });
     skills = newSkills;
     sortSkills();
@@ -148,11 +155,15 @@ class Character extends HiveObject{
   }
 
   int calculateSpentExp() {
-    int statExp = stats.fold(0, (previousValue, element) => previousValue+element.cost);
-    int skillExp = skills.fold(0, (previousValue, element) => previousValue+element.cost);
-    int talentExp  = talents.fold(0, (previousValue, element) => previousValue+element.cost);
-    int powerExp = powers.fold(0, (previousValue, element) => previousValue+element.cost);
-    return statExp+skillExp+talentExp+powerExp;
+    int statExp =
+        stats.fold(0, (previousValue, element) => previousValue + element.cost);
+    int skillExp = skills.fold(
+        0, (previousValue, element) => previousValue + element.cost);
+    int talentExp = talents.fold(
+        0, (previousValue, element) => previousValue + element.cost);
+    int powerExp = powers.fold(
+        0, (previousValue, element) => previousValue + element.cost);
+    return statExp + skillExp + talentExp + powerExp;
   }
 
   // oh lord why
@@ -229,7 +240,8 @@ class Character extends HiveObject{
   }
 
   dynamic getThisStat(String statName) {
-    return stats.firstWhere((element) => element.name == statName, orElse: () => null);
+    return stats.firstWhere((element) => element.name == statName,
+        orElse: () => null);
   }
 
   void sortSkills() {
@@ -258,30 +270,60 @@ class Character extends HiveObject{
             'Right Leg': 0
           }
         : {
-            'Head': armors
-                .reduce((current, next) =>
-                    current.getHead() > next.getHead() ? current : next)
-                .getHead(),
-            'Left Arm': armors
-                .reduce((current, next) =>
-                    current.getLeftArm() > next.getLeftArm() ? current : next)
-                .getLeftArm(),
-            'Right Arm': armors
-                .reduce((current, next) =>
-                    current.getRightArm() > next.getRightArm() ? current : next)
-                .getRightArm(),
-            'Body': armors
-                .reduce((current, next) =>
-                    current.getBody() > next.getBody() ? current : next)
-                .getBody(),
-            'Left Leg': armors
-                .reduce((current, next) =>
-                    current.getLeftLeg() > next.getLeftLeg() ? current : next)
-                .getLeftLeg(),
-            'Right Leg': armors
-                .reduce((current, next) =>
-                    current.getRightLeg() > next.getRightLeg() ? current : next)
-                .getRightLeg()
+            'Head': armors.fold(0, (previousValue, current) {
+              if (current.stackable) {
+                return current.getHead() + previousValue;
+              } else {
+                return current.getHead() > previousValue
+                    ? current.getHead()
+                    : previousValue;
+              }
+            }),
+            'Left Arm': armors.fold(0, (previousValue, current) {
+              if (current.stackable) {
+                return current.getLeftArm() + previousValue;
+              } else {
+                return current.getLeftArm() > previousValue
+                    ? current.getLeftArm()
+                    : previousValue;
+              }
+            }),
+            'Right Arm': armors.fold(0, (previousValue, current) {
+              if (current.stackable) {
+                return current.getRightArm() + previousValue;
+              } else {
+                return current.getRightArm() > previousValue
+                    ? current.getRightArm()
+                    : previousValue;
+              }
+            }),
+            'Body': armors.fold(0, (previousValue, current) {
+              if (current.stackable) {
+                return current.getBody() + previousValue;
+              } else {
+                return current.getBody() > previousValue
+                    ? current.getBody()
+                    : previousValue;
+              }
+            }),
+            'Left Leg': armors.fold(0, (previousValue, current) {
+              if (current.stackable) {
+                return current.getLeftLeg() + previousValue;
+              } else {
+                return current.getLeftLeg() > previousValue
+                    ? current.getLeftLeg()
+                    : previousValue;
+              }
+            }),
+            'Right Leg': armors.fold(0, (previousValue, current) {
+              if (current.stackable) {
+                return current.getRightLeg() + previousValue;
+              } else {
+                return current.getRightLeg() > previousValue
+                    ? current.getRightLeg()
+                    : previousValue;
+              }
+            }),
           };
   }
 }

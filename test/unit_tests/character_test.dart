@@ -36,7 +36,7 @@ void main() {
       expect(twoStatsGiven.stats.length, 10);
     });
 
-    test('has 32 skills after cleanup', () {
+    test('has 32 skills after cleanup w/ no multiples', () {
       final Character noSkillsGiven = Character()..stats = [];
       final Character twoSkillsGiven = Character()
         ..skills = [
@@ -49,6 +49,25 @@ void main() {
 
       expect(noSkillsGiven.skills.length, 32);
       expect(twoSkillsGiven.skills.length, 32);
+    });
+
+    test('handles multiples correctly', () {
+      final Skill mechanicus = Skill(Constants.forbiddenLore, 1, Constants.INT)..subSkill = 'Mechanicus';
+      final Skill aurajuusto = Skill(Constants.forbiddenLore, 1, Constants.INT)..subSkill = 'Aurajuusto';
+      final Skill administratum = Skill(Constants.forbiddenLore, 1, Constants.INT)..subSkill = 'Administratum';
+      final Character multiples = Character()
+          ..skills = [
+            mechanicus,
+            aurajuusto,
+            administratum
+          ];
+
+      multiples.importCleanup();
+
+      expect(multiples.skills.length, 32+3);
+      expect(multiples.skills.contains(mechanicus), isTrue);
+      expect(multiples.skills.contains(aurajuusto), isTrue);
+      expect(multiples.skills.contains(administratum), isTrue);
     });
 
     test('Misnamed are deleted', () {
@@ -137,33 +156,41 @@ void main() {
       expect(character.getItemWeight(), 7.0);
     });
 
-    test('Armor points are calculated correctly', () {
+    test('Armor points are calculated correctly w/o stackable', () {
       Map<String, int> armorPoints = character.getArmorPoints();
       expect(armorPoints['Head'], 5);
       expect(armorPoints['Left Leg'], 5);
     });
 
-    group('Experience', () {
-      test('total spent experience is calculated correctly', () {
-        final Character character = Character.blank()
-          ..skills = [
-            Skill(Constants.stealth, 0, Constants.AG)..cost = 200,
-            Skill(Constants.scholasticLore, 0, Constants.INT)..cost = 250,
-          ]
-          ..talents = [
-            Talent('SOme talent', 'lorem ipsum', 1)..cost = 200,
-          ]
-          ..stats = [
-            Stat(Constants.WP, 'WP', 40, 0)..cost = 200,
-            Stat(Constants.T, 'T', 20, 0)..cost = 200,
-          ]
-          ..powers = [
-            Power()..cost = 200,
-          ];
+    test('Stackable armor stacks correctly', () {
+      character.armors.add(Armor.blank()
+        ..head = 5
+        ..stackable = true);
+      Map<String, int> armorPoints = character.getArmorPoints();
+      expect(armorPoints['Head'], 10);
+      expect(armorPoints['Left Leg'], 5);
+    });
+  });
 
-        expect(character.calculateSpentExp(), 1250);
+  group('Experience', () {
+    test('total spent experience is calculated correctly', () {
+      final Character character = Character.blank()
+        ..skills = [
+          Skill(Constants.stealth, 0, Constants.AG)..cost = 200,
+          Skill(Constants.scholasticLore, 0, Constants.INT)..cost = 250,
+        ]
+        ..talents = [
+          Talent('SOme talent', 'lorem ipsum', 1)..cost = 200,
+        ]
+        ..stats = [
+          Stat(Constants.WP, 'WP', 40, 0)..cost = 200,
+          Stat(Constants.T, 'T', 20, 0)..cost = 200,
+        ]
+        ..powers = [
+          Power()..cost = 200,
+        ];
 
-      });
+      expect(character.calculateSpentExp(), 1250);
     });
   });
 }
