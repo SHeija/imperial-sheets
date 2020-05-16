@@ -9,20 +9,17 @@ class ArmorAndWeightContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     Character _character = HiveProvider.of(context).getActiveCharacter();
     return SliverGrid(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.85,
-      ),
-      delegate: SliverChildListDelegate(
-        [
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.85,
+        ),
+        delegate: SliverChildListDelegate([
           ArmorPointsTable(
             character: _character,
           ),
           WeightTable(
             character: _character,
           ),
-        ]
-      )
-    );
+        ]));
   }
 }

@@ -5,15 +5,13 @@ import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
 
 class SkillView extends StatelessWidget {
-
   // DIALOG
   void _showAddDialog(BuildContext context) async {
     final result = await showDialog<dynamic>(
         context: context,
         builder: (BuildContext context) {
           return SkillAddDialog();
-        }
-    );
+        });
     if (result != null) {
       Character _character = HiveProvider.of(context).getActiveCharacter();
       _character.skills.add(result);
@@ -24,7 +22,7 @@ class SkillView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-       return CustomScrollView(
+    return CustomScrollView(
       primary: false,
       slivers: <Widget>[
         SliverAppBar(

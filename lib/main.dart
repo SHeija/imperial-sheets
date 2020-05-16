@@ -28,7 +28,7 @@ class App extends StatelessWidget {
           accentColor: Colors.blueGrey[200],
           primaryColor: Colors.blueGrey,
           indicatorColor: Colors.blueGrey,
-          textTheme: TextTheme(title: TextStyle(fontSize: 17.0))),
+          textTheme: TextTheme(headline6: TextStyle(fontSize: 17.0))),
       home: HiveProvider(
         child: RootView(),
       ),

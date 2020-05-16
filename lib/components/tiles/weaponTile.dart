@@ -76,12 +76,12 @@ class WeaponTile extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: Text(weapon.name + ' ' + weapon.getAmountString(),
-                          style: Theme.of(context).textTheme.title),
+                          style: Theme.of(context).textTheme.headline6),
                       padding: EdgeInsets.all(cellPadding),
                     ),
                     Container(
                       child: Text(weapon.weight.toString() + ' kg',
-                          style: Theme.of(context).textTheme.title),
+                          style: Theme.of(context).textTheme.headline6),
                       padding: EdgeInsets.all(cellPadding),
                       alignment: Alignment.center,
                     ),
@@ -91,7 +91,7 @@ class WeaponTile extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: Text(weapon.description,
-                          style: Theme.of(context).textTheme.body1),
+                          style: Theme.of(context).textTheme.bodyText2),
                       padding: EdgeInsets.all(cellPadding),
                       alignment: Alignment.topLeft,
                     ),
@@ -116,19 +116,19 @@ class WeaponTile extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         child: Text('Range: ${weapon.range}',
-                            style: Theme.of(context).textTheme.subhead),
+                            style: Theme.of(context).textTheme.subtitle1),
                         padding: EdgeInsets.all(cellPadding),
                         alignment: Alignment.topLeft,
                       ),
                       Container(
                         child: Text('RoF: ${weapon.rateOfFire}',
-                            style: Theme.of(context).textTheme.subhead),
+                            style: Theme.of(context).textTheme.subtitle1),
                         padding: EdgeInsets.all(cellPadding),
                         alignment: Alignment.topLeft,
                       ),
                       Container(
                         child: Text('Dmg: ${weapon.damage} ${weapon.type}',
-                            style: Theme.of(context).textTheme.subhead),
+                            style: Theme.of(context).textTheme.subtitle1),
                         padding: EdgeInsets.all(cellPadding),
                         alignment: Alignment.topLeft,
                       ),
@@ -138,19 +138,19 @@ class WeaponTile extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         child: Text('Pen: ${weapon.penetration}',
-                            style: Theme.of(context).textTheme.subhead),
+                            style: Theme.of(context).textTheme.subtitle1),
                         padding: EdgeInsets.all(cellPadding),
                         alignment: Alignment.topLeft,
                       ),
                       Container(
                         child: Text('Clip: ${weapon.clip}',
-                            style: Theme.of(context).textTheme.subhead),
+                            style: Theme.of(context).textTheme.subtitle1),
                         padding: EdgeInsets.all(cellPadding),
                         alignment: Alignment.topLeft,
                       ),
                       Container(
                         child: Text('Rld: ${weapon.reloadSpeed}',
-                            style: Theme.of(context).textTheme.subhead),
+                            style: Theme.of(context).textTheme.subtitle1),
                         padding: EdgeInsets.all(cellPadding),
                         alignment: Alignment.topLeft,
                       ),
@@ -162,7 +162,7 @@ class WeaponTile extends StatelessWidget {
             Container(
               color: Colors.black12,
               child: Text('Special: ${weapon.special}',
-                  style: Theme.of(context).textTheme.subhead),
+                  style: Theme.of(context).textTheme.subtitle1),
               padding: EdgeInsets.all(cellPadding),
               alignment: Alignment.topLeft,
             ),

@@ -70,7 +70,8 @@ Armor _$ArmorFromJson(Map<String, dynamic> json) {
     ..rightArm = json['rightArm'] as int ?? 0
     ..body = json['body'] as int ?? 0
     ..leftLeg = json['leftLeg'] as int ?? 0
-    ..rightLeg = json['rightLeg'] as int ?? 0;
+    ..rightLeg = json['rightLeg'] as int ?? 0
+    ..stackable = json['stackable'] as bool ?? false;
 }
 
 Map<String, dynamic> _$ArmorToJson(Armor instance) => <String, dynamic>{
@@ -85,4 +86,5 @@ Map<String, dynamic> _$ArmorToJson(Armor instance) => <String, dynamic>{
       'body': instance.body,
       'leftLeg': instance.leftLeg,
       'rightLeg': instance.rightLeg,
+      'stackable': instance.stackable,
     };

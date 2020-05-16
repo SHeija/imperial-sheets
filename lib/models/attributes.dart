@@ -2,14 +2,15 @@ import 'package:json_annotation/json_annotation.dart';
 import '../utils/constants.dart' as Constants;
 part 'attributes.g.dart';
 
-
 abstract class Buyable {
+  @JsonKey(defaultValue: [])
   List<String> aptitudes = [];
+  @JsonKey(defaultValue: 0)
   int cost = 0;
 }
 
 @JsonSerializable()
-class Talent extends Buyable{
+class Talent extends Buyable {
   @JsonKey(defaultValue: '')
   String name;
 
@@ -20,7 +21,7 @@ class Talent extends Buyable{
   int tier;
 
   Talent(this.name, this.description, this.tier);
-  Talent.blank(){
+  Talent.blank() {
     name = '';
     description = '';
     tier = 0;
@@ -45,30 +46,30 @@ class Skill extends Buyable {
   int stage;
 
   Skill(this.name, this.stage, this.stat);
-  Skill.notKnown(this.name, this.stat){
+  Skill.notKnown(this.name, this.stat) {
     subSkill = '';
     stage = 0;
   }
-  Skill.blank() : super();
+  Skill.blank();
 
   String getBonusString() {
-    switch (stage){
+    switch (stage) {
       case 0:
         return '-20';
         break;
       default:
-        return ('+${(stage-1)*10}');
+        return ('+${(stage - 1) * 10}');
         break;
     }
   }
 
   int getBonus() {
-    switch (stage){
+    switch (stage) {
       case 0:
         return -20;
         break;
       default:
-        return (stage-1)*10;
+        return (stage - 1) * 10;
         break;
     }
   }
@@ -80,15 +81,21 @@ class Skill extends Buyable {
 
   factory Skill.fromJson(Map<String, dynamic> json) => _$SkillFromJson(json);
   Map<String, dynamic> toJson() => _$SkillToJson(this);
-
 }
 
 @JsonSerializable()
 class Power extends Buyable {
-  String name, description, action, focusPower, range, sustained, effect, subType;
+  String name,
+      description,
+      action,
+      focusPower,
+      range,
+      sustained,
+      effect,
+      subType;
 
   Power();
-  Power.blank(){
+  Power.blank() {
     name = '';
     description = '';
     action = '';
@@ -127,6 +134,6 @@ class Stat extends Buyable {
   }
 
   int getStatBonus() {
-    return (value/10).floor()+unnaturalBonus;
+    return (value / 10).floor() + unnaturalBonus;
   }
 }

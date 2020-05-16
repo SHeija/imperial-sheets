@@ -68,7 +68,7 @@ class PowerTile extends StatelessWidget {
               TableRow(children: <Widget>[
                 Container(
                   child: Text(power.name,
-                      style: Theme.of(context).textTheme.title),
+                      style: Theme.of(context).textTheme.headline6),
                   padding: EdgeInsets.all(cellPadding),
                 ),
                 Container(
@@ -78,7 +78,7 @@ class PowerTile extends StatelessWidget {
                 children: <Widget>[
                   Container(
                     child: Text(power.description,
-                        style: Theme.of(context).textTheme.body1),
+                        style: Theme.of(context).textTheme.bodyText2),
                     padding: EdgeInsets.all(cellPadding),
                     alignment: Alignment.topLeft,
                   ),
@@ -98,19 +98,19 @@ class PowerTile extends StatelessWidget {
                   TableRow(children: <Widget>[
                     Container(
                       child: Text('Action: ${power.action}',
-                          style: Theme.of(context).textTheme.subhead),
+                          style: Theme.of(context).textTheme.subtitle1),
                       padding: EdgeInsets.all(cellPadding),
                       alignment: Alignment.topLeft,
                     ),
                     Container(
                       child: Text('Focus Power: ${power.focusPower}',
-                          style: Theme.of(context).textTheme.subhead),
+                          style: Theme.of(context).textTheme.subtitle1),
                       padding: EdgeInsets.all(cellPadding),
                       alignment: Alignment.topLeft,
                     ),
                     Container(
                       child: Text('Range: ${power.range}',
-                          style: Theme.of(context).textTheme.subhead),
+                          style: Theme.of(context).textTheme.subtitle1),
                       padding: EdgeInsets.all(cellPadding),
                       alignment: Alignment.topLeft,
                     ),
@@ -119,13 +119,13 @@ class PowerTile extends StatelessWidget {
                   TableRow(children: <Widget>[
                     Container(
                       child: Text('Sustained: ${power.sustained}',
-                          style: Theme.of(context).textTheme.subhead),
+                          style: Theme.of(context).textTheme.subtitle1),
                       padding: EdgeInsets.all(cellPadding),
                       alignment: Alignment.topLeft,
                     ),
                     Container(
                       child: Text('Subtype: ${power.subType}',
-                          style: Theme.of(context).textTheme.subhead),
+                          style: Theme.of(context).textTheme.subtitle1),
                       padding: EdgeInsets.all(cellPadding),
                       alignment: Alignment.topLeft,
                     ),
@@ -138,7 +138,7 @@ class PowerTile extends StatelessWidget {
             Container(
               color: Colors.black12,
               child: Text('Effect: ${power.effect}',
-                  style: Theme.of(context).textTheme.subhead),
+                  style: Theme.of(context).textTheme.subtitle1),
               padding: EdgeInsets.all(cellPadding),
               alignment: Alignment.topLeft,
             ),

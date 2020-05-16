@@ -12,8 +12,9 @@ Talent _$TalentFromJson(Map<String, dynamic> json) {
     json['description'] as String ?? '',
     json['tier'] as int ?? 0,
   )
-    ..aptitudes = (json['aptitudes'] as List)?.map((e) => e as String)?.toList()
-    ..cost = json['cost'] as int;
+    ..aptitudes =
+        (json['aptitudes'] as List)?.map((e) => e as String)?.toList() ?? []
+    ..cost = json['cost'] as int ?? 0;
 }
 
 Map<String, dynamic> _$TalentToJson(Talent instance) => <String, dynamic>{
@@ -30,8 +31,9 @@ Skill _$SkillFromJson(Map<String, dynamic> json) {
     json['stage'] as int ?? 0,
     json['stat'] as String ?? '',
   )
-    ..aptitudes = (json['aptitudes'] as List)?.map((e) => e as String)?.toList()
-    ..cost = json['cost'] as int
+    ..aptitudes =
+        (json['aptitudes'] as List)?.map((e) => e as String)?.toList() ?? []
+    ..cost = json['cost'] as int ?? 0
     ..subSkill = json['subSkill'] as String ?? '';
 }
 
@@ -46,8 +48,9 @@ Map<String, dynamic> _$SkillToJson(Skill instance) => <String, dynamic>{
 
 Power _$PowerFromJson(Map<String, dynamic> json) {
   return Power()
-    ..aptitudes = (json['aptitudes'] as List)?.map((e) => e as String)?.toList()
-    ..cost = json['cost'] as int
+    ..aptitudes =
+        (json['aptitudes'] as List)?.map((e) => e as String)?.toList() ?? []
+    ..cost = json['cost'] as int ?? 0
     ..name = json['name'] as String
     ..description = json['description'] as String
     ..action = json['action'] as String
@@ -78,8 +81,9 @@ Stat _$StatFromJson(Map<String, dynamic> json) {
     json['value'] as int ?? 0,
     json['stage'] as int ?? 0,
   )
-    ..aptitudes = (json['aptitudes'] as List)?.map((e) => e as String)?.toList()
-    ..cost = json['cost'] as int
+    ..aptitudes =
+        (json['aptitudes'] as List)?.map((e) => e as String)?.toList() ?? []
+    ..cost = json['cost'] as int ?? 0
     ..unnaturalBonus = json['unnaturalBonus'] as int ?? 0;
 }
 

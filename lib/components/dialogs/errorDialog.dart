@@ -28,7 +28,7 @@ class ErrorDialog extends StatelessWidget {
                   ),
                   Text(
                     error.toString(),
-                    style: Theme.of(context).textTheme.body1.copyWith(color: Colors.red),
+                    style: Theme.of(context).textTheme.bodyText2.copyWith(color: Colors.red),
                   ),
                 ],
               ),
