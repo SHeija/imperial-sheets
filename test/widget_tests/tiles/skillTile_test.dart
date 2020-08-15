@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:imperial_sheets/components/common/stepIndicator.dart';
+import 'package:imperial_sheets/components/data/stepIndicator.dart';
 import 'package:imperial_sheets/components/dialogs/skillEditDialog.dart';
 import 'package:imperial_sheets/components/tiles/skillTile.dart';
 import 'package:imperial_sheets/models/attributes.dart';

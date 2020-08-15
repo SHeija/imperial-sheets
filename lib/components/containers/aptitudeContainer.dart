@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:imperial_sheets/components/common/aptitudeChips.dart';
+import 'package:imperial_sheets/components/data/aptitudeChips.dart';
 import 'package:imperial_sheets/components/dialogs/aptitudeEditDialog.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
 import 'package:imperial_sheets/models/character.dart';

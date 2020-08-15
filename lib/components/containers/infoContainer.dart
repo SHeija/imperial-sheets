@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:imperial_sheets/components/common/infoChips.dart';
+import 'package:imperial_sheets/components/data/infoChips.dart';
 import 'package:imperial_sheets/components/dialogs/infoEditDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/utils/enums.dart';
