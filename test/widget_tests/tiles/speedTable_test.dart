@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'file:///C:/Users/Sirkku/dev/imperial-sheets/lib/components/data/speedTable.dart';
+import 'package:imperial_sheets/components/data/speedTable.dart';
 import 'package:imperial_sheets/models/attributes.dart';
 import 'package:imperial_sheets/models/character.dart';
 import '../../utils/constants.dart' as Constants;
