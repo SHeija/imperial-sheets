@@ -55,7 +55,7 @@ void main() {
       expect(find.widgetWithText(FlatButton, 'Regret'), findsOneWidget);
     });
   });
-
+  /*
   testWidgets('SkillAddDialog renders correctly', (WidgetTester tester) async {
     final Widget widget = MaterialApp(
       home: SkillAddDialog(),
@@ -82,4 +82,6 @@ void main() {
       expect(find.text(element), findsNWidgets(2));
     });
   });
+
+ */
 }

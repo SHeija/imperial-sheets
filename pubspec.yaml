@@ -33,6 +33,7 @@ dependencies:
   file_picker: ^1.6.3+2
   share: ^0.6.4
   package_info: ^0.4.1
+  url_launcher: ^5.5.0
 
 dev_dependencies:
   flutter_test:
