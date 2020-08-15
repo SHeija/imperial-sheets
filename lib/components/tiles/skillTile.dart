@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:imperial_sheets/components/common/stepIndicator.dart';
+import 'package:imperial_sheets/components/data/stepIndicator.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/components/dialogs/skillEditDialog.dart';
 import 'package:imperial_sheets/models/attributes.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:imperial_sheets/components/common/appInfoButton.dart';
-import 'package:imperial_sheets/components/common/importButton.dart';
+import 'package:imperial_sheets/components/misc/appInfoButton.dart';
+import 'package:imperial_sheets/components/misc/importButton.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
 import 'package:imperial_sheets/views/inventoryView.dart';

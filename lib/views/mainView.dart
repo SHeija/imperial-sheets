@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:imperial_sheets/components/common/exportButton.dart';
-import 'package:imperial_sheets/components/common/speedTable.dart';
+import 'package:imperial_sheets/components/misc/exportButton.dart';
+import 'file:///C:/Users/Sirkku/dev/imperial-sheets/lib/components/data/speedTable.dart';
 import 'package:imperial_sheets/components/containers/aptitudeContainer.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/models/character.dart';

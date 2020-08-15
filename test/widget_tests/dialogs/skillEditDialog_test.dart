@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:imperial_sheets/components/common/dialogTitleWithButton.dart';
+import 'package:imperial_sheets/components/misc/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/components/dialogs/skillAddDialog.dart';
 import 'package:imperial_sheets/components/dialogs/skillEditDialog.dart';
 import 'package:imperial_sheets/models/attributes.dart';
