@@ -53,7 +53,7 @@ class ArmorTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double cellPadding = 8.0;
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         Character character = HiveProvider.of(context).getActiveCharacter();
         character.armors[index].toggleStow();
