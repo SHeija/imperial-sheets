@@ -36,10 +36,10 @@ class ArmorPointsTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map<String, int> armorPoints = character.getArmorPoints();
-    return SingleChildScrollView(
-      child: Card(
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
+    return Card(
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 8.0),
+        child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Container(
