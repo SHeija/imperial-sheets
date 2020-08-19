@@ -51,7 +51,7 @@ class DualValueEditDialog extends StatelessWidget {
                   Navigator.of(context).pop();
                 }),
             FlatButton(
-              child: Text('Submit'),
+              child: Text('Confirm'),
               onPressed: () {
                 if (_formKey.currentState.saveAndValidate()) {
                   Navigator.of(context).pop(_formKey.currentState.value);
@@ -105,7 +105,7 @@ class DualValueEditDialog extends StatelessWidget {
                   Navigator.of(context).pop();
                 }),
             FlatButton(
-              child: Text('Submit'),
+              child: Text('Confirm'),
               onPressed: () {
                 if (_formKey.currentState.saveAndValidate()) {
                   Navigator.of(context).pop(_formKey.currentState.value);
