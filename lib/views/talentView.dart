@@ -23,6 +23,7 @@ class TalentView extends StatelessWidget {
         case DialogChoices.confirm:
           Character character = HiveProvider.of(context).getActiveCharacter();
           character.talents.add(result['payload']);
+          character.sortTalents();
           character.save();
           break;
         default:

@@ -248,6 +248,10 @@ class Character extends HiveObject {
     skills.sort((a, b) => a.name.compareTo(b.name));
   }
 
+  void sortTalents() {
+    talents.sort((a, b) => a.name.compareTo(b.name));
+  }
+
   //ITEMS
   double getItemWeight() {
     double armorWT = armors.fold(

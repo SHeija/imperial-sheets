@@ -18,9 +18,11 @@ void main() {
       ..effect = 'Kill all'
       ..subType = 'Boom';
       final widget = MaterialApp(
-        home: Container(
-          child: PowerTile(power, 1),
-        )
+        home: Scaffold(
+          body: Container(
+            child: PowerTile(power, 1),
+          ),
+        ),
       );
       await tester.pumpWidget(widget);
       expect(find.text(power.name), findsOneWidget);
@@ -44,9 +46,11 @@ void main() {
         ..effect = 'Kill all'
         ..subType = 'Boom';
       final widget = MaterialApp(
-          home: Container(
+        home: Scaffold(
+          body: Container(
             child: PowerTile(power, 1),
-          )
+          ),
+        ),
       );
       await tester.pumpWidget(widget);
       await tester.longPress(find.byType(PowerTile));
