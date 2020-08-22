@@ -32,7 +32,7 @@ class AptitudeContainer extends StatelessWidget {
       }
     }
 
-    return GestureDetector(
+    return InkWell(
       onLongPress: () {
         _showEditDialog(context);
       },

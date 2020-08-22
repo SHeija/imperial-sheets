@@ -34,26 +34,33 @@ class InfoContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onLongPress: () => _showEditDialog(context),
-      child: Container(
+    return Container(
         child: Card(
           child: Column(
             children: <Widget>[
-              Container(
-                padding: EdgeInsets.all(12.0),
-                child: Text(character.name,
-                    style: Theme.of(context).textTheme.headline5),
-              ),
-              Container(
-                padding: EdgeInsets.all(12.0),
-                child: Text(character.description,
-                    style: Theme.of(context).textTheme.bodyText2),
+              InkWell(
+                onLongPress: () => _showEditDialog(context),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.all(12.0),
+                      alignment: Alignment.center,
+                      child: Text(character.name,
+                          style: Theme.of(context).textTheme.headline5),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(12.0),
+                      alignment: Alignment.center,
+                      child: Text(character.description,
+                          style: Theme.of(context).textTheme.bodyText2),
+                    ),
+                  ],
+                ),
               ),
               InfoChips(character),
             ],
           ),
-        ),
       ),
     );
   }

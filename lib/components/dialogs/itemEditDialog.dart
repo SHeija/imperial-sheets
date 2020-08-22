@@ -84,7 +84,7 @@ class ItemEditDialog extends StatelessWidget {
               });
             }),
         FlatButton(
-          child: Text('Submit'),
+          child: Text('Confirm'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {
               item.name = _formKey.currentState.value['title'];

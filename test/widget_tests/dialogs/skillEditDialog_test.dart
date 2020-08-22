@@ -24,7 +24,7 @@ void main() {
       expect(touchSpin.decoration.labelText, 'Stage');
       expect(touchSpin.initialValue, skill.stage);
       expect(find.byType(FormBuilderTextField), findsNWidgets(1));
-      expect(find.widgetWithText(FlatButton, 'Submit'), findsOneWidget);
+      expect(find.widgetWithText(FlatButton, 'Confirm'), findsOneWidget);
       expect(find.widgetWithText(FlatButton, 'Regret'), findsOneWidget);
     });
 
@@ -50,7 +50,7 @@ void main() {
           tester.firstWidget(find.byType(FormBuilderTouchSpin));
       expect(touchSpin.decoration.labelText, 'Stage');
       expect(touchSpin.initialValue, skill.stage);
-      expect(find.widgetWithText(FlatButton, 'Submit'), findsOneWidget);
+      expect(find.widgetWithText(FlatButton, 'Confirm'), findsOneWidget);
       expect(find.widgetWithText(FlatButton, 'Regret'), findsOneWidget);
     });
   });
@@ -72,7 +72,7 @@ void main() {
         tester.firstWidget(find.byType(FormBuilderTouchSpin));
     expect(touchSpin.decoration.labelText, 'Stage');
     expect(touchSpin.initialValue, 1);
-    expect(find.widgetWithText(FlatButton, 'Submit'), findsOneWidget);
+    expect(find.widgetWithText(FlatButton, 'Confirm'), findsOneWidget);
     expect(find.widgetWithText(FlatButton, 'Regret'), findsOneWidget);
 
     await tester.tap(find.byType(FormBuilderDropdown));

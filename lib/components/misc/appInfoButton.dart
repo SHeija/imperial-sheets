@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:imperial_sheets/views/infoView.dart';
 import 'package:package_info/package_info.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppInfoButton extends StatelessWidget {
 
@@ -9,29 +9,49 @@ class AppInfoButton extends StatelessWidget {
     return packageInfo.version;
   }
 
-  void _showInfoDialog(BuildContext context) async {
-    await showDialog<dynamic>(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('App info'),
-            content: InfoView(),
-          );
-        });
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    int _year = DateTime.now().year;
     return FutureBuilder(
       future: _getVersionNumber(),
       builder: (context, snapshot) {
-        return ListTile(
-          leading: Icon(Icons.info_outline),
-          title: Text('Version'),
-          subtitle: snapshot.hasData ? Text(snapshot.data) : null,
-          onTap: () {
-            _showInfoDialog(context);
-          },
+        return AboutListTile(
+          icon: Icon(Icons.info_outline),
+          applicationVersion: snapshot.hasData ? snapshot.data : '',
+          applicationLegalese: '© $_year SHeija',
+          aboutBoxChildren: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(left:8.0),
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                    title: Text('Repository'),
+                    subtitle: Text('Github'),
+                    trailing: Icon(Icons.code),
+                    onTap: () async {
+                      await _launchURL('https://github.com/SHeija/imperial-sheets/');
+                    },
+                  ),
+                  ListTile(
+                    title: Text('License'),
+                    subtitle: Text('TBA'),
+                    trailing: Icon(Icons.gavel),
+                    onTap: () async {
+                      // await _launchURL('https://github.com/SHeija/imperial-sheets/');
+                    },
+                  ),
+                ],
+              ),
+            )
+          ],
         );
       },
     );
