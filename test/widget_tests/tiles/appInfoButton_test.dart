@@ -20,7 +20,11 @@ void main() {
 
     testWidgets('tap opens a dialog', (WidgetTester tester) async {
       final Widget widget = MaterialApp(
-        home: AppInfoButton(),
+        home: Scaffold(
+          body: Container(
+            child: AppInfoButton(),
+          ),
+        ),
       );
 
       await tester.pumpWidget(widget);
