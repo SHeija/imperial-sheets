@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:imperial_sheets/components/misc/appInfoButton.dart';
-import 'package:imperial_sheets/views/infoView.dart';
 
 void main() {
   group('AppInfoButton', () {
@@ -12,7 +11,7 @@ void main() {
 
       await tester.pumpWidget(widget);
       expect(find.text('Version'), findsOneWidget);
-      expect(find.byType(ListTile), findsOneWidget);
+      expect(find.byType(AboutListTile), findsOneWidget);
     });
 
     testWidgets('tap opens a dialog', (WidgetTester tester) async {
@@ -23,8 +22,7 @@ void main() {
       await tester.pumpWidget(widget);
       await tester.tap(find.byType(AppInfoButton));
       await tester.pumpAndSettle();
-      expect(find.byType(AlertDialog), findsOneWidget);
-      expect(find.byType(InfoView), findsOneWidget);
+      expect(find.byType(AboutDialog), findsOneWidget);
       expect(find.text('Repository'), findsOneWidget);
       expect(find.text('Licence'), findsOneWidget);
     });
