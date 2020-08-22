@@ -41,7 +41,7 @@ class _RootViewState extends State<RootView> {
     }
 
     final List<String> _destinations = [
-      'Home',
+      'Stats',
       'Skills',
       'Talents',
       'Inventory',
@@ -79,7 +79,10 @@ class _RootViewState extends State<RootView> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
+        showUnselectedLabels: true,
+        fixedColor: Theme.of(context).indicatorColor,
+        unselectedItemColor: Colors.grey,
+        unselectedIconTheme: IconThemeData(color: Colors.grey),
         currentIndex:
             _currentIndex, // this will be set when a new tab is tapped
         onTap: onTabTapped,
