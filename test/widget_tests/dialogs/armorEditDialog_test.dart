@@ -21,7 +21,7 @@ void main() {
       expect(touchSpin.initialValue, armor.amount);
       expect(find.byType(FormBuilderTextField), findsNWidgets(9));
       expect(find.byType(FormBuilderSwitch), findsOneWidget);
-      expect(find.widgetWithText(FlatButton, 'Submit'), findsOneWidget);
+      expect(find.widgetWithText(FlatButton, 'Confirm'), findsOneWidget);
       expect(find.widgetWithText(FlatButton, 'Regret'), findsOneWidget);
     });
 
@@ -40,7 +40,7 @@ void main() {
       expect(touchSpin.initialValue, armor.amount);
       expect(find.byType(FormBuilderTextField), findsNWidgets(9));
       expect(find.byType(FormBuilderSwitch), findsOneWidget);
-      expect(find.widgetWithText(FlatButton, 'Submit'), findsOneWidget);
+      expect(find.widgetWithText(FlatButton, 'Confirm'), findsOneWidget);
       expect(find.widgetWithText(FlatButton, 'Regret'), findsOneWidget);
     });
   });

@@ -62,7 +62,7 @@ class SkillTile extends StatelessWidget {
     const double cellPadding = 8.0;
     bool _hasSubSkill = skill.subSkill != null && skill.subSkill != '';
 
-    return GestureDetector(
+    return InkWell(
       onLongPress: () => _showEditDialog(context),
       child: Card(
           child: SingleChildScrollView(

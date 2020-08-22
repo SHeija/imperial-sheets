@@ -31,7 +31,7 @@ class StatTile extends StatelessWidget {
   Widget build(BuildContext context) {
     const double cellPadding = 8.0;
 
-    return GestureDetector(
+    return InkWell(
       onLongPress: () => _showEditDialog(context),
       child: Card(
           child: SingleChildScrollView(

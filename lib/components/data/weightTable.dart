@@ -9,10 +9,10 @@ class WeightTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isEncumbered =
         character.getItemWeight() > character.getCarryLimit();
-    return SingleChildScrollView(
-      child: Card(
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 8.0),
+    return Card(
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 8.0),
+        child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Container(
@@ -72,20 +72,22 @@ class WeightTable extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyText2),
                     ),
                   ]),
-                  TableRow(children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('Push limit:',
-                          style: Theme.of(context).textTheme.subtitle2),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('${character.getCarryLimit() * 4} kg',
-                          style: Theme.of(context).textTheme.bodyText2),
-                    ),
-                  ]),
+                  TableRow(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('Push limit:',
+                            style: Theme.of(context).textTheme.subtitle2),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('${character.getCarryLimit() * 4} kg',
+                            style: Theme.of(context).textTheme.bodyText2),
+                      ),
+                    ],
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),

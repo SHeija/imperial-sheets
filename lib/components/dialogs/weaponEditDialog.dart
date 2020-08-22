@@ -118,7 +118,7 @@ class WeaponEditDialog extends StatelessWidget {
               Navigator.of(context).pop({"choice": DialogChoices.cancel});
             }),
         FlatButton(
-          child: Text('Submit'),
+          child: Text('Confirm'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {
               weapon.name = _formKey.currentState.value['title'];

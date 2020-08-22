@@ -54,7 +54,7 @@ class PowerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double cellPadding = 8.0;
-    return GestureDetector(
+    return InkWell(
       onLongPress: () =>
           _showEditDialog(context),
       child: Card(
