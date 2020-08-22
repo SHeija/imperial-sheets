@@ -14,7 +14,6 @@ void main() {
       );
 
       await tester.pumpWidget(widget);
-      expect(find.text('Version'), findsOneWidget);
       expect(find.byType(AboutListTile), findsOneWidget);
     });
 
