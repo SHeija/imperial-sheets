@@ -25,37 +25,38 @@ class _RootViewState extends State<RootView> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    Widget _getView() {
-      final List<Widget> _children = [
-        MainView(),
-        SkillView(),
-        TalentView(),
-        InventoryView(),
-        NotesView(),
-        PowerView(),
-      ];
-
-      return _children[_currentIndex];
-    }
-
-    final List<String> _destinations = [
-      'Stats',
-      'Skills',
-      'Talents',
-      'Inventory',
-      'Notes',
-      'Powers',
+  Widget _getView() {
+    final List<Widget> _children = [
+      MainView(),
+      SkillView(),
+      TalentView(),
+      InventoryView(),
+      NotesView(),
+      PowerView(),
     ];
 
-    List<BottomNavigationBarItem> navigation() {
-      return _destinations.map((destination) {
-        return BottomNavigationBarItem(
-            title: new Text(destination), icon: new Icon(Icons.adjust));
-      }).toList();
-    }
+    return _children[_currentIndex];
+  }
 
+  final List<String> _destinations = [
+    'Stats',
+    'Skills',
+    'Talents',
+    'Inventory',
+    'Notes',
+    'Powers',
+  ];
+
+  List<BottomNavigationBarItem> navigation() {
+    return _destinations.map((destination) {
+      return BottomNavigationBarItem(
+          title: new Text(destination), icon: new Icon(Icons.adjust));
+    }).toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    HiveProvider.of(context).initializeSettings();
     return Scaffold(
       drawer: MenuDrawer(),
       body: SafeArea(
