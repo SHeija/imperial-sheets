@@ -12,7 +12,10 @@ class MainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Character currentCharacter = HiveProvider.of(context).getActiveCharacter();
-
+    bool autoExpOn = HiveProvider.of(context).settings.get('Auto exp calculation');
+    if (autoExpOn) {
+      currentCharacter.autoCalcExp();
+    }
     return CustomScrollView(
       primary: false,
       slivers: <Widget>[

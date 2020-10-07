@@ -154,6 +154,10 @@ class Character extends HiveObject {
     return wpB + tB;
   }
 
+  void autoCalcExp() {
+    spentXp = calculateSpentExp();
+  }
+
   int calculateSpentExp() {
     int statExp =
         stats.fold(0, (previousValue, element) => previousValue + element.cost);
