@@ -21,7 +21,6 @@ class SettingsView extends StatelessWidget {
             children: <Widget>[
               SwitchListTile(
                 title: Text('Automatically calculate spent exp'),
-                subtitle: Text('Convenient, but may ruin your bookkeeping'),
                 value: box.get('Auto exp calculation'),
                 onChanged: (bool v) {
                   box.put('Auto exp calculation', v);
@@ -35,7 +34,8 @@ class SettingsView extends StatelessWidget {
                 },
               ),
               SwitchListTile(
-                title: Text('Dark mode'),
+                title: Text('Follow system dark/light mode'),
+                subtitle: Text('False = light mode is always on'),
                 value: box.get('Dark mode'),
                 onChanged: (bool v) {
                   box.put('Dark mode', v);
