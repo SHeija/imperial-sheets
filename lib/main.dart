@@ -18,17 +18,21 @@ void main() async {
 }
 
 class App extends StatelessWidget {
+  ThemeData defaultTheme = ThemeData(
+      accentColor: Colors.blueGrey[200],
+      primaryColor: Colors.blueGrey,
+      indicatorColor: Colors.blueGrey,
+      textTheme: TextTheme(headline6: TextStyle(fontSize: 17.0)));
   @override
   Widget build(BuildContext context) {
-    StatusBar.color(Colors.blueGrey);
-
+    bool darkMode = Hive.box('settings').get('Dark mode', defaultValue: false);
+    if (!darkMode) {
+      StatusBar.color(Colors.blueGrey);
+    }
     return MaterialApp(
       title: 'Imperial Sheets',
-      theme: ThemeData(
-          accentColor: Colors.blueGrey[200],
-          primaryColor: Colors.blueGrey,
-          indicatorColor: Colors.blueGrey,
-          textTheme: TextTheme(headline6: TextStyle(fontSize: 17.0))),
+      darkTheme: darkMode ? ThemeData.dark() : defaultTheme,
+      theme: defaultTheme,
       home: HiveProvider(
         child: RootView(),
       ),

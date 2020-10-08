@@ -31,7 +31,6 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(AboutDialog), findsOneWidget);
       expect(find.text('Repository'), findsOneWidget);
-      expect(find.text('License'), findsOneWidget);
     });
   });
 }
