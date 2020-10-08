@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:imperial_sheets/components/data/infoChips.dart';
 import 'package:imperial_sheets/components/dialogs/infoEditDialog.dart';
+import 'package:imperial_sheets/database/hiveProvider.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
@@ -34,6 +35,7 @@ class InfoContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool timeStampOn = HiveProvider.of(context).settings.get('Display editing timestamps');
     return Container(
         child: Card(
           child: Column(
@@ -48,6 +50,10 @@ class InfoContainer extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Text(character.name,
                           style: Theme.of(context).textTheme.headline5),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: timeStampOn ? Text('Last edited: ${character.lastEdited.day}.${character.lastEdited.month}.${character.lastEdited.year} ${character.lastEdited.hour}:${character.lastEdited.minute}') : null,
                     ),
                     Container(
                       padding: EdgeInsets.all(12.0),

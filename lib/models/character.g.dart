@@ -12,11 +12,9 @@ Character _$CharacterFromJson(Map<String, dynamic> json) {
     ..description = json['description'] as String ?? ''
     ..notes = json['notes'] as String ?? ''
     ..id = json['id'] as String ?? ''
-    ..stats = (json['stats'] as List)
-            ?.map((e) =>
-                e == null ? null : Stat.fromJson(e as Map<String, dynamic>))
-            ?.toList() ??
-        []
+    ..stats =
+        (json['stats'] as List)?.map((e) => e == null ? null : Stat.fromJson(e as Map<String, dynamic>))?.toList() ??
+            []
     ..talents = (json['talents'] as List)
             ?.map((e) =>
                 e == null ? null : Talent.fromJson(e as Map<String, dynamic>))
@@ -29,8 +27,10 @@ Character _$CharacterFromJson(Map<String, dynamic> json) {
         []
     ..aptitudes =
         (json['aptitudes'] as List)?.map((e) => e as String)?.toList() ?? []
-    ..items =
-        (json['items'] as List)?.map((e) => e == null ? null : Item.fromJson(e as Map<String, dynamic>))?.toList() ?? []
+    ..items = (json['items'] as List)
+            ?.map((e) => e == null ? null : Item.fromJson(e as Map<String, dynamic>))
+            ?.toList() ??
+        []
     ..weapons = (json['weapons'] as List)?.map((e) => e == null ? null : Weapon.fromJson(e as Map<String, dynamic>))?.toList() ?? []
     ..armors = (json['armors'] as List)?.map((e) => e == null ? null : Armor.fromJson(e as Map<String, dynamic>))?.toList() ?? []
     ..powers = (json['powers'] as List)?.map((e) => e == null ? null : Power.fromJson(e as Map<String, dynamic>))?.toList() ?? []
@@ -42,7 +42,8 @@ Character _$CharacterFromJson(Map<String, dynamic> json) {
     ..currentFate = json['currentFate'] as int ?? 0
     ..corruption = json['corruption'] as int ?? 0
     ..insanity = json['insanity'] as int ?? 0
-    ..fatigue = json['fatigue'] as int ?? 0;
+    ..fatigue = json['fatigue'] as int ?? 0
+    ..lastEdited = json['lastEdited'] == null ? null : DateTime.parse(json['lastEdited'] as String);
 }
 
 Map<String, dynamic> _$CharacterToJson(Character instance) => <String, dynamic>{
@@ -67,4 +68,5 @@ Map<String, dynamic> _$CharacterToJson(Character instance) => <String, dynamic>{
       'corruption': instance.corruption,
       'insanity': instance.insanity,
       'fatigue': instance.fatigue,
+      'lastEdited': instance.lastEdited?.toIso8601String(),
     };
