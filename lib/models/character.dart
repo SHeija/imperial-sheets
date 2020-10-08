@@ -63,6 +63,9 @@ class Character extends HiveObject {
   @JsonKey(defaultValue: 0)
   int fatigue = 0;
 
+  @JsonKey()
+  DateTime lastEdited;
+
   Character.blank() {
     name = 'Name';
     description = 'Description';
@@ -75,6 +78,7 @@ class Character extends HiveObject {
     aptitudes = ['general'];
     armors = [];
     powers = [];
+    lastEdited = DateTime.now();
   }
 
   Character();
@@ -83,10 +87,17 @@ class Character extends HiveObject {
       _$CharacterFromJson(json);
   Map<String, dynamic> toJson() => _$CharacterToJson(this);
 
+  @override
+  Future<void> save() {
+    lastEdited = DateTime.now();
+    return super.save();
+  }
+
   // IMPORT
 
   void importCleanup() {
     id = DateTime.now().toIso8601String();
+    lastEdited = lastEdited != null ? lastEdited : DateTime.now();
     _fillSkillList();
     _fillStatList();
   }
@@ -152,6 +163,10 @@ class Character extends HiveObject {
     int wpB = getThisStat(Constants.WP).getStatBonus();
     int tB = getThisStat(Constants.T).getStatBonus();
     return wpB + tB;
+  }
+
+  void autoCalcExp() {
+    spentXp = calculateSpentExp();
   }
 
   int calculateSpentExp() {

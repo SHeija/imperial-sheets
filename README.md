@@ -2,5 +2,3 @@
 
 TODO:
 Settings
-Aptitudes
-Exp calculation

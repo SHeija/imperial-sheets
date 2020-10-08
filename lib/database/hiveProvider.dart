@@ -12,6 +12,15 @@ class HiveProvider extends InheritedWidget {
     return characters.get(id);
   }
 
+  void initializeSettings() {
+    if (settings.get('initialized') == null) {
+      settings.put('Auto exp calculation', false);
+      settings.put('Display editing timestamps', false);
+      settings.put('Dark mode', false);
+      settings.put('initialized', true);
+    }
+  }
+
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) => true;
 

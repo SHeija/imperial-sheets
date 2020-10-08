@@ -24,7 +24,6 @@ class AppInfoButton extends StatelessWidget {
       future: _getVersionNumber(),
       builder: (context, snapshot) {
         return AboutListTile(
-          icon: Icon(Icons.info_outline),
           applicationVersion: snapshot.hasData ? snapshot.data : '',
           applicationLegalese: '© $_year SHeija',
           aboutBoxChildren: <Widget>[
@@ -38,14 +37,6 @@ class AppInfoButton extends StatelessWidget {
                     trailing: Icon(Icons.code),
                     onTap: () async {
                       await _launchURL('https://github.com/SHeija/imperial-sheets/');
-                    },
-                  ),
-                  ListTile(
-                    title: Text('License'),
-                    subtitle: Text('TBA'),
-                    trailing: Icon(Icons.gavel),
-                    onTap: () async {
-                      // await _launchURL('https://github.com/SHeija/imperial-sheets/');
                     },
                   ),
                 ],

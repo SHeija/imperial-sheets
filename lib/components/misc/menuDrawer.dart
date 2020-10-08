@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'settingsButton.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
 import 'package:imperial_sheets/models/character.dart';
 
-import 'appInfoButton.dart';
 import 'importButton.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -55,7 +55,7 @@ class MenuDrawer extends StatelessWidget {
             },
           ),
           ImportButton(),
-          AppInfoButton(),
+          SettingsButton(),
         ]),
       );
     }
