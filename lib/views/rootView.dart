@@ -50,7 +50,7 @@ class _RootViewState extends State<RootView> {
   List<BottomNavigationBarItem> navigation() {
     return _destinations.map((destination) {
       return BottomNavigationBarItem(
-          title: new Text(destination), icon: new Icon(Icons.adjust));
+          label: destination, icon: new Icon(Icons.adjust));
     }).toList();
   }
 

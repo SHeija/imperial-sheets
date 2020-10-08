@@ -16,9 +16,7 @@ class HiveProvider extends InheritedWidget {
     if (settings.get('initialized') == null) {
       settings.put('Auto exp calculation', false);
       settings.put('Display editing timestamps', false);
-      settings.put('Hide Powers', false);
-      settings.put('Keep screen on', false);
-      //settings.put('Dark mode', false);
+      settings.put('Dark mode', false);
       settings.put('initialized', true);
     }
   }
