@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:imperial_sheets/components/misc/menuDrawer.dart';
+import 'package:imperial_sheets/components/misc/tutorial.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
 import 'package:imperial_sheets/views/inventoryView.dart';
 import 'package:imperial_sheets/views/mainView.dart';
@@ -54,9 +55,19 @@ class _RootViewState extends State<RootView> {
     }).toList();
   }
 
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    bool firstTime = !HiveProvider.of(context).settings.get('initialized', defaultValue: false);
+    if (firstTime) {
+      Future.delayed(Duration.zero,() {
+        showDialog(context: context, builder: (context) => Tutorial());
+      });
+    }
+    HiveProvider.of(context).initializeSettings();
+  }
+
   @override
   Widget build(BuildContext context) {
-    HiveProvider.of(context).initializeSettings();
     return Scaffold(
       drawer: MenuDrawer(),
       body: SafeArea(
