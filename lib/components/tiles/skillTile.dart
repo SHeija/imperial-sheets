@@ -16,13 +16,13 @@ class SkillTile extends StatelessWidget {
 
   // DIALOG
   Future<void> _showEditDialog(BuildContext context) async {
-    final result = await showDialog<dynamic>(
-      context: context,
-      barrierDismissible: true,
-      builder: (context) {
-        return SkillEditDialog(skill);
-      },
-    );
+      final result = await showDialog<dynamic>(
+        context: context,
+        barrierDismissible: true,
+        builder: (context) {
+          return SkillEditDialog(skill);
+        },
+      );
 
     Future<bool> _confirmDismiss() async {
       return await showDialog<bool>(
