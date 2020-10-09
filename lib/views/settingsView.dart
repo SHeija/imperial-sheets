@@ -34,8 +34,9 @@ class SettingsView extends StatelessWidget {
                 },
               ),
               SwitchListTile(
-                title: Text('Follow system dark/light mode'),
-                subtitle: Text('False = light mode is always on'),
+                title: Text('Dark mode'),
+                subtitle: Text('If unchecked, app '
+                    'follows system theme'),
                 value: box.get('Dark mode'),
                 onChanged: (bool v) {
                   box.put('Dark mode', v);

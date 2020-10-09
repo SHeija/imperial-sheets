@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:hive/hive.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
 import 'package:path_provider/path_provider.dart';
@@ -26,13 +27,13 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool darkMode = Hive.box('settings').get('Dark mode', defaultValue: false);
-    if (!darkMode) {
+    if (!darkMode && SchedulerBinding.instance.window.platformBrightness == Brightness.light) {
       StatusBar.color(Colors.blueGrey);
     }
     return MaterialApp(
       title: 'Imperial Sheets',
-      darkTheme: darkMode ? ThemeData.dark() : defaultTheme,
-      theme: defaultTheme,
+      darkTheme: ThemeData.dark(),
+      theme: darkMode ? ThemeData.dark() : defaultTheme,
       home: HiveProvider(
         child: RootView(),
       ),
