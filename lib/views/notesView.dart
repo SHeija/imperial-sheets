@@ -58,8 +58,7 @@ class _NotesViewState extends State<NotesView> {
           : Container();
     }
 
-    Widget getEditingForm() {
-      return FormBuilder(
+    Widget editForm = FormBuilder(
         key: _formKey,
         initialValue: {
           "notes": notes,
@@ -67,16 +66,17 @@ class _NotesViewState extends State<NotesView> {
         child: SizedBox(
           height: 400,
           child: FormBuilderTextField(
+            maxLines: 5000,
             attribute: "notes",
           ),
         ),
       );
-    }
 
     return CustomScrollView(
       primary: false,
       slivers: <Widget>[
         SliverAppBar(
+          pinned: true,
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.delete),
@@ -104,7 +104,7 @@ class _NotesViewState extends State<NotesView> {
           sliver: SliverFillRemaining(
             child: Container(
               child: _editing
-                  ? getEditingForm()
+                  ? editForm
                   : Markdown(data: notes.toString()),
             ),
           ),
