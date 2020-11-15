@@ -31,4 +31,5 @@ jobs:
       uses: ReactiveCircus/android-emulator-runner@v2.13.0
       with:
         api-level: 29
+        profile: 8" foldable
         script: flutter drive --target=test_driver/app.dart
