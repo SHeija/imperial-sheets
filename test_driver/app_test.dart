@@ -18,7 +18,7 @@ void main() {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
       // to go around a bug in flutter driver
-      sleep(Duration(seconds: 10));
+      sleep(Duration(seconds: 2));
     });
 
     // Close the connection to the driver after the tests have completed.
