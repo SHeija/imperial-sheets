@@ -1,6 +1,5 @@
 // Imports the Flutter Driver API.
 import 'package:flutter_driver/flutter_driver.dart';
-import 'dart:io';
 import 'package:test/test.dart';
 
 void main() {
@@ -17,8 +16,7 @@ void main() {
     // Connect to the Flutter driver before running any tests.
     setUpAll(() async {
       driver = await FlutterDriver.connect();
-      // to go around a bug in flutter driver
-      sleep(Duration(seconds: 2));
+      await driver.waitUntilFirstFrameRasterized();
     });
 
     // Close the connection to the driver after the tests have completed.
