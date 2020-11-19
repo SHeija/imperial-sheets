@@ -75,7 +75,7 @@ class WeaponEditDialog extends StatelessWidget {
                     decoration: InputDecoration(labelText: 'Range'),
                   ),
                   FormBuilderTextField(
-                    key: Key('field_range'),
+                    key: Key('field_rateOfFire'),
                     attribute: "rateOfFire",
                     decoration: InputDecoration(labelText: 'Rate of fire'),
                   ),
