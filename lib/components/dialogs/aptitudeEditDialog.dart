@@ -21,6 +21,7 @@ class AptitudeEditDialog extends StatelessWidget {
           child: Column(
             children: <Widget>[
               FormBuilderTextField(
+                key: Key('field_aptitudes'),
                 attribute: "aptitudes",
                 decoration: InputDecoration(labelText: "Aptitudes", helperText: "Separate aptitudes by spaces", hintText: "e.g. general offence finesse"),
                 valueTransformer: (v) => v.split(" "),

@@ -39,14 +39,15 @@ class SkillEditDialog extends StatelessWidget {
                 children: <Widget>[
                   skill.canHaveMultiple()
                       ? FormBuilderTextField(
+                          key: Key('field_subSkill'),
                           attribute: 'subSkill',
                           decoration: InputDecoration(labelText: "Subskill"),
                           validators: [FormBuilderValidators.required()],
                         )
                       : Container(),
                   FormBuilderTouchSpin(
+                    key: Key('field_stage'),
                     decoration: InputDecoration(labelText: "Stage"),
-                    validators: [FormBuilderValidators.max(5)],
                     attribute: "stage",
                     initialValue: skill.stage,
                     min: 0,
@@ -54,13 +55,13 @@ class SkillEditDialog extends StatelessWidget {
                     max: 4,
                   ),
                   FormBuilderTextField(
+                    key: Key('field_cost'),
                     attribute: "cost",
                     decoration: InputDecoration(labelText: "Exp cost in total"),
                     validators: [
                       FormBuilderValidators.numeric(),
                       FormBuilderValidators.required(),
                     ],
-                    valueTransformer: (v) => int.parse(v),
                   ),
                 ],
               ),
@@ -78,11 +79,11 @@ class SkillEditDialog extends StatelessWidget {
           child: Text('Confirm'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {
-              skill.stage = _formKey.currentState.value['stage'];
-              skill.cost = _formKey.currentState.value['cost'];
               if (skill.canHaveMultiple()) {
                 skill.subSkill = _formKey.currentState.value['subSkill'];
               }
+              skill.stage = _formKey.currentState.value['stage'];
+              skill.cost = int.parse(_formKey.currentState.value['cost']);
               Navigator.of(context)
                   .pop({"choice": DialogChoices.confirm, "payload": skill});
             }

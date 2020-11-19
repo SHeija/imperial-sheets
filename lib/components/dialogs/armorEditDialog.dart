@@ -47,6 +47,7 @@ class ArmorEditDialog extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   FormBuilderTextField(
+                    key: Key('field_title'),
                     attribute: "title",
                     decoration: InputDecoration(labelText: 'Title'),
                     validators: [
@@ -54,77 +55,86 @@ class ArmorEditDialog extends StatelessWidget {
                     ],
                   ),
                   FormBuilderTextField(
+                    key: Key('field_description'),
                     attribute: "description",
                     decoration: InputDecoration(labelText: 'Description'),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_weight'),
                     attribute: "weight",
                     decoration:
                         InputDecoration(labelText: 'Weight per armor (kg)'),
                     validators: [
                       FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
                     ],
-                    valueTransformer: (v) => double.parse(v),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_head'),
                     attribute: "head",
                     decoration: InputDecoration(labelText: 'Armor in head'),
                     validators: [
                       FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
                     ],
-                    valueTransformer: (v) => int.parse(v),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_leftArm'),
                     attribute: "leftArm",
                     decoration: InputDecoration(labelText: 'Armor in left arm'),
                     validators: [
                       FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
                     ],
-                    valueTransformer: (v) => int.parse(v),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_rightArm'),
                     attribute: "rightArm",
                     decoration:
                         InputDecoration(labelText: 'Armor in right arm'),
                     validators: [
                       FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
                     ],
-                    valueTransformer: (v) => int.parse(v),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_body'),
                     attribute: "body",
                     decoration: InputDecoration(labelText: 'Armor in body'),
                     validators: [
                       FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
                     ],
-                    valueTransformer: (v) => int.parse(v),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_leftLeg'),
                     attribute: "leftLeg",
                     decoration: InputDecoration(labelText: 'Armor in left leg'),
                     validators: [
                       FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
                     ],
-                    valueTransformer: (v) => int.parse(v),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_rightLeg'),
                     attribute: "rightLeg",
                     decoration:
                         InputDecoration(labelText: 'Armor in right leg'),
                     validators: [
                       FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
                     ],
-                    valueTransformer: (v) => int.parse(v),
                   ),
                   FormBuilderTouchSpin(
+                    key: Key('field_amount'),
                     attribute: "amount",
                     initialValue: armor.amount,
                     decoration: InputDecoration(labelText: 'Amount'),
-                    validators: [FormBuilderValidators.required()],
                     min: 0,
                     step: 1,
                   ),
                   FormBuilderSwitch(
+                    key: Key('field_stackable'),
                     attribute: 'stackable',
                     initialValue: armor.stackable,
                     label: Text('This armor stacks'),
@@ -147,13 +157,13 @@ class ArmorEditDialog extends StatelessWidget {
             if (_formKey.currentState.saveAndValidate()) {
               armor.name = _formKey.currentState.value['title'];
               armor.description = _formKey.currentState.value['description'];
-              armor.weight = _formKey.currentState.value['weight'];
-              armor.head = _formKey.currentState.value['head'];
-              armor.leftArm = _formKey.currentState.value['leftArm'];
-              armor.rightArm = _formKey.currentState.value['rightArm'];
-              armor.body = _formKey.currentState.value['body'];
-              armor.leftLeg = _formKey.currentState.value['leftLeg'];
-              armor.rightLeg = _formKey.currentState.value['rightLeg'];
+              armor.weight = double.parse(_formKey.currentState.value['weight'].replaceAll(',', '.'));
+              armor.head = int.parse(_formKey.currentState.value['head']);
+              armor.leftArm = int.parse(_formKey.currentState.value['leftArm']);
+              armor.rightArm = int.parse(_formKey.currentState.value['rightArm']);
+              armor.body = int.parse(_formKey.currentState.value['body']);
+              armor.leftLeg = int.parse(_formKey.currentState.value['leftLeg']);
+              armor.rightLeg = int.parse(_formKey.currentState.value['rightLeg']);
               armor.amount = _formKey.currentState.value['amount'];
               armor.stackable = _formKey.currentState.value['stackable'];
               Navigator.of(context).pop({

@@ -21,7 +21,9 @@ class SkillAddDialog extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   FormBuilderDropdown(
+                    key: Key('field_title'),
                     attribute: 'title',
+                    decoration: InputDecoration(labelText: 'Skill'),
                     items: Constants.SKILLS_MULTIPLE
                         .map((skill) => DropdownMenuItem(
                         value: skill,
@@ -32,6 +34,7 @@ class SkillAddDialog extends StatelessWidget {
                     ],
                   ),
                   FormBuilderTextField(
+                    key: Key('field_subSkill'),
                     attribute: 'subSkill',
                     decoration: InputDecoration(labelText: 'Subskill', hintText: 'e.g. Mechanicus, shipwright...'),
                     validators: [
@@ -39,6 +42,7 @@ class SkillAddDialog extends StatelessWidget {
                     ],
                   ),
                   FormBuilderTouchSpin(
+                    key: Key('field_stage'),
                     attribute: 'stage',
                     decoration: InputDecoration(labelText: 'Stage'),
                     initialValue: 1,
@@ -47,13 +51,13 @@ class SkillAddDialog extends StatelessWidget {
                     step: 1,
                   ),
                   FormBuilderTextField(
+                    key: Key('field_cost'),
                     attribute: "cost",
                     decoration: InputDecoration(labelText: "Exp cost in total"),
                     validators: [
                       FormBuilderValidators.numeric(),
                       FormBuilderValidators.required(),
                     ],
-                    valueTransformer: (v) => int.parse(v),
                   ),
                 ],
               ),
@@ -76,7 +80,7 @@ class SkillAddDialog extends StatelessWidget {
               _skill.stat = Constants.SKILL_LIST[_formKey.currentState.value['title']];
               _skill.stage = _formKey.currentState.value['stage'];
               _skill.aptitudes = [];
-              _skill.cost = _formKey.currentState.value['cost'];
+              _skill.cost = int.parse(_formKey.currentState.value['cost']);
               Navigator.of(context).pop(_skill);
             }
           },

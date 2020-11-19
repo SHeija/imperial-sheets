@@ -42,6 +42,7 @@ class ItemEditDialog extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   FormBuilderTextField(
+                    key: Key('field_title'),
                     attribute: "title",
                     decoration: InputDecoration(labelText: 'Title'),
                     validators: [
@@ -49,19 +50,22 @@ class ItemEditDialog extends StatelessWidget {
                     ],
                   ),
                   FormBuilderTextField(
+                    key: Key('field_description'),
                     attribute: "description",
                     decoration: InputDecoration(labelText: 'Description'),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_weight'),
                     attribute: "weight",
                     decoration:
                         InputDecoration(labelText: 'Weight per item (kg)'),
                     validators: [
                       FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
                     ],
-                    valueTransformer: (v) => double.parse(v),
                   ),
                   FormBuilderTouchSpin(
+                    key: Key('field_amount'),
                     attribute: "amount",
                     initialValue: item.amount,
                     decoration: InputDecoration(labelText: 'Amount'),
@@ -89,7 +93,7 @@ class ItemEditDialog extends StatelessWidget {
             if (_formKey.currentState.saveAndValidate()) {
               item.name = _formKey.currentState.value['title'];
               item.description = _formKey.currentState.value['description'];
-              item.weight = _formKey.currentState.value['weight'];
+              item.weight = double.parse(_formKey.currentState.value['weight'].replaceAll(',', '.'));
               item.amount = _formKey.currentState.value['amount'];
               Navigator.of(context).pop({
                 "choice": DialogChoices.confirm,

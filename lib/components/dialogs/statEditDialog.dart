@@ -26,6 +26,7 @@ class StatEditDialog extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   FormBuilderTextField(
+                    key: Key('field_value'),
                     attribute: "value",
                     decoration: InputDecoration(labelText: "Value"),
                     validators: [
@@ -33,11 +34,10 @@ class StatEditDialog extends StatelessWidget {
                       FormBuilderValidators.numeric(),
                       FormBuilderValidators.max(100),
                     ],
-                    valueTransformer: (v) => int.parse(v),
                   ),
                   FormBuilderTouchSpin(
+                    key: Key('field_stage'),
                     decoration: InputDecoration(labelText: "Stage"),
-                    validators: [FormBuilderValidators.max(5)],
                     attribute: "stage",
                     initialValue: stat.stage,
                     min: 0,
@@ -45,21 +45,21 @@ class StatEditDialog extends StatelessWidget {
                     max: 5,
                   ),
                   FormBuilderTouchSpin(
+                    key: Key('field_unnatural_bonus'),
                     decoration: InputDecoration(labelText: "Unnatural bonus"),
-                    validators: [FormBuilderValidators.min(0)],
                     attribute: "unnaturalBonus",
                     initialValue: stat.unnaturalBonus,
                     min: 0,
                     step: 1,
                   ),
                   FormBuilderTextField(
+                    key: Key('field_cost'),
                     attribute: "cost",
                     decoration: InputDecoration(labelText: "Exp cost in total"),
                     validators: [
                       FormBuilderValidators.required(),
                       FormBuilderValidators.numeric(),
                     ],
-                    valueTransformer: (v) => int.parse(v),
                   ),
                 ],
               )),
@@ -75,11 +75,11 @@ class StatEditDialog extends StatelessWidget {
           child: Text('Confirm'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {
+              stat.value = int.parse(_formKey.currentState.value['value']);
               stat.stage = _formKey.currentState.value['stage'];
               stat.unnaturalBonus =
                   _formKey.currentState.value['unnaturalBonus'];
-              stat.value = _formKey.currentState.value['value'];
-              stat.cost = _formKey.currentState.value['cost'];
+              stat.cost = int.parse(_formKey.currentState.value['cost']);
               Navigator.of(context).pop(stat);
             }
           },
