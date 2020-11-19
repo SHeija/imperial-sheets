@@ -42,17 +42,17 @@ class ExperienceEditDialog extends StatelessWidget {
                     ),
                     validators: [
                       FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
                     ],
                     controller: spentController,
-                    valueTransformer: (v) => int.parse(v),
                   ),
                   FormBuilderTextField(
                     attribute: "val2",
                     decoration: InputDecoration(labelText: 'Total'),
                     validators: [
                       FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
                     ],
-                    valueTransformer: (v) => int.parse(v),
                   ),
                 ],
               )),

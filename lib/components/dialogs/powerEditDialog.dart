@@ -45,6 +45,7 @@ class PowerEditDialog extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   FormBuilderTextField(
+                    key: Key('field_name'),
                     attribute: 'name',
                     decoration: InputDecoration(
                       labelText: 'Name',
@@ -54,77 +55,67 @@ class PowerEditDialog extends StatelessWidget {
                     ],
                   ),
                   FormBuilderTextField(
+                    key: Key('field_description'),
                     attribute: 'description',
                     decoration: InputDecoration(
                         labelText: 'Description',
                         hintText: 'Flavor description'),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_action'),
                     attribute: 'action',
                     decoration: InputDecoration(
                       labelText: 'Action',
                       hintText: 'e.g Half Action',
                     ),
-                    validators: [
-                      FormBuilderValidators.required(),
-                    ],
                   ),
                   FormBuilderTextField(
+                    key: Key('field_focusPower'),
                     attribute: 'focusPower',
                     decoration: InputDecoration(
                       labelText: 'Focus Power',
                       hintText: 'e.g. +0 Opposed Willpower test',
                     ),
-                    validators: [
-                      FormBuilderValidators.required(),
-                    ],
                   ),
                   FormBuilderTextField(
+                    key: Key('field_range'),
                     attribute: 'range',
                     decoration: InputDecoration(
                       labelText: 'Range',
                       hintText: 'e.g. 20m x psy rating',
                     ),
-                    validators: [
-                      FormBuilderValidators.required(),
-                    ],
                   ),
                   FormBuilderTextField(
+                    key: Key('field_sustained'),
                     attribute: 'sustained',
                     decoration: InputDecoration(
                       labelText: 'Sustained',
                       hintText: 'e.g. Half Action',
                     ),
-                    validators: [
-                      FormBuilderValidators.required(),
-                    ],
                   ),
                   FormBuilderTextField(
+                    key: Key('field_subType'),
                     attribute: 'subType',
                     decoration: InputDecoration(
                         labelText: 'Subtype',
-                        hintText: 'e.g. Attack, Concentration'),
-                    validators: [
-                      FormBuilderValidators.required(),
-                    ],
+                        hintText: 'e.g. Attack, Concentration'
+                    ),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_effect'),
                     attribute: 'effect',
                     decoration: InputDecoration(
                       labelText: 'Effect',
                     ),
-                    validators: [
-                      FormBuilderValidators.required(),
-                    ],
                   ),
                   FormBuilderTextField(
+                    key: Key('field_cost'),
                     attribute: "cost",
                     decoration: InputDecoration(labelText: "Exp cost"),
                     validators: [
                       FormBuilderValidators.numeric(),
                       FormBuilderValidators.required(),
                     ],
-                    valueTransformer: (v) => int.parse(v),
                   ),
                 ],
               ),
@@ -150,7 +141,7 @@ class PowerEditDialog extends StatelessWidget {
               power.sustained = _formKey.currentState.value['sustained'];
               power.subType = _formKey.currentState.value['subType'];
               power.effect = _formKey.currentState.value['effect'];
-              power.cost = _formKey.currentState.value['cost'];
+              power.cost = int.parse(_formKey.currentState.value['cost']);
               Navigator.of(context).pop({
                 'choice': DialogChoices.confirm,
                 'payload': power,

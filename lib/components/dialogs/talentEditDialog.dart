@@ -40,6 +40,7 @@ class TalentEditDialog extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   FormBuilderTextField(
+                    key: Key('field_title'),
                     attribute: "title",
                     decoration: InputDecoration(labelText: 'Title'),
                     validators: [
@@ -47,10 +48,12 @@ class TalentEditDialog extends StatelessWidget {
                     ],
                   ),
                   FormBuilderTextField(
+                    key: Key('field_description'),
                     attribute: "description",
                     decoration: InputDecoration(labelText: 'Description'),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_tier'),
                     attribute: "tier",
                     decoration: InputDecoration(labelText: 'Tier'),
                     validators: [
@@ -59,16 +62,15 @@ class TalentEditDialog extends StatelessWidget {
                       FormBuilderValidators.min(1),
                       FormBuilderValidators.max(3)
                     ],
-                    valueTransformer: (v) => int.parse(v),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_cost'),
                     attribute: "cost",
                     decoration: InputDecoration(labelText: "Exp cost"),
                     validators: [
                       FormBuilderValidators.numeric(),
                       FormBuilderValidators.required(),
                     ],
-                    valueTransformer: (v) => int.parse(v),
                   ),
                 ],
               ),
@@ -88,8 +90,8 @@ class TalentEditDialog extends StatelessWidget {
             if (_formKey.currentState.saveAndValidate()) {
               talent.name = _formKey.currentState.value['title'];
               talent.description = _formKey.currentState.value['description'];
-              talent.tier = _formKey.currentState.value['tier'];
-              talent.cost = _formKey.currentState.value['cost'];
+              talent.tier = int.parse(_formKey.currentState.value['tier']);
+              talent.cost = int.parse(_formKey.currentState.value['cost']);
               Navigator.of(context).pop({
                 'choice': DialogChoices.confirm,
                 'payload': talent,

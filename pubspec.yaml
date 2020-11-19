@@ -11,7 +11,7 @@ description: A character sheet app for a certain d10-based grimdank RPG.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.2.0
+version: 0.3.0
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -23,6 +23,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
+  font_awesome_flutter: ^8.10.0
   json_annotation: 3.0.1
   path_provider: 1.6.11
   hive_flutter: ^0.3.0+2

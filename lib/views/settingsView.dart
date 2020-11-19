@@ -44,8 +44,8 @@ class SettingsView extends StatelessWidget {
             ),
             SwitchListTile(
               title: Text('Dark mode'),
-              subtitle: Text('If unchecked, app '
-                  'follows system theme'),
+              subtitle: Text(
+                  'If unchecked, app follows system theme. Requires app restart.'),
               value: box.get('Dark mode'),
               onChanged: (bool v) {
                 box.put('Dark mode', v);

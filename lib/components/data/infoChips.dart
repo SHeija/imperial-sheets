@@ -36,18 +36,13 @@ class InfoChips extends StatelessWidget {
 
   Future<void> _showDualValueDialog(BuildContext context, dynamic val1,
       dynamic val2, String type, String label1, String label2) async {
-    final style = type == 'Experience' ? 'field' : 'touchSpin';
     final result = await showDialog<dynamic>(
         context: context,
         builder: (context) {
-          return (DualValueEditDialog(val1, val2, label1, label2, type, style));
+          return (DualValueEditDialog(val1, val2, label1, label2, type));
         });
     if (result != null) {
       switch (type) {
-        case 'Experience':
-          character.spentXp = result['val1'];
-          character.xp = result['val2'];
-          break;
         case 'Wounds':
           character.hp = result['val2'];
           character.currentHp = result['val1'];
@@ -69,8 +64,8 @@ class InfoChips extends StatelessWidget {
           return ExperienceEditDialog(val1, val2, character);
         });
     if (result != null) {
-      character.spentXp = result['val1'];
-      character.xp = result['val2'];
+      character.spentXp = int.parse(result['val1']);
+      character.xp = int.parse(result['val2']);
       character.save();
     }
   }
