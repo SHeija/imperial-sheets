@@ -94,7 +94,7 @@ void main() {
     });
   });
   group('Utils', () {
-    test('Fatigue trashold works correctly', () {
+    test('Fatigue treshold works correctly', () {
       final Character c = Character()
         ..stats = [
           Stat(Constants.WP, 'WP', 40, 0),

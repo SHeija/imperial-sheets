@@ -48,6 +48,7 @@ class WeaponEditDialog extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   FormBuilderTextField(
+                    key: Key('field_title'),
                     attribute: "title",
                     decoration: InputDecoration(labelText: 'Title'),
                     validators: [
@@ -55,55 +56,64 @@ class WeaponEditDialog extends StatelessWidget {
                     ],
                   ),
                   FormBuilderTextField(
+                    key: Key('field_description'),
                     attribute: "description",
                     decoration: InputDecoration(labelText: 'Description'),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_weight'),
                     attribute: "weight",
                     decoration: InputDecoration(labelText: 'Weight in kg'),
                     validators: [
                       FormBuilderValidators.numeric(),
+                      FormBuilderValidators.required(),
                     ],
-                    valueTransformer: (v) =>
-                        double.parse(v.replaceAll(',', '.')),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_range'),
                     attribute: "range",
                     decoration: InputDecoration(labelText: 'Range'),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_range'),
                     attribute: "rateOfFire",
                     decoration: InputDecoration(labelText: 'Rate of fire'),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_damage'),
                     attribute: "damage",
                     decoration: InputDecoration(labelText: 'Damage'),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_type'),
                     attribute: "type",
                     decoration: InputDecoration(labelText: 'Damage type'),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_penetration'),
                     attribute: "penetration",
                     decoration: InputDecoration(labelText: 'Penetration'),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_clip'),
                     attribute: "clip",
                     decoration: InputDecoration(labelText: 'Clip'),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_reloadSpeed'),
                     attribute: "reloadSpeed",
                     decoration: InputDecoration(labelText: 'Reload speed'),
                   ),
                   FormBuilderTextField(
+                    key: Key('field_special'),
                     attribute: "special",
                     decoration: InputDecoration(labelText: 'Special'),
                   ),
                   FormBuilderTouchSpin(
+                    key: Key('field_amount'),
                     attribute: "amount",
                     initialValue: weapon.amount,
                     decoration: InputDecoration(labelText: 'Amount'),
-                    validators: [FormBuilderValidators.required()],
                     min: 0,
                     step: 1,
                   ),
@@ -123,7 +133,7 @@ class WeaponEditDialog extends StatelessWidget {
             if (_formKey.currentState.saveAndValidate()) {
               weapon.name = _formKey.currentState.value['title'];
               weapon.description = _formKey.currentState.value['description'];
-              weapon.weight = _formKey.currentState.value['weight'];
+              weapon.weight = double.parse(_formKey.currentState.value['weight'].replaceAll(',', '.'));
               weapon.range = _formKey.currentState.value['range'];
               weapon.rateOfFire = _formKey.currentState.value['rateOfFire'];
               weapon.damage = _formKey.currentState.value['damage'];
