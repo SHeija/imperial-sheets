@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:imperial_sheets/components/misc/menuDrawer.dart';
 import 'package:imperial_sheets/components/misc/tutorial.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
@@ -51,7 +52,7 @@ class _RootViewState extends State<RootView> {
   List<BottomNavigationBarItem> navigation() {
     return _destinations.map((destination) {
       return BottomNavigationBarItem(
-          label: destination, icon: new Icon(Icons.adjust));
+          label: destination, icon: new FaIcon(FontAwesomeIcons.skull));
     }).toList();
   }
 
@@ -74,7 +75,7 @@ class _RootViewState extends State<RootView> {
         child: ValueListenableBuilder(
           valueListenable: HiveProvider.of(context)
               .settings
-              .listenable(keys: ['activeCharacter']),
+              .listenable(),
           builder: (context, box, widget) {
             String id = box.get('activeCharacter');
             if (id == null || id == '') {
