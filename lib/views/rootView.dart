@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:imperial_sheets/components/misc/menuDrawer.dart';
 import 'package:imperial_sheets/components/misc/tutorial.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
@@ -52,7 +51,9 @@ class _RootViewState extends State<RootView> {
   List<BottomNavigationBarItem> navigation() {
     return _destinations.map((destination) {
       return BottomNavigationBarItem(
-          label: destination, icon: new FaIcon(FontAwesomeIcons.skull));
+          label: destination,
+          icon: new Icon(Icons.adjust),
+      );
     }).toList();
   }
 
