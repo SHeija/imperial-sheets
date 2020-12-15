@@ -34,7 +34,7 @@ class PowerTile extends StatelessWidget {
 
     if (result != null) {
       Character character = HiveProvider.of(context).getActiveCharacter();
-      switch (result['choice']){
+      switch (result['choice']) {
         case DialogChoices.cancel:
           break;
         case DialogChoices.confirm:
@@ -54,25 +54,22 @@ class PowerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double cellPadding = 8.0;
-    return InkWell(
-      onLongPress: () =>
-          _showEditDialog(context),
-      child: Card(
+    return Card(
+      child: InkWell(
+        onLongPress: () => _showEditDialog(context),
         child: Column(
           children: <Widget>[
-            Table(
-                columnWidths: {
-                  0: FractionColumnWidth(0.75),
-                  1: FractionColumnWidth(0.25)
-                }, children: [
+            Table(columnWidths: {
+              0: FractionColumnWidth(0.75),
+              1: FractionColumnWidth(0.25)
+            }, children: [
               TableRow(children: <Widget>[
                 Container(
                   child: Text(power.name,
                       style: Theme.of(context).textTheme.headline6),
                   padding: EdgeInsets.all(cellPadding),
                 ),
-                Container(
-                ),
+                Container(),
               ]),
               TableRow(
                 children: <Widget>[
@@ -82,8 +79,7 @@ class PowerTile extends StatelessWidget {
                     padding: EdgeInsets.all(cellPadding),
                     alignment: Alignment.topLeft,
                   ),
-                  Container(
-                  ),
+                  Container(),
                 ],
               ),
             ]),
@@ -95,42 +91,44 @@ class PowerTile extends StatelessWidget {
               ),
               child: Table(
                 children: <TableRow>[
-                  TableRow(children: <Widget>[
-                    Container(
-                      child: Text('Action: ${power.action}',
-                          style: Theme.of(context).textTheme.subtitle1),
-                      padding: EdgeInsets.all(cellPadding),
-                      alignment: Alignment.topLeft,
-                    ),
-                    Container(
-                      child: Text('Focus Power: ${power.focusPower}',
-                          style: Theme.of(context).textTheme.subtitle1),
-                      padding: EdgeInsets.all(cellPadding),
-                      alignment: Alignment.topLeft,
-                    ),
-                    Container(
-                      child: Text('Range: ${power.range}',
-                          style: Theme.of(context).textTheme.subtitle1),
-                      padding: EdgeInsets.all(cellPadding),
-                      alignment: Alignment.topLeft,
-                    ),
-                  ],
+                  TableRow(
+                    children: <Widget>[
+                      Container(
+                        child: Text('Action: ${power.action}',
+                            style: Theme.of(context).textTheme.subtitle1),
+                        padding: EdgeInsets.all(cellPadding),
+                        alignment: Alignment.topLeft,
+                      ),
+                      Container(
+                        child: Text('Focus Power: ${power.focusPower}',
+                            style: Theme.of(context).textTheme.subtitle1),
+                        padding: EdgeInsets.all(cellPadding),
+                        alignment: Alignment.topLeft,
+                      ),
+                      Container(
+                        child: Text('Range: ${power.range}',
+                            style: Theme.of(context).textTheme.subtitle1),
+                        padding: EdgeInsets.all(cellPadding),
+                        alignment: Alignment.topLeft,
+                      ),
+                    ],
                   ),
-                  TableRow(children: <Widget>[
-                    Container(
-                      child: Text('Sustained: ${power.sustained}',
-                          style: Theme.of(context).textTheme.subtitle1),
-                      padding: EdgeInsets.all(cellPadding),
-                      alignment: Alignment.topLeft,
-                    ),
-                    Container(
-                      child: Text('Subtype: ${power.subType}',
-                          style: Theme.of(context).textTheme.subtitle1),
-                      padding: EdgeInsets.all(cellPadding),
-                      alignment: Alignment.topLeft,
-                    ),
-                    Container(),
-                  ],
+                  TableRow(
+                    children: <Widget>[
+                      Container(
+                        child: Text('Sustained: ${power.sustained}',
+                            style: Theme.of(context).textTheme.subtitle1),
+                        padding: EdgeInsets.all(cellPadding),
+                        alignment: Alignment.topLeft,
+                      ),
+                      Container(
+                        child: Text('Subtype: ${power.subType}',
+                            style: Theme.of(context).textTheme.subtitle1),
+                        padding: EdgeInsets.all(cellPadding),
+                        alignment: Alignment.topLeft,
+                      ),
+                      Container(),
+                    ],
                   ),
                 ],
               ),

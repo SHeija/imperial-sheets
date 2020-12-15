@@ -58,9 +58,9 @@ class TalentTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double cellPadding = 8.0;
-    return InkWell(
-      onLongPress: () => _showEditDialog(context),
-      child: Card(
+    return Card(
+      child: InkWell(
+        onLongPress: () => _showEditDialog(context),
         child: Column(
           children: <Widget>[
             Table(

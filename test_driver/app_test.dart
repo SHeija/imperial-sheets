@@ -6,6 +6,7 @@ void main() {
   group('Sanity check', () {
     final confirmButton = find.text('Confirm');
     final drawerButton = find.byTooltip('Open navigation menu');
+    final deleteCharacter = find.byTooltip('Delete character');
     final createCharacter = find.text('Add new character');
     final ch1name = 'First one';
     final ch2name = 'Second one';
@@ -78,6 +79,13 @@ void main() {
       await driver.tap(find.text(ch2name));
       await driver.waitForAbsent(createCharacter);
       await driver.waitFor(find.text(ch2desc));
+    });
+
+    test('Character deletion works', () async {
+      await driver.tap(deleteCharacter);
+      await driver.waitFor(find.text('Really delete this character?'));
+      await driver.tap(find.text('Yes'));
+      await driver.waitFor(find.text('No character selected'));
     });
   });
 }

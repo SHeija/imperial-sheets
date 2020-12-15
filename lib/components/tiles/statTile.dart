@@ -31,63 +31,65 @@ class StatTile extends StatelessWidget {
   Widget build(BuildContext context) {
     const double cellPadding = 8.0;
 
-    return InkWell(
-      onLongPress: () => _showEditDialog(context),
-      child: Card(
+    return Card(
+      child: InkWell(
+          onLongPress: () => _showEditDialog(context),
           child: SingleChildScrollView(
-        child: Table(columnWidths: {
-          0: FractionColumnWidth(0.75),
-          1: FractionColumnWidth(0.25)
-        }, children: [
-          TableRow(children: <Widget>[
-            Container(
-              child: Text(stat.name, style: Theme.of(context).textTheme.headline6),
-              padding: EdgeInsets.only(
-                  left: cellPadding, top: cellPadding, right: cellPadding),
-            ),
-            Container(
-              child: Text(stat.value.toString(),
-                  style: Theme.of(context).textTheme.headline6),
-              padding: EdgeInsets.only(
-                  left: cellPadding, top: cellPadding, right: cellPadding),
-              alignment: Alignment.center,
-            ),
-          ]),
-          TableRow(children: <Widget>[
-            Column(
-              children: <Widget>[
+            child: Table(columnWidths: {
+              0: FractionColumnWidth(0.75),
+              1: FractionColumnWidth(0.25)
+            }, children: [
+              TableRow(children: <Widget>[
                 Container(
-                  child: Text(stat.short,
-                      style: Theme.of(context).textTheme.bodyText2),
+                  child: Text(stat.name,
+                      style: Theme.of(context).textTheme.headline6),
                   padding: EdgeInsets.only(
-                      left: cellPadding,
-                      bottom: cellPadding,
-                      right: cellPadding),
-                  alignment: Alignment.topLeft,
+                      left: cellPadding, top: cellPadding, right: cellPadding),
                 ),
                 Container(
-                  child: StepIndicator(
-                    steps: 5,
-                    currentSteps: stat.stage,
-                  ),
-                  padding:
-                      EdgeInsets.only(left: cellPadding, right: cellPadding),
-                  alignment: Alignment.topLeft,
+                  child: Text(stat.value.toString(),
+                      style: Theme.of(context).textTheme.headline6),
+                  padding: EdgeInsets.only(
+                      left: cellPadding, top: cellPadding, right: cellPadding),
+                  alignment: Alignment.center,
                 ),
-              ],
-            ),
-            Container(
-                child: Chip(
-                    backgroundColor: stat.isUnnatural()
-                        ? Theme.of(context).accentColor
-                        : null,
-                    label: Text(stat.getStatBonus().toString()),
-                    padding: EdgeInsets.all(0)),
-                padding: EdgeInsets.only(left: cellPadding, right: cellPadding),
-                alignment: Alignment.topCenter),
-          ]),
-        ]),
-      )),
+              ]),
+              TableRow(children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Container(
+                      child: Text(stat.short,
+                          style: Theme.of(context).textTheme.bodyText2),
+                      padding: EdgeInsets.only(
+                          left: cellPadding,
+                          bottom: cellPadding,
+                          right: cellPadding),
+                      alignment: Alignment.topLeft,
+                    ),
+                    Container(
+                      child: StepIndicator(
+                        steps: 5,
+                        currentSteps: stat.stage,
+                      ),
+                      padding: EdgeInsets.only(
+                          left: cellPadding, right: cellPadding),
+                      alignment: Alignment.topLeft,
+                    ),
+                  ],
+                ),
+                Container(
+                    child: Chip(
+                        backgroundColor: stat.isUnnatural()
+                            ? Theme.of(context).accentColor
+                            : null,
+                        label: Text(stat.getStatBonus().toString()),
+                        padding: EdgeInsets.all(0)),
+                    padding:
+                        EdgeInsets.only(left: cellPadding, right: cellPadding),
+                    alignment: Alignment.topCenter),
+              ]),
+            ]),
+          )),
     );
   }
 }

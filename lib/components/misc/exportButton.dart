@@ -15,6 +15,7 @@ class ExportButton extends StatelessWidget {
     Character _character = HiveProvider.of(context).getActiveCharacter();
     return IconButton(
       icon: Icon(Icons.file_upload),
+      tooltip: 'Export character as JSON',
       onPressed: () {
         _export(_character);
       },

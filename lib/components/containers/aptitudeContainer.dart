@@ -32,16 +32,16 @@ class AptitudeContainer extends StatelessWidget {
       }
     }
 
-    return InkWell(
-      onLongPress: () {
-        _showEditDialog(context);
-      },
-      child: Container(
-        child: Card(
+    return Container(
+      child: Card(
+        child: InkWell(
+            onLongPress: () {
+              _showEditDialog(context);
+            },
             child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: AptitudeChips(character.aptitudes),
-        )),
+              padding: EdgeInsets.all(8.0),
+              child: AptitudeChips(character.aptitudes),
+            )),
       ),
     );
   }

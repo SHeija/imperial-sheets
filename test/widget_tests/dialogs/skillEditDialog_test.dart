@@ -8,7 +8,7 @@ import '../../utils/constants.dart' as Constants;
 
 void main() {
   group('SkillEditDialog', () {
-    testWidgets('renders correcly w/ canHasMultiple=false',
+    testWidgets('renders correctly w/ canHasMultiple=false',
         (WidgetTester tester) async {
       final Skill skill = Skill.notKnown(Constants.parry, Constants.WS);
       final Widget widget = MaterialApp(
@@ -54,33 +54,4 @@ void main() {
       expect(find.widgetWithText(FlatButton, 'Regret'), findsOneWidget);
     });
   });
-  /*
-  testWidgets('SkillAddDialog renders correctly', (WidgetTester tester) async {
-    final Widget widget = MaterialApp(
-      home: SkillAddDialog(),
-    );
-    await tester.pumpWidget(widget);
-
-    expect(find.text('Add a skill'), findsOneWidget);
-    expect(find.byType(FormBuilderDropdown), findsOneWidget);
-    expect(find.byType(FormBuilderTextField), findsNWidgets(2));
-    FormBuilderTextField textField =
-        tester.firstWidget(find.byType(FormBuilderTextField));
-    expect(textField.decoration.labelText, 'Subskill');
-    expect(find.byType(FormBuilderTouchSpin), findsOneWidget);
-    FormBuilderTouchSpin touchSpin =
-        tester.firstWidget(find.byType(FormBuilderTouchSpin));
-    expect(touchSpin.decoration.labelText, 'Stage');
-    expect(touchSpin.initialValue, 1);
-    expect(find.widgetWithText(FlatButton, 'Confirm'), findsOneWidget);
-    expect(find.widgetWithText(FlatButton, 'Regret'), findsOneWidget);
-
-    await tester.tap(find.byType(FormBuilderDropdown));
-    await tester.pump();
-    Constants.SKILLS_MULTIPLE.forEach((element) {
-      expect(find.text(element), findsNWidgets(2));
-    });
-  });
-
- */
 }
