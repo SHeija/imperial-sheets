@@ -27,6 +27,7 @@ class MainView extends StatelessWidget {
             ExportButton(),
             IconButton(
               icon: Icon(Icons.delete),
+              tooltip: 'Delete character',
               onPressed: () async {
                 final result = await showDialog(
                   context: context,

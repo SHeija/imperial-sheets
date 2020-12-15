@@ -16,13 +16,13 @@ class SkillTile extends StatelessWidget {
 
   // DIALOG
   Future<void> _showEditDialog(BuildContext context) async {
-      final result = await showDialog<dynamic>(
-        context: context,
-        barrierDismissible: true,
-        builder: (context) {
-          return SkillEditDialog(skill);
-        },
-      );
+    final result = await showDialog<dynamic>(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return SkillEditDialog(skill);
+      },
+    );
 
     Future<bool> _confirmDismiss() async {
       return await showDialog<bool>(
@@ -55,96 +55,101 @@ class SkillTile extends StatelessWidget {
     }
   }
 
-
   // TILE
   @override
   Widget build(BuildContext context) {
     const double cellPadding = 8.0;
     bool _hasSubSkill = skill.subSkill != null && skill.subSkill != '';
 
-    return InkWell(
-      onLongPress: () => _showEditDialog(context),
-      child: Card(
+    return Card(
+      child: InkWell(
+          onLongPress: () => _showEditDialog(context),
           child: SingleChildScrollView(
-        child: Table(
-          //defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-          columnWidths: {
-            0: FractionColumnWidth(0.70),
-            1: FractionColumnWidth(0.30)
-          },
-          children: [
-            TableRow(
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    skill.canHaveMultiple() ? skill.name + ':' : skill.name,
-                    style: Theme.of(context).textTheme.headline6,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  padding: EdgeInsets.only(
-                      left: cellPadding, top: cellPadding, right: cellPadding),
-                ),
-                Container(
-                  child: Text(
-                    skill.getBonusString(),
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  padding: EdgeInsets.only(
-                      left: cellPadding, top: cellPadding, right: cellPadding),
-                  alignment: Alignment.center,
-                ),
-              ],
-            ),
-            TableRow(
-              children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            child: Table(
+              //defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+              columnWidths: {
+                0: FractionColumnWidth(0.70),
+                1: FractionColumnWidth(0.30)
+              },
+              children: [
+                TableRow(
                   children: <Widget>[
-                    _hasSubSkill
-                        ? Container(
-                            child: Text(skill.subSkill,
-                                overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context).textTheme.subtitle2),
-                            padding: EdgeInsets.only(
-                              left: cellPadding,
-                            ),
-                          )
-                        : Container(),
                     Container(
                       child: Text(
-                        skill.stat,
-                        style: Theme.of(context).textTheme.bodyText2,
+                        skill.canHaveMultiple() ? skill.name + ':' : skill.name,
+                        style: Theme.of(context).textTheme.headline6,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       padding: EdgeInsets.only(
-                        left: cellPadding,
-                        bottom: cellPadding,
-                        right: cellPadding,
-                      ),
-                      alignment: Alignment.topLeft,
+                          left: cellPadding,
+                          top: cellPadding,
+                          right: cellPadding),
                     ),
                     Container(
-                      child: StepIndicator(
-                        steps: 4,
-                        currentSteps: skill.stage,
+                      child: Text(
+                        skill.getBonusString(),
+                        style: Theme.of(context).textTheme.headline6,
                       ),
                       padding: EdgeInsets.only(
-                          left: cellPadding, right: cellPadding),
-                      alignment: Alignment.topLeft,
+                          left: cellPadding,
+                          top: cellPadding,
+                          right: cellPadding),
+                      alignment: Alignment.center,
                     ),
                   ],
                 ),
-                Container(
-                    child: Chip(
-                        label: Text((stat.value + skill.getBonus()).toString()),
-                        padding: EdgeInsets.all(0)),
-                    padding:
-                        EdgeInsets.only(left: cellPadding, right: cellPadding),
-                    alignment: Alignment.topCenter),
+                TableRow(
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        _hasSubSkill
+                            ? Container(
+                                child: Text(skill.subSkill,
+                                    overflow: TextOverflow.ellipsis,
+                                    style:
+                                        Theme.of(context).textTheme.subtitle2),
+                                padding: EdgeInsets.only(
+                                  left: cellPadding,
+                                ),
+                              )
+                            : Container(),
+                        Container(
+                          child: Text(
+                            skill.stat,
+                            style: Theme.of(context).textTheme.bodyText2,
+                          ),
+                          padding: EdgeInsets.only(
+                            left: cellPadding,
+                            bottom: cellPadding,
+                            right: cellPadding,
+                          ),
+                          alignment: Alignment.topLeft,
+                        ),
+                        Container(
+                          child: StepIndicator(
+                            steps: 4,
+                            currentSteps: skill.stage,
+                          ),
+                          padding: EdgeInsets.only(
+                              left: cellPadding, right: cellPadding),
+                          alignment: Alignment.topLeft,
+                        ),
+                      ],
+                    ),
+                    Container(
+                        child: Chip(
+                            label: Text(
+                                (stat.value + skill.getBonus()).toString()),
+                            padding: EdgeInsets.all(0)),
+                        padding: EdgeInsets.only(
+                            left: cellPadding, right: cellPadding),
+                        alignment: Alignment.topCenter),
+                  ],
+                ),
               ],
             ),
-          ],
-        ),
-      )),
+          )),
     );
   }
 }
