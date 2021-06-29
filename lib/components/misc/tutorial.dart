@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Tutorial extends StatelessWidget {
-  String tutorial = '1. Create, select and manage characters from left drawer \n2. Long press to edit things \n3. Tap "+" in upper left corner to add things \n4. Tap "trashcan" to delete things';
+  final String tutorial = '1. Create, select and manage characters from left drawer \n2. Long press to edit things \n3. Tap "+" in upper left corner to add things \n4. Tap "trashcan" to delete things';
   @override
   Widget build(BuildContext context) {
     return AlertDialog(

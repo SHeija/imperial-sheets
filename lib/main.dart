@@ -19,7 +19,7 @@ void main() async {
 }
 
 class App extends StatelessWidget {
-  ThemeData defaultTheme = ThemeData(
+  final ThemeData defaultTheme = ThemeData(
       accentColor: Colors.blueGrey[200],
       primaryColor: Colors.blueGrey,
       indicatorColor: Colors.blueGrey,

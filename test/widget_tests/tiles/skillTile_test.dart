@@ -11,7 +11,7 @@ import '../../utils/constants.dart' as Constants;
 void main() {
   group('SkillTile', () {
     final Skill skill = Skill(Constants.stealth, 2, Constants.AG);
-    final Skill skillWSubskill = Skill(Constants.forbiddenLore, 2, Constants.AG)
+    final Skill skillWSubskill = Skill(Constants.forbiddenLore, 1, Constants.AG)
       ..subSkill = 'Mechanicus';
 
     Character mockCharacter = Character()
@@ -54,10 +54,8 @@ void main() {
 
       await tester.pumpWidget(widget);
 
-      expect(find.text(Constants.stealth), findsOneWidget);
-      expect(find.text('+10'), findsOneWidget);
-      expect(find.text('35'), findsOneWidget);
       expect(find.byType(StepIndicator), findsOneWidget);
+      await expectLater(find.byType(SkillTile), matchesGoldenFile('skillTile.png'));
     });
 
     testWidgets('is displayed correctly w/ subskill',
@@ -74,11 +72,8 @@ void main() {
       );
 
       await tester.pumpWidget(widget);
-      expect(find.text(Constants.forbiddenLore + ':'), findsOneWidget);
-      expect(find.text('Mechanicus'), findsOneWidget);
-      expect(find.text('+10'), findsOneWidget);
-      expect(find.text('35'), findsOneWidget);
       expect(find.byType(StepIndicator), findsOneWidget);
+      await expectLater(find.byType(SkillTile), matchesGoldenFile('skillTileSubSkill.png'));
     });
   });
 }

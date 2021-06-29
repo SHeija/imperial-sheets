@@ -27,5 +27,6 @@ void main() {
     expect(find.text('9'), findsOneWidget);
     expect(find.text('Run'), findsOneWidget);
     expect(find.text('18'), findsOneWidget);
+    await expectLater(find.byType(SpeedTable), matchesGoldenFile('speedTable.png'));
   });
 }

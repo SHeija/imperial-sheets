@@ -15,6 +15,7 @@ void main() {
 
       await tester.pumpWidget(widget);
       expect(find.byType(AboutListTile), findsOneWidget);
+      await expectLater(find.byType(AppInfoButton), matchesGoldenFile('appInfoButton.png'));
     });
 
     testWidgets('tap opens a dialog', (WidgetTester tester) async {
