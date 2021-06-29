@@ -38,12 +38,14 @@ class _NotesViewState extends State<NotesView> {
                   _toggleEditing();
                 }
               },
+              tooltip: 'Save',
             )
           : IconButton(
               icon: Icon(Icons.edit),
               onPressed: () {
                 _toggleEditing();
               },
+              tooltip: 'Edit',
             );
     }
 
@@ -54,23 +56,24 @@ class _NotesViewState extends State<NotesView> {
               onPressed: () {
                 _formKey.currentState.reset();
               },
+              tooltip: 'Undo',
             )
           : Container();
     }
 
     Widget editForm = FormBuilder(
-        key: _formKey,
-        initialValue: {
-          "notes": notes,
-        },
-        child: SizedBox(
-          height: 400,
-          child: FormBuilderTextField(
-            maxLines: 5000,
-            attribute: "notes",
-          ),
+      key: _formKey,
+      initialValue: {
+        "notes": notes,
+      },
+      child: SizedBox(
+        height: 400,
+        child: FormBuilderTextField(
+          maxLines: 5000,
+          attribute: "notes",
         ),
-      );
+      ),
+    );
 
     return CustomScrollView(
       primary: false,
@@ -89,11 +92,14 @@ class _NotesViewState extends State<NotesView> {
                       );
                     });
                 if (result) {
-                  _toggleEditing();
+                  setState(() {
+                    _editing = false;
+                  });
                   character.notes = '';
                   character.save();
                 }
               },
+              tooltip: 'Clear notes',
             ),
             _undoButton(),
             _editToggleButton(),
@@ -103,9 +109,7 @@ class _NotesViewState extends State<NotesView> {
           padding: EdgeInsets.all(8.0),
           sliver: SliverFillRemaining(
             child: Container(
-              child: _editing
-                  ? editForm
-                  : Markdown(data: notes.toString()),
+              child: _editing ? editForm : Markdown(data: notes.toString()),
             ),
           ),
         )
