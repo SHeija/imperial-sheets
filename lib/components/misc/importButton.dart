@@ -19,11 +19,12 @@ class _ImportButtonState extends State<ImportButton> {
 
   Future<dynamic> _import() async {
     try {
-      File file = await FilePicker.getFile(type: FileType.any);
-      if (file == null) {
-        // if user exits file picker, file = null
+      FilePickerResult result = await FilePicker.platform.pickFiles();
+      if (result == null) {
+        // user exited the picker
         return null;
       }
+      File file = File(result.files.single.path);
       String json = await file.readAsString();
       Character character = Character.fromJson(jsonDecode(json));
       character.importCleanup();

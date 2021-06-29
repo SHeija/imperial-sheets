@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
+import 'package:form_builder_fields/form_builder_fields.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:imperial_sheets/components/misc/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/models/attributes.dart';
 import 'package:imperial_sheets/utils/enums.dart';
@@ -29,6 +32,7 @@ class SkillEditDialog extends StatelessWidget {
         child: Column(
           children: <Widget>[
             FormBuilder(
+              autovalidateMode: AutovalidateMode.always,
               key: _formKey,
               initialValue: {
                 'stage': skill.stage.toString(),
@@ -40,15 +44,15 @@ class SkillEditDialog extends StatelessWidget {
                   skill.canHaveMultiple()
                       ? FormBuilderTextField(
                           key: Key('field_subSkill'),
-                          attribute: 'subSkill',
+                          name: 'subSkill',
                           decoration: InputDecoration(labelText: "Subskill"),
-                          validators: [FormBuilderValidators.required()],
+                          validator: FormBuilderValidators.required(context),
                         )
                       : Container(),
                   FormBuilderTouchSpin(
                     key: Key('field_stage'),
                     decoration: InputDecoration(labelText: "Stage"),
-                    attribute: "stage",
+                    name: "stage",
                     initialValue: skill.stage,
                     min: 0,
                     step: 1,
@@ -56,12 +60,14 @@ class SkillEditDialog extends StatelessWidget {
                   ),
                   FormBuilderTextField(
                     key: Key('field_cost'),
-                    attribute: "cost",
+                    name: "cost",
                     decoration: InputDecoration(labelText: "Exp cost in total"),
-                    validators: [
-                      FormBuilderValidators.numeric(),
-                      FormBuilderValidators.required(),
-                    ],
+                    validator: FormBuilderValidators.compose(
+                      [
+                        FormBuilderValidators.numeric(context),
+                        FormBuilderValidators.required(context),
+                      ],
+                    ),
                   ),
                 ],
               ),

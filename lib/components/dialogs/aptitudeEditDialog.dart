@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_fields/form_builder_fields.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
 class AptitudeEditDialog extends StatelessWidget {
@@ -14,6 +15,7 @@ class AptitudeEditDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       content: SingleChildScrollView(
         child: FormBuilder(
+          autovalidateMode: AutovalidateMode.always,
           key: _formKey,
           initialValue: {
             "aptitudes": aptitudes.join(" "),
@@ -22,8 +24,11 @@ class AptitudeEditDialog extends StatelessWidget {
             children: <Widget>[
               FormBuilderTextField(
                 key: Key('field_aptitudes'),
-                attribute: "aptitudes",
-                decoration: InputDecoration(labelText: "Aptitudes", helperText: "Separate aptitudes by spaces", hintText: "e.g. general offence finesse"),
+                name: "aptitudes",
+                decoration: InputDecoration(
+                    labelText: "Aptitudes",
+                    helperText: "Separate aptitudes by spaces",
+                    hintText: "e.g. general offence finesse"),
                 valueTransformer: (v) => v.split(" "),
               ),
             ],

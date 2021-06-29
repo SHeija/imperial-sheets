@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
+import 'package:form_builder_fields/form_builder_fields.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:imperial_sheets/models/attributes.dart';
 
 class StatEditDialog extends StatelessWidget {
@@ -13,9 +16,10 @@ class StatEditDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: Text(stat.name),
       content: SingleChildScrollView(
-          child: Column(
-        children: <Widget>[
-          FormBuilder(
+        child: Column(
+          children: <Widget>[
+            FormBuilder(
+              autovalidateMode: AutovalidateMode.always,
               key: _formKey,
               initialValue: {
                 'value': stat.value.toString(),
@@ -27,18 +31,18 @@ class StatEditDialog extends StatelessWidget {
                 children: <Widget>[
                   FormBuilderTextField(
                     key: Key('field_value'),
-                    attribute: "value",
+                    name: "value",
                     decoration: InputDecoration(labelText: "Value"),
-                    validators: [
-                      FormBuilderValidators.required(),
-                      FormBuilderValidators.numeric(),
-                      FormBuilderValidators.max(100),
-                    ],
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.numeric(context),
+                      FormBuilderValidators.required(context),
+                      FormBuilderValidators.max(context, 100),
+                    ]),
                   ),
                   FormBuilderTouchSpin(
                     key: Key('field_stage'),
                     decoration: InputDecoration(labelText: "Stage"),
-                    attribute: "stage",
+                    name: "stage",
                     initialValue: stat.stage,
                     min: 0,
                     step: 1,
@@ -47,24 +51,26 @@ class StatEditDialog extends StatelessWidget {
                   FormBuilderTouchSpin(
                     key: Key('field_unnatural_bonus'),
                     decoration: InputDecoration(labelText: "Unnatural bonus"),
-                    attribute: "unnaturalBonus",
+                    name: "unnaturalBonus",
                     initialValue: stat.unnaturalBonus,
                     min: 0,
                     step: 1,
                   ),
                   FormBuilderTextField(
                     key: Key('field_cost'),
-                    attribute: "cost",
+                    name: "cost",
                     decoration: InputDecoration(labelText: "Exp cost in total"),
-                    validators: [
-                      FormBuilderValidators.required(),
-                      FormBuilderValidators.numeric(),
-                    ],
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.numeric(context),
+                      FormBuilderValidators.required(context),
+                    ]),
                   ),
                 ],
-              )),
-        ],
-      )),
+              ),
+            ),
+          ],
+        ),
+      ),
       actions: <Widget>[
         FlatButton(
             child: Text('Regret'),

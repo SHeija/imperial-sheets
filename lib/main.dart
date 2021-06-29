@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hive/hive.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
 import 'package:path_provider/path_provider.dart';
@@ -32,6 +33,12 @@ class App extends StatelessWidget {
     }
     return MaterialApp(
       title: 'Imperial Sheets',
+      supportedLocales: [
+        Locale('en'),
+      ],
+      localizationsDelegates: [
+        FormBuilderLocalizations.delegate,
+      ],
       darkTheme: ThemeData.dark(),
       theme: darkMode ? ThemeData.dark() : defaultTheme,
       home: HiveProvider(

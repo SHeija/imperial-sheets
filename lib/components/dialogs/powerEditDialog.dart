@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_fields/form_builder_fields.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:imperial_sheets/components/misc/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/models/attributes.dart';
 import 'package:imperial_sheets/utils/enums.dart';
@@ -30,6 +32,7 @@ class PowerEditDialog extends StatelessWidget {
         child: Column(
           children: <Widget>[
             FormBuilder(
+              autovalidateMode: AutovalidateMode.always,
               key: _formKey,
               initialValue: {
                 'name': power.name,
@@ -46,24 +49,22 @@ class PowerEditDialog extends StatelessWidget {
                 children: <Widget>[
                   FormBuilderTextField(
                     key: Key('field_name'),
-                    attribute: 'name',
+                    name: 'name',
                     decoration: InputDecoration(
                       labelText: 'Name',
                     ),
-                    validators: [
-                      FormBuilderValidators.required(),
-                    ],
+                    validator: FormBuilderValidators.required(context),
                   ),
                   FormBuilderTextField(
                     key: Key('field_description'),
-                    attribute: 'description',
+                    name: 'description',
                     decoration: InputDecoration(
                         labelText: 'Description',
                         hintText: 'Flavor description'),
                   ),
                   FormBuilderTextField(
                     key: Key('field_action'),
-                    attribute: 'action',
+                    name: 'action',
                     decoration: InputDecoration(
                       labelText: 'Action',
                       hintText: 'e.g Half Action',
@@ -71,7 +72,7 @@ class PowerEditDialog extends StatelessWidget {
                   ),
                   FormBuilderTextField(
                     key: Key('field_focusPower'),
-                    attribute: 'focusPower',
+                    name: 'focusPower',
                     decoration: InputDecoration(
                       labelText: 'Focus Power',
                       hintText: 'e.g. +0 Opposed Willpower test',
@@ -79,7 +80,7 @@ class PowerEditDialog extends StatelessWidget {
                   ),
                   FormBuilderTextField(
                     key: Key('field_range'),
-                    attribute: 'range',
+                    name: 'range',
                     decoration: InputDecoration(
                       labelText: 'Range',
                       hintText: 'e.g. 20m x psy rating',
@@ -87,7 +88,7 @@ class PowerEditDialog extends StatelessWidget {
                   ),
                   FormBuilderTextField(
                     key: Key('field_sustained'),
-                    attribute: 'sustained',
+                    name: 'sustained',
                     decoration: InputDecoration(
                       labelText: 'Sustained',
                       hintText: 'e.g. Half Action',
@@ -95,27 +96,26 @@ class PowerEditDialog extends StatelessWidget {
                   ),
                   FormBuilderTextField(
                     key: Key('field_subType'),
-                    attribute: 'subType',
+                    name: 'subType',
                     decoration: InputDecoration(
                         labelText: 'Subtype',
-                        hintText: 'e.g. Attack, Concentration'
-                    ),
+                        hintText: 'e.g. Attack, Concentration'),
                   ),
                   FormBuilderTextField(
                     key: Key('field_effect'),
-                    attribute: 'effect',
+                    name: 'effect',
                     decoration: InputDecoration(
                       labelText: 'Effect',
                     ),
                   ),
                   FormBuilderTextField(
                     key: Key('field_cost'),
-                    attribute: "cost",
+                    name: "cost",
                     decoration: InputDecoration(labelText: "Exp cost"),
-                    validators: [
-                      FormBuilderValidators.numeric(),
-                      FormBuilderValidators.required(),
-                    ],
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.numeric(context),
+                      FormBuilderValidators.required(context),
+                    ]),
                   ),
                 ],
               ),

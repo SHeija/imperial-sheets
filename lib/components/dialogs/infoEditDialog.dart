@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_fields/form_builder_fields.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
@@ -15,6 +16,7 @@ class InfoEditDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       content: SingleChildScrollView(
         child: FormBuilder(
+          autovalidateMode: AutovalidateMode.always,
           key: _formKey,
           initialValue: {
             'name': character.name,
@@ -23,11 +25,11 @@ class InfoEditDialog extends StatelessWidget {
           child: Column(
             children: <Widget>[
               FormBuilderTextField(
-                attribute: 'name',
+                name: 'name',
                 decoration: InputDecoration(labelText: 'Name'),
               ),
               FormBuilderTextField(
-                attribute: 'description',
+                name: 'description',
                 decoration: InputDecoration(labelText: 'Description'),
               ),
             ],

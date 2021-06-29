@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:form_builder_fields/form_builder_fields.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
@@ -70,7 +71,7 @@ class _NotesViewState extends State<NotesView> {
         height: 400,
         child: FormBuilderTextField(
           maxLines: 5000,
-          attribute: "notes",
+          name: "notes",
         ),
       ),
     );
