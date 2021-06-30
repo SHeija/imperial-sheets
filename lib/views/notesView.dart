@@ -70,6 +70,7 @@ class _NotesViewState extends State<NotesView> {
       child: SizedBox(
         height: 400,
         child: FormBuilderTextField(
+          key: Key('NotesTextField'),
           maxLines: 5000,
           name: "notes",
         ),

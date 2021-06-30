@@ -85,12 +85,12 @@ void main() {
     test('Notes behave', () async {
       await driver.tap(find.byTooltip('Notes'));
       await driver.tap(find.byTooltip('Edit'));
-      await driver.tap(find.byType('TextFormField'));
+      await driver.tap(find.byValueKey('NotesTextField'));
       await driver.enterText(loremIpsum.text);
       await driver.tap(find.byTooltip('Clear notes'));
       await driver.tap(find.text('Yes'));
       await driver.tap(find.byTooltip('Edit'));
-      await driver.tap(find.byType('TextFormField'));
+      await driver.tap(find.byValueKey('NotesTextField'));
       await driver.enterText(loremIpsum.text);
       await driver.tap(find.byTooltip('Save'));
       await driver.tap(find.byTooltip('Stats'));
