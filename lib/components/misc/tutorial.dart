@@ -10,7 +10,7 @@ class Tutorial extends StatelessWidget {
         child: Text(tutorial),
       ),
       actions: [
-        FlatButton(
+        TextButton(
             child: Text('Confirm'),
             onPressed: () {
               Navigator.of(context).pop();

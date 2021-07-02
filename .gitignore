@@ -170,4 +170,4 @@ fabric.properties
 .idea/**/markdown-navigator/
 
 # End of https://www.gitignore.io/api/flutter,intellij
-/test/widget_tests/dialogs/failures/
+/test/**/**/failures/

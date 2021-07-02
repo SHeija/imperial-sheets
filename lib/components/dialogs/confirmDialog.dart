@@ -13,12 +13,12 @@ class ConfirmDialog extends StatelessWidget {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
             child: Text('No'),
             onPressed: () {
               Navigator.of(context).pop(false);
             }),
-        FlatButton(
+        TextButton(
           child: Text('Yes'),
           onPressed: () {
             Navigator.of(context).pop(true);
