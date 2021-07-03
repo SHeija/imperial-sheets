@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ErrorDialog extends StatelessWidget {
-  ErrorDialog({
-    @required this.error,
-    this.content = const Text('Something went wrong.')
-  });
+  ErrorDialog(
+      {@required this.error,
+      this.content = const Text('Something went wrong.')});
   final Exception error;
   final Widget content;
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape:
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: Text('ERROR'),
       content: SingleChildScrollView(
         child: Column(
@@ -28,7 +26,10 @@ class ErrorDialog extends StatelessWidget {
                   ),
                   Text(
                     error.toString(),
-                    style: Theme.of(context).textTheme.bodyText2.copyWith(color: Colors.red),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2
+                        .copyWith(color: Colors.red),
                   ),
                 ],
               ),
@@ -37,9 +38,9 @@ class ErrorDialog extends StatelessWidget {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text('OK'),
-          onPressed: (){
+          onPressed: () {
             Navigator.of(context).pop();
           },
         )

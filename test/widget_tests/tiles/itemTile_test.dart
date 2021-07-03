@@ -21,10 +21,7 @@ void main() {
       );
 
       await tester.pumpWidget(widget);
-      expect(find.text(item.name+' '+item.getAmountString()), findsOneWidget);
-      expect(find.text(item.description), findsOneWidget);
-      expect(find.text(item.getWeight().toString()+' kg'), findsNothing);
-      expect(find.text(item.weight.toString()+' kg'), findsOneWidget);
+      await expectLater(find.byType(ItemTile), matchesGoldenFile('itemTile.png'));
     });
 
     testWidgets('longpress opens a dialog', (WidgetTester tester) async {

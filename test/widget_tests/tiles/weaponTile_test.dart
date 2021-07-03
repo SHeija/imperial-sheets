@@ -29,16 +29,7 @@ void main() {
      );
 
      await tester.pumpWidget(widget);
-     expect(find.text(weapon.name+' '+weapon.getAmountString()), findsOneWidget);
-     expect(find.text(weapon.description), findsOneWidget);
-     expect(find.text(weapon.weight.toString()+' kg'), findsOneWidget);
-     expect(find.text(weapon.getWeight().toString()+' kg'), findsNothing);
-     expect(find.text('Range: '+weapon.range), findsOneWidget);
-     expect(find.text('Clip: '+weapon.clip), findsOneWidget);
-     expect(find.text('Pen: '+weapon.penetration), findsOneWidget);
-     expect(find.text('Rld: '+weapon.reloadSpeed), findsOneWidget);
-     expect(find.text('Dmg: '+weapon.damage+' '+weapon.type), findsOneWidget);
-     expect(find.text('Special: '+weapon.special), findsOneWidget);
+     await expectLater(find.byType(WeaponTile), matchesGoldenFile('weaponTile.png'));
    });
 
    testWidgets('longpress opens a dialog', (WidgetTester tester) async {

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
+import 'package:imperial_sheets/components/fields/FormTouchSpin.dart';
 import 'package:imperial_sheets/models/attributes.dart';
+import 'package:imperial_sheets/utils/customValidators.dart';
 
 class StatEditDialog extends StatelessWidget {
   StatEditDialog(this.stat);
@@ -13,65 +17,66 @@ class StatEditDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: Text(stat.name),
       content: SingleChildScrollView(
-          child: Column(
-        children: <Widget>[
-          FormBuilder(
+        child: Column(
+          children: <Widget>[
+            FormBuilder(
+              autovalidateMode: AutovalidateMode.always,
               key: _formKey,
               initialValue: {
                 'value': stat.value.toString(),
-                'stage': stat.stage.toString(),
-                'unnaturalBonus': stat.unnaturalBonus.toString(),
+                'stage': stat.stage,
+                'unnaturalBonus': stat.unnaturalBonus,
                 'cost': stat.cost.toString(),
               },
               child: Column(
                 children: <Widget>[
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_value'),
-                    attribute: "value",
-                    decoration: InputDecoration(labelText: "Value"),
-                    validators: [
-                      FormBuilderValidators.required(),
-                      FormBuilderValidators.numeric(),
-                      FormBuilderValidators.max(100),
-                    ],
+                    name: "value",
+                    label: "Value",
+                    validator: FormBuilderValidators.compose([
+                      CustomValidators.numeric(context),
+                      FormBuilderValidators.required(context),
+                      FormBuilderValidators.max(context, 100),
+                    ]),
                   ),
-                  FormBuilderTouchSpin(
+                  FormTouchSpin(
                     key: Key('field_stage'),
                     decoration: InputDecoration(labelText: "Stage"),
-                    attribute: "stage",
-                    initialValue: stat.stage,
+                    name: "stage",
                     min: 0,
                     step: 1,
                     max: 5,
                   ),
-                  FormBuilderTouchSpin(
+                  FormTouchSpin(
                     key: Key('field_unnatural_bonus'),
                     decoration: InputDecoration(labelText: "Unnatural bonus"),
-                    attribute: "unnaturalBonus",
-                    initialValue: stat.unnaturalBonus,
+                    name: "unnaturalBonus",
                     min: 0,
                     step: 1,
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_cost'),
-                    attribute: "cost",
-                    decoration: InputDecoration(labelText: "Exp cost in total"),
-                    validators: [
-                      FormBuilderValidators.required(),
-                      FormBuilderValidators.numeric(),
-                    ],
+                    name: "cost",
+                    label: "Exp cost in total",
+                    validator: FormBuilderValidators.compose([
+                      CustomValidators.numeric(context),
+                      FormBuilderValidators.required(context),
+                    ]),
                   ),
                 ],
-              )),
-        ],
-      )),
+              ),
+            ),
+          ],
+        ),
+      ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
             child: Text('Regret'),
             onPressed: () {
               Navigator.of(context).pop();
             }),
-        FlatButton(
+        TextButton(
           child: Text('Confirm'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {

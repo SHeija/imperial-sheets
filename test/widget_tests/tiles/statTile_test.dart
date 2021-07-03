@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:imperial_sheets/components/data/stepIndicator.dart';
 import 'package:imperial_sheets/components/dialogs/statEditDialog.dart';
 import 'package:imperial_sheets/components/tiles/statTile.dart';
 import 'package:imperial_sheets/models/attributes.dart';
@@ -21,17 +20,12 @@ void main() {
       await tester.pumpWidget(testableWidget);
       await tester.pumpAndSettle();
 
-      expect(find.text(stat.name), findsOneWidget);
-      expect(find.text(stat.short), findsOneWidget);
-      expect(find.text(stat.value.toString()), findsOneWidget);
-      expect(find.widgetWithText(Chip, stat.getStatBonus().toString()), findsOneWidget );
-      expect(find.byType(StepIndicator), findsOneWidget);
+      await expectLater(find.byType(StatTile), matchesGoldenFile('statTile.png'));
 
       // Check that dialog opens
       await tester.longPress(find.byType(StatTile));
       await tester.pumpAndSettle();
       expect(find.byType(StatEditDialog), findsOneWidget);
-
     });
 
     testWidgets('renders correctly w/ unnaturalBonus', (WidgetTester tester) async {
@@ -47,13 +41,7 @@ void main() {
       await tester.pumpWidget(testableWidget);
       await tester.pumpAndSettle();
 
-      expect(find.text(stat.name), findsOneWidget);
-      expect(find.text(stat.short), findsOneWidget);
-      expect(find.text(stat.value.toString()), findsOneWidget);
-      expect(find.widgetWithText(Chip, stat.getStatBonus().toString()), findsOneWidget);
-      Chip chip = tester.firstWidget(find.byType(Chip));
-      expect(chip.backgroundColor, Color(0xff2196f3));
-      expect(find.byType(StepIndicator), findsOneWidget);
+      await expectLater(find.byType(StatTile), matchesGoldenFile('statTileUnnatural.png'));
 
       // Check that dialog opens
       await tester.longPress(find.byType(StatTile));

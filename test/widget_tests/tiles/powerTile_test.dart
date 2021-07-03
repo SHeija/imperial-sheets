@@ -25,14 +25,7 @@ void main() {
         ),
       );
       await tester.pumpWidget(widget);
-      expect(find.text(power.name), findsOneWidget);
-      expect(find.text(power.description), findsOneWidget);
-      expect(find.text('Action: ${power.action}'), findsOneWidget);
-      expect(find.text('Focus Power: ${power.focusPower}'), findsOneWidget);
-      expect(find.text('Range: ${power.range}'), findsOneWidget);
-      expect(find.text('Sustained: ${power.sustained}'), findsOneWidget);
-      expect(find.text('Effect: ${power.effect}'), findsOneWidget);
-      expect(find.text('Subtype: ${power.subType}'), findsOneWidget);
+      await expectLater(find.byType(PowerTile), matchesGoldenFile('powerTile.png'));
     });
 
     testWidgets('longpress opens a dialog', (WidgetTester tester) async {

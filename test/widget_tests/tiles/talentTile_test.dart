@@ -21,9 +21,7 @@ void main() {
       );
 
       await tester.pumpWidget(widget);
-      expect(find.text(talent.name), findsOneWidget);
-      expect(find.text(talent.description), findsOneWidget);
-      expect(find.text('Tier ${talent.tier}'), findsOneWidget);
+      await expectLater(find.byType(TalentTile), matchesGoldenFile('talentTile.png'));
     });
 
     testWidgets('Longpress opens a dialog', (WidgetTester tester) async{

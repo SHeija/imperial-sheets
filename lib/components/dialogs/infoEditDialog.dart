@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import '../fields/FormTextField.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
@@ -15,6 +16,7 @@ class InfoEditDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       content: SingleChildScrollView(
         child: FormBuilder(
+          autovalidateMode: AutovalidateMode.always,
           key: _formKey,
           initialValue: {
             'name': character.name,
@@ -22,25 +24,28 @@ class InfoEditDialog extends StatelessWidget {
           },
           child: Column(
             children: <Widget>[
-              FormBuilderTextField(
-                attribute: 'name',
-                decoration: InputDecoration(labelText: 'Name'),
+              FormTextField(
+                key: Key('NameField'),
+                name: 'name',
+                label: 'Name',
               ),
-              FormBuilderTextField(
-                attribute: 'description',
-                decoration: InputDecoration(labelText: 'Description'),
+              FormTextField(
+                key: Key('DescriptionField'),
+                name: 'description',
+                label: 'Description',
+                maxLines: 5,
               ),
             ],
           ),
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
             child: Text('Regret'),
             onPressed: () {
               Navigator.of(context).pop({'choice': DialogChoices.cancel});
             }),
-        FlatButton(
+        TextButton(
           child: Text('Confirm'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {

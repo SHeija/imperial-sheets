@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
+import 'package:imperial_sheets/components/fields/FormTouchSpin.dart';
 import 'package:imperial_sheets/components/misc/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/models/equipment.dart';
+import 'package:imperial_sheets/utils/customValidators.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
 class WeaponEditDialog extends StatelessWidget {
@@ -30,6 +34,7 @@ class WeaponEditDialog extends StatelessWidget {
           child: Column(
         children: <Widget>[
           FormBuilder(
+              autovalidateMode: AutovalidateMode.always,
               key: _formKey,
               initialValue: {
                 'title': weapon.name,
@@ -47,72 +52,69 @@ class WeaponEditDialog extends StatelessWidget {
               },
               child: Column(
                 children: <Widget>[
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_title'),
-                    attribute: "title",
-                    decoration: InputDecoration(labelText: 'Title'),
-                    validators: [
-                      FormBuilderValidators.required(),
-                    ],
+                    name: "title",
+                    label: 'Title',
+                    validator: FormBuilderValidators.required(context),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_description'),
-                    attribute: "description",
-                    decoration: InputDecoration(labelText: 'Description'),
+                    name: "description",
+                    label: 'Description',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_weight'),
-                    attribute: "weight",
-                    decoration: InputDecoration(labelText: 'Weight in kg'),
-                    validators: [
-                      FormBuilderValidators.numeric(),
-                      FormBuilderValidators.required(),
-                    ],
+                    name: "weight",
+                    label: 'Weight in kg',
+                    validator: FormBuilderValidators.compose([
+                      CustomValidators.numeric(context),
+                      FormBuilderValidators.required(context),
+                    ]),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_range'),
-                    attribute: "range",
-                    decoration: InputDecoration(labelText: 'Range'),
+                    name: "range",
+                    label: 'Range',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_rateOfFire'),
-                    attribute: "rateOfFire",
-                    decoration: InputDecoration(labelText: 'Rate of fire'),
+                    name: "rateOfFire",
+                    label: 'Rate of fire',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_damage'),
-                    attribute: "damage",
-                    decoration: InputDecoration(labelText: 'Damage'),
+                    name: "damage",
+                    label: 'Damage',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_type'),
-                    attribute: "type",
-                    decoration: InputDecoration(labelText: 'Damage type'),
+                    name: "type",
+                    label: 'Damage type',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_penetration'),
-                    attribute: "penetration",
-                    decoration: InputDecoration(labelText: 'Penetration'),
+                    name: "penetration",
+                    label: 'Penetration',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_clip'),
-                    attribute: "clip",
-                    decoration: InputDecoration(labelText: 'Clip'),
+                    name: "clip",
+                    label: 'Clip',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_reloadSpeed'),
-                    attribute: "reloadSpeed",
-                    decoration: InputDecoration(labelText: 'Reload speed'),
+                    name: "reloadSpeed",
+                    label: 'Reload speed',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_special'),
-                    attribute: "special",
-                    decoration: InputDecoration(labelText: 'Special'),
+                    name: "special",
+                    label: 'Special',
                   ),
-                  FormBuilderTouchSpin(
+                  FormTouchSpin(
                     key: Key('field_amount'),
-                    attribute: "amount",
-                    initialValue: weapon.amount,
+                    name: "amount",
                     decoration: InputDecoration(labelText: 'Amount'),
                     min: 0,
                     step: 1,
@@ -122,12 +124,12 @@ class WeaponEditDialog extends StatelessWidget {
         ],
       )),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
             child: Text('Regret'),
             onPressed: () {
               Navigator.of(context).pop({"choice": DialogChoices.cancel});
             }),
-        FlatButton(
+        TextButton(
           child: Text('Confirm'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {

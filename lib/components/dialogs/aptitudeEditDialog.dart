@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
 class AptitudeEditDialog extends StatelessWidget {
@@ -14,16 +15,19 @@ class AptitudeEditDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       content: SingleChildScrollView(
         child: FormBuilder(
+          autovalidateMode: AutovalidateMode.always,
           key: _formKey,
           initialValue: {
             "aptitudes": aptitudes.join(" "),
           },
           child: Column(
             children: <Widget>[
-              FormBuilderTextField(
+              FormTextField(
                 key: Key('field_aptitudes'),
-                attribute: "aptitudes",
-                decoration: InputDecoration(labelText: "Aptitudes", helperText: "Separate aptitudes by spaces", hintText: "e.g. general offence finesse"),
+                name: "aptitudes",
+                label: "Aptitudes",
+                helper: "Separate aptitudes by spaces",
+                hint: "e.g. general offence finesse",
                 valueTransformer: (v) => v.split(" "),
               ),
             ],
@@ -31,12 +35,12 @@ class AptitudeEditDialog extends StatelessWidget {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
             child: Text('Regret'),
             onPressed: () {
               Navigator.of(context).pop({'choice': DialogChoices.cancel});
             }),
-        FlatButton(
+        TextButton(
           child: Text('Confirm'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {

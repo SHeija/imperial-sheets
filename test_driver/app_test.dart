@@ -1,6 +1,7 @@
 // Imports the Flutter Driver API.
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
+import 'loremIpsum.dart' as loremIpsum;
 
 void main() {
   group('Sanity check', () {
@@ -79,6 +80,19 @@ void main() {
       await driver.tap(find.text(ch2name));
       await driver.waitForAbsent(createCharacter);
       await driver.waitFor(find.text(ch2desc));
+    });
+
+    test('Notes behave', () async {
+      await driver.tap(find.byTooltip('Notes'));
+      await driver.tap(find.byTooltip('Edit'));
+      await driver.enterText(loremIpsum.text);
+      await driver.tap(find.byTooltip('Clear notes'));
+      await driver.tap(find.text('Yes'));
+      await driver.tap(find.byTooltip('Edit'));
+      await driver.enterText(loremIpsum.text);
+      await driver.tap(find.byTooltip('Save'));
+      await driver.tap(find.byTooltip('Stats'));
+      await driver.waitFor(find.text(ch2name));
     });
 
     test('Character deletion works', () async {

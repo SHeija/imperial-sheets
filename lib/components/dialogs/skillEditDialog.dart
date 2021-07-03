@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
+import 'package:imperial_sheets/components/fields/FormTouchSpin.dart';
 import 'package:imperial_sheets/components/misc/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/models/attributes.dart';
+import 'package:imperial_sheets/utils/customValidators.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
 class SkillEditDialog extends StatelessWidget {
@@ -29,39 +33,41 @@ class SkillEditDialog extends StatelessWidget {
         child: Column(
           children: <Widget>[
             FormBuilder(
+              autovalidateMode: AutovalidateMode.always,
               key: _formKey,
               initialValue: {
-                'stage': skill.stage.toString(),
+                'stage': skill.stage,
                 'subSkill': skill.canHaveMultiple() ? skill.subSkill : '',
                 'cost': skill.cost.toString(),
               },
               child: Column(
                 children: <Widget>[
                   skill.canHaveMultiple()
-                      ? FormBuilderTextField(
+                      ? FormTextField(
                           key: Key('field_subSkill'),
-                          attribute: 'subSkill',
-                          decoration: InputDecoration(labelText: "Subskill"),
-                          validators: [FormBuilderValidators.required()],
+                          name: 'subSkill',
+                          label: "Subskill",
+                          validator: FormBuilderValidators.required(context),
                         )
                       : Container(),
-                  FormBuilderTouchSpin(
+                  FormTouchSpin(
                     key: Key('field_stage'),
                     decoration: InputDecoration(labelText: "Stage"),
-                    attribute: "stage",
-                    initialValue: skill.stage,
+                    name: "stage",
                     min: 0,
                     step: 1,
                     max: 4,
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_cost'),
-                    attribute: "cost",
-                    decoration: InputDecoration(labelText: "Exp cost in total"),
-                    validators: [
-                      FormBuilderValidators.numeric(),
-                      FormBuilderValidators.required(),
-                    ],
+                    name: "cost",
+                    label: "Exp cost in total",
+                    validator: FormBuilderValidators.compose(
+                      [
+                        CustomValidators.numeric(context),
+                        FormBuilderValidators.required(context),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -70,12 +76,12 @@ class SkillEditDialog extends StatelessWidget {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
             child: Text('Regret'),
             onPressed: () {
               Navigator.of(context).pop({"choice": DialogChoices.cancel});
             }),
-        FlatButton(
+        TextButton(
           child: Text('Confirm'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {

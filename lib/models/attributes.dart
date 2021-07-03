@@ -50,7 +50,12 @@ class Skill extends Buyable {
     subSkill = '';
     stage = 0;
   }
-  Skill.blank();
+  Skill.blank() {
+    name = '';
+    subSkill = '';
+    stage = 1;
+    cost = 0;
+  }
 
   String getBonusString() {
     switch (stage) {

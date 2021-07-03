@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
 import 'package:imperial_sheets/components/misc/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/models/attributes.dart';
+import 'package:imperial_sheets/utils/customValidators.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
 class PowerEditDialog extends StatelessWidget {
@@ -30,6 +33,7 @@ class PowerEditDialog extends StatelessWidget {
         child: Column(
           children: <Widget>[
             FormBuilder(
+              autovalidateMode: AutovalidateMode.always,
               key: _formKey,
               initialValue: {
                 'name': power.name,
@@ -44,78 +48,60 @@ class PowerEditDialog extends StatelessWidget {
               },
               child: Column(
                 children: <Widget>[
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_name'),
-                    attribute: 'name',
-                    decoration: InputDecoration(
-                      labelText: 'Name',
-                    ),
-                    validators: [
-                      FormBuilderValidators.required(),
-                    ],
+                    name: 'name',
+                    label: 'Name',
+                    validator: FormBuilderValidators.required(context),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_description'),
-                    attribute: 'description',
-                    decoration: InputDecoration(
-                        labelText: 'Description',
-                        hintText: 'Flavor description'),
+                    name: 'description',
+                    label: 'Description',
+                    hint: 'Flavor description',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_action'),
-                    attribute: 'action',
-                    decoration: InputDecoration(
-                      labelText: 'Action',
-                      hintText: 'e.g Half Action',
-                    ),
+                    name: 'action',
+                    label: 'Action',
+                    hint: 'e.g Half Action',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_focusPower'),
-                    attribute: 'focusPower',
-                    decoration: InputDecoration(
-                      labelText: 'Focus Power',
-                      hintText: 'e.g. +0 Opposed Willpower test',
-                    ),
+                    name: 'focusPower',
+                    label: 'Focus Power',
+                    hint: 'e.g. +0 Opposed Willpower test',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_range'),
-                    attribute: 'range',
-                    decoration: InputDecoration(
-                      labelText: 'Range',
-                      hintText: 'e.g. 20m x psy rating',
-                    ),
+                    name: 'range',
+                    label: 'Range',
+                    hint: 'e.g. 20m x psy rating',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_sustained'),
-                    attribute: 'sustained',
-                    decoration: InputDecoration(
-                      labelText: 'Sustained',
-                      hintText: 'e.g. Half Action',
-                    ),
+                    name: 'sustained',
+                    label: 'Sustained',
+                    hint: 'e.g. Half Action',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_subType'),
-                    attribute: 'subType',
-                    decoration: InputDecoration(
-                        labelText: 'Subtype',
-                        hintText: 'e.g. Attack, Concentration'
-                    ),
-                  ),
-                  FormBuilderTextField(
+                    name: 'subType',
+                    label: 'Subtype',
+                    hint: 'e.g. Attack, Concentration'),
+                  FormTextField(
                     key: Key('field_effect'),
-                    attribute: 'effect',
-                    decoration: InputDecoration(
-                      labelText: 'Effect',
-                    ),
+                    name: 'effect',
+                    label: 'Effect',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_cost'),
-                    attribute: "cost",
-                    decoration: InputDecoration(labelText: "Exp cost"),
-                    validators: [
-                      FormBuilderValidators.numeric(),
-                      FormBuilderValidators.required(),
-                    ],
+                    name: "cost",
+                    label: "Exp cost",
+                    validator: FormBuilderValidators.compose([
+                      CustomValidators.numeric(context),
+                      FormBuilderValidators.required(context),
+                    ]),
                   ),
                 ],
               ),
@@ -124,12 +110,12 @@ class PowerEditDialog extends StatelessWidget {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
             child: Text('Regret'),
             onPressed: () {
               Navigator.of(context).pop({'choice': DialogChoices.cancel});
             }),
-        FlatButton(
+        TextButton(
           child: Text('Confirm'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {

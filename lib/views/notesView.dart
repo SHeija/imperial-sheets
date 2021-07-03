@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:imperial_sheets/components/dialogs/confirmDialog.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/database/hiveProvider.dart';
 
@@ -38,12 +39,14 @@ class _NotesViewState extends State<NotesView> {
                   _toggleEditing();
                 }
               },
+              tooltip: 'Save',
             )
           : IconButton(
               icon: Icon(Icons.edit),
               onPressed: () {
                 _toggleEditing();
               },
+              tooltip: 'Edit',
             );
     }
 
@@ -54,23 +57,28 @@ class _NotesViewState extends State<NotesView> {
               onPressed: () {
                 _formKey.currentState.reset();
               },
+              tooltip: 'Undo',
             )
           : Container();
     }
 
     Widget editForm = FormBuilder(
-        key: _formKey,
-        initialValue: {
-          "notes": notes,
-        },
-        child: SizedBox(
-          height: 400,
-          child: FormBuilderTextField(
-            maxLines: 5000,
-            attribute: "notes",
-          ),
+      key: _formKey,
+      initialValue: {
+        "notes": notes,
+      },
+      child: SizedBox(
+        height: 400,
+        child: FormTextField(
+          key: Key('NotesTextField'),
+          label: '',
+          hint: 'Markdown formatting supported',
+          maxLines: 40,
+          name: "notes",
+          autofocus: true,
         ),
-      );
+      ),
+    );
 
     return CustomScrollView(
       primary: false,
@@ -89,11 +97,14 @@ class _NotesViewState extends State<NotesView> {
                       );
                     });
                 if (result) {
-                  _toggleEditing();
+                  setState(() {
+                    _editing = false;
+                  });
                   character.notes = '';
                   character.save();
                 }
               },
+              tooltip: 'Clear notes',
             ),
             _undoButton(),
             _editToggleButton(),
@@ -103,9 +114,7 @@ class _NotesViewState extends State<NotesView> {
           padding: EdgeInsets.all(8.0),
           sliver: SliverFillRemaining(
             child: Container(
-              child: _editing
-                  ? editForm
-                  : Markdown(data: notes.toString()),
+              child: _editing ? editForm : Markdown(data: notes.toString()),
             ),
           ),
         )

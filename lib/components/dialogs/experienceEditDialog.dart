@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
+import '../../utils/customValidators.dart';
 import 'package:imperial_sheets/components/misc/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/models/character.dart';
 
@@ -28,6 +31,7 @@ class ExperienceEditDialog extends StatelessWidget {
           child: Column(
         children: <Widget>[
           FormBuilder(
+              autovalidateMode: AutovalidateMode.always,
               key: _formKey,
               initialValue: {
                 'val1': spent.toString(),
@@ -35,36 +39,36 @@ class ExperienceEditDialog extends StatelessWidget {
               },
               child: Column(
                 children: <Widget>[
-                  FormBuilderTextField(
-                    attribute: "val1",
-                    decoration: InputDecoration(
-                      labelText: 'Spent',
-                    ),
-                    validators: [
-                      FormBuilderValidators.numeric(),
-                      FormBuilderValidators.required(),
-                    ],
+                  FormTextField(
+                    key: Key('SpentValue'),
+                    name: "val1",
+                    label: 'Spent',
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(context),
+                      CustomValidators.numeric(context),
+                    ]),
                     controller: spentController,
                   ),
-                  FormBuilderTextField(
-                    attribute: "val2",
-                    decoration: InputDecoration(labelText: 'Total'),
-                    validators: [
-                      FormBuilderValidators.numeric(),
-                      FormBuilderValidators.required(),
-                    ],
+                  FormTextField(
+                    key: Key('TotalValue'),
+                    name: "val2",
+                    label: 'Total',
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(context),
+                      CustomValidators.numeric(context),
+                    ]),
                   ),
                 ],
               )),
         ],
       )),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
             child: Text('Regret'),
             onPressed: () {
               Navigator.of(context).pop();
             }),
-        FlatButton(
+        TextButton(
           child: Text('Confirm'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {

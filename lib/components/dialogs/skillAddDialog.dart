@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+
+import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:imperial_sheets/components/fields/FormDropdown.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
+import 'package:imperial_sheets/components/fields/FormTouchSpin.dart';
 import 'package:imperial_sheets/models/attributes.dart';
+import 'package:imperial_sheets/utils/customValidators.dart';
 import '../../utils/constants.dart' as Constants;
 
 class SkillAddDialog extends StatelessWidget {
@@ -10,55 +16,51 @@ class SkillAddDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     Skill _skill = Skill.blank();
     return AlertDialog(
-      shape:
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: Text('Add a skill'),
       content: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             FormBuilder(
+              autovalidateMode: AutovalidateMode.always,
               key: _formKey,
+              initialValue: {
+                'subSkill': _skill.subSkill,
+                'stage': _skill.stage,
+                'cost': _skill.cost.toString()
+              },
               child: Column(
                 children: <Widget>[
-                  FormBuilderDropdown(
-                    key: Key('field_title'),
-                    attribute: 'title',
-                    decoration: InputDecoration(labelText: 'Skill'),
-                    items: Constants.SKILLS_MULTIPLE
-                        .map((skill) => DropdownMenuItem(
-                        value: skill,
-                        child: Text("$skill")
-                    )).toList(),
-                    validators: [
-                      FormBuilderValidators.required(),
-                    ],
+                  FormDropdown(
+                    key: key,
+                    name: 'title',
+                    label: 'Skill',
+                    items: Constants.SKILLS_MULTIPLE,
+                    validator: FormBuilderValidators.required(context),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_subSkill'),
-                    attribute: 'subSkill',
-                    decoration: InputDecoration(labelText: 'Subskill', hintText: 'e.g. Mechanicus, shipwright...'),
-                    validators: [
-                      FormBuilderValidators.required(),
-                    ],
+                    name: 'subSkill',
+                    label: 'Subskill',
+                    hint: 'e.g. Mechanicus, shipwright...',
+                    validator: FormBuilderValidators.required(context),
                   ),
-                  FormBuilderTouchSpin(
+                  FormTouchSpin(
                     key: Key('field_stage'),
-                    attribute: 'stage',
+                    name: 'stage',
                     decoration: InputDecoration(labelText: 'Stage'),
-                    initialValue: 1,
                     min: 1,
                     max: 4,
                     step: 1,
                   ),
-                  FormBuilderTextField(
-                    key: Key('field_cost'),
-                    attribute: "cost",
-                    decoration: InputDecoration(labelText: "Exp cost in total"),
-                    validators: [
-                      FormBuilderValidators.numeric(),
-                      FormBuilderValidators.required(),
-                    ],
-                  ),
+                  FormTextField(
+                      key: Key('field_cost'),
+                      name: "cost",
+                      label: "Exp cost in total",
+                      validator: FormBuilderValidators.compose([
+                        CustomValidators.numeric(context),
+                        FormBuilderValidators.required(context),
+                      ])),
                 ],
               ),
             ),
@@ -66,18 +68,19 @@ class SkillAddDialog extends StatelessWidget {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
             child: Text('Regret'),
             onPressed: () {
               Navigator.of(context).pop();
             }),
-        FlatButton(
+        TextButton(
           child: Text('Confirm'),
           onPressed: () {
             if (_formKey.currentState.saveAndValidate()) {
               _skill.name = _formKey.currentState.value['title'];
               _skill.subSkill = _formKey.currentState.value['subSkill'];
-              _skill.stat = Constants.SKILL_LIST[_formKey.currentState.value['title']];
+              _skill.stat =
+                  Constants.SKILL_LIST[_formKey.currentState.value['title']];
               _skill.stage = _formKey.currentState.value['stage'];
               _skill.aptitudes = [];
               _skill.cost = int.parse(_formKey.currentState.value['cost']);
