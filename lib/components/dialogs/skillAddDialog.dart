@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
-import 'package:form_builder_fields/form_builder_fields.dart';
+
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:imperial_sheets/components/fields/FormDropdown.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
+import 'package:imperial_sheets/components/fields/FormTouchSpin.dart';
 import 'package:imperial_sheets/models/attributes.dart';
+import 'package:imperial_sheets/utils/customValidators.dart';
 import '../../utils/constants.dart' as Constants;
 
 class SkillAddDialog extends StatelessWidget {
@@ -21,42 +24,41 @@ class SkillAddDialog extends StatelessWidget {
             FormBuilder(
               autovalidateMode: AutovalidateMode.always,
               key: _formKey,
+              initialValue: {
+                'subSkill': _skill.subSkill,
+                'stage': _skill.stage,
+                'cost': _skill.cost.toString()
+              },
               child: Column(
                 children: <Widget>[
-                  FormBuilderDropdown(
-                    key: Key('field_title'),
+                  FormDropdown(
+                    key: key,
                     name: 'title',
-                    decoration: InputDecoration(labelText: 'Skill'),
-                    items: Constants.SKILLS_MULTIPLE
-                        .map((skill) => DropdownMenuItem(
-                            value: skill, child: Text("$skill")))
-                        .toList(),
+                    label: 'Skill',
+                    items: Constants.SKILLS_MULTIPLE,
                     validator: FormBuilderValidators.required(context),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_subSkill'),
                     name: 'subSkill',
-                    decoration: InputDecoration(
-                        labelText: 'Subskill',
-                        hintText: 'e.g. Mechanicus, shipwright...'),
+                    label: 'Subskill',
+                    hint: 'e.g. Mechanicus, shipwright...',
                     validator: FormBuilderValidators.required(context),
                   ),
-                  FormBuilderTouchSpin(
+                  FormTouchSpin(
                     key: Key('field_stage'),
                     name: 'stage',
                     decoration: InputDecoration(labelText: 'Stage'),
-                    initialValue: 1,
                     min: 1,
                     max: 4,
                     step: 1,
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                       key: Key('field_cost'),
                       name: "cost",
-                      decoration:
-                          InputDecoration(labelText: "Exp cost in total"),
+                      label: "Exp cost in total",
                       validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.numeric(context),
+                        CustomValidators.numeric(context),
                         FormBuilderValidators.required(context),
                       ])),
                 ],

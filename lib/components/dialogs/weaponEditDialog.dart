@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
-import 'package:form_builder_fields/form_builder_fields.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
+import 'package:imperial_sheets/components/fields/FormTouchSpin.dart';
 import 'package:imperial_sheets/components/misc/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/models/equipment.dart';
+import 'package:imperial_sheets/utils/customValidators.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
 class WeaponEditDialog extends StatelessWidget {
@@ -51,70 +52,69 @@ class WeaponEditDialog extends StatelessWidget {
               },
               child: Column(
                 children: <Widget>[
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_title'),
                     name: "title",
-                    decoration: InputDecoration(labelText: 'Title'),
+                    label: 'Title',
                     validator: FormBuilderValidators.required(context),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_description'),
                     name: "description",
-                    decoration: InputDecoration(labelText: 'Description'),
+                    label: 'Description',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_weight'),
                     name: "weight",
-                    decoration: InputDecoration(labelText: 'Weight in kg'),
+                    label: 'Weight in kg',
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.numeric(context),
+                      CustomValidators.numeric(context),
                       FormBuilderValidators.required(context),
                     ]),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_range'),
                     name: "range",
-                    decoration: InputDecoration(labelText: 'Range'),
+                    label: 'Range',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_rateOfFire'),
                     name: "rateOfFire",
-                    decoration: InputDecoration(labelText: 'Rate of fire'),
+                    label: 'Rate of fire',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_damage'),
                     name: "damage",
-                    decoration: InputDecoration(labelText: 'Damage'),
+                    label: 'Damage',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_type'),
                     name: "type",
-                    decoration: InputDecoration(labelText: 'Damage type'),
+                    label: 'Damage type',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_penetration'),
                     name: "penetration",
-                    decoration: InputDecoration(labelText: 'Penetration'),
+                    label: 'Penetration',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_clip'),
                     name: "clip",
-                    decoration: InputDecoration(labelText: 'Clip'),
+                    label: 'Clip',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_reloadSpeed'),
                     name: "reloadSpeed",
-                    decoration: InputDecoration(labelText: 'Reload speed'),
+                    label: 'Reload speed',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_special'),
                     name: "special",
-                    decoration: InputDecoration(labelText: 'Special'),
+                    label: 'Special',
                   ),
-                  FormBuilderTouchSpin(
+                  FormTouchSpin(
                     key: Key('field_amount'),
                     name: "amount",
-                    initialValue: weapon.amount,
                     decoration: InputDecoration(labelText: 'Amount'),
                     min: 0,
                     step: 1,

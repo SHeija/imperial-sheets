@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_fields/form_builder_fields.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
 import 'package:imperial_sheets/components/misc/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/models/attributes.dart';
+import 'package:imperial_sheets/utils/customValidators.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
 class TalentEditDialog extends StatelessWidget {
@@ -42,37 +43,37 @@ class TalentEditDialog extends StatelessWidget {
               },
               child: Column(
                 children: <Widget>[
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_title'),
                     name: "title",
-                    decoration: InputDecoration(labelText: 'Title'),
+                    label: 'Title',
                     validator: FormBuilderValidators.required(context),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_description'),
                     name: "description",
-                    decoration: InputDecoration(labelText: 'Description'),
+                    label: 'Description',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_tier'),
                     name: "tier",
-                    decoration: InputDecoration(labelText: 'Tier'),
+                    label: 'Tier',
                     validator: FormBuilderValidators.compose(
                       [
-                        FormBuilderValidators.numeric(context),
+                        CustomValidators.numeric(context),
                         FormBuilderValidators.required(context),
                         FormBuilderValidators.min(context, 1),
                         FormBuilderValidators.max(context, 3),
                       ],
                     ),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_cost'),
                     name: "cost",
-                    decoration: InputDecoration(labelText: "Exp cost"),
+                    label: "Exp cost",
                     validator: FormBuilderValidators.compose(
                       [
-                        FormBuilderValidators.numeric(context),
+                        CustomValidators.numeric(context),
                         FormBuilderValidators.required(context),
                       ],
                     ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
-import 'package:form_builder_fields/form_builder_fields.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
+import 'package:imperial_sheets/components/fields/FormTouchSpin.dart';
 import 'package:imperial_sheets/components/misc/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/models/equipment.dart';
+import 'package:imperial_sheets/utils/customValidators.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
 class ItemEditDialog extends StatelessWidget {
@@ -45,31 +46,29 @@ class ItemEditDialog extends StatelessWidget {
               },
               child: Column(
                 children: <Widget>[
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_title'),
                     name: "title",
-                    decoration: InputDecoration(labelText: 'Title'),
+                    label: 'Title',
                     validator: FormBuilderValidators.required(context),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_description'),
                     name: "description",
-                    decoration: InputDecoration(labelText: 'Description'),
+                    label: 'Description',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_weight'),
                     name: "weight",
-                    decoration:
-                        InputDecoration(labelText: 'Weight per item (kg)'),
+                    label: 'Weight per item (kg)',
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.numeric(context),
+                      CustomValidators.numeric(context),
                       FormBuilderValidators.required(context),
                     ]),
                   ),
-                  FormBuilderTouchSpin(
+                  FormTouchSpin(
                     key: Key('field_amount'),
                     name: "amount",
-                    initialValue: item.amount,
                     decoration: InputDecoration(labelText: 'Amount'),
                     validator: FormBuilderValidators.required(context),
                     min: 0,

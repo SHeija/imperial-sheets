@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
+import 'package:imperial_sheets/components/fields/FormTouchSpin.dart';
 
 class DualValueEditDialog extends StatelessWidget {
   DualValueEditDialog(
@@ -26,19 +26,15 @@ class DualValueEditDialog extends StatelessWidget {
               },
               child: Column(
                 children: <Widget>[
-                  FormBuilderTouchSpin(
+                  FormTouchSpin(
+                    key: Key(label1+'DualValue'),
                     decoration: InputDecoration(labelText: label1),
                     name: "val1",
-                    initialValue: val1,
-                    min: 0,
-                    step: 1,
                   ),
-                  FormBuilderTouchSpin(
+                  FormTouchSpin(
+                    key: Key(label2+'DualValue'),
                     decoration: InputDecoration(labelText: label2),
                     name: "val2",
-                    initialValue: val2,
-                    min: 0,
-                    step: 1,
                   ),
                 ],
               )),

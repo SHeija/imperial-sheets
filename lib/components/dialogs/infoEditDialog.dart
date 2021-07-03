@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_fields/form_builder_fields.dart';
+import '../fields/FormTextField.dart';
 import 'package:imperial_sheets/models/character.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
@@ -24,13 +24,16 @@ class InfoEditDialog extends StatelessWidget {
           },
           child: Column(
             children: <Widget>[
-              FormBuilderTextField(
+              FormTextField(
+                key: Key('NameField'),
                 name: 'name',
-                decoration: InputDecoration(labelText: 'Name'),
+                label: 'Name',
               ),
-              FormBuilderTextField(
+              FormTextField(
+                key: Key('DescriptionField'),
                 name: 'description',
-                decoration: InputDecoration(labelText: 'Description'),
+                label: 'Description',
+                maxLines: 5,
               ),
             ],
           ),

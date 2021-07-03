@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_fields/form_builder_fields.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
+import '../../utils/customValidators.dart';
 import 'package:imperial_sheets/components/misc/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/models/character.dart';
 
@@ -38,23 +39,23 @@ class ExperienceEditDialog extends StatelessWidget {
               },
               child: Column(
                 children: <Widget>[
-                  FormBuilderTextField(
+                  FormTextField(
+                    key: Key('SpentValue'),
                     name: "val1",
-                    decoration: InputDecoration(
-                      labelText: 'Spent',
-                    ),
+                    label: 'Spent',
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.numeric(context),
                       FormBuilderValidators.required(context),
+                      CustomValidators.numeric(context),
                     ]),
                     controller: spentController,
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
+                    key: Key('TotalValue'),
                     name: "val2",
-                    decoration: InputDecoration(labelText: 'Total'),
+                    label: 'Total',
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.numeric(context),
                       FormBuilderValidators.required(context),
+                      CustomValidators.numeric(context),
                     ]),
                   ),
                 ],

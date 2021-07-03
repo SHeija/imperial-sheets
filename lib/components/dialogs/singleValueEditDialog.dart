@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:imperial_sheets/components/fields/FormTouchSpin.dart';
 
 class SingleValueEditDialog extends StatelessWidget {
   SingleValueEditDialog(this.value, this.label);
@@ -15,9 +14,9 @@ class SingleValueEditDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: Text(label),
       content: SingleChildScrollView(
-          child: Column(
-        children: <Widget>[
-          FormBuilder(
+        child: Column(
+          children: <Widget>[
+            FormBuilder(
               autovalidateMode: AutovalidateMode.always,
               key: _formKey,
               initialValue: {
@@ -25,23 +24,24 @@ class SingleValueEditDialog extends StatelessWidget {
               },
               child: Column(
                 children: <Widget>[
-                  FormBuilderTouchSpin(
-                    validator: FormBuilderValidators.required(context),
-                    name: "value",
-                    initialValue: value,
-                    min: 0,
-                    step: 1,
+                  FormTouchSpin(
+                    decoration: InputDecoration(),
+                    key: Key('SingleValue'),
+                    name: 'value',
                   ),
                 ],
-              )),
-        ],
-      )),
+              ),
+            ),
+          ],
+        ),
+      ),
       actions: <Widget>[
         TextButton(
-            child: Text('Regret'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            }),
+          child: Text('Regret'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         TextButton(
           child: Text('Confirm'),
           onPressed: () {

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
-import 'package:form_builder_fields/form_builder_fields.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:imperial_sheets/components/fields/FormSwitch.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
+import 'package:imperial_sheets/components/fields/FormTouchSpin.dart';
 import 'package:imperial_sheets/components/misc/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/models/equipment.dart';
+import 'package:imperial_sheets/utils/customValidators.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
 class ArmorEditDialog extends StatelessWidget {
@@ -50,96 +52,91 @@ class ArmorEditDialog extends StatelessWidget {
               },
               child: Column(
                 children: <Widget>[
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_title'),
                     name: "title",
-                    decoration: InputDecoration(labelText: 'Title'),
+                    label: 'Title',
                     validator: FormBuilderValidators.required(context),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_description'),
                     name: "description",
-                    decoration: InputDecoration(labelText: 'Description'),
+                    label: 'Description',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_weight'),
                     name: "weight",
-                    decoration:
-                        InputDecoration(labelText: 'Weight per armor (kg)'),
+                    label: 'Weight per armor (kg)',
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.numeric(context),
+                      CustomValidators.numeric(context),
                       FormBuilderValidators.required(context),
                     ]),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_head'),
                     name: "head",
-                    decoration: InputDecoration(labelText: 'Armor in head'),
+                    label: 'Armor in head',
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.numeric(context),
+                      CustomValidators.numeric(context),
                       FormBuilderValidators.required(context),
                     ]),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_leftArm'),
                     name: "leftArm",
-                    decoration: InputDecoration(labelText: 'Armor in left arm'),
+                    label: 'Armor in left arm',
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.numeric(context),
+                      CustomValidators.numeric(context),
                       FormBuilderValidators.required(context),
                     ]),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_rightArm'),
                     name: "rightArm",
-                    decoration:
-                        InputDecoration(labelText: 'Armor in right arm'),
+                    label: 'Armor in right arm',
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.numeric(context),
+                      CustomValidators.numeric(context),
                       FormBuilderValidators.required(context),
                     ]),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_body'),
                     name: "body",
-                    decoration: InputDecoration(labelText: 'Armor in body'),
+                   label: 'Armor in body',
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.numeric(context),
+                      CustomValidators.numeric(context),
                       FormBuilderValidators.required(context),
                     ]),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_leftLeg'),
                     name: "leftLeg",
-                    decoration: InputDecoration(labelText: 'Armor in left leg'),
+                    label: 'Armor in left leg',
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.numeric(context),
+                      CustomValidators.numeric(context),
                       FormBuilderValidators.required(context),
                     ]),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_rightLeg'),
                     name: "rightLeg",
-                    decoration:
-                        InputDecoration(labelText: 'Armor in right leg'),
+                   label: 'Armor in right leg',
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.numeric(context),
+                      CustomValidators.numeric(context),
                       FormBuilderValidators.required(context),
                     ]),
                   ),
-                  FormBuilderTouchSpin(
+                  FormTouchSpin(
                     key: Key('field_amount'),
                     name: "amount",
-                    initialValue: armor.amount,
                     decoration: InputDecoration(labelText: 'Amount'),
                     min: 0,
                     step: 1,
                   ),
-                  FormBuilderSwitch(
+                  FormSwitch(
                     key: Key('field_stackable'),
                     name: 'stackable',
-                    initialValue: armor.stackable,
-                    title: Text('This armor stacks'),
+                    label: 'This armor stacks',
                   )
                 ],
               ),

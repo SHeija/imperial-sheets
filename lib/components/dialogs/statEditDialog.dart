@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
-import 'package:form_builder_fields/form_builder_fields.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
+import 'package:imperial_sheets/components/fields/FormTouchSpin.dart';
 import 'package:imperial_sheets/models/attributes.dart';
+import 'package:imperial_sheets/utils/customValidators.dart';
 
 class StatEditDialog extends StatelessWidget {
   StatEditDialog(this.stat);
@@ -23,45 +24,43 @@ class StatEditDialog extends StatelessWidget {
               key: _formKey,
               initialValue: {
                 'value': stat.value.toString(),
-                'stage': stat.stage.toString(),
-                'unnaturalBonus': stat.unnaturalBonus.toString(),
+                'stage': stat.stage,
+                'unnaturalBonus': stat.unnaturalBonus,
                 'cost': stat.cost.toString(),
               },
               child: Column(
                 children: <Widget>[
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_value'),
                     name: "value",
-                    decoration: InputDecoration(labelText: "Value"),
+                    label: "Value",
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.numeric(context),
+                      CustomValidators.numeric(context),
                       FormBuilderValidators.required(context),
                       FormBuilderValidators.max(context, 100),
                     ]),
                   ),
-                  FormBuilderTouchSpin(
+                  FormTouchSpin(
                     key: Key('field_stage'),
                     decoration: InputDecoration(labelText: "Stage"),
                     name: "stage",
-                    initialValue: stat.stage,
                     min: 0,
                     step: 1,
                     max: 5,
                   ),
-                  FormBuilderTouchSpin(
+                  FormTouchSpin(
                     key: Key('field_unnatural_bonus'),
                     decoration: InputDecoration(labelText: "Unnatural bonus"),
                     name: "unnaturalBonus",
-                    initialValue: stat.unnaturalBonus,
                     min: 0,
                     step: 1,
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_cost'),
                     name: "cost",
-                    decoration: InputDecoration(labelText: "Exp cost in total"),
+                    label: "Exp cost in total",
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.numeric(context),
+                      CustomValidators.numeric(context),
                       FormBuilderValidators.required(context),
                     ]),
                   ),

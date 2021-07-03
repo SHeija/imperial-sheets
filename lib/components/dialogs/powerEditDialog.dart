@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_fields/form_builder_fields.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:imperial_sheets/components/fields/FormTextField.dart';
 import 'package:imperial_sheets/components/misc/dialogTitleWithButton.dart';
 import 'package:imperial_sheets/models/attributes.dart';
+import 'package:imperial_sheets/utils/customValidators.dart';
 import 'package:imperial_sheets/utils/enums.dart';
 
 class PowerEditDialog extends StatelessWidget {
@@ -47,73 +48,58 @@ class PowerEditDialog extends StatelessWidget {
               },
               child: Column(
                 children: <Widget>[
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_name'),
                     name: 'name',
-                    decoration: InputDecoration(
-                      labelText: 'Name',
-                    ),
+                    label: 'Name',
                     validator: FormBuilderValidators.required(context),
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_description'),
                     name: 'description',
-                    decoration: InputDecoration(
-                        labelText: 'Description',
-                        hintText: 'Flavor description'),
+                    label: 'Description',
+                    hint: 'Flavor description',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_action'),
                     name: 'action',
-                    decoration: InputDecoration(
-                      labelText: 'Action',
-                      hintText: 'e.g Half Action',
-                    ),
+                    label: 'Action',
+                    hint: 'e.g Half Action',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_focusPower'),
                     name: 'focusPower',
-                    decoration: InputDecoration(
-                      labelText: 'Focus Power',
-                      hintText: 'e.g. +0 Opposed Willpower test',
-                    ),
+                    label: 'Focus Power',
+                    hint: 'e.g. +0 Opposed Willpower test',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_range'),
                     name: 'range',
-                    decoration: InputDecoration(
-                      labelText: 'Range',
-                      hintText: 'e.g. 20m x psy rating',
-                    ),
+                    label: 'Range',
+                    hint: 'e.g. 20m x psy rating',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_sustained'),
                     name: 'sustained',
-                    decoration: InputDecoration(
-                      labelText: 'Sustained',
-                      hintText: 'e.g. Half Action',
-                    ),
+                    label: 'Sustained',
+                    hint: 'e.g. Half Action',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_subType'),
                     name: 'subType',
-                    decoration: InputDecoration(
-                        labelText: 'Subtype',
-                        hintText: 'e.g. Attack, Concentration'),
-                  ),
-                  FormBuilderTextField(
+                    label: 'Subtype',
+                    hint: 'e.g. Attack, Concentration'),
+                  FormTextField(
                     key: Key('field_effect'),
                     name: 'effect',
-                    decoration: InputDecoration(
-                      labelText: 'Effect',
-                    ),
+                    label: 'Effect',
                   ),
-                  FormBuilderTextField(
+                  FormTextField(
                     key: Key('field_cost'),
                     name: "cost",
-                    decoration: InputDecoration(labelText: "Exp cost"),
+                    label: "Exp cost",
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.numeric(context),
+                      CustomValidators.numeric(context),
                       FormBuilderValidators.required(context),
                     ]),
                   ),
